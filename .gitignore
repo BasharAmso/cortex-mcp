@@ -1,9 +1,19 @@
 # ==============================================
-# The AI Orchestrator System — .gitignore
+# Cortex MCP — .gitignore
 # ==============================================
-# Prevents personal/local machine paths and
-# sensitive files from leaking into the repo.
-# ==============================================
+
+# ----- AI Orchestrator System (dev framework, not part of the product) -----
+.claude/
+.claudeignore
+custom-skills/
+FRAMEWORK_VERSION
+
+# ----- Framework template docs (not Cortex MCP content) -----
+docs/CUSTOM_SKILLS_GUIDE.md
+docs/DIAGRAMS.md
+docs/FAQ.md
+docs/FRAMEWORK_SCOPE.md
+docs/USER_GUIDE.md
 
 # ----- Local environment files -----
 .env
@@ -23,28 +33,14 @@ Desktop.ini
 *~
 
 # ----- AI-Memory (personal cross-project knowledge) -----
-# AI-Memory is a personal folder that should NOT be included
-# in the shared repo. Each user should create their own locally.
-# See /capture-lesson command and knowledge-policy.md for setup.
 AI-Memory/
 
-# ----- Claude Code local settings -----
-# Local overrides should not be committed to the repo.
-.claude/settings.local.json
-
-# ----- Claude Code session artifacts -----
-# These are generated per-session and should not be committed.
-.claude/project/STATE.md
-.claude/project/EVENTS.md
-.claude/project/knowledge/DECISIONS.md
-.claude/project/knowledge/RESEARCH.md
-.claude/project/knowledge/GLOSSARY.md
-.claude/project/knowledge/OPEN_QUESTIONS.md
-.claude/project/RUN_POLICY.md
-
-# ----- Node / Python artifacts (if projects use them) -----
+# ----- Node artifacts -----
 node_modules/
-__pycache__/
-*.pyc
 dist/
 build/
+.cortex/
+
+# ----- Python artifacts -----
+__pycache__/
+*.pyc

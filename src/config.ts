@@ -1,7 +1,13 @@
 import { readFileSync, existsSync } from "node:fs";
 import { resolve, dirname } from "node:path";
+import { fileURLToPath } from "node:url";
 import { homedir } from "node:os";
 import { parse } from "yaml";
+
+// Resolve the package root (where resources/ lives), not process.cwd()
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const PACKAGE_ROOT = resolve(__dirname, "..");
 
 export type OutputMode = "index" | "minimal" | "catalog" | "full";
 
@@ -24,7 +30,7 @@ export interface CortexConfig {
 }
 
 const DEFAULTS: CortexConfig = {
-  directories: ["./resources"],
+  directories: [resolve(PACKAGE_ROOT, "resources")],
   customDirectories: [],
   aiMemoryPath:
     process.env.AI_MEMORY_PATH ??
@@ -40,7 +46,7 @@ const DEFAULTS: CortexConfig = {
     defaultBudget: 4000,
   },
   devMode: false,
-  indexPath: ".cortex",
+  indexPath: resolve(PACKAGE_ROOT, ".cortex"),
 };
 
 const CONFIG_FILENAME = "cortex.config.json";

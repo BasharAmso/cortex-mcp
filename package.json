@@ -14,7 +14,8 @@
     "start": "node dist/index.js",
     "test": "vitest run",
     "test:watch": "vitest",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build && npm run test"
   },
   "keywords": [
     "mcp",
@@ -28,6 +29,11 @@
   ],
   "author": "Bashar Amso",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BasharAmso/cortex-mcp.git"
+  },
+  "homepage": "https://github.com/BasharAmso/cortex-mcp#readme",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.12.1",
     "fuse.js": "^7.0.0",

@@ -201,6 +201,20 @@ npm run typecheck
 - **Transport:** stdio (standard MCP)
 - **Dependencies:** 3 runtime packages (MCP SDK, yaml, fuse.js)
 
+## About
+
+My name is Bashar Amso. I've spent my career in software development — not as a developer, but working alongside them. Managing projects, understanding systems, figuring out how to get things built and shipped.
+
+When AI coding tools came along, they changed everything for me. Suddenly I could build things myself. Not just plan them or hand them off — actually build them. But I kept hitting the same wall. Every time I started a new project, I had to load all my framework files into context. My agents, my skills, my patterns — everything. And every time, it ate up most of my token budget before I even asked my first question.
+
+I thought: why am I loading the entire library when I only need two or three things right now?
+
+That's what Cortex MCP solves. Instead of dumping everything into context and hoping for the best, it serves only the knowledge that's relevant to what you're working on. You install it once, and every project you open gets access to the full library without the cost.
+
+I built this on top of my experience creating the [AI Orchestrator System](https://github.com/BasharAmso/AI-Orchestrator-System) — a framework for structured AI development with agents, skills, and workflows. Cortex MCP is the delivery layer. The orchestrator tells you what to do. Cortex tells your AI tool how to do it.
+
+If you're tired of running out of context or re-explaining the same patterns to your AI every session, this is for you. Beginner or senior dev — Cortex MCP is the playbook your AI tool has been missing.
+
 ## License
 
 MIT

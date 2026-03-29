@@ -22,25 +22,34 @@ Project A   Project B   Project C
 
 Your project repos stay lightweight. The knowledge lives in Cortex MCP and gets delivered based on what the current task needs.
 
-## Quick Start
+## Getting Started
 
-### 1. Install
+### Before you begin
+
+You need **Node.js 20 or newer** on your computer. If you're not sure, open a terminal and type `node --version`. If you see a number like `v20.x.x` or higher, you're good. If not, download it from [nodejs.org](https://nodejs.org).
+
+### Step 1: Install Cortex MCP
+
+Open your terminal (Command Prompt, PowerShell, or Mac Terminal) and run:
 
 ```bash
 npm install -g cortex-mcp
 ```
 
-### 2. Build the index
+This installs Cortex MCP on your computer. You only do this once. It's not tied to any project — it works across all of them.
 
-```bash
-cortex-mcp-build-index
-# or from the project directory:
-npm run build-index
-```
+### Step 2: Tell your AI tool about it
 
-### 3. Add to your MCP config
+Cortex MCP works with Claude Code, Cursor, Windsurf, and other MCP-compatible tools. Pick the one you use and follow the steps below.
 
-**Claude Code** (`~/.claude/settings.json`):
+**If you use Claude Code:**
+
+Open your settings file. You can find it at:
+- **Windows:** `C:\Users\YourName\.claude\settings.json`
+- **Mac:** `~/.claude/settings.json`
+
+Add this inside the file (or add the `mcpServers` section if it doesn't exist):
+
 ```json
 {
   "mcpServers": {
@@ -51,7 +60,10 @@ npm run build-index
 }
 ```
 
-**Cursor** (`.cursor/mcp.json`):
+**If you use Cursor:**
+
+Open (or create) the file `.cursor/mcp.json` in your home folder and add:
+
 ```json
 {
   "mcpServers": {
@@ -62,15 +74,28 @@ npm run build-index
 }
 ```
 
-**Windsurf** — add to your MCP server configuration with the command `cortex-mcp`.
+**If you use Windsurf:**
 
-### 4. Use it
+Add `cortex-mcp` as an MCP server in your Windsurf settings. The command is just `cortex-mcp`.
 
-Your AI tool now has access to the knowledge library. Ask it to search for what you need:
+### Step 3: Start using it
+
+That's it. There's no Step 3 setup. Just open your AI tool and start working.
+
+Cortex MCP runs quietly in the background. When your AI tool needs knowledge about how to build something, review code, write tests, or follow a pattern, it pulls the right information from the library automatically.
+
+You can also ask it directly:
 
 - "Search for error handling patterns"
 - "Find the skill for writing tests"
 - "What agents are available?"
+- "Show me how to create an MCP tool"
+
+### Troubleshooting
+
+**"command not found" after install?** Close and reopen your terminal. If it still doesn't work, try `npx cortex-mcp` instead.
+
+**Not seeing results?** Make sure you saved the settings file and restarted your AI tool. The MCP connection only picks up config changes on restart.
 
 ## Features
 

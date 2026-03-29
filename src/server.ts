@@ -192,6 +192,42 @@ export async function startServer(): Promise<void> {
     },
   );
 
+  server.tool(
+    "browse_library",
+    {
+      category: z
+        .enum(["agents", "skills", "patterns", "examples", "all"])
+        .optional()
+        .describe("Category to browse, or 'all' for everything (default: all)"),
+    },
+    async (args) => {
+      const cat = args.category ?? "all";
+      const filtered =
+        cat === "all" ? fragments : fragments.filter((f) => f.category === cat);
+
+      const listing = filtered.map((f) => ({
+        id: f.id,
+        name: f.name,
+        category: f.category,
+        tags: f.tags,
+        estimatedTokens: f.estimatedTokens,
+      }));
+
+      return {
+        content: [
+          {
+            type: "text" as const,
+            text: JSON.stringify(
+              { total: listing.length, category: cat, fragments: listing },
+              null,
+              2,
+            ),
+          },
+        ],
+      };
+    },
+  );
+
   server.tool("list_categories", {}, async () => {
     const counts: Record<string, number> = {};
     for (const f of fragments) {

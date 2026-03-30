@@ -17,6 +17,7 @@ synonyms: ["how to make my app faster with caching", "should I use redis or memc
 lastUpdated: "2026-03-29"
 sourceUrl: "https://github.com/donnemartin/system-design-primer"
 difficulty: advanced
+owner: builder
 ---
 
 # Caching Strategy

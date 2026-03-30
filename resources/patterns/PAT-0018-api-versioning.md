@@ -16,6 +16,7 @@ dependencies: []
 synonyms: ["how to version my API", "handle breaking API changes", "deprecate old endpoints safely", "v1 vs v2 API strategy", "backward compatible API changes"]
 lastUpdated: "2026-03-29"
 difficulty: intermediate
+owner: builder
 sourceUrl: "https://github.com/elsewhencode/project-guidelines"
 ---
 

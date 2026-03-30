@@ -17,6 +17,7 @@ synonyms: ["how to organize my project files", "what folder structure should I u
 lastUpdated: "2026-03-29"
 sourceUrl: "https://github.com/elsewhencode/project-guidelines"
 difficulty: beginner
+owner: builder
 ---
 
 # Project Structure

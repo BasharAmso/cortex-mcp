@@ -16,6 +16,7 @@ dependencies: []
 synonyms: ["protect my API from abuse", "add rate limiting to my API", "too many requests error", "prevent spam on my API", "how to throttle API calls"]
 lastUpdated: "2026-03-29"
 difficulty: intermediate
+owner: builder
 sourceUrl: "https://github.com/elsewhencode/project-guidelines"
 ---
 

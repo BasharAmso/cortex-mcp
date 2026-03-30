@@ -16,6 +16,7 @@ dependencies: []
 synonyms: ["set up webhooks in my app", "receive Stripe webhooks", "how webhooks work", "webhook retry logic", "verify webhook signature"]
 lastUpdated: "2026-03-29"
 difficulty: intermediate
+owner: builder
 sourceUrl: "https://github.com/goldbergyoni/nodebestpractices"
 ---
 

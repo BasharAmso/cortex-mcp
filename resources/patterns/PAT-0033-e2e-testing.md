@@ -11,11 +11,12 @@ useWhen:
   - testing critical user flows like signup, checkout, and onboarding
   - adding visual comparison to your test suite
 estimatedTokens: 650
-relatedFragments: [PAT-0005, SKL-0003, PAT-0034, PAT-0037]
+relatedFragments: [PAT-0005, SKL-0017, PAT-0034, PAT-0037]
 dependencies: []
 synonyms: ["how to test my app in a browser", "playwright setup guide", "my e2e tests keep failing randomly", "should I write e2e or unit tests", "how to test user flows end to end"]
 lastUpdated: "2026-03-29"
 difficulty: intermediate
+owner: builder
 sourceUrl: "https://github.com/goldbergyoni/javascript-testing-best-practices"
 ---
 

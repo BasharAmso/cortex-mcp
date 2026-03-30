@@ -17,6 +17,7 @@ synonyms: ["how to set up my database tables", "how should I structure my data",
 lastUpdated: "2026-03-29"
 sourceUrl: "https://github.com/dhamaniasad/awesome-postgres"
 difficulty: intermediate
+owner: builder
 ---
 
 # Database Design Patterns

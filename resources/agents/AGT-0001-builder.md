@@ -10,11 +10,12 @@ useWhen:
   - implementing API endpoints or database schemas
   - creating frontend components or mobile screens
 estimatedTokens: 650
-relatedFragments: [AGT-0002, SKL-0001, SKL-0002]
+relatedFragments: [AGT-0002, SKL-0004, SKL-0016]
 dependencies: []
 synonyms: ["how do I build a feature", "write code for me", "make the app do something new", "I need to code this thing", "help me implement this"]
 lastUpdated: "2026-03-29"
 difficulty: beginner
+owner: builder
 ---
 
 # Builder Agent

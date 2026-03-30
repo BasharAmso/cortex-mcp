@@ -11,12 +11,13 @@ useWhen:
   - handling safe areas and notches on modern devices
   - optimizing tap targets for thumb reachability
 estimatedTokens: 650
-relatedFragments: [SKL-0007, SKL-0023, SKL-0005, PAT-0048]
+relatedFragments: [SKL-0007, SKL-0003, SKL-0005, PAT-0048]
 dependencies: []
 synonyms: ["how to navigate a mobile app", "tab bar vs hamburger menu", "bottom navigation design", "swipe gestures for navigation", "thumb-friendly mobile layout", "mobile menu patterns"]
 lastUpdated: "2026-03-30"
 sourceUrl: "https://github.com/alexpate/awesome-design-systems"
 difficulty: intermediate
+owner: builder
 ---
 
 # Mobile Navigation

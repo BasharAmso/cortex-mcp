@@ -10,12 +10,13 @@ useWhen:
   - designing loading states and progressive disclosure
   - building drag-and-drop or infinite scroll interfaces
 estimatedTokens: 750
-relatedFragments: [SKL-0020, SKL-0005, SKL-0105, SKL-0023]
+relatedFragments: [SKL-0023, SKL-0005, SKL-0106, SKL-0003]
 dependencies: []
 synonyms: ["should I use a modal or a new page", "accordion vs tabs", "how to show loading state", "drag and drop best practices", "tooltip or popover", "when to use infinite scroll"]
 lastUpdated: "2026-03-30"
 sourceUrl: "https://github.com/Patternslib/Patterns"
 difficulty: beginner
+owner: builder
 ---
 
 # UI Interaction Patterns

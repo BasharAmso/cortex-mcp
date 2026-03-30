@@ -11,11 +11,12 @@ useWhen:
   - implementing admin impersonation for support debugging
   - designing a permission model that scales with feature growth
 estimatedTokens: 700
-relatedFragments: [PAT-0003, PAT-0029, PAT-0031, SKL-0004, SKL-0034]
+relatedFragments: [PAT-0003, PAT-0029, PAT-0031, SKL-0015, SKL-0029]
 dependencies: []
 synonyms: ["how to make some users admin and others regular", "how do I restrict pages to certain users", "how to check if user has permission", "add roles and permissions to my app", "how to let admins log in as another user"]
 lastUpdated: "2026-03-29"
 difficulty: intermediate
+owner: builder
 sourceUrl: "https://github.com/OWASP/CheatSheetSeries"
 ---
 

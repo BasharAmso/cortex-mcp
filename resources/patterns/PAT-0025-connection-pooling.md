@@ -16,6 +16,7 @@ dependencies: []
 synonyms: ["too many database connections error", "how to set up pgbouncer", "serverless database connection problems", "how many connections should my pool have", "supabase connection pooling setup"]
 lastUpdated: "2026-03-29"
 difficulty: intermediate
+owner: builder
 sourceUrl: "https://github.com/dhamaniasad/awesome-postgres"
 ---
 

@@ -16,6 +16,7 @@ dependencies: []
 synonyms: ["how to change database without breaking production", "zero downtime database migration", "how to rollback a bad migration", "safe way to rename a column in production", "database migration best practices"]
 lastUpdated: "2026-03-29"
 difficulty: advanced
+owner: builder
 sourceUrl: "https://github.com/dhamaniasad/awesome-postgres"
 ---
 

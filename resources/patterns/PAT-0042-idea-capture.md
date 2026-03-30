@@ -16,6 +16,7 @@ dependencies: []
 synonyms: ["I never know what to write about", "how to come up with content ideas", "I had a great idea but forgot it", "how to never run out of content ideas", "how to build an idea bank"]
 lastUpdated: "2026-03-29"
 difficulty: beginner
+owner: builder
 sourceUrl: "https://github.com/PhilipStark/book-genesis"
 ---
 

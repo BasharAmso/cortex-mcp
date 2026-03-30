@@ -11,11 +11,12 @@ useWhen:
   - encrypting sensitive data at rest
   - auditing who accessed which secret and when
 estimatedTokens: 550
-relatedFragments: [PAT-0003, PAT-0001, SKL-0004]
+relatedFragments: [PAT-0003, PAT-0001, SKL-0015]
 dependencies: []
 synonyms: ["where do I store production secrets", "rotate API keys safely", "secrets manager comparison", "encrypt sensitive data at rest", "stop hardcoding passwords"]
 lastUpdated: "2026-03-29"
 difficulty: advanced
+owner: builder
 sourceUrl: "https://github.com/OWASP/CheatSheetSeries"
 ---
 

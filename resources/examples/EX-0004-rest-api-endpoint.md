@@ -15,6 +15,7 @@ synonyms: ["how to create an api endpoint in express", "rest api route example w
 sourceUrl: "https://github.com/goldbergyoni/nodebestpractices"
 lastUpdated: "2026-03-30"
 difficulty: beginner
+owner: builder
 ---
 
 # REST API Endpoint Example

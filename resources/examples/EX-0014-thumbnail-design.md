@@ -10,12 +10,13 @@ useWhen:
   - choosing thumbnail layouts and running A/B tests
   - learning the face-text-contrast formula for thumbnails
 estimatedTokens: 750
-relatedFragments: [SKL-0091, EX-0015, EX-0016]
+relatedFragments: [SKL-0092, EX-0015, EX-0016]
 dependencies: []
 synonyms: ["how do I make good thumbnails", "youtube thumbnail tips", "what size should my linkedin image be", "thumbnail design formula", "how to get more clicks with thumbnails"]
 sourceUrl: ""
 lastUpdated: "2026-03-30"
 difficulty: beginner
+owner: builder
 ---
 
 # Thumbnail Design Guide

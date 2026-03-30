@@ -11,11 +11,12 @@ useWhen:
   - choosing a fail-fast strategy for pull requests
   - reducing CI costs while maintaining confidence
 estimatedTokens: 650
-relatedFragments: [PAT-0005, PAT-0010, SKL-0003, PAT-0033, PAT-0035]
+relatedFragments: [PAT-0005, PAT-0010, SKL-0017, PAT-0033, PAT-0035]
 dependencies: []
 synonyms: ["how to run tests faster in CI", "github actions test setup", "parallel test execution", "my CI tests take too long", "how to split tests across machines"]
 lastUpdated: "2026-03-29"
 difficulty: advanced
+owner: builder
 sourceUrl: "https://github.com/goldbergyoni/javascript-testing-best-practices"
 ---
 

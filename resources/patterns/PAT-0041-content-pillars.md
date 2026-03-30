@@ -16,6 +16,7 @@ dependencies: []
 synonyms: ["what should I post about", "I never know what topics to cover", "my content feels all over the place", "how to pick my content niche", "how do I stay on brand with my posts"]
 lastUpdated: "2026-03-29"
 difficulty: beginner
+owner: builder
 sourceUrl: "https://github.com/PhilipStark/book-genesis"
 ---
 

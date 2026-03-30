@@ -11,12 +11,13 @@ useWhen:
   - containerizing an application with Docker
   - automating testing and releases
 estimatedTokens: 650
-relatedFragments: [PAT-0007, EX-0007, AGT-0008, SKL-0043]
+relatedFragments: [PAT-0007, EX-0007, AGT-0008, SKL-0044]
 dependencies: []
 synonyms: ["how to set up automatic deploys", "how to run tests automatically on every push", "how to build a ci cd pipeline", "how to automate my deployments", "what is continuous integration and how to set it up"]
 lastUpdated: "2026-03-29"
 sourceUrl: "https://github.com/veggiemonk/awesome-docker"
 difficulty: intermediate
+owner: builder
 ---
 
 # CI/CD Pipeline Patterns

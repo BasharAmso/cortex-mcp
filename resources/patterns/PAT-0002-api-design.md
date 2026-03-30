@@ -11,12 +11,13 @@ useWhen:
   - planning API versioning and pagination
   - scaling an API to handle growing traffic
 estimatedTokens: 650
-relatedFragments: [PAT-0001, PAT-0009, SKL-0002]
+relatedFragments: [PAT-0001, PAT-0009, SKL-0016]
 dependencies: []
 synonyms: ["how to design an api", "what url structure should my api use", "how do I build a rest api", "which http methods should I use", "how to structure api responses"]
 lastUpdated: "2026-03-29"
 sourceUrl: "https://github.com/donnemartin/system-design-primer"
 difficulty: intermediate
+owner: builder
 ---
 
 # REST API Design Pattern

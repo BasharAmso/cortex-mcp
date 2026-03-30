@@ -15,6 +15,7 @@ synonyms: ["how to send push notifications", "web push api example", "service wo
 sourceUrl: "https://github.com/nicedoc/nicedoc.io"
 lastUpdated: "2026-03-30"
 difficulty: advanced
+owner: builder
 ---
 
 # Push Notifications Example

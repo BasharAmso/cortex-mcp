@@ -16,6 +16,7 @@ dependencies: []
 synonyms: ["add pagination to my list", "infinite scroll setup", "cursor vs offset pagination", "load more button implementation", "my list has thousands of items"]
 lastUpdated: "2026-03-29"
 difficulty: beginner
+owner: builder
 sourceUrl: "https://github.com/elsewhencode/project-guidelines"
 ---
 

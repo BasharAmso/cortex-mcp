@@ -15,6 +15,7 @@ synonyms: ["how to set up github actions", "github ci workflow example", "how to
 sourceUrl: "https://github.com/sdras/awesome-actions"
 lastUpdated: "2026-03-30"
 difficulty: beginner
+owner: builder
 ---
 
 # GitHub Actions CI Workflow

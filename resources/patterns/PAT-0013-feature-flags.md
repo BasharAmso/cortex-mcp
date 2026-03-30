@@ -16,6 +16,7 @@ dependencies: []
 synonyms: ["release features to some users first", "how to do A/B testing", "feature toggle setup", "turn features on and off without deploying", "gradual rollout strategy"]
 lastUpdated: "2026-03-29"
 difficulty: intermediate
+owner: builder
 sourceUrl: "https://github.com/dair-ai/Prompt-Engineering-Guide"
 ---
 

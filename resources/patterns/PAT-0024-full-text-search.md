@@ -16,6 +16,7 @@ dependencies: []
 synonyms: ["how to add search to my app", "postgres full text search setup", "tsvector and tsquery explained", "should I use elasticsearch or postgres search", "how to make search results relevant"]
 lastUpdated: "2026-03-29"
 difficulty: intermediate
+owner: builder
 sourceUrl: "https://github.com/dhamaniasad/awesome-postgres"
 ---
 

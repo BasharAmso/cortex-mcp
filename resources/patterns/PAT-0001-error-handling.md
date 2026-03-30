@@ -11,12 +11,13 @@ useWhen:
   - deciding between throwing, returning, or emitting errors
   - setting up process-level uncaught exception handling
 estimatedTokens: 650
-relatedFragments: [PAT-0002, PAT-0008, SKL-0002]
+relatedFragments: [PAT-0002, PAT-0008, SKL-0016]
 dependencies: []
 synonyms: ["how to handle errors in my app", "my app crashes when something goes wrong", "how do I show error messages to users", "try catch best practices", "what to do when api call fails"]
 lastUpdated: "2026-03-29"
 sourceUrl: "https://github.com/goldbergyoni/nodebestpractices"
 difficulty: intermediate
+owner: builder
 ---
 
 # Error Handling Pattern

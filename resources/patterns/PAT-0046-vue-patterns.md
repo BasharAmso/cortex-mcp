@@ -11,12 +11,13 @@ useWhen:
   - using render functions for dynamic component generation
   - handling async components with Suspense
 estimatedTokens: 650
-relatedFragments: [SKL-0113, SKL-0005, PAT-0006]
+relatedFragments: [SKL-0114, SKL-0005, PAT-0006]
 dependencies: []
 synonyms: ["Vue advanced patterns", "provide inject Vue", "Vue slots tutorial", "Vue render functions", "Suspense in Vue", "Vue composable patterns"]
 lastUpdated: "2026-03-30"
 sourceUrl: "https://github.com/vuejs/core"
 difficulty: advanced
+owner: builder
 ---
 
 # Vue Patterns

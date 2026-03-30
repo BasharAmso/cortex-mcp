@@ -11,11 +11,12 @@ useWhen:
   - setting up visual testing in CI pipelines
   - catching unintended CSS or layout changes before shipping
 estimatedTokens: 600
-relatedFragments: [PAT-0005, SKL-0003, PAT-0033, SKL-0005]
+relatedFragments: [PAT-0005, SKL-0017, PAT-0033, SKL-0005]
 dependencies: []
 synonyms: ["how to catch visual bugs automatically", "screenshot testing setup", "my visual tests keep failing on fonts", "chromatic vs percy comparison", "how to test CSS changes automatically"]
 lastUpdated: "2026-03-29"
 difficulty: intermediate
+owner: builder
 sourceUrl: "https://github.com/goldbergyoni/javascript-testing-best-practices"
 ---
 

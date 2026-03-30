@@ -17,88 +17,96 @@ synonyms: ["add AI to my app", "use ChatGPT in my project", "build a RAG pipelin
 lastUpdated: "2026-03-29"
 sourceUrl: "https://github.com/dair-ai/Prompt-Engineering-Guide"
 difficulty: advanced
+owner: builder
 ---
 
-# AI Feature Implementation
+# Skill: AI Feature Implementation
 
-Build AI-powered features with production-grade reliability, cost control, and quality evaluation. Grounded in the Prompt Engineering Guide (DAIR.AI) covering techniques (zero-shot, few-shot, chain-of-thought, ReAct, tree-of-thoughts), RAG, function calling, and adversarial prompting risks.
+## Metadata
 
-## Prompt Engineering Techniques
+| Field | Value |
+|-------|-------|
+| **Skill ID** | SKL-0009 |
+| **Version** | 1.0 |
+| **Owner** | builder |
+| **Inputs** | Task description, PRD AI/ML section, DECISIONS.md, existing AI files |
+| **Outputs** | AI service layer files, STATE.md updated |
+| **Triggers** | `AI_FEATURE_REQUESTED` |
 
-| Technique | When to use | Complexity |
-|-----------|------------|------------|
-| Zero-shot | Simple classification, formatting | Low |
-| Few-shot | Tasks needing examples for pattern | Low |
-| Chain-of-thought (CoT) | Reasoning, math, multi-step logic | Medium |
-| Self-consistency | Improve CoT by sampling multiple paths | Medium |
-| ReAct | Tasks needing external tool use | High |
-| Tree-of-thoughts | Complex planning, exploration problems | High |
-| Prompt chaining | Multi-step pipelines, decomposed tasks | High |
+---
+
+## Purpose
+
+Build AI-powered features (LLM integrations, RAG pipelines, prompt engineering, agentic workflows) with production-grade reliability. Every AI integration handles failures, controls costs, and evaluates quality.
+
+---
 
 ## Architecture Selection
 
 | Use Case | Architecture |
 |----------|-------------|
-| Q&A over documents | RAG (Retrieval Augmented Generation) |
+| Q&A over documents/data | RAG (Retrieval Augmented Generation) |
 | Structured data extraction | Prompt engineering with JSON output mode |
-| Multi-step automation | Agentic with tool use (ReAct pattern) |
-| Classification / routing | Zero-shot or few-shot classifier prompt |
+| Multi-step automation | Agentic with tool use |
+| Classification / routing | Classifier prompt or fine-tuned model |
 | Chat / conversation | Stateful conversation with system prompt |
 | Content generation | Prompt engineering with temperature control |
 
+---
+
 ## Procedure
 
-### 1. Define Requirements
+1. **Read PRD AI/ML Requirements** — extract what the AI does, model selection, performance thresholds, guardrails, cost model.
+2. **Choose and confirm architecture** from the table above. Log to DECISIONS.md.
+3. **Build AI service layer** in `src/services/ai/`:
+   - `client.js` — model client setup, auth, retry config
+   - `prompts/[feature].js` — all prompt templates (never inline)
+   - `[feature]-service.js` — feature-specific AI logic
+   - `guardrails.js` — input/output validation
+4. **Non-negotiables:**
+   - Pin model versions (e.g., `claude-sonnet-4-6`, not `claude-sonnet`)
+   - Set explicit `temperature`, `max_tokens`, `top_p`
+   - Handle all failure modes: rate limit (backoff), timeout, low confidence, model error
+   - Log token usage per request; set `max_tokens` to minimum needed
+   - Cache identical requests for cost reduction
+5. **Implement guardrails:**
+   - Input: validate length, check injection patterns, redact PII
+   - Output: check confidence, validate schema, flag unsourced claims
+   - Fallback hierarchy: retry simplified → rule-based → "I'm not sure" → never empty
+6. **RAG (if applicable):** chunk docs (800-1200 tokens, 10-15% overlap), embed, retrieve top-K, instruct model to cite sources and say "I don't know" when context is insufficient.
+7. **Write evaluation tests** — minimum 10-case golden set (expected outputs, must-not-contain).
+8. **Document in `docs/AI.md`** — feature, model, architecture, cost estimate, fallback behavior.
+9. **Update STATE.md.**
 
-Extract from the PRD: what the AI does, model selection, performance thresholds, guardrails, and cost model.
+---
 
-### 2. Design Prompts
+## Constraints
 
-Follow the Prompt Engineering Guide principles:
-- **Be specific** -- state the task, format, and constraints explicitly
-- **Use delimiters** -- separate instructions from context with clear markers
-- **Specify output format** -- JSON schema, markdown structure, or examples
-- **Include few-shot examples** when the task is ambiguous
-- **Add chain-of-thought** ("think step by step") for reasoning tasks
+- Never uses floating model aliases — always pins versions
+- Never puts prompts inline — always in dedicated prompt files
+- Never ships without a fallback for model failure
+- Never sends PII to external models without PRD authorization
+- Always logs token usage — no AI feature without cost visibility
+- Never sets max_tokens to unlimited
 
-### 3. Build AI Service Layer
+---
 
-Organize in `src/services/ai/`:
-- `client.js` -- model client setup, auth, retry config
-- `prompts/[feature].js` -- all prompt templates (never inline prompts)
-- `[feature]-service.js` -- feature-specific AI logic
-- `guardrails.js` -- input/output validation
+## Primary Agent
 
-### 4. Non-Negotiables
+builder
 
-- **Pin model versions** (e.g., `claude-sonnet-4-6`, not `claude-sonnet`)
-- **Set explicit parameters:** temperature, max_tokens, top_p
-- **Handle all failures:** rate limit (exponential backoff), timeout, low confidence, model error
-- **Log token usage** per request and set max_tokens to minimum needed
-- **Cache identical requests** for cost reduction
+---
 
-### 5. Implement Guardrails
+## Definition of Done
 
-**Input:** Validate length, check injection patterns (jailbreak attempts), redact PII
-
-**Output:** Check confidence, validate schema, flag unsourced claims, detect hallucination markers
-
-**Fallback hierarchy:** Retry simplified prompt, then rule-based fallback, then "I'm not sure" message -- never return empty
-
-### 6. RAG Pipeline (If Applicable)
-
-- Chunk documents: 800-1200 tokens with 10-15% overlap
-- Embed and retrieve top-K results
-- Instruct model to cite sources and say "I don't know" when context is insufficient
-
-### 7. Evaluation
-
-Write a golden set of at least 10 test cases with expected outputs and must-not-contain rules. Test for factuality, format compliance, and adversarial inputs.
-
-## Key Constraints
-
-- Never use floating model aliases -- always pin versions
-- Never put prompts inline -- always in dedicated files
-- Never ship without a fallback for model failure
-- Never send PII to external models without authorization
-- Never set max_tokens to unlimited
+- [ ] Model version pinned
+- [ ] Temperature and max_tokens explicitly set
+- [ ] Prompts in `/prompts/` directory
+- [ ] Input and output guardrails implemented
+- [ ] Fallback behavior defined and tested
+- [ ] Token usage logged per request
+- [ ] Cost controls in place
+- [ ] Golden set evaluation test written (10+ cases)
+- [ ] AI feature documented in docs/AI.md
+- [ ] Architecture decision logged to DECISIONS.md
+- [ ] STATE.md updated

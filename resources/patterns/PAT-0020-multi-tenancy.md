@@ -16,6 +16,7 @@ dependencies: []
 synonyms: ["build a SaaS for multiple customers", "separate data for each customer", "row level security setup", "multi-tenant database design", "shared vs separate databases for SaaS"]
 lastUpdated: "2026-03-29"
 difficulty: advanced
+owner: builder
 sourceUrl: "https://github.com/donnemartin/system-design-primer"
 ---
 

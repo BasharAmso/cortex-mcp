@@ -10,12 +10,13 @@ useWhen:
   - selecting colors, icons, and layout for data-heavy content
   - sizing infographics for different social platforms
 estimatedTokens: 750
-relatedFragments: [SKL-0091, EX-0014, EX-0016]
+relatedFragments: [SKL-0092, EX-0014, EX-0016]
 dependencies: []
 synonyms: ["how to make an infographic", "infographic layout tips", "data visualization for social media", "how to visualize information", "infographic sizing guide"]
 sourceUrl: ""
 lastUpdated: "2026-03-30"
 difficulty: intermediate
+owner: builder
 ---
 
 # Infographic Design Principles

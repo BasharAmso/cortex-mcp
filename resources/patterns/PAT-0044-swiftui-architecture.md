@@ -11,12 +11,13 @@ useWhen:
   - setting up dependency injection in a Swift project
   - choosing between MVVM and Clean Architecture for iOS
 estimatedTokens: 700
-relatedFragments: [SKL-0107, SKL-0007, PAT-0006]
+relatedFragments: [SKL-0108, SKL-0007, PAT-0006]
 dependencies: []
 synonyms: ["SwiftUI app architecture", "MVVM in SwiftUI", "clean architecture iOS", "how to structure a SwiftUI project", "SwiftUI dependency injection", "repository pattern Swift"]
 lastUpdated: "2026-03-30"
 sourceUrl: "https://github.com/nalexn/clean-architecture-swiftui"
 difficulty: advanced
+owner: builder
 ---
 
 # SwiftUI Architecture

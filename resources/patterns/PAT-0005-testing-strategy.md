@@ -11,12 +11,13 @@ useWhen:
   - setting up a test suite from scratch
   - reviewing test quality and effectiveness
 estimatedTokens: 650
-relatedFragments: [EX-0006, PAT-0010, SKL-0041]
+relatedFragments: [EX-0006, PAT-0010, SKL-0042]
 dependencies: []
 synonyms: ["how to test my code", "what tests should I write first", "how to set up a test suite", "my tests keep breaking randomly", "do I need unit tests or integration tests"]
 lastUpdated: "2026-03-29"
 sourceUrl: "https://github.com/goldbergyoni/javascript-testing-best-practices"
 difficulty: intermediate
+owner: builder
 ---
 
 # Testing Strategy

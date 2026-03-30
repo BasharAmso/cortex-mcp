@@ -11,11 +11,12 @@ useWhen:
   - configuring test containers for local development and CI
   - testing service-to-service communication
 estimatedTokens: 650
-relatedFragments: [PAT-0005, SKL-0003, PAT-0036, PAT-0033]
+relatedFragments: [PAT-0005, SKL-0017, PAT-0036, PAT-0033]
 dependencies: []
 synonyms: ["how to test my API endpoints", "database test setup and teardown", "should I mock external services in tests", "testcontainers setup guide", "how to test with a real database"]
 lastUpdated: "2026-03-29"
 difficulty: intermediate
+owner: builder
 sourceUrl: "https://github.com/goldbergyoni/javascript-testing-best-practices"
 ---
 

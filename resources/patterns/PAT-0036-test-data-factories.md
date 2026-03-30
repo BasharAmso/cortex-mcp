@@ -11,11 +11,12 @@ useWhen:
   - seeding a database for development or demo environments
   - reducing test setup boilerplate
 estimatedTokens: 600
-relatedFragments: [PAT-0005, SKL-0003, PAT-0035, PAT-0033]
+relatedFragments: [PAT-0005, SKL-0017, PAT-0035, PAT-0033]
 dependencies: []
 synonyms: ["how to create test data", "factory pattern for tests", "faker.js setup guide", "test fixtures vs factories which is better", "how to seed my database for tests"]
 lastUpdated: "2026-03-29"
 difficulty: intermediate
+owner: builder
 sourceUrl: "https://github.com/goldbergyoni/javascript-testing-best-practices"
 ---
 

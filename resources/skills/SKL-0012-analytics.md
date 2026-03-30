@@ -17,74 +17,86 @@ synonyms: ["track what users do", "add analytics to my app", "how do I measure s
 lastUpdated: "2026-03-29"
 sourceUrl: "https://github.com/newTendermint/awesome-analytics"
 difficulty: intermediate
+owner: builder
 ---
 
-# Analytics & Tracking
+# Skill: Analytics & Tracking
 
-Instrument the product so every important user action is measurable. Grounded in the awesome-analytics ecosystem covering general analytics (PostHog, Matomo), privacy-focused options (Plausible, Umami, Fathom), heatmaps (Hotjar), analytics layers (Segment), and dashboards (Metabase, Grafana).
+## Metadata
 
-## Provider Selection
+| Field | Value |
+|-------|-------|
+| **Skill ID** | SKL-0012 |
+| **Version** | 1.0 |
+| **Owner** | builder |
+| **Inputs** | Task description, PRD success metrics, DECISIONS.md, source code |
+| **Outputs** | Analytics service, event taxonomy, ANALYTICS.md, STATE.md updated |
+| **Triggers** | `ANALYTICS_REQUESTED` |
 
-| Use Case | Provider | Type |
-|----------|---------|------|
-| Solo/MVP (free, privacy-first) | Plausible or Umami | Self-hosted or SaaS |
-| Product analytics + funnels | PostHog (open source) | Self-hosted or cloud |
-| Enterprise product analytics | Mixpanel or Amplitude | SaaS |
-| Multi-destination routing | Segment or RudderStack | Analytics layer |
-| Simple pageviews only | Fathom or GoatCounter | Privacy-focused SaaS |
-| Internal dashboards | Metabase or Redash | Self-hosted, query-based |
-| Heatmaps + session replay | PostHog or Hotjar | Visual analytics |
+---
 
-### Privacy-First Considerations
+## Purpose
 
-If operating in the EU or targeting privacy-conscious users:
-- Choose cookie-free tools (Plausible, Umami, Fathom) -- no cookie banner needed
-- Self-host analytics for full data ownership
-- Avoid sending PII to third-party analytics providers
-- Check GDPR/CCPA compliance of your chosen provider
+Instrument the product so every important user action is measurable. Track events tied to PRD success metrics — not everything, just what drives decisions.
+
+---
+
+## Provider Defaults
+
+| Use Case | Provider |
+|----------|---------|
+| Solo/MVP (free) | PostHog (open source) |
+| Product analytics + funnels | Mixpanel or Amplitude |
+| Multi-destination routing | Segment |
+| Simple pageviews only | Plausible or Fathom |
+
+---
 
 ## Procedure
 
-### 1. Map Metrics to Events
+1. **Read PRD success metrics** — extract primary metric, guardrail metrics, key user flows. Every tracked event must map to a metric.
+2. **Choose analytics provider** from DECISIONS.md or defaults above. Default: PostHog. Log to DECISIONS.md.
+3. **Define event taxonomy** in `src/services/analytics/events.js`:
+   - Naming: `[object]_[action]` in snake_case (e.g., `user_signed_up`, `subscription_started`)
+   - Single source of truth for all event names — never use raw strings inline
+4. **Build analytics service layer** — provider-agnostic wrapper with `track()`, `identify()`, `alias()` methods.
+   - **Critical:** All analytics calls wrapped in try/catch. Analytics must NEVER break the product.
+   - Fail silently in dev if provider not configured.
+5. **Instrument the critical path** in priority order:
+   1. Signup + `identify()` with key traits
+   2. Core feature usage (the action defining product value)
+   3. Conversion to paid
+   4. Retention signal (return visit, day-7 usage)
+   5. Failure states (payment failed, feature failed)
+6. **Document dashboard metrics** in `docs/ANALYTICS.md` — top 5 metrics with events, targets, and funnels to monitor.
+7. **Update STATE.md.**
 
-Extract the primary metric, guardrail metrics, and key user flows from the PRD. Every tracked event must map to a metric. If it does not drive a decision, do not track it.
+---
 
-### 2. Define Event Taxonomy
+## Constraints
 
-Create a single source of truth for all event names (e.g., `src/services/analytics/events.js`):
-- Naming convention: `[object]_[action]` in snake_case
-- Examples: `user_signed_up`, `subscription_started`, `feature_used`
-- Never use raw strings inline -- always reference the constants file
+- Never breaks the product on analytics failure — all calls are try/catch
+- Never tracks PII in event properties (PII goes in identify(), not track())
+- Never hardcodes API keys
+- Never instruments events not connected to a PRD metric
+- Always uses centralized event constants — never raw string event names
 
-### 3. Build Analytics Service Layer
+---
 
-Create a provider-agnostic wrapper with these methods:
-- `track(event, properties)` -- log an event
-- `identify(userId, traits)` -- associate events with a user
-- `alias(newId, oldId)` -- link anonymous to authenticated identity
+## Primary Agent
 
-All analytics calls must be wrapped in try/catch. Analytics must never break the product. Fail silently in dev if the provider is not configured.
+builder
 
-### 4. Instrument the Critical Path
+---
 
-In priority order:
-1. **Signup** + `identify()` with key traits
-2. **Core feature usage** -- the action that defines product value
-3. **Conversion to paid** -- subscription started, payment completed
-4. **Retention signal** -- return visit, day-7 usage
-5. **Failure states** -- payment failed, feature error
+## Definition of Done
 
-### 5. Build a Dashboard
-
-Use Metabase, Grafana, or the analytics provider's built-in dashboard to display:
-- Top 5 metrics with their events, targets, and current values
-- Conversion funnel (signup to activation to payment)
-- Retention curve (day 1, day 7, day 30)
-
-## Key Constraints
-
-- Never break the product on analytics failure -- all calls are try/catch
-- Never track PII in event properties (PII goes in `identify()`, not `track()`)
-- Never hardcode API keys
-- Never instrument events not connected to a success metric
-- Always use centralized event constants -- never raw string event names
+- [ ] PRD success metrics mapped to tracking events
+- [ ] Event taxonomy defined in events.js
+- [ ] Analytics service layer built (provider-agnostic)
+- [ ] All calls wrapped in try/catch
+- [ ] Signup, core feature, and billing events instrumented
+- [ ] User identity called at signup
+- [ ] Dashboard metrics documented in ANALYTICS.md
+- [ ] Provider credentials in env vars
+- [ ] STATE.md updated

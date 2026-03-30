@@ -11,12 +11,13 @@ useWhen:
   - configuring Hilt dependency injection
   - choosing between MVI and MVVM for Android
 estimatedTokens: 700
-relatedFragments: [SKL-0108, SKL-0007, PAT-0006]
+relatedFragments: [SKL-0109, SKL-0007, PAT-0006]
 dependencies: []
 synonyms: ["Android app architecture", "Compose MVVM setup", "unidirectional data flow Android", "how to structure a Compose project", "Hilt dependency injection", "Room database with Compose"]
 lastUpdated: "2026-03-30"
 sourceUrl: "https://github.com/android/compose-samples"
 difficulty: advanced
+owner: builder
 ---
 
 # Compose Architecture

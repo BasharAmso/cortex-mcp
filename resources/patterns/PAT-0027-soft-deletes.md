@@ -16,6 +16,7 @@ dependencies: []
 synonyms: ["how to undo deleting a record from database", "soft delete vs hard delete implementation", "how to handle gdpr delete requests", "how to filter out deleted records in queries", "trash or recycle bin for database records"]
 lastUpdated: "2026-03-29"
 difficulty: intermediate
+owner: builder
 sourceUrl: "https://github.com/dhamaniasad/awesome-postgres"
 ---
 

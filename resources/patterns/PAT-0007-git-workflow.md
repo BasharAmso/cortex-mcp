@@ -11,12 +11,13 @@ useWhen:
   - onboarding contributors to a git workflow
   - automating changelogs and version bumps
 estimatedTokens: 650
-relatedFragments: [PAT-0010, PAT-0006, SKL-0043]
+relatedFragments: [PAT-0010, PAT-0006, SKL-0044]
 dependencies: []
 synonyms: ["how to use git branches", "what should my commit messages look like", "how to do pull requests", "best way to manage code with a team", "how to set up a git workflow"]
 lastUpdated: "2026-03-29"
 sourceUrl: "https://github.com/conventional-changelog/conventionalcommits.org"
 difficulty: beginner
+owner: builder
 ---
 
 # Git Workflow

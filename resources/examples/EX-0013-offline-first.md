@@ -15,6 +15,7 @@ synonyms: ["offline first app", "indexeddb example", "dexie.js tutorial", "sync 
 sourceUrl: "https://github.com/nicedoc/nicedoc.io"
 lastUpdated: "2026-03-30"
 difficulty: advanced
+owner: builder
 ---
 
 # Offline-First Pattern

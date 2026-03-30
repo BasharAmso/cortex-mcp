@@ -16,6 +16,7 @@ dependencies: []
 synonyms: ["send emails from my app", "which email service should I use", "set up password reset emails", "email template design", "my emails go to spam"]
 lastUpdated: "2026-03-29"
 difficulty: beginner
+owner: builder
 sourceUrl: "https://github.com/goldbergyoni/nodebestpractices"
 ---
 

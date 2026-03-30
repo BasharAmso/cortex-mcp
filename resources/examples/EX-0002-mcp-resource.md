@@ -15,6 +15,7 @@ synonyms: ["how to create an mcp resource", "how to serve data from mcp server",
 sourceUrl: "https://github.com/modelcontextprotocol/servers"
 lastUpdated: "2026-03-30"
 difficulty: intermediate
+owner: builder
 ---
 
 # MCP Resource Registration Example

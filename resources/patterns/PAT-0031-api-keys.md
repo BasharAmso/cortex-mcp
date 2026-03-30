@@ -11,11 +11,12 @@ useWhen:
   - designing a developer dashboard for key management
   - planning key rotation without downtime
 estimatedTokens: 650
-relatedFragments: [PAT-0003, PAT-0030, PAT-0002, SKL-0004, SKL-0034]
+relatedFragments: [PAT-0003, PAT-0030, PAT-0002, SKL-0015, SKL-0029]
 dependencies: []
 synonyms: ["how to create api keys for my users", "should I hash api keys in the database", "how to add rate limiting per api key", "developer portal for api key management", "how to rotate api keys without downtime"]
 lastUpdated: "2026-03-29"
 difficulty: advanced
+owner: builder
 sourceUrl: "https://github.com/OWASP/CheatSheetSeries"
 ---
 

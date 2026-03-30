@@ -11,12 +11,13 @@ useWhen:
   - adding transitions and animations to Svelte elements
   - structuring SvelteKit routes with layouts and groups
 estimatedTokens: 650
-relatedFragments: [SKL-0114, SKL-0005, PAT-0006]
+relatedFragments: [SKL-0115, SKL-0005, PAT-0006]
 dependencies: []
 synonyms: ["Svelte store patterns", "Svelte context API", "Svelte actions tutorial", "SvelteKit routing patterns", "Svelte transitions", "derived stores Svelte"]
 lastUpdated: "2026-03-30"
 sourceUrl: "https://github.com/sveltejs/kit"
 difficulty: advanced
+owner: builder
 ---
 
 # Svelte Patterns

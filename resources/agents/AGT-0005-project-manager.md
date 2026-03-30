@@ -10,11 +10,12 @@ useWhen:
   - estimating task durations and identifying risks
   - writing a stakeholder update
 estimatedTokens: 600
-relatedFragments: [AGT-0004, AGT-0001, SKL-0025]
+relatedFragments: [AGT-0004, AGT-0001, SKL-0027]
 dependencies: []
 synonyms: ["plan out my tasks", "how long will this take", "what should I work on next", "track my project progress", "organize the work into sprints"]
 lastUpdated: "2026-03-29"
 difficulty: beginner
+owner: project-manager
 ---
 
 # Project Manager Agent

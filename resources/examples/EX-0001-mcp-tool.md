@@ -15,6 +15,7 @@ synonyms: ["how to create an mcp tool", "how to build an mcp server", "mcp tool 
 sourceUrl: "https://github.com/modelcontextprotocol/servers"
 lastUpdated: "2026-03-30"
 difficulty: intermediate
+owner: builder
 ---
 
 # MCP Tool Registration Example

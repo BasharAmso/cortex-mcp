@@ -17,86 +17,84 @@ synonyms: ["set up my database", "design database tables", "my queries are slow"
 lastUpdated: "2026-03-29"
 sourceUrl: "https://github.com/dhamaniasad/awesome-postgres"
 difficulty: intermediate
+owner: builder
 ---
 
-# Database Administration
+# Skill: Database Administration
 
-Design schemas, write migrations, optimize queries, and ensure data integrity. Grounded in the awesome-postgres ecosystem covering high-availability (Patroni, Citus), monitoring (pganalyze, pg_stat_statements), extensions (PostGIS, pgvector, pg_cron), and optimization tools.
+## Metadata
 
-## PostgreSQL Ecosystem Defaults
+| Field | Value |
+|-------|-------|
+| **Skill ID** | SKL-0008 |
+| **Version** | 1.0 |
+| **Owner** | builder |
+| **Inputs** | Task description, DECISIONS.md, existing migration/model files |
+| **Outputs** | Migration files, schema changes, seed files, STATE.md updated |
+| **Triggers** | `DATABASE_TASK_REQUESTED` |
 
-| Concern | Tool | Notes |
-|---------|------|-------|
-| ORM (Node.js) | Prisma | Type-safe, auto-migration |
-| GUI | pgAdmin, DBeaver | Free, cross-platform |
-| Monitoring | pg_stat_statements + pganalyze | Query performance tracking |
-| Full-text search | Built-in tsvector or pg_search | No external service needed |
-| Vector/embeddings | pgvector | AI/RAG use cases |
-| Job scheduling | pg_cron | In-database cron |
-| Connection pooling | PgBouncer | Required at scale |
+---
+
+## Purpose
+
+Design schemas, write migrations, optimize queries, and ensure data integrity. Every schema change is a migration. Every migration is reversible.
+
+---
 
 ## Procedure
 
-### 1. Confirm Database Stack
+1. **Read DECISIONS.md** — confirm database engine, ORM, migration tool, hosting.
+   - Default: PostgreSQL + Prisma for Node.js projects.
+2. **Design schema before writing migrations:**
+   - List entities and relationships (1:N, M:N, self-referential)
+   - Design indexes for read patterns
+   - Soft-delete for critical records; plan archiving for unbounded data
+3. **Naming conventions (PostgreSQL):**
+   - Tables: `snake_case`, plural (`users`, `subscription_events`)
+   - Columns: `snake_case` (`created_at`, `stripe_customer_id`)
+   - PKs: `id` (UUID preferred); FKs: `[table_singular]_id`
+   - Booleans: `is_[state]` / `has_[thing]`; always include `created_at`, `updated_at`
+4. **Write migrations (never edit schema directly):**
+   - Every migration has UP and DOWN sections — no exceptions
+   - Never rename columns directly — add new, migrate data, drop old
+   - Never add NOT NULL without DEFAULT to existing tables
+   - Large tables (>1M rows): use `CREATE INDEX CONCURRENTLY`
+5. **Indexing strategy:**
+   - Always index: FKs, WHERE clause columns, ORDER BY columns, UNIQUE constraints
+   - Use composite indexes when queries filter on multiple columns
+   - Use partial indexes when queries filter on a subset of rows
+6. **Query optimization:** Use `EXPLAIN ANALYZE` to diagnose slow queries. Fix N+1 with eager loading/JOINs.
+7. **Seed data:** Create seed files for dev/test environments. Never seed production.
+8. **Backup verification:** Document backup config in `docs/DATABASE.md` (provider, frequency, retention, restore procedure).
+9. **Update STATE.md.**
 
-Read project decisions for database engine, ORM, and migration tool. Default: PostgreSQL + Prisma for Node.js projects.
+---
 
-### 2. Design Schema Before Writing Migrations
+## Constraints
 
-- List entities and relationships (1:N, M:N, self-referential)
-- Design indexes against read/query patterns
-- Use soft-delete for critical records
-- Plan archiving for unbounded data growth
-- Consider PostgreSQL-specific types (JSONB, arrays, enums, UUID)
+- Never modifies schema directly — always through migrations
+- Never writes a migration without a DOWN section
+- Never adds NOT NULL without DEFAULT to existing tables
+- Never runs blocking index creation on large tables
+- Never seeds production with test data
+- Always reads DECISIONS.md before writing database code
 
-### 3. Naming Conventions (PostgreSQL)
+---
 
-| Element | Convention | Example |
-|---------|-----------|---------|
-| Tables | snake_case, plural | `users`, `subscription_events` |
-| Columns | snake_case | `created_at`, `stripe_customer_id` |
-| Primary keys | `id` (UUID preferred) | `id UUID DEFAULT gen_random_uuid()` |
-| Foreign keys | `[table_singular]_id` | `user_id`, `order_id` |
-| Booleans | `is_` or `has_` prefix | `is_active`, `has_trial` |
-| Timestamps | Always include | `created_at`, `updated_at` |
+## Primary Agent
 
-### 4. Write Migrations
+builder
 
-- Every migration has UP and DOWN sections -- no exceptions
-- Never rename columns directly -- add new, migrate data, drop old
-- Never add NOT NULL without DEFAULT to existing tables
-- Large tables (1M+ rows): use `CREATE INDEX CONCURRENTLY`
+---
 
-### 5. Indexing Strategy
+## Definition of Done
 
-| Index Type | When to use |
-|-----------|-------------|
-| B-tree (default) | Equality, range queries, sorting |
-| GIN | JSONB fields, arrays, full-text search |
-| GiST | Geometric data, PostGIS, range types |
-| BRIN | Large append-only tables (time-series) |
-| Partial | Subset queries (`WHERE is_active = true`) |
-| Composite | Multi-column filter queries |
-
-Always index: foreign keys, WHERE clause columns, ORDER BY columns, UNIQUE constraints.
-
-### 6. Query Optimization
-
-- Use `EXPLAIN ANALYZE` to diagnose slow queries
-- Enable `pg_stat_statements` for production query monitoring
-- Fix N+1 problems with eager loading or JOINs
-- Consider materialized views for expensive aggregations
-- Use connection pooling (PgBouncer) for high-concurrency apps
-
-### 7. Backup and Recovery
-
-- Automate backups with pg_dump (small DBs) or pg_basebackup (large DBs)
-- Document: provider, frequency, retention period, restore procedure
-- Test restore procedure at least once before going to production
-
-## Key Constraints
-
-- Never modify schema directly -- always through migrations
-- Never write a migration without a DOWN section
-- Never run blocking index creation on large tables
-- Always design schema against query patterns before writing migrations
+- [ ] Database engine and ORM confirmed from DECISIONS.md
+- [ ] Schema designed against query patterns before migration
+- [ ] Migration includes UP and DOWN sections
+- [ ] Foreign keys indexed
+- [ ] Frequent WHERE/ORDER BY columns indexed
+- [ ] Large table migrations use CONCURRENTLY
+- [ ] Seed file created for dev environment
+- [ ] Backup config documented
+- [ ] STATE.md updated

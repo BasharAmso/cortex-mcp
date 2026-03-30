@@ -15,6 +15,7 @@ synonyms: ["make web app feel native", "bottom tab bar", "pull to refresh web", 
 sourceUrl: "https://github.com/nicedoc/nicedoc.io"
 lastUpdated: "2026-03-30"
 difficulty: intermediate
+owner: builder
 ---
 
 # App-Like UX Patterns

@@ -16,6 +16,7 @@ dependencies: []
 synonyms: ["how do I get more out of one post", "I spend hours writing and only post once", "how to reuse my content across platforms", "one piece of content many formats", "turn a blog post into social media posts"]
 lastUpdated: "2026-03-29"
 difficulty: beginner
+owner: builder
 sourceUrl: "https://github.com/PhilipStark/book-genesis"
 ---
 

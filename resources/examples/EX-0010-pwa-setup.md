@@ -15,6 +15,7 @@ synonyms: ["how to make a pwa", "progressive web app setup", "add pwa to next.js
 sourceUrl: "https://github.com/nicklockwood/iVersion"
 lastUpdated: "2026-03-30"
 difficulty: intermediate
+owner: builder
 ---
 
 # PWA Setup Example

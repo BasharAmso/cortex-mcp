@@ -16,6 +16,7 @@ dependencies: []
 synonyms: ["how do I create content faster", "I never have time to post consistently", "how to batch content creation", "how do people post every day", "content creation takes me forever"]
 lastUpdated: "2026-03-29"
 difficulty: beginner
+owner: builder
 sourceUrl: "https://github.com/PhilipStark/book-genesis"
 ---
 

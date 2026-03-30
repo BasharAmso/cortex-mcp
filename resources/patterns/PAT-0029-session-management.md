@@ -11,11 +11,12 @@ useWhen:
   - handling concurrent sessions and forced logout across devices
   - securing session handling against fixation and hijacking
 estimatedTokens: 650
-relatedFragments: [PAT-0003, PAT-0028, PAT-0032, SKL-0004]
+relatedFragments: [PAT-0003, PAT-0028, PAT-0032, SKL-0015]
 dependencies: []
 synonyms: ["should I use jwt or cookies for login", "how to keep users logged in safely", "how does remember me work", "my sessions keep expiring too fast", "how to kick a user out of all devices"]
 lastUpdated: "2026-03-29"
 difficulty: intermediate
+owner: builder
 sourceUrl: "https://github.com/OWASP/CheatSheetSeries"
 ---
 

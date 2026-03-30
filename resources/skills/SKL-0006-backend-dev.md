@@ -17,70 +17,83 @@ synonyms: ["build an API", "create a server endpoint", "write backend logic", "I
 lastUpdated: "2026-03-29"
 sourceUrl: "https://github.com/goldbergyoni/nodebestpractices"
 difficulty: intermediate
+owner: builder
 ---
 
-# Backend Development
+# Skill: Backend Development
 
-Build API endpoints, server logic, and backend services. Grounded in the Node.js Best Practices checklist (102 items) covering project structure, error handling, code style, testing, security, and performance.
+## Metadata
 
-## Core Principles (From Node.js Best Practices)
+| Field | Value |
+|-------|-------|
+| **Skill ID** | SKL-0006 |
+| **Version** | 1.0 |
+| **Owner** | builder |
+| **Inputs** | Task description, DECISIONS.md, existing backend files |
+| **Outputs** | Backend files, STATE.md updated |
+| **Triggers** | `BACKEND_TASK_READY` |
 
-| Principle | Rule |
-|-----------|------|
-| Structure by components | Organize by feature (users/, orders/), not by technical layer |
-| Separate Express from business | Route handlers call services; services hold logic |
-| Config validation at startup | Use convict, envalid, or joi to validate env vars on boot |
-| Error handling | Use async-aware error handler; never swallow errors silently |
-| Operational vs programmer errors | Distinguish crashes (restart) from expected failures (handle gracefully) |
+---
+
+## Purpose
+
+Build server-side logic — APIs, database models, business logic, and integrations.
+
+---
 
 ## Procedure
 
-### 1. Confirm Stack
+1. **Read DECISIONS.md** — identify backend framework, database, ORM, auth approach.
+2. **Design before building** — inputs, outputs, failure modes, database changes.
+3. **Build with non-negotiables:**
+   - Validate all inputs before processing
+   - Never trust client-supplied data
+   - Use parameterized queries — never string-concatenate SQL
+   - Consistent error responses with appropriate HTTP status codes
+   - Log errors with context, never log sensitive data
+4. **Database operations:**
+   - Use migrations for all schema changes
+   - Every migration must be reversible
+   - Index foreign keys and frequently queried fields
+5. **Environment and secrets:**
+   - Never hardcode credentials — all via environment variables
+   - Document new env vars in .env.example
+6. **Update STATE.md** with files created.
 
-Read project decisions for backend framework, database, ORM, and auth approach. Common defaults: Node.js + Express/Fastify, PostgreSQL + Prisma.
+---
 
-### 2. Design Before Building
+## Constraints
 
-For each endpoint or service, define:
-- Inputs and outputs (request/response shape)
-- Failure modes and error responses
-- Database changes required (if any)
+- Never modifies frontend files
+- Never hardcodes secrets or credentials
+- Never writes raw SQL string concatenation
+- Always logs new stack/database decisions to DECISIONS.md
 
-### 3. Build With Non-Negotiables
+---
 
-- **Validate all inputs** at the API boundary using a schema library (Zod, Joi, typebox)
-- **Parameterized queries** -- never string-concatenate SQL
-- **Consistent error responses** with appropriate HTTP status codes and a standard error shape
-- **Log errors with context** (request ID, user ID) -- never log sensitive data
-- **Use middleware** for cross-cutting concerns (auth, logging, rate limiting)
-- **Handle async errors** -- unhandled rejections must crash the process (fail fast)
-
-### 4. Database Operations
-
-- Use migrations for all schema changes -- never edit schema directly
-- Every migration must be reversible (UP and DOWN)
-- Index foreign keys and frequently queried columns
-- Never add NOT NULL without DEFAULT to existing tables
-
-### 5. Environment and Secrets
-
-- All credentials via environment variables -- never hardcoded
-- Validate all required env vars at startup (fail fast if missing)
-- Document new env vars in `.env.example`
-- Never commit `.env` files
-
-## Deployment Options
+## Deployment Reference
 
 | Target | Tool | Notes |
 |--------|------|-------|
-| Beginner | Railway, Render | Auto-deploy, free tier |
-| Control | Fly.io | Docker-based, scales to zero |
+| API server (beginner) | Railway | Auto-deploys, free tier |
+| API server (beginner) | Render | Good free tier |
+| API server (control) | Fly.io | Docker-based, scales to zero |
 | Serverless | Vercel/Netlify Functions | Lightweight APIs |
 
-## Key Constraints
+---
 
-- Never modify frontend files
-- Never hardcode secrets or credentials
-- Never write raw SQL string concatenation
-- Always structure by feature, not by technical layer
-- Always validate config at startup
+## Primary Agent
+
+builder
+
+---
+
+## Definition of Done
+
+- [ ] Stack and database confirmed from DECISIONS.md
+- [ ] All inputs validated
+- [ ] Parameterized queries used
+- [ ] Consistent error handling and HTTP status codes
+- [ ] No hardcoded credentials
+- [ ] Migrations created for schema changes
+- [ ] STATE.md updated

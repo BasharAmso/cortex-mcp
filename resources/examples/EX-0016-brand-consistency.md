@@ -10,12 +10,13 @@ useWhen:
   - building a lightweight style guide for content creators
   - maintaining visual consistency across multiple platforms at scale
 estimatedTokens: 750
-relatedFragments: [SKL-0091, EX-0014, EX-0015]
+relatedFragments: [SKL-0092, EX-0014, EX-0015]
 dependencies: []
 synonyms: ["how to keep my brand consistent", "brand kit setup guide", "style guide for social media", "how to make templates in canva", "visual identity across platforms"]
 sourceUrl: "https://github.com/alexpate/awesome-design-systems"
 lastUpdated: "2026-03-30"
 difficulty: intermediate
+owner: builder
 ---
 
 # Brand Visual Consistency

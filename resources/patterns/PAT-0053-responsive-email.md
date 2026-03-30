@@ -17,6 +17,7 @@ synonyms: ["how to build HTML emails", "responsive email template", "email that 
 lastUpdated: "2026-03-30"
 sourceUrl: "https://github.com/alexpate/awesome-design-systems"
 difficulty: advanced
+owner: builder
 ---
 
 # Responsive Email

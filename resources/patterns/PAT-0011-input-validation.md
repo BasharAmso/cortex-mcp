@@ -16,6 +16,7 @@ dependencies: []
 synonyms: ["how to validate user input", "which validation library should I use", "form validation best practices", "prevent SQL injection", "validate API requests"]
 lastUpdated: "2026-03-29"
 difficulty: intermediate
+owner: builder
 sourceUrl: "https://github.com/goldbergyoni/nodebestpractices"
 ---
 

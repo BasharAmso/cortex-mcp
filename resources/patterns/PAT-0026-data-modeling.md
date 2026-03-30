@@ -16,6 +16,7 @@ dependencies: []
 synonyms: ["should I normalize or denormalize my database", "when to use json column in postgres", "how to track changes in database audit log", "how to model something that belongs to different tables", "database schema design best practices"]
 lastUpdated: "2026-03-29"
 difficulty: intermediate
+owner: builder
 sourceUrl: "https://github.com/dhamaniasad/awesome-postgres"
 ---
 

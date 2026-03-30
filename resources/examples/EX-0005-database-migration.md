@@ -15,6 +15,7 @@ synonyms: ["how to create a database migration", "how to add a new table to my d
 sourceUrl: "https://github.com/prisma/prisma"
 lastUpdated: "2026-03-30"
 difficulty: beginner
+owner: builder
 ---
 
 # Database Migration Example

@@ -10,11 +10,12 @@ useWhen:
   - planning onboarding experiences
   - defining empty states, error states, and edge case UX
 estimatedTokens: 500
-relatedFragments: [AGT-0001, AGT-0004, SKL-0023]
+relatedFragments: [AGT-0001, AGT-0004, SKL-0003]
 dependencies: []
 synonyms: ["design the screens before coding", "plan out the user experience", "what should the app look like", "map out how users move through the app", "wireframe the pages"]
 lastUpdated: "2026-03-29"
 difficulty: intermediate
+owner: designer
 ---
 
 # Designer Agent

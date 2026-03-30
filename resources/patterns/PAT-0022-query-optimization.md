@@ -16,6 +16,7 @@ dependencies: []
 synonyms: ["my database queries are slow how to fix", "what is the n plus one problem", "how to use explain analyze in postgres", "cursor vs offset pagination which is better", "how to add indexes to speed up queries"]
 lastUpdated: "2026-03-29"
 difficulty: intermediate
+owner: builder
 sourceUrl: "https://github.com/dhamaniasad/awesome-postgres"
 ---
 

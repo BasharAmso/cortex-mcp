@@ -12,6 +12,7 @@ export interface FragmentFrontmatter {
   lastUpdated: string;
   sourceUrl: string;
   difficulty: string;
+  owner: string;
 }
 
 export interface Fragment extends FragmentFrontmatter {

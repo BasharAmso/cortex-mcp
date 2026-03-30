@@ -11,12 +11,13 @@ useWhen:
   - creating pricing tables or feature comparison grids
   - optimizing a page for conversions
 estimatedTokens: 750
-relatedFragments: [SKL-0005, SKL-0013, SKL-0023, PAT-0050]
+relatedFragments: [SKL-0005, SKL-0013, SKL-0003, PAT-0050]
 dependencies: []
 synonyms: ["how to build a landing page", "make a homepage that converts", "hero section design", "pricing page layout", "what goes above the fold", "build a marketing page"]
 lastUpdated: "2026-03-30"
 sourceUrl: "https://github.com/nordicgiant2/awesome-landing-page"
 difficulty: intermediate
+owner: builder
 ---
 
 # Landing Page Patterns

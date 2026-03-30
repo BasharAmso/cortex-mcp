@@ -11,12 +11,13 @@ useWhen:
   - implementing skeleton loading for data-heavy pages
   - choosing chart types for different data stories
 estimatedTokens: 750
-relatedFragments: [SKL-0005, SKL-0012, SKL-0023, PAT-0048]
+relatedFragments: [SKL-0005, SKL-0012, SKL-0003, PAT-0048]
 dependencies: []
 synonyms: ["how to design a dashboard", "build an admin panel", "show KPI metrics", "data dashboard layout", "analytics page design", "charts and graphs page"]
 lastUpdated: "2026-03-30"
 sourceUrl: "https://github.com/dashboarddesignpatterns/dashboarddesignpatterns.github.io"
 difficulty: intermediate
+owner: builder
 ---
 
 # Dashboard Design

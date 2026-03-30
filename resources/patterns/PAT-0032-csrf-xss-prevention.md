@@ -11,11 +11,12 @@ useWhen:
   - hardening an application with security response headers
   - rendering user-submitted HTML safely
 estimatedTokens: 700
-relatedFragments: [PAT-0003, PAT-0029, PAT-0028, SKL-0004, SKL-0034]
+relatedFragments: [PAT-0003, PAT-0029, PAT-0028, SKL-0015, SKL-0029]
 dependencies: []
 synonyms: ["how to prevent csrf attacks on my forms", "how to stop xss in user input", "what security headers should I add", "someone could inject scripts into my site", "how to set up content security policy"]
 lastUpdated: "2026-03-29"
 difficulty: intermediate
+owner: builder
 sourceUrl: "https://github.com/OWASP/CheatSheetSeries"
 ---
 

@@ -17,6 +17,7 @@ synonyms: ["how to add logging to my app", "how to track errors in production", 
 lastUpdated: "2026-03-29"
 sourceUrl: "https://github.com/goldbergyoni/nodebestpractices"
 difficulty: intermediate
+owner: builder
 ---
 
 # Logging and Monitoring

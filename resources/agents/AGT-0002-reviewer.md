@@ -10,11 +10,12 @@ useWhen:
   - writing or reviewing tests
   - conducting acceptance testing before release
 estimatedTokens: 550
-relatedFragments: [AGT-0001, SKL-0003, SKL-0004]
+relatedFragments: [AGT-0001, SKL-0017, SKL-0015]
 dependencies: []
 synonyms: ["check my code for mistakes", "is this code any good", "find bugs before I ship", "review what I wrote", "make sure this is safe"]
 lastUpdated: "2026-03-29"
 difficulty: beginner
+owner: reviewer
 ---
 
 # Reviewer Agent

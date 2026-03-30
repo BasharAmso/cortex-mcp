@@ -16,6 +16,7 @@ dependencies: []
 synonyms: ["how far ahead should I plan content", "how often should I post on LinkedIn", "I need a content calendar template", "how to plan my posts for the month", "what should I post and when"]
 lastUpdated: "2026-03-29"
 difficulty: beginner
+owner: builder
 sourceUrl: "https://github.com/PhilipStark/book-genesis"
 ---
 

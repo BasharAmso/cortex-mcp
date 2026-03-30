@@ -16,6 +16,7 @@ dependencies: []
 synonyms: ["how to upload files in my app", "store images in the cloud", "S3 vs Cloudflare R2", "image upload and resize", "serve user uploaded files"]
 lastUpdated: "2026-03-29"
 difficulty: intermediate
+owner: builder
 sourceUrl: "https://github.com/goldbergyoni/nodebestpractices"
 ---
 

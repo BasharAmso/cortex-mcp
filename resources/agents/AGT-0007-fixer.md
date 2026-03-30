@@ -10,11 +10,12 @@ useWhen:
   - diagnosing an error or unexpected behavior
   - cleaning up messy or duplicated code
 estimatedTokens: 500
-relatedFragments: [AGT-0001, AGT-0002, SKL-0019, SKL-0020]
+relatedFragments: [AGT-0001, AGT-0002, SKL-0024, SKL-0023]
 dependencies: []
 synonyms: ["something is broken fix it", "my app has a bug", "why is this not working", "clean up messy code", "find out why this crashes"]
 lastUpdated: "2026-03-29"
 difficulty: beginner
+owner: fixer
 ---
 
 # Fixer Agent

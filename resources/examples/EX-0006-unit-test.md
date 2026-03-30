@@ -15,6 +15,7 @@ synonyms: ["how to write a unit test", "vitest or jest test example", "how to mo
 sourceUrl: "https://github.com/goldbergyoni/javascript-testing-best-practices"
 lastUpdated: "2026-03-30"
 difficulty: beginner
+owner: builder
 ---
 
 # Unit Test Example

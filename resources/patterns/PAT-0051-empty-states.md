@@ -11,12 +11,13 @@ useWhen:
   - creating first-time user experiences
   - improving engagement on sparse or new accounts
 estimatedTokens: 600
-relatedFragments: [SKL-0115, SKL-0023, SKL-0020, PAT-0050]
+relatedFragments: [SKL-0116, SKL-0003, SKL-0023, PAT-0050]
 dependencies: []
 synonyms: ["what to show when there's no data", "blank screen design", "no results found page", "first time user screen", "zero state design", "empty page placeholder"]
 lastUpdated: "2026-03-30"
 sourceUrl: "https://github.com/uixmat/onborda"
 difficulty: beginner
+owner: builder
 ---
 
 # Empty States

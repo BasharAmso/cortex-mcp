@@ -10,11 +10,12 @@ useWhen:
   - validating whether a problem is worth solving
   - conducting competitor analysis or creating a pitch deck
 estimatedTokens: 600
-relatedFragments: [AGT-0005, AGT-0001, SKL-0004]
+relatedFragments: [AGT-0005, AGT-0001, SKL-0015]
 dependencies: []
 synonyms: ["figure out what to build", "write requirements for my app", "is this idea worth building", "who is this for and why", "scope out the project"]
 lastUpdated: "2026-03-29"
 difficulty: beginner
+owner: product-manager
 ---
 
 # Product Manager Agent

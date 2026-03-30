@@ -11,12 +11,13 @@ useWhen:
   - handling images, shadows, and charts in dark mode
   - respecting system-level color scheme preferences
 estimatedTokens: 700
-relatedFragments: [SKL-0005, SKL-0023, PAT-0053, PAT-0048]
+relatedFragments: [SKL-0005, SKL-0003, PAT-0053, PAT-0048]
 dependencies: []
 synonyms: ["how to add dark mode", "light and dark theme toggle", "CSS dark theme implementation", "make my app work in dark mode", "theme switching", "night mode for my website"]
 lastUpdated: "2026-03-30"
 sourceUrl: "https://github.com/alexpate/awesome-design-systems"
 difficulty: intermediate
+owner: builder
 ---
 
 # Dark Mode Implementation

@@ -15,6 +15,7 @@ dependencies: []
 synonyms: ["how should I structure my app", "what tech stack should I use", "plan out the system before coding", "how do the pieces fit together", "design the big picture"]
 lastUpdated: "2026-03-29"
 difficulty: intermediate
+owner: architecture-designer
 ---
 
 # Architecture Designer Agent

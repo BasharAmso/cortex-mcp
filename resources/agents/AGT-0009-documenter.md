@@ -10,11 +10,12 @@ useWhen:
   - documenting a shipped feature
   - writing API docs or changelogs
 estimatedTokens: 450
-relatedFragments: [AGT-0001, SKL-0024]
+relatedFragments: [AGT-0001, SKL-0001]
 dependencies: []
 synonyms: ["write a readme for my project", "document how this works", "create setup instructions", "explain the code for others", "write API docs"]
 lastUpdated: "2026-03-29"
 difficulty: beginner
+owner: documenter
 ---
 
 # Documenter Agent

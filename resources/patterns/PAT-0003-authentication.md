@@ -17,6 +17,7 @@ synonyms: ["how do I add logins to my app", "how to make users sign up and log i
 lastUpdated: "2026-03-29"
 sourceUrl: "https://github.com/OWASP/CheatSheetSeries"
 difficulty: intermediate
+owner: builder
 ---
 
 # Authentication Patterns

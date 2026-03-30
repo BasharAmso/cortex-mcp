@@ -15,6 +15,7 @@ dependencies: []
 synonyms: ["research options before I decide", "what library should I use", "compare these two approaches", "I need to figure something out first", "explore what tools are available"]
 lastUpdated: "2026-03-29"
 difficulty: beginner
+owner: explorer
 ---
 
 # Explorer Agent

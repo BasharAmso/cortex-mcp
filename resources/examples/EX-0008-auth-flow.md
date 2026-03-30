@@ -16,6 +16,7 @@ synonyms: ["add login to my Next.js app", "NextAuth setup example", "protect pag
 sourceUrl: "https://github.com/OWASP/CheatSheetSeries"
 lastUpdated: "2026-03-30"
 difficulty: intermediate
+owner: builder
 ---
 
 # Authentication Flow (Next.js + NextAuth)

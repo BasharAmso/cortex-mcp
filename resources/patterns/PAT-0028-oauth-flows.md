@@ -11,11 +11,12 @@ useWhen:
   - building a secure logout flow that revokes tokens
   - choosing between OAuth flows for SPAs vs server-rendered apps
 estimatedTokens: 700
-relatedFragments: [PAT-0003, PAT-0029, SKL-0004, SKL-0034]
+relatedFragments: [PAT-0003, PAT-0029, SKL-0015, SKL-0029]
 dependencies: []
 synonyms: ["how do I add Google login to my app", "sign in with GitHub button", "what is PKCE and do I need it", "how to handle oauth tokens and refresh", "add Apple sign in to my website"]
 lastUpdated: "2026-03-29"
 difficulty: intermediate
+owner: builder
 sourceUrl: "https://github.com/OWASP/CheatSheetSeries"
 ---
 

@@ -13,17 +13,18 @@ estimatedTokens: 650
 relatedFragments: [SKL-0081, SKL-0083, SKL-0029]
 dependencies: []
 synonyms: ["how do I tell a story in a post", "my writing is boring", "how to make content interesting", "I have a story but don't know how to structure it", "how to write about my experience", "what makes a good story"]
-lastUpdated: "2026-03-29"
+sourceUrl: "https://github.com/btford/write-good"
+lastUpdated: "2026-03-30"
 difficulty: beginner
 ---
 
 # Storytelling Frameworks
 
-Stories are the oldest technology for making ideas stick. Every framework here turns raw experience into structured narrative that people remember and share.
+Stories are the oldest technology for making ideas stick. Every framework here turns raw experience into structured narrative that people remember and share. The difference between a forgettable post and a compelling one often comes down to sentence-level craft: active voice over passive, concrete words over weasel words, tension over filler.
 
 ## When Stories Beat Facts
 
-Use story when you want to: change someone's mind, make them feel something, or help them remember. Use facts when they just need the answer.
+Use story when you want to: change someone's mind, make them feel something, or help them remember. Use facts when they just need the answer. Automated prose checks (like write-good) flag passive voice, adverb overuse, and wordy phrasing because these patterns drain energy from narrative. Strong stories use active verbs and specific details.
 
 ## Framework Reference
 
@@ -75,6 +76,18 @@ Structure: **[Specific time] + [unexpected event] + [emotional result]**
 
 *Example: "Three years ago I got fired. It was the best thing that happened to my career."*
 
+## Sentence-Level Story Craft
+
+Prose linters reveal the patterns that weaken narrative. Apply these rules to every story:
+
+| Weak Pattern | Why It Hurts | Fix |
+|-------------|-------------|-----|
+| Passive voice ("was discovered") | Hides the actor, kills momentum | Name who did what ("I discovered") |
+| Weasel words ("many people," "various reasons") | Vague, no image in reader's mind | Use specifics ("12 founders," "the pricing decision") |
+| Adverb stacking ("really extremely hard") | Empty intensifiers | Pick one strong adjective or show with detail |
+| "There is/are" openers | Delays the point | Start with the subject doing something |
+| Cliches ("at the end of the day") | Signal lazy thinking | Replace with an original observation |
+
 ## Emotional Beats
 
 Every story needs at least two of these emotional shifts:
@@ -102,3 +115,4 @@ For social posts under 200 words:
 - No emotional stakes (facts without feelings)
 - Ending with a generic moral instead of a specific, earned insight
 - Making yourself the hero instead of making the reader the hero
+- Using passive constructions during the climax (the moment that should hit hardest)

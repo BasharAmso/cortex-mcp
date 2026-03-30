@@ -13,80 +13,102 @@ estimatedTokens: 750
 relatedFragments: [SKL-0091, EX-0014, EX-0015]
 dependencies: []
 synonyms: ["how to keep my brand consistent", "brand kit setup guide", "style guide for social media", "how to make templates in canva", "visual identity across platforms"]
-lastUpdated: "2026-03-29"
+sourceUrl: "https://github.com/alexpate/awesome-design-systems"
+lastUpdated: "2026-03-30"
 difficulty: intermediate
 ---
 
 # Brand Visual Consistency
 
-How to define, document, and enforce a visual identity so every piece of content looks like it belongs to the same brand.
+How to define, document, and enforce a visual identity using design system principles from leading systems (Material, Carbon, Polaris, Spectrum).
 
-## Brand Kit Setup
+## Design Tokens (CSS Custom Properties)
 
-Every brand kit needs five elements:
+```css
+/* Brand tokens: single source of truth for visual identity */
+/* Pattern from design systems: tokens define, components consume */
+:root {
+  /* Color palette (5 roles max) */
+  --brand-primary: #2563eb;
+  --brand-secondary: #f59e0b;
+  --brand-neutral-dark: #1e293b;
+  --brand-neutral-light: #f8fafc;
+  --brand-alert: #ef4444;
 
-### 1. Color Palette
+  /* Typography scale */
+  --font-heading: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-body: "Source Sans 3", system-ui, sans-serif;
+  --text-h1: 2.25rem;   /* 36px */
+  --text-h2: 1.5rem;    /* 24px */
+  --text-h3: 1.25rem;   /* 20px */
+  --text-body: 1rem;     /* 16px */
+  --text-caption: 0.875rem; /* 14px */
+  --leading-heading: 1.2;
+  --leading-body: 1.5;
 
-Define exactly these roles:
+  /* Spacing and shape */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+}
+```
 
-| Role | Example | Usage |
-|------|---------|-------|
-| Primary | #2563EB (blue) | Headers, buttons, key accents |
-| Secondary | #F59E0B (amber) | Highlights, callouts, CTAs |
-| Neutral dark | #1E293B (slate) | Body text, borders |
-| Neutral light | #F8FAFC (off-white) | Backgrounds, cards |
-| Alert/accent | #EF4444 (red) | Errors, warnings, urgent badges |
+## Brand Card Component
 
-Store hex values, RGB, and HSL. Include WCAG contrast ratios for each text/background pairing. Minimum 4.5:1 for body text, 3:1 for large text.
+```html
+<!-- Reusable brand component using design tokens -->
+<article class="brand-card">
+  <h3 class="brand-card-title">Feature Title</h3>
+  <p class="brand-card-body">Description of the feature or content block.</p>
+  <a href="/learn-more" class="brand-cta">Learn more</a>
+</article>
+```
 
-### 2. Typography
+```css
+.brand-card {
+  background: var(--brand-neutral-light);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
 
-Pick two fonts maximum:
+.brand-card-title {
+  font-family: var(--font-heading);
+  font-size: var(--text-h3);
+  font-weight: 700;
+  line-height: var(--leading-heading);
+  color: var(--brand-neutral-dark);
+  margin-bottom: 0.5rem;
+}
 
-- **Heading font** -- a distinctive sans-serif (Inter, Plus Jakarta Sans, or Satoshi).
-- **Body font** -- a highly readable serif or sans-serif (Source Sans 3, Lora, or system font stack).
-- **Sizes:** H1 = 32-40px, H2 = 24-28px, H3 = 18-22px, Body = 16px, Caption = 14px.
-- **Line height:** 1.5 for body, 1.2 for headings.
+.brand-card-body {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  color: var(--brand-neutral-dark);
+}
 
-### 3. Logo Usage
+/* WCAG 4.5:1 contrast: --brand-primary on white background */
+.brand-cta {
+  display: inline-block;
+  margin-top: 1rem;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  color: var(--brand-primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
 
-Document minimum clear space (usually 1x the logo mark height around all sides), minimum display size (typically 24px height for digital), and what NOT to do (stretch, recolor, place on busy backgrounds).
+.brand-cta:focus-visible {
+  outline: 2px solid var(--brand-primary);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+```
 
-### 4. Image Style
-
-Define the visual tone: photography vs. illustration, warm vs. cool, candid vs. staged. Pick one direction and reference 3-5 example images.
-
-### 5. Graphic Elements
-
-Consistent use of: rounded vs. sharp corners, line weight for icons, shadow depth, border radius. Small details compound into recognizable identity.
-
-## Template Creation
-
-### In Canva
-
-1. Go to **Brand Kit** (requires Canva Pro) and upload colors, fonts, and logos.
-2. Create one master template per content type:
-   - LinkedIn post (1200 x 1200)
-   - Twitter/X header (1500 x 500)
-   - Instagram story (1080 x 1920)
-   - YouTube thumbnail (1280 x 720)
-   - Presentation slide (1920 x 1080)
-3. Lock background layers, logo placement, and font styles. Leave text and image areas editable.
-4. Save each as a **Brand Template** so team members can duplicate without altering the original.
-
-### In Figma
-
-1. Create a **Brand Library** file with:
-   - Color styles (Primary/500, Primary/100, etc.)
-   - Text styles (H1, H2, Body, Caption with font, size, weight, line-height)
-   - Component variants for buttons, cards, banners, and social post frames
-2. Publish as a **Team Library** so all project files pull from one source of truth.
-3. Use **Auto Layout** on template frames so content reflows cleanly when text length changes.
-4. Add **annotations** on each component explaining when and how to use it.
-
-## Style Guide Essentials
-
-A lightweight style guide fits on one page:
+## One-Page Style Guide Template
 
 ```
 BRAND STYLE GUIDE -- [Brand Name]
@@ -94,33 +116,25 @@ BRAND STYLE GUIDE -- [Brand Name]
 COLORS       Primary: #2563EB | Secondary: #F59E0B | Dark: #1E293B | Light: #F8FAFC
 FONTS        Headings: Plus Jakarta Sans Bold | Body: Source Sans 3 Regular
 LOGO         Min size: 24px height | Clear space: 1x mark height | No recoloring
-TONE         Warm, direct, encouraging (see tone profile for copy guidelines)
+TONE         Warm, direct, encouraging
 IMAGES       Candid photography, warm lighting, real people over stock
 CORNERS      8px border radius on cards and buttons
 ICONS        Lucide set, 1.5px stroke, 24px grid
 ```
 
-## Cross-Platform Visual Identity
+## Cross-Platform Consistency
 
 | Element | LinkedIn | Twitter/X | YouTube | Instagram |
 |---------|----------|-----------|---------|-----------|
-| Profile photo | Logo mark, 400x400 | Same logo mark | Same logo mark | Same logo mark |
-| Banner | Brand tagline + colors | Shortened tagline | Channel art with schedule | N/A (use highlights) |
-| Post template | 1200x1200 branded frame | 1200x675 card | 1280x720 thumbnail | 1080x1080 feed post |
-| Color usage | Primary headers, neutral body | Accent on key text | High contrast for thumbnails | Full palette allowed |
-
-## Maintaining Consistency at Scale
-
-1. **Single source of truth** -- one Figma library or Canva Brand Kit. Never duplicate style definitions.
-2. **Template-first workflow** -- creators start from a template, never from a blank canvas.
-3. **Batch create** -- design a week or month of content in one session to maintain visual rhythm.
-4. **Audit quarterly** -- screenshot 10 recent posts side by side. If any look like they come from a different brand, update the template or retrain the creator.
-5. **Automate where possible** -- use Canva Bulk Create or Figma plugins to generate variants from a data source (CSV of post titles, stats, dates).
+| Profile photo | Logo mark, 400x400 | Same | Same | Same |
+| Post template | 1200x1200 | 1200x675 | 1280x720 | 1080x1080 |
+| Color usage | Primary headers | Accent on key text | High contrast | Full palette |
 
 ## Key Points
 
+- **Design tokens are the foundation**: leading systems (Material, Carbon, Polaris) define tokens that components consume
 - **Two fonts, five colors** -- constraints create recognition faster than variety
-- **Templates prevent drift** -- every new content piece should start from an approved template
-- **Lock what matters** -- logo position, font choices, and color palette are non-negotiable; imagery and copy flex
-- **Test across platforms** -- a brand kit designed only for LinkedIn may look wrong on Instagram; verify each format
+- **Templates prevent drift** -- every new content piece starts from an approved template
+- **Single source of truth** -- one Figma library or Canva Brand Kit, never duplicated
 - **Document the "don'ts"** -- showing what NOT to do prevents more mistakes than showing what to do
+- **Audit quarterly** -- screenshot 10 recent posts side by side to catch visual drift

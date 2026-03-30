@@ -12,13 +12,14 @@ estimatedTokens: 450
 relatedFragments: [EX-0002]
 dependencies: []
 synonyms: ["how to create an mcp tool", "how to build an mcp server", "mcp tool registration example", "how to add a tool to mcp"]
-lastUpdated: "2026-03-29"
+sourceUrl: "https://github.com/modelcontextprotocol/servers"
+lastUpdated: "2026-03-30"
 difficulty: intermediate
 ---
 
 # MCP Tool Registration Example
 
-How to register a tool with the MCP SDK (TypeScript).
+How to register a tool with the MCP SDK (TypeScript), following patterns from the official reference servers.
 
 ```typescript
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
@@ -30,12 +31,14 @@ const server = new McpServer({
   version: "1.0.0",
 });
 
-// Register a tool with typed parameters
+// Register a tool with typed parameters using Zod
+// Pattern from modelcontextprotocol/servers reference implementations
 server.tool(
   "search",
+  "Search documents by query string",
   {
     query: z.string().describe("Search query"),
-    limit: z.number().optional().default(10),
+    limit: z.number().optional().default(10).describe("Max results"),
   },
   async (args) => {
     const results = await performSearch(args.query, args.limit);
@@ -51,15 +54,30 @@ server.tool(
   },
 );
 
-// Connect via stdio
+// Tools can return errors without throwing
+server.tool("read_file", "Read a file with access control", {
+  path: z.string().describe("File path to read"),
+}, async (args) => {
+  if (!isAllowedPath(args.path)) {
+    return {
+      isError: true,
+      content: [{ type: "text", text: "Access denied: path outside allowed directories" }],
+    };
+  }
+  const content = await readFile(args.path, "utf-8");
+  return { content: [{ type: "text", text: content }] };
+});
+
+// Connect via stdio transport (standard for local MCP servers)
 const transport = new StdioServerTransport();
 await server.connect(transport);
 ```
 
 ## Key Points
 
-- Use `z` (Zod) for parameter schemas — auto-converted to JSON Schema
-- Return `content` array with typed content blocks
-- Use `type: "text"` for most responses
-- Connect via `StdioServerTransport` for local MCP servers
-- Log to stderr (stdout is the MCP transport channel)
+- **Description string** is the second argument to `server.tool()`, used by LLMs to decide when to call the tool
+- **Zod schemas** auto-convert to JSON Schema for the MCP protocol
+- Return `isError: true` in the content response for graceful tool-level errors
+- Reference servers use `StdioServerTransport` for local process communication
+- Always log to stderr since stdout is the MCP transport channel
+- Implement access controls (like allowed paths) as the reference filesystem server does

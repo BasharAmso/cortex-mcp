@@ -13,13 +13,14 @@ estimatedTokens: 600
 relatedFragments: [SKL-0013, SKL-0087, SKL-0094]
 dependencies: []
 synonyms: ["how do I build a personal brand", "what should my bio say", "how do I stand out online", "help me define my brand", "what's my unique angle"]
-lastUpdated: "2026-03-29"
+sourceUrl: "https://github.com/mezod/awesome-indie"
+lastUpdated: "2026-03-30"
 difficulty: beginner
 ---
 
 # Personal Branding
 
-Define who you are, who you serve, and why they should pay attention. Personal branding is not self-promotion. It is a promise about the value people get by following you.
+Define who you are, who you serve, and why they should pay attention. The indie maker community has proven that personal brands built on transparency outperform polished corporate personas. Pieter Levels, Patrick McKenzie, Rob Walling, and David Heinemeier Hansson built brands by sharing real work, real numbers, and real opinions over years. The pattern is consistency and specificity, not production value.
 
 ## Brand Promise Framework
 
@@ -43,6 +44,17 @@ Write platform-specific bios, not one-size-fits-all:
 | Personal site | Full story | Brand story + best work + clear CTA. |
 
 Rules: First-person voice. No jargon. Include one concrete proof point. Update quarterly.
+
+## The Indie Maker Brand Playbook
+
+The bootstrapped community surfaces clear brand-building patterns:
+
+| Pattern | Example | Why It Works |
+|---------|---------|-------------|
+| Build in public | Sharing revenue, decisions, mistakes | Audience invests in your journey |
+| Niche expertise | Patrick McKenzie on SaaS pricing, Moz on SEO | Deep knowledge in one area compounds authority |
+| Authentic storytelling | Tyler Tringas sharing Storemapper metrics | Real numbers build trust generic advice never can |
+| Consistent presence | Joel Spolsky blogging for years before Stack Overflow | Long-term consistency creates compounding recognition |
 
 ## Visual Consistency
 
@@ -76,3 +88,4 @@ This is internal. It guides content decisions but you never post it verbatim.
 - Leading with credentials instead of outcomes
 - Changing your positioning every month before it has time to work
 - Overthinking the brand before creating any content (start messy, refine later)
+- Waiting for a "launch moment" instead of sharing work in progress

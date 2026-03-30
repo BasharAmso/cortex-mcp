@@ -13,13 +13,14 @@ estimatedTokens: 600
 relatedFragments: [SKL-0085, SKL-0081, SKL-0029]
 dependencies: []
 synonyms: ["my writing is too long", "how do I edit my own work", "this draft feels wordy", "how to cut down my writing", "I don't know what to delete", "make my writing tighter", "how to improve my draft"]
-lastUpdated: "2026-03-29"
+sourceUrl: "https://github.com/btford/write-good"
+lastUpdated: "2026-03-30"
 difficulty: beginner
 ---
 
 # Self-Editing
 
-Good writing is rewriting. The first draft gets your ideas out. Editing makes them land. Follow these three passes in order.
+Good writing is rewriting. The first draft gets your ideas out. Editing makes them land. The write-good prose linter checks for passive voice, weasel words, adverb overuse, wordy phrases, cliches, lexical illusions (repeated words), and sentences starting with "So" or "There is." Use those same categories as your manual editing checklist.
 
 ## The Three-Pass System
 
@@ -36,21 +37,23 @@ Read the whole piece and ask:
 
 ### Pass 2: Clarity (Is it clear?)
 
-Go sentence by sentence and ask:
+Go sentence by sentence and apply the write-good checks:
 
-- Can I say this in fewer words?
-- Would a stranger understand this without context?
-- Am I using jargon when a simpler word works?
+- **Passive voice:** Find sentences where the subject receives the action. Flip them. ("The report was written by the team" becomes "The team wrote the report.")
+- **Weasel words:** Flag "many," "various," "some," "often," "practically." Replace with specifics or cut.
+- **Adverbs:** Remove "really," "very," "extremely," "basically." If the sentence weakens without them, choose a stronger verb or adjective.
+- **Wordy phrases:** "In order to" becomes "to." "Due to the fact that" becomes "because." "Start to write" becomes "write."
+- **"There is/are" openers:** Rewrite so the real subject leads the sentence.
 
 **Action:** Rewrite unclear sentences. Replace jargon. Break long sentences in two.
 
 ### Pass 3: Polish (Does it sound right?)
 
-Read it aloud (actually aloud, not in your head) and ask:
+Read it aloud (actually aloud, not in your head) and check for:
 
-- Do I stumble anywhere? (Rewrite that part.)
-- Does it sound like me or like a textbook?
-- Are there any words I can cut without losing meaning?
+- **Lexical illusions:** Repeated words your eye skips but your ear catches ("the the," "and and").
+- **Cliches:** "At the end of the day," "think outside the box," "game-changer." Replace with original phrasing.
+- **Sentence rhythm:** Mix short and long sentences. Three long sentences in a row loses the reader.
 
 **Action:** Fine-tune word choice, rhythm, and tone.
 
@@ -62,29 +65,19 @@ A 300-word post should become 210 words. The cut version will almost always be b
 
 ## Filler Words to Delete
 
-Search your draft for these and remove most of them:
+These are the words prose linters flag most frequently. Search your draft for them:
 
 | Filler | Why It's Filler |
 |--------|----------------|
 | just | Weakens the sentence ("I just wanted to say" = "I wanted to say") |
-| really, very | Intensifiers that add nothing ("really important" = "critical") |
+| really, very | Empty intensifiers ("really important" = "critical") |
 | actually | Usually unnecessary ("I actually think" = "I think") |
-| basically | Signals you're about to oversimplify (so just simplify) |
+| basically | Signals oversimplification (just simplify) |
 | I think / I feel | You're writing it, so we know you think it. State it directly. |
 | in order to | Replace with "to" |
 | that | Often removable ("the post that I wrote" = "the post I wrote") |
 | start to / begin to | Just use the verb ("I started to write" = "I wrote") |
-
-## Active Voice Conversion
-
-Passive voice hides who's doing what. Find sentences where the subject receives the action and flip them.
-
-- Passive: "The report was written by the team."
-- Active: "The team wrote the report."
-- Passive: "Mistakes were made."
-- Active: "We made mistakes."
-
-**Quick test:** If you can add "by zombies" after the verb and it makes grammatical sense, it's passive.
+| So (at sentence start) | Filler opening. Delete and start with the next word. |
 
 ## The "So What" Test
 
@@ -96,7 +89,10 @@ Before publishing any piece:
 
 - [ ] One clear point stated in the first 2 sentences
 - [ ] No paragraph longer than 4 sentences
-- [ ] Filler words removed
+- [ ] Passive voice converted to active
+- [ ] Weasel words replaced with specifics
+- [ ] Filler adverbs removed
+- [ ] No sentences starting with "There is/are" or "So"
 - [ ] Read aloud with no stumbles
 - [ ] Cut at least 20% from first draft
 - [ ] The ending gives the reader something to do or think about

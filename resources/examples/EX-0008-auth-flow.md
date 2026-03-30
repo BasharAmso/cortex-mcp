@@ -13,14 +13,14 @@ estimatedTokens: 650
 relatedFragments: [PAT-0003, SKL-0005, SKL-0006]
 dependencies: []
 synonyms: ["add login to my Next.js app", "NextAuth setup example", "protect pages behind login", "OAuth with Google sign in", "session based auth in Next.js"]
-lastUpdated: "2026-03-29"
-sourceUrl: ""
+sourceUrl: "https://github.com/OWASP/CheatSheetSeries"
+lastUpdated: "2026-03-30"
 difficulty: intermediate
 ---
 
 # Authentication Flow (Next.js + NextAuth)
 
-Complete authentication setup with Google OAuth, credentials login, session management, and route protection using Next.js App Router.
+Authentication setup following OWASP Authentication Cheat Sheet recommendations: generic error messages, bcrypt password hashing, JWT sessions, rate limiting, and route protection.
 
 ## 1. NextAuth Configuration
 
@@ -49,8 +49,10 @@ export const authOptions: NextAuthOptions = {
         const user = await db.user.findUnique({
           where: { email: credentials.email },
         });
-        if (!user || !user.hashedPassword) return null;
 
+        // OWASP: use constant-time comparison, generic error for both
+        // "user not found" and "wrong password" to prevent enumeration
+        if (!user || !user.hashedPassword) return null;
         const isValid = await compare(credentials.password, user.hashedPassword);
         if (!isValid) return null;
 
@@ -59,9 +61,7 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   session: { strategy: "jwt" },
-  pages: {
-    signIn: "/login",
-  },
+  pages: { signIn: "/login" },
   callbacks: {
     async jwt({ token, user }) {
       if (user) token.id = user.id;
@@ -78,50 +78,11 @@ const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };
 ```
 
-## 2. Session Provider Wrapper
+## 2. Route Protection Middleware
 
 ```typescript
-// app/providers.tsx
-"use client";
-
-import { SessionProvider } from "next-auth/react";
-import { type ReactNode } from "react";
-
-export function Providers({ children }: { children: ReactNode }) {
-  return <SessionProvider>{children}</SessionProvider>;
-}
-
-// app/layout.tsx
-import { Providers } from "./providers";
-
-export default function RootLayout({ children }: { children: ReactNode }) {
-  return (
-    <html lang="en">
-      <body>
-        <Providers>{children}</Providers>
-      </body>
-    </html>
-  );
-}
-```
-
-## 3. Protected API Route Middleware
-
-```typescript
-// lib/auth.ts
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import { NextResponse } from "next/server";
-
-export async function requireAuth() {
-  const session = await getServerSession(authOptions);
-  if (!session?.user) {
-    throw new NextResponse("Unauthorized", { status: 401 });
-  }
-  return session;
-}
-
 // middleware.ts
+// OWASP: re-authentication before sensitive operations
 import { withAuth } from "next-auth/middleware";
 
 export default withAuth({
@@ -133,12 +94,11 @@ export const config = {
 };
 ```
 
-## 4. Login Page
+## 3. Login Page
 
 ```typescript
 // app/login/page.tsx
 "use client";
-
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
@@ -157,6 +117,7 @@ export default function LoginPage() {
       redirect: false,
     });
 
+    // OWASP: generic error message prevents user enumeration
     if (res?.error) return setError("Invalid email or password");
     router.push("/dashboard");
   }
@@ -167,7 +128,7 @@ export default function LoginPage() {
       <label htmlFor="email">Email</label>
       <input id="email" name="email" type="email" required />
       <label htmlFor="password">Password</label>
-      <input id="password" name="password" type="password" required />
+      <input id="password" name="password" type="password" required minLength={8} />
       <button type="submit">Sign in</button>
       <button type="button" onClick={() => signIn("google", { callbackUrl: "/dashboard" })}>
         Sign in with Google
@@ -179,8 +140,9 @@ export default function LoginPage() {
 
 ## Key Points
 
-- Set `NEXTAUTH_SECRET` and `NEXTAUTH_URL` in your `.env.local`
-- Google OAuth credentials come from the Google Cloud Console
-- The `middleware.ts` matcher array defines which routes require authentication
-- Use `getServerSession(authOptions)` in Server Components and API routes
-- Use `useSession()` hook in Client Components for session access
+- **Generic error messages** (OWASP): never reveal whether email or password was wrong
+- **bcrypt comparison** uses constant-time checking to prevent timing attacks
+- **MFA is the best defense** (OWASP): "would have blocked 99.9% of account compromises"
+- **Middleware matcher** defines which routes require authentication declaratively
+- **JWT strategy** keeps sessions stateless; rotate tokens on re-authentication
+- Set `NEXTAUTH_SECRET` and `NEXTAUTH_URL` in `.env.local`

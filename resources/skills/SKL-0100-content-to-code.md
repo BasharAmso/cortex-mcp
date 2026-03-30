@@ -13,25 +13,31 @@ estimatedTokens: 550
 relatedFragments: [SKL-0097, SKL-0005, SKL-0013, SKL-0009]
 dependencies: []
 synonyms: ["automate my content", "turn my blog into a landing page", "build a content tool", "automate social media posting", "AI content pipeline"]
-lastUpdated: "2026-03-29"
+sourceUrl: "https://github.com/dair-ai/Prompt-Engineering-Guide"
+lastUpdated: "2026-03-30"
 difficulty: advanced
 ---
 
 # Content-to-Code Pipeline
 
-Turn content ideas into shipped pages, automated workflows, and custom tools. Bridge the gap between writing content and building the infrastructure that publishes it.
+Turn content ideas into shipped pages, automated workflows, and custom tools. The Prompt Engineering Guide demonstrates that prompt chaining, program-aided language models (PAL), and function calling enable AI to bridge the gap between natural language content and executable code. Apply these techniques to build content infrastructure.
 
 ## Content to Landing Pages
 
-### The Workflow
+### The Workflow (Prompt Chaining)
+
+Use prompt chaining to break page generation into focused steps:
 
 ```
 Content idea or draft
-    -> AI generates page structure (sections, copy, CTA)
-    -> AI builds the page (HTML/React + styling)
-    -> You review and adjust messaging
+    -> Step 1: AI extracts key messages, value props, and CTA (information extraction)
+    -> Step 2: AI generates page structure (sections, copy hierarchy)
+    -> Step 3: AI builds the page (HTML/React + styling)
+    -> Step 4: You review and adjust messaging
     -> Deploy
 ```
+
+Each step uses a targeted prompt. This chained approach (from the Prompt Engineering Guide) produces significantly better results than a single "build me a landing page" prompt.
 
 ### Prompt for Page Generation
 
@@ -47,12 +53,15 @@ Content idea or draft
 
 ## Automating Social Media Posting
 
-### Build a Posting Pipeline
+### Build a Posting Pipeline Using Function Calling
+
+The Prompt Engineering Guide documents function calling as a way to connect LLM output to external APIs. Apply this pattern:
 
 1. **Content source:** Blog post, newsletter, or standalone idea
-2. **AI transformation:** Convert long-form to platform-specific format (thread, carousel, single post)
-3. **Scheduling:** Use platform APIs or tools (Buffer API, Twitter API, LinkedIn API) to queue posts
-4. **Tracking:** Log what was posted, when, and engagement metrics
+2. **AI transformation:** Use role prompting + few-shot examples to convert long-form to platform-specific format
+3. **Function call:** AI outputs structured JSON (platform, text, schedule_time, media_urls)
+4. **API integration:** Feed structured output to Buffer API, Twitter API, or LinkedIn API
+5. **Tracking:** Log what was posted, when, and engagement metrics
 
 ### Platform-Specific Formatting
 
@@ -62,32 +71,37 @@ Content idea or draft
 | Twitter/X | 280 char limit per tweet, thread if longer, hook in tweet 1, CTA in last tweet |
 | Newsletter | Subject line under 8 words, preview text matters, one topic per send |
 
-## Building Content Tools
+## Building Content Tools with PAL
 
-When you repeat a content workflow more than 3 times, build a tool for it.
+Program-aided language models (PAL) combine natural language reasoning with code execution. Use this pattern for content tools:
 
 **Starter tools worth building:**
 - Blog-to-social converter (input: blog URL, output: 3 platform-specific posts)
 - Newsletter-to-blog reformatter (strips email formatting, adds SEO metadata)
 - Content calendar generator (input: 5 topics, output: 30-day posting schedule)
-- Visual asset generator (input: quote or stat, output: branded image using AI image APIs)
+- Visual asset generator (input: quote or stat, output: branded image prompt)
 
 ### Architecture Pattern
 
 ```
 Input (content + parameters)
-    -> AI transformation layer (prompt + model call)
+    -> AI reasoning layer (chain-of-thought for content decisions)
+    -> Code generation layer (PAL for formatting and API calls)
     -> Output formatting (platform-specific)
     -> Distribution (API call or file output)
 ```
 
 Keep each tool single-purpose. A tool that does one thing well gets used. A tool that does five things gets abandoned.
 
-## Visual Asset Generation
+## ReAct Pattern for Content Research
 
-Use AI image APIs (DALL-E, Midjourney API, Stable Diffusion) to generate supporting visuals. Feed them structured prompts:
+The ReAct prompting technique (Reasoning + Acting) from the Prompt Engineering Guide alternates between thinking and tool use. Apply this to content research pipelines:
 
-"Create a minimal, clean illustration for a blog post about [topic]. Style: [flat/3D/sketch]. Color palette: [brand colors]. No text in the image."
+1. **Thought:** "I need to find recent data on [topic]"
+2. **Action:** Search for sources
+3. **Observation:** Process results
+4. **Thought:** "The most relevant finding is..."
+5. **Action:** Generate content using findings
 
 ## Key Constraints
 

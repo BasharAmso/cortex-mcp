@@ -13,13 +13,14 @@ estimatedTokens: 600
 relatedFragments: [SKL-0081, SKL-0084, SKL-0029]
 dependencies: []
 synonyms: ["my writing sounds generic", "how do I find my voice", "I sound like everyone else", "my content sounds like AI wrote it", "how to be authentic online", "I want a consistent brand voice", "voice vs tone what's the difference"]
-lastUpdated: "2026-03-29"
+sourceUrl: "https://github.com/btford/write-good"
+lastUpdated: "2026-03-30"
 difficulty: intermediate
 ---
 
 # Voice Development
 
-Your voice is what makes your writing sound like you and not like anyone else. It stays constant. Tone shifts based on context. Developing voice takes intention, not talent.
+Your voice is what makes your writing sound like you and not like anyone else. It stays constant. Tone shifts based on context. Developing voice takes intention, not talent. Prose linting tools like write-good reveal voice by showing you what to remove: strip out passive voice, weasel words, adverbs, and cliches, and what remains is closer to your natural voice than any amount of polishing.
 
 ## Voice vs Tone
 
@@ -41,6 +42,18 @@ Answer these questions honestly (in your own words, not polished answers):
 3. **What writers or creators do you sound most like?** (Not who you admire. Who you actually sound like.)
 4. **What would you never say?** (Jargon? Slang? Formal language? Emojis?)
 5. **Read your last 5 messages to a friend.** What patterns do you see in sentence length, punctuation, and word choice?
+
+## Voice Through Subtraction
+
+Run your writing through the same checks a prose linter applies:
+
+1. **Remove passive voice.** "The decision was made" vs "I decided." Active voice sounds more like a human talking.
+2. **Cut weasel words.** "Many people feel" vs "Founders feel." Specificity is personality.
+3. **Delete filler adverbs.** "I really believe" vs "I believe." Conviction without qualifiers is a voice choice.
+4. **Replace cliches.** "Think outside the box" vs your original phrasing. Cliches are someone else's voice.
+5. **Eliminate "there is/are" starts.** "There are three reasons" vs "Three reasons." Direct openers reflect a direct voice.
+
+What survives this process is your voice. The patterns you keep after removing generic filler are the patterns that define you.
 
 ## Voice Attributes Framework
 
@@ -76,7 +89,7 @@ Sentence Style:
 Words I Use: [list 10 words you naturally reach for]
 Words I Never Use: [list 10 words that don't sound like you]
 
-Punctuation Habits: [em dashes? ellipses? exclamation marks? parentheses?]
+Punctuation Habits: [ellipses? exclamation marks? parentheses?]
 
 How I Open: [with a story? a question? a bold claim?]
 How I Close: [with a takeaway? a question? a call to action?]
@@ -106,4 +119,4 @@ Your voice stays the same. The format changes.
 
 ## The Raw Draft Test
 
-Write your first draft fast, without editing. Then compare it to your published content. If they sound like two different people, you are over-editing. Your raw draft is usually closer to your real voice.
+Write your first draft fast, without editing. Then compare it to your published content. If they sound like two different people, you are over-editing. Your raw draft is usually closer to your real voice. The Elements of Style principle applies: "Omit needless words." But only the needless ones. Your quirks, your rhythm, your word choices are not needless.

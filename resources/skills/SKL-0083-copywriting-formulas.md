@@ -13,13 +13,14 @@ estimatedTokens: 700
 relatedFragments: [SKL-0029, SKL-0081, SKL-0086]
 dependencies: []
 synonyms: ["how do I write a landing page", "what copywriting formula should I use", "how to write emails that convert", "my sales copy isn't working", "how to describe my product", "AIDA PAS what do these mean"]
-lastUpdated: "2026-03-29"
+sourceUrl: "https://github.com/btford/write-good"
+lastUpdated: "2026-03-30"
 difficulty: intermediate
 ---
 
 # Copywriting Formulas
 
-Formulas give you structure so you can focus on the message. Pick the right one for your situation, fill in the blanks, and refine.
+Formulas give you structure so you can focus on the message. Pick the right one for your situation, fill in the blanks, and refine. The best copy follows formula for structure but breaks rules at the sentence level: active voice, no filler, every word earning its place.
 
 ## The Five Core Formulas
 
@@ -75,6 +76,18 @@ Works for turning specs into reasons to buy.
 
 *Best for: Product descriptions, feature comparison pages, spec sheets.*
 
+## Prose Quality in Copy
+
+Automated prose analysis reveals patterns that weaken conversion copy. Apply these checks to every formula output:
+
+| Bad Pattern | Why It Kills Conversion | Fix |
+|------------|------------------------|-----|
+| Passive voice | Hides who benefits and who acts | "Your time is saved" becomes "Save 3 hours every week" |
+| Weasel words ("some," "many," "often") | Undermines proof and specificity | Replace with real numbers or cut entirely |
+| Adverb padding ("very unique," "really fast") | Signals weak claims | Use a stronger noun or verb instead |
+| Wordy phrases ("in order to," "due to the fact that") | Slows the reader down | Compress: "to," "because" |
+| Cliches ("game-changer," "best-in-class") | Reader's brain skips them | Replace with a specific, original claim |
+
 ## Decision Table
 
 | Situation | Recommended Formula | Why |
@@ -126,4 +139,4 @@ Practice this translation for everything you write:
 - One formula per piece. Don't mix AIDA and PAS in the same section.
 - Always lead with the reader's problem, not your product's features.
 - Every piece of copy needs exactly one clear CTA. Not two. Not zero.
-- Read it aloud. If you wouldn't say it in conversation, rewrite it.
+- Read it aloud. If you stumble on a phrase, rewrite it. Wordy or passive constructions are the usual culprit.

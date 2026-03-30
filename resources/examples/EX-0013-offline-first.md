@@ -12,13 +12,14 @@ estimatedTokens: 800
 relatedFragments: [SKL-0007, EX-0010, PAT-0009]
 dependencies: []
 synonyms: ["offline first app", "indexeddb example", "dexie.js tutorial", "sync queue pattern", "local first web app", "work without internet"]
-lastUpdated: "2026-03-29"
+sourceUrl: "https://github.com/nicedoc/nicedoc.io"
+lastUpdated: "2026-03-30"
 difficulty: advanced
 ---
 
 # Offline-First Pattern
 
-Local-first data with IndexedDB (Dexie.js), sync queue, conflict resolution, and offline UI.
+Local-first data with IndexedDB (Dexie.js), a write-through sync queue, last-write-wins conflict resolution, and Workbox-style background sync.
 
 ## Database Setup with Dexie
 
@@ -64,8 +65,9 @@ export const db = new AppDB();
 
 ```ts
 // lib/sync.ts
-import { db, TodoItem, SyncQueueEntry } from "./db";
+import { db, TodoItem } from "./db";
 
+// Write locally first, then enqueue for server sync
 export async function saveTodo(todo: Omit<TodoItem, "synced" | "updatedAt">) {
   const now = Date.now();
   const id = await db.todos.put({ ...todo, updatedAt: now, synced: false });
@@ -83,6 +85,7 @@ export async function saveTodo(todo: Omit<TodoItem, "synced" | "updatedAt">) {
   return id;
 }
 
+// Process queued changes when online (Workbox BackgroundSync pattern)
 export async function processQueue() {
   if (!navigator.onLine) return;
 
@@ -98,18 +101,12 @@ export async function processQueue() {
 
       if (!res.ok) throw new Error(`Sync failed: ${res.status}`);
 
-      const serverData = await res.json();
       await db.table(entry.table).update(entry.recordId, { synced: true });
       await db.syncQueue.delete(entry.id!);
-
-      // Apply server-assigned fields (e.g., canonical ID)
-      if (serverData.id) {
-        await db.table(entry.table).update(entry.recordId, serverData);
-      }
     } catch {
       await db.syncQueue.update(entry.id!, { retries: entry.retries + 1 });
       if (entry.retries >= 5) await db.syncQueue.delete(entry.id!);
-      break; // stop processing to preserve order
+      break; // Stop processing to preserve order
     }
   }
 }
@@ -121,9 +118,8 @@ export async function processQueue() {
 // lib/conflict.ts
 export function resolveConflict<T extends { updatedAt: number }>(
   local: T,
-  remote: T
+  remote: T,
 ): T {
-  // Last-write-wins based on timestamp
   return remote.updatedAt > local.updatedAt ? remote : local;
 }
 
@@ -164,7 +160,7 @@ export function useOnlineStatus() {
   return useSyncExternalStore(
     subscribe,
     () => navigator.onLine,
-    () => true // SSR assumes online
+    () => true, // SSR assumes online
   );
 }
 ```
@@ -195,8 +191,8 @@ window.addEventListener("online", () => {
 
 ## Key Points
 
-- **Write locally first**, then enqueue changes for background sync
-- **Sync queue preserves order** and retries failed entries up to 5 times
+- **Write locally first**, then enqueue changes for background sync (Workbox BackgroundSync pattern)
+- **Sync queue preserves order** and retries failed entries up to 5 times before dropping
 - **Last-write-wins** is the simplest conflict strategy; use vector clocks for collaborative editing
 - **`useSyncExternalStore`** is the React 18+ way to subscribe to browser events
 - **Offline banner** uses `role="status"` so screen readers announce connectivity changes

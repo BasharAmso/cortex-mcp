@@ -13,13 +13,14 @@ estimatedTokens: 550
 relatedFragments: [SKL-0013, SKL-0087, SKL-0093]
 dependencies: []
 synonyms: ["what should I post about", "how do I pick a niche", "is my niche too small", "how do I find my audience", "should I go broad or specific"]
-lastUpdated: "2026-03-29"
+sourceUrl: "https://github.com/mezod/awesome-indie"
+lastUpdated: "2026-03-30"
 difficulty: beginner
 ---
 
 # Niche Positioning
 
-Find the intersection where your skills, interests, and audience needs overlap. A strong niche makes content creation easier and audience growth faster because you are solving a specific problem for a specific group.
+Find the intersection where your skills, interests, and audience needs overlap. Patrick McKenzie's "Marketing for Minorities" talk distills the core indie wisdom: solo creators can target niche markets that large companies ignore, and those niches can be extremely profitable because competition is low and audience loyalty is high.
 
 ## The Intersection Method
 
@@ -39,10 +40,21 @@ If you only have two of three, you get:
 Before committing, verify:
 
 - [ ] Can you list 50+ content ideas in this niche without repeating yourself?
-- [ ] Are people searching for this topic? (Check Google Trends, Reddit, Quora, Twitter)
+- [ ] Are people searching for this topic? (Check Google Trends, Reddit, Quora, Twitter, IndieHackers forums)
 - [ ] Are there existing creators in this space? (Competition = demand. No competition often = no market.)
 - [ ] Can you name 3 ways your perspective differs from what already exists?
 - [ ] Would you still enjoy this topic if nobody paid you for it?
+
+## Micro-SaaS Thinking for Content
+
+Tyler Tringas introduced the concept of Micro-SaaS: tiny software products serving narrow niches. The same principle applies to content. The indie community has shown that narrow content niches compound faster:
+
+| Micro-Niche Pattern | Example | Why It Works |
+|--------------------|---------|-------------|
+| [Skill] for [specific role] | "TypeScript tips for junior developers" | Role-specific content attracts loyal followers |
+| [Topic] for [business stage] | "Growth tactics for pre-PMF startups" | Stage-specific advice is more actionable |
+| [Method] for [constraint] | "Marketing on $0 budget" | Constraints create unique, valuable angles |
+| [Industry] + [function] | "Analytics for e-commerce" | Cross-domain expertise is rare and valued |
 
 ## Riches in Niches vs. Broad Appeal
 

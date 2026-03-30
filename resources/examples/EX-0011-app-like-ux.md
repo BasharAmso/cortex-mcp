@@ -12,13 +12,14 @@ estimatedTokens: 750
 relatedFragments: [SKL-0007, EX-0010, SKL-0005]
 dependencies: []
 synonyms: ["make web app feel native", "bottom tab bar", "pull to refresh web", "mobile gestures react", "app-like navigation"]
-lastUpdated: "2026-03-29"
+sourceUrl: "https://github.com/nicedoc/nicedoc.io"
+lastUpdated: "2026-03-30"
 difficulty: intermediate
 ---
 
 # App-Like UX Patterns
 
-Touch-friendly patterns that make a PWA feel like a native app.
+Touch-friendly patterns that make a PWA feel like a native app, using service worker integration and modern web APIs.
 
 ## Bottom Navigation Bar
 
@@ -29,9 +30,9 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 
 const tabs = [
-  { href: "/", label: "Home", icon: "🏠" },
-  { href: "/search", label: "Search", icon: "🔍" },
-  { href: "/profile", label: "Profile", icon: "👤" },
+  { href: "/", label: "Home", icon: "home" },
+  { href: "/search", label: "Search", icon: "search" },
+  { href: "/profile", label: "Profile", icon: "user" },
 ];
 
 export function BottomNav() {
@@ -52,7 +53,9 @@ export function BottomNav() {
                 ${pathname === href ? "text-blue-600 font-semibold" : "text-gray-500"}`}
               aria-current={pathname === href ? "page" : undefined}
             >
-              <span className="text-xl" aria-hidden="true">{icon}</span>
+              <svg className="w-6 h-6" aria-hidden="true">
+                <use href={`/icons.svg#${icon}`} />
+              </svg>
               {label}
             </Link>
           </li>
@@ -64,7 +67,7 @@ export function BottomNav() {
 ```
 
 ```css
-/* Safe area padding for notched devices */
+/* Safe area padding for notched devices (iPhone, Pixel) */
 .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); }
 ```
 
@@ -116,30 +119,26 @@ export function triggerHaptic(style: "light" | "medium" | "heavy" = "light") {
 }
 ```
 
-## Fullscreen Mode Toggle
-
-```ts
-// lib/fullscreen.ts
-export async function toggleFullscreen(el: HTMLElement = document.documentElement) {
-  if (!document.fullscreenElement) {
-    await el.requestFullscreen();
-  } else {
-    await document.exitFullscreen();
-  }
-}
-```
-
-## Splash Screen (CSS)
+## Standalone Display CSS
 
 ```css
-/* Displays while JS loads, hidden by app mount */
+/* When launched from home screen (display: standalone in manifest.json) */
+@media (display-mode: standalone) {
+  /* Hide browser-only elements */
+  .browser-only { display: none; }
+
+  /* Adjust for status bar */
+  body { padding-top: env(safe-area-inset-top); }
+}
+
+/* Splash screen: displays while JS loads, hidden by app mount */
 #splash {
   position: fixed;
   inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #0066ff;
+  background: var(--theme-color, #0066ff);
   color: white;
   font-size: 2rem;
   font-weight: 700;
@@ -153,16 +152,11 @@ export async function toggleFullscreen(el: HTMLElement = document.documentElemen
 }
 ```
 
-```ts
-// Call after app hydration
-document.getElementById("splash")?.classList.add("hidden");
-```
-
 ## Key Points
 
-- **Bottom nav uses `pb-safe`** for notched devices (iPhone, Pixel)
+- **`env(safe-area-inset-bottom)`** handles notched devices without hardcoded padding
 - **Pull-to-refresh threshold** of 80px prevents accidental triggers
 - **Haptic feedback** degrades gracefully when Vibration API is unavailable
 - **`display: standalone`** in manifest.json removes browser chrome automatically
-- **Splash screen** covers the white flash between HTML load and JS hydration
-- **Accessible:** nav uses `role`, `aria-label`, and `aria-current`
+- **`@media (display-mode: standalone)`** applies styles only when launched as an app
+- **Accessible:** nav uses `role`, `aria-label`, `aria-current`, and SVG icons with `aria-hidden`

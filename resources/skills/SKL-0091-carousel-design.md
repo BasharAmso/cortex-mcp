@@ -14,13 +14,14 @@ estimatedTokens: 650
 relatedFragments: [SKL-0013, SKL-0029, SKL-0087]
 dependencies: []
 synonyms: ["how to make a carousel post", "LinkedIn carousel tips", "Instagram carousel design", "how to design slides for social media", "carousel post template", "how to make save-worthy content", "Canva carousel tutorial"]
-lastUpdated: "2026-03-29"
+sourceUrl: "https://github.com/mezod/awesome-indie"
+lastUpdated: "2026-03-30"
 difficulty: beginner
 ---
 
 # Carousel Design
 
-Create carousel posts that get saved, shared, and establish authority. This playbook covers slide structure, text-to-visual ratio, platform sizing, Canva workflow, and what makes content save-worthy.
+Create carousel posts that get saved, shared, and establish authority. Carousels are the highest-reach format on LinkedIn and one of the most saved formats on Instagram. Indie makers and bootstrapped founders use carousels to package frameworks, tool lists, and step-by-step processes into shareable assets that compound audience growth over time.
 
 ## Slide Structure: Hook to CTA
 
@@ -61,15 +62,16 @@ Every carousel follows the same skeleton:
 
 **LinkedIn-specific:** Upload as PDF for swipe behavior. Image carousels on LinkedIn do not get the same swipe UX and perform worse. Name the PDF file something descriptive since it shows as the document title.
 
-## Design Templates
+## Design Templates for Indie Makers
 
-Start with these proven layouts and customize:
+These proven layouts work well for bootstrapped founders sharing knowledge:
 
 1. **The Listicle** -- "7 tools I use daily" -- numbered slides, consistent layout, icon per item
 2. **The Framework** -- "My 4-step process for X" -- diagram on slide 2, one step per slide after
-3. **The Myth Buster** -- "5 things you think are true but aren't" -- myth vs. reality per slide
-4. **The Before/After** -- "What I did wrong vs. what works" -- split-screen comparison slides
-5. **The Story** -- "How I went from X to Y" -- timeline progression with key moments
+3. **The Build-in-Public Update** -- Revenue screenshot, lesson learned, next milestone
+4. **The Myth Buster** -- "5 things you think are true but aren't" -- myth vs. reality per slide
+5. **The Before/After** -- "What I did wrong vs. what works" -- split-screen comparison slides
+6. **The Case Study** -- "How I went from X to Y" -- timeline progression with key moments
 
 ## Canva Workflow
 

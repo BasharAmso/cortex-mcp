@@ -12,13 +12,14 @@ estimatedTokens: 700
 relatedFragments: [SKL-0007, EX-0011, EX-0013]
 dependencies: []
 synonyms: ["how to make a pwa", "progressive web app setup", "add pwa to next.js", "service worker setup", "make website installable"]
-lastUpdated: "2026-03-29"
+sourceUrl: "https://github.com/nicklockwood/iVersion"
+lastUpdated: "2026-03-30"
 difficulty: intermediate
 ---
 
 # PWA Setup Example
 
-Complete PWA setup for a Next.js project: manifest, service worker, offline page, and install prompt.
+Complete PWA setup: web app manifest, service worker with Workbox-style caching strategies, offline fallback, and install prompt handling.
 
 ## Web App Manifest
 
@@ -44,7 +45,7 @@ Complete PWA setup for a Next.js project: manifest, service worker, offline page
 ## Head Metadata
 
 ```tsx
-// app/layout.tsx — add to <head>
+// app/layout.tsx -- add to <head>
 <link rel="manifest" href="/manifest.json" />
 <meta name="theme-color" content="#0066ff" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,31 +53,14 @@ Complete PWA setup for a Next.js project: manifest, service worker, offline page
 <link rel="apple-touch-icon" href="/icons/icon-192.png" />
 ```
 
-## Service Worker Registration
-
-```ts
-// lib/register-sw.ts
-export function registerServiceWorker() {
-  if ("serviceWorker" in navigator) {
-    window.addEventListener("load", async () => {
-      try {
-        const reg = await navigator.serviceWorker.register("/sw.js");
-        console.log("SW registered:", reg.scope);
-      } catch (err) {
-        console.error("SW registration failed:", err);
-      }
-    });
-  }
-}
-```
-
-## Service Worker (Cache-First Shell)
+## Service Worker (Workbox-Style Strategies)
 
 ```js
 // public/sw.js
 const CACHE_NAME = "app-shell-v1";
 const SHELL_URLS = ["/", "/offline"];
 
+// Precaching: cache shell URLs during install
 self.addEventListener("install", (e) => {
   e.waitUntil(
     caches.open(CACHE_NAME).then((cache) => cache.addAll(SHELL_URLS))
@@ -84,6 +68,7 @@ self.addEventListener("install", (e) => {
   self.skipWaiting();
 });
 
+// Clean up old caches on activate
 self.addEventListener("activate", (e) => {
   e.waitUntil(
     caches.keys().then((keys) =>
@@ -93,10 +78,17 @@ self.addEventListener("activate", (e) => {
   self.clients.claim();
 });
 
+// Network-first for navigation, cache-first for static assets
 self.addEventListener("fetch", (e) => {
   if (e.request.mode === "navigate") {
+    // Network-first with offline fallback (Workbox NetworkFirst strategy)
     e.respondWith(
       fetch(e.request).catch(() => caches.match("/offline"))
+    );
+  } else if (e.request.destination === "image" || e.request.destination === "style") {
+    // Cache-first for static assets (Workbox CacheFirst strategy)
+    e.respondWith(
+      caches.match(e.request).then((cached) => cached || fetch(e.request))
     );
   }
 });
@@ -137,7 +129,8 @@ export function useInstallPrompt() {
 ## Key Points
 
 - **Three icons minimum:** 192px, 512px, and a maskable icon for Android adaptive icons
-- **Offline fallback:** navigation requests that fail serve `/offline` from cache
-- **skipWaiting + clients.claim** ensures immediate activation of new service workers
+- **Network-first for pages, cache-first for assets** mirrors Workbox's recommended strategy split
+- **`skipWaiting` + `clients.claim`** ensures immediate activation of new service workers
 - **Install prompt** is captured and deferred so you control when to show it
 - **Apple meta tags** are required since Safari ignores `manifest.json` for some properties
+- **Offline fallback** serves `/offline` from cache when navigation requests fail

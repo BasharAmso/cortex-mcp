@@ -14,13 +14,14 @@ estimatedTokens: 700
 relatedFragments: [SKL-0013, SKL-0029, SKL-0092]
 dependencies: []
 synonyms: ["how do I script a YouTube video", "how to get more views on YouTube", "YouTube video structure", "how to write a video script", "what makes a good YouTube thumbnail", "how to start a YouTube channel", "YouTube Shorts tips"]
-lastUpdated: "2026-03-29"
+sourceUrl: "https://github.com/mezod/awesome-indie"
+lastUpdated: "2026-03-30"
 difficulty: intermediate
 ---
 
 # YouTube Scripting
 
-Script videos that hold attention. This playbook covers the hook-content-CTA structure, retention curve optimization, thumbnail-first planning, Shorts strategy, and YouTube SEO.
+Script videos that hold attention. The indie maker community has demonstrated that YouTube content drives long-term, compounding traffic. Unlike social posts that decay in hours, a well-optimized video generates views for years. Bootstrapped founders use YouTube for tutorials, build-in-public vlogs, and educational content that doubles as marketing.
 
 ## Design the Thumbnail FIRST
 
@@ -74,24 +75,16 @@ Structure the body using one of these frameworks:
 - One primary CTA only (subscribe, watch next video, or visit link)
 - Use an end screen pointing to a related video
 
-## Retention Curve Optimization
+## YouTube for Indie Makers
 
-YouTube shows you exactly where viewers drop off. Target these benchmarks:
+Successful bootstrapped creators use video as a top-of-funnel marketing channel:
 
-| Metric | Target | Fix If Below |
-|--------|--------|-------------|
-| 30-second retention | 70%+ | Rewrite your hook |
-| Average view duration | 50%+ of video length | Add re-hooks, cut filler |
-| Click-through rate | 5-10% | Redesign thumbnail and title |
-
-## B-Roll Planning
-
-Script B-roll into your document, not as an afterthought:
-
-- Mark `[B-ROLL: description]` inline in the script
-- Plan 2-3 B-roll cuts per minute for talking-head videos
-- Screen recordings, stock footage, and graphics all count
-- B-roll at every transition point prevents visual monotony
+| Content Strategy | Example | Business Impact |
+|-----------------|---------|-----------------|
+| Tutorial solving your product's use case | "How to automate X" (using your tool) | Organic leads who already understand the value |
+| Build-in-public vlog | Monthly revenue updates, feature launches | Audience investment in your success |
+| Niche education | Deep dives on your area of expertise | Authority that transfers to product trust |
+| Tool comparisons | Honest reviews including your product | Captures buyers actively evaluating options |
 
 ## YouTube Shorts Strategy
 

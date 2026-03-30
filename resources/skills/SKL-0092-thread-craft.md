@@ -14,13 +14,14 @@ estimatedTokens: 650
 relatedFragments: [SKL-0088, SKL-0087, SKL-0029]
 dependencies: []
 synonyms: ["how to write a thread", "Twitter thread tips", "how to structure a thread", "thread writing formula", "how to turn a thread into a blog post", "my threads don't get engagement", "how long should a thread be"]
-lastUpdated: "2026-03-29"
+sourceUrl: "https://github.com/mezod/awesome-indie"
+lastUpdated: "2026-03-30"
 difficulty: beginner
 ---
 
 # Thread Craft
 
-Write threads that people read to the end. This playbook covers thread openers, progressive disclosure, cliffhanger transitions, length optimization, repurposing, and numbering conventions.
+Write threads that people read to the end. The indie maker community popularized the Twitter thread as a growth format. Pieter Levels' "12 startups in 12 months" thread, IndieHackers revenue breakdowns, and MicroConf talk summaries are examples of threads that built audience and drove real business outcomes.
 
 ## Thread Openers
 
@@ -43,13 +44,11 @@ The first post determines whether anyone reads the rest. Proven opener formats:
 
 ## Progressive Disclosure
 
-Each post in a thread must earn the right to the next one:
+Each post in a thread must earn the right to the next one. Indie creators who share their journey in threads use this technique naturally: each tweet reveals one step, one metric, one decision.
 
 1. **Open a loop** in the first post (promise something specific)
 2. **Deliver partial value** in each subsequent post (one idea, one step, one example)
 3. **Close the loop** in the final post (deliver on the original promise)
-
-The reader should feel smarter after every single post in the thread, not just at the end.
 
 **Structure options:**
 - **Numbered list** -- "1/ Here's the first thing..." (most common, easiest to follow)
@@ -69,8 +68,6 @@ The last line of each post should pull the reader into the next one:
 | Contrast | "That was the easy part. Here's where it gets hard:" |
 | Incomplete thought | "The real reason is..." (continued in next post) |
 
-**Avoid:** "Let me explain..." (weak) or "Stay with me..." (condescending). Just make the content compelling enough that they want to continue.
-
 ## Thread Length Optimization
 
 | Length | Best For | Read-Through Rate |
@@ -82,11 +79,9 @@ The last line of each post should pull the reader into the next one:
 
 **Sweet spot:** 7-12 posts. Long enough to demonstrate depth, short enough to maintain attention.
 
-**Rule of thumb:** If a post doesn't add unique value, cut it. Better a tight 8-post thread than a padded 15-post thread.
-
 ## Repurposing Threads
 
-A single thread can become 5+ pieces of content:
+A single thread can become 5+ pieces of content, a key strategy from the indie maker playbook:
 
 | Source | Becomes | How |
 |--------|---------|-----|
@@ -105,14 +100,11 @@ A single thread can become 5+ pieces of content:
 |----------|-----------|---------|
 | Twitter/X | x/ format | "1/ Here's what I learned..." |
 | LinkedIn | No numbers (use line breaks) | Each section is a paragraph, no thread markers |
-| General | Emoji numbers | Not recommended. Looks cluttered |
-
-On Twitter, numbering helps readers track position in long threads. On LinkedIn, the thread is a single post with section breaks instead of numbered parts.
 
 ## Key Rules
 
 - Write the entire thread before posting the first post. Never thread in real-time
-- Each post must deliver standalone value. If someone only sees post 4, they should still learn something
+- Each post must deliver standalone value
 - End the thread with a clear CTA: follow for more, bookmark this, share with someone who needs it
 - Screenshot your best threads. They make great carousel content later
 - Post threads between 8-10 AM in your audience's timezone for maximum reach

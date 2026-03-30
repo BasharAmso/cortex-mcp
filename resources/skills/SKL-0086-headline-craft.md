@@ -13,13 +13,14 @@ estimatedTokens: 650
 relatedFragments: [SKL-0081, SKL-0029, SKL-0083]
 dependencies: []
 synonyms: ["how to write a good title", "my headlines are boring", "nobody clicks my articles", "how to title a blog post", "what makes a good headline", "should I use numbers in titles", "how long should my title be"]
-lastUpdated: "2026-03-29"
+sourceUrl: "https://github.com/btford/write-good"
+lastUpdated: "2026-03-30"
 difficulty: beginner
 ---
 
 # Headline Craft
 
-The headline is the ad for your content. Eight out of ten people read the headline. Two out of ten read the rest. A better headline changes that ratio.
+The headline is the ad for your content. Eight out of ten people read the headline. Two out of ten read the rest. A better headline changes that ratio. Prose quality checks apply to headlines even more than body text: every weasel word, passive construction, or filler adverb wastes precious characters.
 
 ## The Six Headline Types
 
@@ -30,7 +31,7 @@ Use a specific number to promise a concrete, scannable payoff.
 - "7 Mistakes New Freelancers Make in Their First Month"
 - "3 Questions That Changed How I Think About Pricing"
 
-**Why they work:** Numbers set expectations. The reader knows what they're getting.
+**Why they work:** Numbers set expectations. The reader knows what they're getting. No weasel words needed.
 
 **Tips:** Odd numbers outperform even. Small numbers (3-9) work for advice. Larger numbers (21, 50) work for lists and resources.
 
@@ -41,7 +42,7 @@ Promise a skill transfer. The reader will learn to do something.
 - "How to Write a LinkedIn Post in 15 Minutes"
 - "How to Price Your Services Without Undercharging"
 
-**Why they work:** Direct promise of practical value.
+**Why they work:** Direct promise of practical value. Active voice built in.
 
 **Tips:** Add a constraint (time, difficulty, tool) to make it specific: "How to X Without Y" or "How to X in [timeframe]."
 
@@ -87,6 +88,18 @@ Ask something the reader wants answered.
 
 **Tips:** Only ask questions where the reader doesn't already know the answer.
 
+## Headline Lint Checks
+
+Apply prose quality rules to every headline:
+
+| Check | Why | Example Fix |
+|-------|-----|-------------|
+| No passive voice | Headlines need action | "Customers Are Lost by Bad Copy" becomes "Bad Copy Loses Customers" |
+| No weasel words | Every word must pull weight | "Some Great Ways to Grow" becomes "5 Ways to Grow Your Newsletter" |
+| No filler adverbs | Headlines are too short for waste | "Really Effective Tips" becomes "Tips That Work" |
+| No "there is" starts | Delays the point | "There Are 3 Reasons..." becomes "3 Reasons..." |
+| No cliches | "Game-Changing Tips" is invisible | Replace with a specific promise |
+
 ## Platform-Specific Length Guide
 
 | Platform | Ideal Length | Why |
@@ -128,3 +141,4 @@ The draft is always the weakest. The variations always reveal a better angle.
 - [ ] Is it the right length for the platform?
 - [ ] Does the content actually deliver what the headline promises?
 - [ ] Have I written at least 3 alternatives before choosing?
+- [ ] Does it pass a prose quality check? (No passive, no filler, no cliches)

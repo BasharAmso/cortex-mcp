@@ -12,17 +12,21 @@ estimatedTokens: 550
 relatedFragments: [EX-0004, PAT-0006]
 dependencies: []
 synonyms: ["how to make a react component", "react component with typescript example", "how to use useState and useEffect", "how to build a reusable component in react", "react hooks example"]
-lastUpdated: "2026-03-29"
+sourceUrl: "https://github.com/alan2207/bulletproof-react"
+lastUpdated: "2026-03-30"
 difficulty: beginner
 ---
 
 # React Component Example
 
-A typed React component with props, state, and effects.
+A feature-scoped React component following bulletproof-react architecture: typed props, data fetching with error/loading states, and clean layer separation.
 
 ```tsx
+// features/users/components/user-card.tsx
+// Bulletproof-react pattern: components live inside feature folders
 import { useState, useEffect } from "react";
 
+// Props interface documents the component's public API
 interface UserCardProps {
   userId: string;
   onSelect?: (userId: string) => void;
@@ -40,12 +44,14 @@ export function UserCard({ userId, onSelect }: UserCardProps) {
       setLoading(true);
       setError(null);
       try {
+        // API calls go through a centralized api layer
         const res = await fetch(`/api/users/${userId}`);
         if (!res.ok) throw new Error("Failed to load user");
         const data = await res.json();
         if (!cancelled) setUser(data);
       } catch (err) {
-        if (!cancelled) setError(err instanceof Error ? err.message : "Unknown error");
+        if (!cancelled)
+          setError(err instanceof Error ? err.message : "Unknown error");
       } finally {
         if (!cancelled) setLoading(false);
       }
@@ -74,8 +80,9 @@ export function UserCard({ userId, onSelect }: UserCardProps) {
 
 ## Key Points
 
-- **TypeScript props interface** documents the component's API
+- **Feature-based structure** (bulletproof-react): components, hooks, and API functions live under `features/<name>/`
 - **Cleanup function** in useEffect prevents state updates on unmounted components
-- **Three states handled:** loading, error, and success
-- **Accessible:** uses semantic HTML, role attributes, and aria-label
+- **Three states handled:** loading, error, and success (never leave error states unhandled)
+- **Accessible:** uses semantic HTML, `role` attributes, and `aria-label`
 - **Optional callback** with `onSelect?.()` safe invocation
+- **Typed props interface** serves as self-documenting component API

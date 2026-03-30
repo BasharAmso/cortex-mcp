@@ -13,13 +13,14 @@ estimatedTokens: 550
 relatedFragments: [SKL-0097, SKL-0099, SKL-0009]
 dependencies: []
 synonyms: ["AI edit my writing", "use AI to improve my draft", "how to edit with AI", "AI writing feedback", "draft then refine method"]
-lastUpdated: "2026-03-29"
+sourceUrl: "https://github.com/dair-ai/Prompt-Engineering-Guide"
+lastUpdated: "2026-03-30"
 difficulty: beginner
 ---
 
 # AI Editing Workflow
 
-Use AI as your editor, not your writer. You draft, AI refines. This preserves your voice while leveraging AI for structure, clarity, and polish.
+Use AI as your editor, not your writer. You draft, AI refines. The Prompt Engineering Guide demonstrates that prompt chaining and self-consistency techniques produce far better results than single-shot "make this better" prompts. Apply these principles to editing: break the editing task into focused rounds, each with its own prompt and evaluation criteria.
 
 ## The Draft-Then-Refine Method
 
@@ -31,15 +32,15 @@ Write the first draft yourself. It will be messy, and that is the point. Your ra
 
 ```
 You write raw draft
-    -> AI analyzes structure and clarity
-    -> AI suggests specific edits
+    -> AI analyzes structure and clarity (chain-of-thought)
+    -> AI suggests specific edits (directional prompting)
     -> You accept, reject, or modify each suggestion
     -> Final pass: you read aloud and adjust
 ```
 
 ## Specific Editing Prompts
 
-Use targeted prompts instead of "make this better." Vague prompts produce vague rewrites.
+Use targeted prompts instead of "make this better." The Prompt Engineering Guide shows that specificity in prompts directly correlates with output quality. Vague prompts produce vague rewrites.
 
 | Editing Goal | Prompt |
 |--------------|--------|
@@ -51,7 +52,9 @@ Use targeted prompts instead of "make this better." Vague prompts produce vague 
 | Kill filler | "Highlight every sentence that could be removed without changing the meaning." |
 | Add transitions | "Add one transition sentence between each section to improve reading flow." |
 
-## Feedback Loops
+## Feedback Loops Using Self-Consistency
+
+The self-consistency technique from prompt engineering asks the model to generate multiple solutions and select the best. Apply this to editing:
 
 ### Round-Based Editing
 
@@ -63,7 +66,15 @@ Each round addresses one dimension. Trying to fix everything at once produces me
 
 ### The Diff Review
 
-Ask AI to show changes as a diff: "Show me exactly what you changed and why, in a before/after format." This prevents silent rewrites that gut your voice.
+Ask AI to show changes as a diff: "Show me exactly what you changed and why, in a before/after format." This prevents silent rewrites that gut your voice. This mirrors the chain-of-thought approach: making the model explain its reasoning produces better, more transparent edits.
+
+### Generate-Then-Select
+
+For critical sections (opening line, headline, CTA), ask for multiple options:
+
+"Give me 5 alternative versions of this opening paragraph. For each, explain what makes it work."
+
+Then pick the best one yourself. Self-consistency across multiple generations surfaces the strongest version.
 
 ## Quality Gates
 

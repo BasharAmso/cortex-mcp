@@ -13,17 +13,18 @@ estimatedTokens: 700
 relatedFragments: [SKL-0029, SKL-0082, SKL-0083, SKL-0086]
 dependencies: []
 synonyms: ["how do I start a post", "nobody reads my posts", "how to get attention online", "my first line is boring", "how do I stop the scroll", "what makes people click", "I need a good opening line"]
-lastUpdated: "2026-03-29"
+sourceUrl: "https://github.com/btford/write-good"
+lastUpdated: "2026-03-30"
 difficulty: beginner
 ---
 
 # Hook Writing
 
-The first line decides whether anyone reads the rest. A hook creates a reason to keep reading by opening a gap between what the reader knows and what they want to know.
+The first line decides whether anyone reads the rest. A hook creates a reason to keep reading by opening a gap between what the reader knows and what they want to know. Automated prose linters like write-good flag weak openers (sentences starting with "So," filler adverbs, passive constructions) because those patterns signal a buried hook.
 
 ## Why Hooks Matter
 
-People decide in under 2 seconds whether to keep scrolling. Your first line is not an introduction. It is an audition.
+People decide in under 2 seconds whether to keep scrolling. Your first line is not an introduction. It is an audition. Linting tools detect weasel words ("many," "various," "extremely") because they weaken opening impact. If your hook contains words a linter would flag, rewrite it.
 
 ## Core Mechanics
 
@@ -62,18 +63,21 @@ Use these as starting structures. Fill in your own specifics.
 | Newsletter | Subject line = hook; first sentence = second hook | Subject: 40 chars ideal |
 | Blog | SEO-aware headline + narrative opening paragraph | Headline: 60 chars for Google |
 
-## The Hook Test
+## The Hook Lint Test
 
-Before publishing, ask:
+Before publishing, run your hook through these checks (inspired by automated prose analysis):
 
-1. Would I stop scrolling to read this? (Be honest.)
-2. Does it create a question in the reader's mind?
-3. Is there a specific detail that makes it feel real?
-4. Could I cut the first sentence and start with the second? (Often, yes.)
+1. Does it start with "So" or "There is"? (Delete those words and start with the real sentence.)
+2. Does it contain adverbs like "really," "very," or "extremely"? (Replace with a specific detail.)
+3. Is it in passive voice? ("A lesson was learned" vs "I learned something that changed everything.")
+4. Does it contain weasel words like "many," "some," or "various"? (Use a number instead.)
+5. Would you stop scrolling to read this? (Be honest.)
+6. Could you cut the first sentence and start with the second? (Often, yes.)
 
 ## Common Mistakes
 
-- Starting with context instead of tension ("In today's world..." -- delete this)
+- Starting with context instead of tension ("In today's world..." is a cliche a linter would catch)
 - Burying the hook in paragraph two (move it to line one)
 - Being vague when you could be specific ("a lot of money" vs "$4,200")
 - Writing a hook that promises something the content doesn't deliver
+- Using wordy phrases where a direct statement works ("In order to" becomes "To")

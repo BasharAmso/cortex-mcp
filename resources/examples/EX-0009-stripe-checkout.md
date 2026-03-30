@@ -13,24 +13,26 @@ estimatedTokens: 650
 relatedFragments: [SKL-0011, SKL-0006, PAT-0019]
 dependencies: []
 synonyms: ["add payments to my app", "Stripe checkout setup", "how to accept credit cards", "subscription billing with Stripe", "handle Stripe webhooks"]
-lastUpdated: "2026-03-29"
-sourceUrl: ""
+sourceUrl: "https://github.com/stripe/stripe-node"
+lastUpdated: "2026-03-30"
 difficulty: intermediate
 ---
 
 # Stripe Checkout Integration
 
-Complete Stripe integration with checkout session creation, client redirect, webhook handling, and subscription helpers in TypeScript.
+Stripe integration using the official stripe-node SDK patterns: typed client initialization, checkout sessions, webhook signature verification, and auto-pagination.
 
-## 1. Checkout Session Creation (API Route)
+## 1. Checkout Session Creation
 
 ```typescript
 // app/api/checkout/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 
+// stripe-node: initialize with API version and retry config
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: "2024-06-20",
+  maxNetworkRetries: 2,
 });
 
 export async function POST(req: NextRequest) {
@@ -50,41 +52,7 @@ export async function POST(req: NextRequest) {
 }
 ```
 
-## 2. Client-Side Redirect
-
-```typescript
-// components/checkout-button.tsx
-"use client";
-
-import { useState } from "react";
-
-export function CheckoutButton({ priceId }: { priceId: string }) {
-  const [loading, setLoading] = useState(false);
-
-  async function handleCheckout() {
-    setLoading(true);
-    try {
-      const res = await fetch("/api/checkout", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ priceId, userId: "current-user-id" }),
-      });
-      const { url } = await res.json();
-      if (url) window.location.href = url;
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  return (
-    <button onClick={handleCheckout} disabled={loading}>
-      {loading ? "Redirecting..." : "Subscribe"}
-    </button>
-  );
-}
-```
-
-## 3. Webhook Handler
+## 2. Webhook Handler
 
 ```typescript
 // app/api/webhooks/stripe/route.ts
@@ -99,6 +67,7 @@ export async function POST(req: NextRequest) {
   const body = await req.text();
   const signature = req.headers.get("stripe-signature")!;
 
+  // stripe-node: "pass the raw request body exactly as received"
   let event: Stripe.Event;
   try {
     event = stripe.webhooks.constructEvent(
@@ -116,11 +85,6 @@ export async function POST(req: NextRequest) {
       await activateSubscription(session.client_reference_id!, session.subscription as string);
       break;
     }
-    case "invoice.payment_succeeded": {
-      const invoice = event.data.object as Stripe.Invoice;
-      await recordPayment(invoice.subscription as string, invoice.amount_paid);
-      break;
-    }
     case "customer.subscription.deleted": {
       const sub = event.data.object as Stripe.Subscription;
       await deactivateSubscription(sub.metadata.userId);
@@ -132,7 +96,7 @@ export async function POST(req: NextRequest) {
 }
 ```
 
-## 4. Subscription Management Helpers
+## 3. Subscription Helpers
 
 ```typescript
 // lib/stripe.ts
@@ -142,32 +106,23 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: "2024-06-20",
 });
 
-export async function activateSubscription(userId: string, subscriptionId: string) {
-  await db.user.update({
-    where: { id: userId },
-    data: { stripeSubscriptionId: subscriptionId, plan: "pro", planActive: true },
-  });
-}
-
-export async function deactivateSubscription(userId: string) {
-  await db.user.update({
-    where: { id: userId },
-    data: { plan: "free", planActive: false, stripeSubscriptionId: null },
-  });
-}
-
-export async function recordPayment(subscriptionId: string, amount: number) {
-  await db.payment.create({
-    data: { subscriptionId, amount, paidAt: new Date() },
-  });
-}
-
+// Graceful cancellation: access continues until period ends
 export async function cancelSubscription(subscriptionId: string) {
   await stripe.subscriptions.update(subscriptionId, {
     cancel_at_period_end: true,
   });
 }
 
+// stripe-node: auto-pagination with async iterators
+export async function listAllInvoices(customerId: string) {
+  const invoices: Stripe.Invoice[] = [];
+  for await (const invoice of stripe.invoices.list({ customer: customerId })) {
+    invoices.push(invoice);
+  }
+  return invoices;
+}
+
+// Billing portal for self-service plan changes
 export async function createBillingPortalSession(customerId: string) {
   const session = await stripe.billingPortal.sessions.create({
     customer: customerId,
@@ -179,8 +134,9 @@ export async function createBillingPortalSession(customerId: string) {
 
 ## Key Points
 
-- Set `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, and `NEXT_PUBLIC_APP_URL` in `.env.local`
-- Use `stripe listen --forward-to localhost:3000/api/webhooks/stripe` for local webhook testing
-- Always verify webhook signatures before processing events
-- Use `cancel_at_period_end: true` for graceful cancellation (access until period ends)
-- Stripe Billing Portal handles plan changes and payment method updates
+- **Always verify webhook signatures** before processing events using `constructEvent()`
+- **Raw body required**: parse as text, not JSON, before passing to signature verification
+- **`cancel_at_period_end: true`** for graceful cancellation (access until period ends)
+- **Auto-pagination** with `for await` iterates all results without manual cursor handling
+- **`maxNetworkRetries`** enables automatic retry on transient network failures
+- Use `stripe listen --forward-to localhost:3000/api/webhooks/stripe` for local testing

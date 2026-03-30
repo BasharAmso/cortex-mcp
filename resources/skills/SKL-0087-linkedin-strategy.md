@@ -14,13 +14,14 @@ estimatedTokens: 700
 relatedFragments: [SKL-0013, SKL-0029]
 dependencies: []
 synonyms: ["how do I grow on LinkedIn", "what should I post on LinkedIn", "how to get more views on LinkedIn", "LinkedIn content strategy", "how to optimize my LinkedIn profile", "why are my LinkedIn posts not getting views"]
-lastUpdated: "2026-03-29"
+sourceUrl: "https://github.com/mezod/awesome-indie"
+lastUpdated: "2026-03-30"
 difficulty: intermediate
 ---
 
 # LinkedIn Strategy
 
-Build a LinkedIn presence that attracts opportunities. This playbook covers profile optimization, post formats, algorithm mechanics, and engagement tactics that compound over time.
+Build a LinkedIn presence that attracts opportunities. The indie maker community has shown that founders who share their journey transparently on platforms like LinkedIn build audience, attract customers, and create inbound deal flow. IndieHackers interviews consistently reveal that content-driven personal brands outperform paid acquisition for solo founders and small teams.
 
 ## Profile Optimization
 
@@ -41,8 +42,19 @@ Your profile is your landing page. Optimize these elements in order:
 | Carousel (PDF) | Step-by-step guides, listicles | Very High |
 | Single image + text | Behind-the-scenes, milestones | Medium |
 | Video (native) | Tutorials, talking head | Medium |
-| Polls | Audience research, engagement bait | High reach, low quality |
 | Document posts | In-depth guides, checklists | High |
+
+## The Indie Maker Content Playbook
+
+Bootstrapped founders who document their journey publicly attract both audience and customers. Draw from these proven content categories:
+
+| Content Type | Source | Why It Works |
+|-------------|--------|-------------|
+| Build-in-public updates | Pieter Levels' "12 startups in 12 months" model | Transparency creates investment in your story |
+| Revenue/metric milestones | IndieHackers case studies (Storemapper, NomadList) | Real numbers build credibility that generic advice cannot |
+| Lessons from failure | Patrick McKenzie's "500+ posts" approach | Vulnerability earns trust faster than expertise alone |
+| Niche expertise | "Marketing for Minorities" (targeting underserved segments) | Specific knowledge for a specific audience compounds |
+| Tool and process breakdowns | Tyler Tringas' micro-SaaS transparency | Practical how-tos get saved and shared |
 
 ## Algorithm Signals
 
@@ -57,7 +69,7 @@ LinkedIn rewards these behaviors in priority order:
 
 ## Commenting Strategy
 
-Commenting is the most underrated growth lever:
+Commenting is the most underrated growth lever, echoing the indie community's emphasis on genuine engagement over paid reach:
 
 - Comment on 10-15 posts from accounts larger than yours daily
 - Add genuine value: share experience, ask a smart question, offer a different angle
@@ -73,16 +85,9 @@ Commenting is the most underrated growth lever:
 | Tue | Personal story or lesson | Relatability |
 | Wed | Carousel or framework | Saves and shares |
 | Thu | Engagement post (question or contrarian take) | Comments |
-| Fri | Behind-the-scenes or wins | Trust |
+| Fri | Behind-the-scenes or build-in-public update | Trust |
 
 Batch-write 5 posts on the weekend. Schedule with Buffer or native LinkedIn scheduling.
-
-## Engagement Pods: Pros and Cons
-
-**Pros:** Early engagement boost, community support, accountability.
-**Cons:** Algorithm detects artificial patterns, attracts low-quality followers, creates dependency. LinkedIn has actively penalized pod-driven engagement since 2024.
-
-**Verdict:** Small organic pods (under 10 people in your niche) can help. Large automated pods hurt more than they help.
 
 ## Analytics to Track Weekly
 
@@ -98,3 +103,4 @@ Batch-write 5 posts on the weekend. Schedule with Buffer or native LinkedIn sche
 - Write for one specific person, not "my network"
 - Personal stories outperform generic advice every time
 - Consistency beats virality. Show up before you blow up
+- Your LinkedIn is a product. Iterate on it like bootstrapped founders iterate on their SaaS.

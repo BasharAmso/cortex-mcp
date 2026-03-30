@@ -14,13 +14,14 @@ estimatedTokens: 700
 relatedFragments: [SKL-0013, SKL-0029]
 dependencies: []
 synonyms: ["how do I start a newsletter", "how to get more email subscribers", "what should I write in my newsletter", "how to monetize a newsletter", "best newsletter platform", "my open rates are low", "how to write a welcome email"]
-lastUpdated: "2026-03-29"
+sourceUrl: "https://github.com/mezod/awesome-indie"
+lastUpdated: "2026-03-30"
 difficulty: intermediate
 ---
 
 # Newsletter Writing
 
-Build a newsletter that people actually open. This playbook covers subject lines, email structure, welcome sequences, growth tactics, monetization, tooling, and deliverability.
+Build a newsletter that people actually open. The indie maker community considers email the most valuable owned channel. Newsletters like IndieHackers, Hackerpreneur, Bootstrappers.io, and The SaaS Bootstrapper built loyal audiences by curating genuine value, not by optimizing funnels. The pattern: one person sharing real knowledge on a consistent schedule.
 
 ## Subject Line Formulas
 
@@ -56,7 +57,7 @@ Every issue should follow a predictable structure readers can scan:
 
 ## Welcome Sequence
 
-The welcome sequence sets expectations and builds trust. Send 3-5 emails over 7-10 days:
+The welcome sequence sets expectations and builds trust. Modeled on how top indie newsletters onboard subscribers:
 
 | Email | Timing | Content |
 |-------|--------|---------|
@@ -67,6 +68,8 @@ The welcome sequence sets expectations and builds trust. Send 3-5 emails over 7-
 | Best-of | Day 10 | Curated top 3 past issues. Catch them up |
 
 ## Growth Tactics
+
+Indie makers who grew newsletters to thousands of subscribers share these proven tactics:
 
 | Tactic | Effort | Impact |
 |--------|--------|--------|
@@ -114,6 +117,6 @@ If your emails land in spam, nothing else matters:
 ## Key Rules
 
 - Send on a consistent schedule. Readers should know when to expect you
-- Never send without proofreading the subject line, preview text, and first paragraph
 - Every email must provide standalone value. No "just checking in" issues
 - If you have nothing valuable to say this week, skip the issue. Trust is worth more than consistency
+- Think of your newsletter as a micro-SaaS: measure, iterate, and treat subscribers as customers

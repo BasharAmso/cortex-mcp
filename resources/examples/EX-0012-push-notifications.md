@@ -12,21 +12,23 @@ estimatedTokens: 750
 relatedFragments: [SKL-0007, SKL-0006, EX-0010]
 dependencies: []
 synonyms: ["how to send push notifications", "web push api example", "service worker notifications", "notification permission prompt", "push notification backend"]
-lastUpdated: "2026-03-29"
+sourceUrl: "https://github.com/nicedoc/nicedoc.io"
+lastUpdated: "2026-03-30"
 difficulty: advanced
 ---
 
 # Push Notifications Example
 
-Web Push API with service worker handler, permission UX, and backend integration.
+Web Push API with VAPID authentication, service worker handler, contextual permission UX, and backend delivery using the `web-push` library.
 
-## Request Permission (User-Facing)
+## Request Permission (Contextual Prompt)
 
 ```tsx
 // components/notification-prompt.tsx
 "use client";
 import { useState } from "react";
 
+// Never auto-prompt on page load. Show a contextual UI explaining value first.
 export function NotificationPrompt() {
   const [dismissed, setDismissed] = useState(false);
 
@@ -57,18 +59,20 @@ export function NotificationPrompt() {
 }
 ```
 
-## Subscribe to Push
+## Subscribe to Push (VAPID)
 
 ```ts
 // lib/push-subscribe.ts
 async function subscribeToPush() {
   const reg = await navigator.serviceWorker.ready;
 
+  // VAPID: application server key authenticates push requests
   const subscription = await reg.pushManager.subscribe({
-    userVisibleOnly: true,
+    userVisibleOnly: true, // Required: silent pushes are not allowed
     applicationServerKey: urlBase64ToUint8Array(process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!),
   });
 
+  // Store subscription on server for later delivery
   await fetch("/api/push/subscribe", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -86,7 +90,7 @@ function urlBase64ToUint8Array(base64: string): Uint8Array {
 ## Service Worker Push Handler
 
 ```js
-// public/sw.js — add to existing service worker
+// public/sw.js -- add to existing service worker
 self.addEventListener("push", (e) => {
   const data = e.data?.json() ?? {};
 
@@ -94,7 +98,7 @@ self.addEventListener("push", (e) => {
     body: data.body || "You have a new notification",
     icon: "/icons/icon-192.png",
     badge: "/icons/badge-72.png",
-    tag: data.tag || "default",
+    tag: data.tag || "default", // Collapses duplicates instead of stacking
     data: { url: data.url || "/" },
     actions: data.actions || [],
   };
@@ -102,9 +106,9 @@ self.addEventListener("push", (e) => {
   e.waitUntil(self.registration.showNotification(data.title || "My App", options));
 });
 
+// Deep-link: focus existing tab or open new one
 self.addEventListener("notificationclick", (e) => {
   e.notification.close();
-
   const targetUrl = e.notification.data?.url || "/";
 
   e.waitUntil(
@@ -133,14 +137,11 @@ export async function POST(req: Request) {
   const { subscription, title, body, url } = await req.json();
 
   try {
-    await webpush.sendNotification(
-      subscription,
-      JSON.stringify({ title, body, url })
-    );
+    await webpush.sendNotification(subscription, JSON.stringify({ title, body, url }));
     return Response.json({ success: true });
   } catch (err: any) {
+    // 410 Gone: subscription expired, remove from database
     if (err.statusCode === 410) {
-      // Subscription expired — remove from database
       return Response.json({ success: false, expired: true }, { status: 410 });
     }
     throw err;
@@ -150,9 +151,9 @@ export async function POST(req: Request) {
 
 ## Key Points
 
-- **Never auto-prompt** on page load. Show a contextual prompt explaining the value first.
-- **`userVisibleOnly: true`** is required by browsers; silent pushes are not allowed
+- **Never auto-prompt** on page load; show a contextual UI explaining the value first
 - **VAPID keys** authenticate your server. Generate with `npx web-push generate-vapid-keys`
+- **`userVisibleOnly: true`** is required by browsers; silent pushes are not allowed
 - **Handle 410 Gone** to clean up expired subscriptions from your database
-- **`notificationclick`** focuses an existing tab or opens a new one for deep linking
 - **`tag` property** collapses duplicate notifications instead of stacking
+- **`notificationclick`** focuses an existing tab or opens a new one for deep linking

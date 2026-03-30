@@ -13,13 +13,14 @@ estimatedTokens: 550
 relatedFragments: [SKL-0097, SKL-0098, SKL-0009]
 dependencies: []
 synonyms: ["make AI sound like me", "AI writing sounds fake", "how to keep my voice with AI", "AI slop detection", "train AI on my writing style"]
-lastUpdated: "2026-03-29"
+sourceUrl: "https://github.com/dair-ai/Prompt-Engineering-Guide"
+lastUpdated: "2026-03-30"
 difficulty: intermediate
 ---
 
 # Voice Preservation with AI
 
-Keep your authentic voice when using AI as a writing partner. Train AI on your style, detect and fix generic AI output, and maintain the balance between efficiency and authenticity.
+Keep your authentic voice when using AI as a writing partner. The Prompt Engineering Guide shows that few-shot examples outperform abstract descriptions for style matching, role prompts set behavioral constraints, and directional stimulus prompting steers output toward specific qualities. Apply all three to preserve your voice.
 
 ## Training AI on Your Voice
 
@@ -41,9 +42,17 @@ Analyze your samples and extract patterns:
 
 **Template:** "My writing voice: [3 adjectives]. I tend to [2 habits]. I never [2 anti-patterns]. Typical sentence length: [range]. I open with [pattern] and close with [pattern]."
 
-### Use Voice Guidelines as System Prompts
+### Use Few-Shot Examples as System Context
 
-Load your voice document at the start of every AI writing session. This is more effective than describing your voice each time because it stays consistent and includes concrete examples.
+The Prompt Engineering Guide demonstrates that few-shot prompting (providing concrete examples) consistently outperforms zero-shot instructions (abstract descriptions). Instead of telling the AI "write casually," show it 3 examples of your casual writing. Instead of saying "be direct," include a sample where you were direct. Load your voice samples at the start of every AI writing session.
+
+## Directional Stimulus for Voice
+
+Directional stimulus prompting adds a guiding hint to steer generation. For voice preservation, add explicit constraints:
+
+- "Write in the style of the examples above, but about [new topic]"
+- "Match the sentence length and paragraph structure of the samples"
+- "If you find yourself writing a phrase the author in those examples would never say, replace it"
 
 ## Detecting AI Slop
 
@@ -60,7 +69,9 @@ AI slop is generic, over-polished language that no human would naturally write. 
 
 ### The Slop Audit Prompt
 
-After AI generates content: "Review this for AI-sounding language. Flag every phrase that a real person would never say in conversation. Suggest replacements that sound natural."
+After AI generates content, use this chain-of-thought audit: "Review this for AI-sounding language. Step 1: Flag every phrase that a real person would never say in conversation. Step 2: For each flagged phrase, explain why it sounds artificial. Step 3: Suggest a replacement that sounds natural."
+
+The chain-of-thought structure (from the Prompt Engineering Guide) forces the model to reason about each edit instead of making surface-level substitutions.
 
 ## The 80/20 Rule
 

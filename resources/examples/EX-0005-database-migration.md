@@ -12,18 +12,27 @@ estimatedTokens: 550
 relatedFragments: [PAT-0004, EX-0004]
 dependencies: []
 synonyms: ["how to create a database migration", "how to add a new table to my database", "prisma migration example", "how to change my database schema", "how to add a column to an existing table"]
-lastUpdated: "2026-03-29"
+sourceUrl: "https://github.com/prisma/prisma"
+lastUpdated: "2026-03-30"
 difficulty: beginner
 ---
 
 # Database Migration Example
 
-Schema migration using Prisma (ORM) and equivalent raw SQL.
+Schema migration using Prisma ORM, following the official Prisma patterns for model definitions, relations, and type-safe client usage.
 
 ## Prisma Schema
 
 ```prisma
 // prisma/schema.prisma
+datasource db {
+  provider = "postgresql"
+}
+
+generator client {
+  provider = "prisma-client"
+}
+
 model User {
   id        String   @id @default(uuid())
   name      String   @db.VarChar(100)
@@ -56,35 +65,49 @@ enum Role {
 }
 ```
 
-## Equivalent SQL Migration
+## Type-Safe Client Usage
 
-```sql
-CREATE TABLE users (
-  id         UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  name       VARCHAR(100) NOT NULL,
-  email      VARCHAR(255) NOT NULL UNIQUE,
-  role       VARCHAR(20) NOT NULL DEFAULT 'USER',
-  created_at TIMESTAMP NOT NULL DEFAULT now(),
-  updated_at TIMESTAMP NOT NULL DEFAULT now()
-);
+```typescript
+// Prisma generates fully typed client from the schema
+import { PrismaClient } from "./generated/client";
 
-CREATE TABLE posts (
-  id         UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  title      VARCHAR(200) NOT NULL,
-  content    TEXT NOT NULL,
-  published  BOOLEAN NOT NULL DEFAULT false,
-  author_id  UUID NOT NULL REFERENCES users(id),
-  created_at TIMESTAMP NOT NULL DEFAULT now()
-);
+const prisma = new PrismaClient();
 
-CREATE INDEX idx_posts_author ON posts(author_id);
-CREATE INDEX idx_posts_published ON posts(published, created_at);
+// Create with relation
+const user = await prisma.user.create({
+  data: { name: "Ada", email: "ada@example.com", role: "ADMIN" },
+});
+
+// Query with included relations (type-safe)
+const usersWithPosts = await prisma.user.findMany({
+  include: { posts: true },
+});
+
+// Filtered query using generated types
+const published = await prisma.post.findMany({
+  where: { published: true },
+  orderBy: { createdAt: "desc" },
+});
+```
+
+## Migration Workflow
+
+```bash
+# Generate migration SQL from schema changes
+npx prisma migrate dev --name add_posts_table
+
+# Apply migrations in production
+npx prisma migrate deploy
+
+# Regenerate client after schema changes
+npx prisma generate
 ```
 
 ## Key Points
 
 - **UUID primary keys** for distributed-safe IDs
-- **created_at / updated_at** on every table for auditability
-- **Foreign key with index** on author_id for fast joins
-- **Composite index** on (published, created_at) for common query pattern
-- **@map directives** keep Prisma camelCase while DB uses snake_case
+- **`@map` directives** keep Prisma camelCase while database uses snake_case
+- **`@relation` with `fields/references`** defines foreign keys explicitly
+- **Composite index** on `(published, createdAt)` optimizes common query patterns
+- **`prisma migrate dev`** creates a migration file and applies it in one step
+- **Type-safe queries** are generated from the schema, catching errors at compile time

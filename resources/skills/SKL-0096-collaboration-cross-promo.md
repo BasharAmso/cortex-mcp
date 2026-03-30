@@ -13,13 +13,14 @@ estimatedTokens: 600
 relatedFragments: [SKL-0013, SKL-0087, SKL-0093]
 dependencies: []
 synonyms: ["how do I collab with other creators", "how do I get on a podcast", "should I do guest posts", "how do I find people to promote with", "how to do a joint launch"]
-lastUpdated: "2026-03-29"
+sourceUrl: "https://github.com/mezod/awesome-indie"
+lastUpdated: "2026-03-30"
 difficulty: intermediate
 ---
 
 # Collaboration & Cross-Promotion
 
-Grow by borrowing trust from aligned creators. Collaboration is the fastest organic growth lever because you reach a pre-qualified audience that already trusts the person introducing you.
+Grow by borrowing trust from aligned creators. The indie maker ecosystem runs on collaboration: newsletter cross-promotions, podcast guest circuits (Startups for the Rest of Us, IndieHackers Podcast, Bootstrapped Web), MicroConf speaker networks, and co-created content between founders. Collaboration is the fastest organic growth lever because you reach a pre-qualified audience that already trusts the person introducing you.
 
 ## Finding the Right Partners
 
@@ -43,11 +44,13 @@ Before reaching out, check:
 
 ## Collaboration Formats
 
+Drawn from patterns in the indie maker community:
+
 | Format | Effort | Reach | Best For |
 |--------|--------|-------|----------|
-| Content swap | Low | Medium | Newsletter or social audiences |
+| Newsletter swap | Low | Medium | Email list cross-pollination (Bootstrappers.io model) |
 | Guest post | Medium | High | SEO + authority building |
-| Podcast guesting | Medium | High | Long-form trust building |
+| Podcast guesting | Medium | High | Long-form trust building (IndieHackers, SaaS Bootstrapper) |
 | Co-created content | High | Very High | Unique assets neither could make alone |
 | Joint launch | Very High | Very High | Product or course launches |
 | Affiliate partnership | Low | Ongoing | Passive cross-referral |
@@ -64,15 +67,9 @@ Before reaching out, check:
 
 Rules: Always lead with what you admire about their work. Always propose a specific format. Never send a generic "let's collab" message.
 
-## Guest Posting Strategy
-
-1. Study the target publication's top-performing posts
-2. Pitch a topic that fills a gap in their existing content
-3. Include your unique angle and a brief outline
-4. Deliver on time and over-deliver on quality
-5. Include a natural bio link and one contextual link to your best content
-
 ## Podcast Guesting
+
+The indie podcast circuit (Startups for the Rest of Us, Mixergy, How I Built This, IndieHackers) is one of the most effective authority-building channels:
 
 1. Build a "media kit" page: bio, headshot, 3-5 topic bullets, past appearances
 2. Target shows with 10-500 episodes (active but still booking guests)

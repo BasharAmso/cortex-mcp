@@ -2,7 +2,7 @@
 id: SKL-0071
 name: Bundle Optimization
 category: skills
-tags: [bundle, webpack, code-splitting, tree-shaking, lazy-loading, performance, build]
+tags: [bundle, webpack, vite, code-splitting, tree-shaking, lazy-loading, performance, build, chunks]
 capabilities: [bundle-analysis, code-splitting, tree-shaking, chunk-strategy, build-optimization]
 useWhen:
   - the JavaScript bundle is too large and slowing down page load
@@ -13,13 +13,14 @@ estimatedTokens: 600
 relatedFragments: [SKL-0005, SKL-0070, SKL-0073, PAT-0020]
 dependencies: []
 synonyms: ["my app takes forever to load", "javascript bundle is too big", "how to make my build smaller", "webpack bundle is huge", "reduce my app size"]
+sourceUrl: "https://github.com/donnemartin/system-design-primer"
 lastUpdated: "2026-03-29"
 difficulty: intermediate
 ---
 
 # Bundle Optimization
 
-Reduce JavaScript bundle size through code splitting, tree shaking, and smart chunking to get faster page loads.
+Reduce JavaScript bundle size through code splitting, tree shaking, and smart chunking. Smaller bundles mean faster first paint and better Core Web Vitals.
 
 ## Performance Targets
 
@@ -31,8 +32,6 @@ Reduce JavaScript bundle size through code splitting, tree shaking, and smart ch
 | Time to Interactive | < 3.5s on 4G | User patience threshold |
 
 ## Step 1: Analyze What You Have
-
-Before optimizing, see what is in your bundle.
 
 ```bash
 # For any webpack project
@@ -52,19 +51,15 @@ Look for: duplicate dependencies, large libraries imported entirely, code that b
 Every route should be its own chunk. Users only download code for the page they visit.
 
 ```javascript
-// React Router - lazy routes
 import { lazy } from 'react';
-
 const Dashboard = lazy(() => import('./pages/Dashboard'));
 const Settings = lazy(() => import('./pages/Settings'));
-const Analytics = lazy(() => import('./pages/Analytics'));
 ```
 
-```javascript
-// Next.js - automatic. Each page in /app or /pages is already a separate chunk.
-// Focus on dynamic imports for heavy components within pages:
-import dynamic from 'next/dynamic';
+Next.js splits automatically per page. Use `dynamic()` for heavy within-page components:
 
+```javascript
+import dynamic from 'next/dynamic';
 const HeavyChart = dynamic(() => import('@/components/HeavyChart'), {
   loading: () => <ChartSkeleton />,
   ssr: false,
@@ -75,29 +70,22 @@ const HeavyChart = dynamic(() => import('@/components/HeavyChart'), {
 
 Tree shaking removes unused exports. It only works with ES modules (`import/export`), not CommonJS (`require`).
 
-**Before (imports everything):**
-```javascript
-import _ from 'lodash';          // 71 KB gzipped
-const result = _.groupBy(data, 'type');
-```
-
-**After (imports only what is used):**
-```javascript
-import groupBy from 'lodash/groupBy';  // 1.4 KB gzipped
-const result = groupBy(data, 'type');
-```
-
-Common offenders and their lightweight alternatives:
-
 | Heavy Library | Size | Alternative | Size |
 |--------------|------|-------------|------|
 | moment.js | 72 KB | date-fns or dayjs | 2-7 KB |
 | lodash (full) | 71 KB | lodash-es (tree-shakeable) | per-function |
 | chart.js (full) | 60 KB | Register only needed charts | 15-25 KB |
 
+```javascript
+// Bad: imports everything (71 KB)
+import _ from 'lodash';
+// Good: imports one function (1.4 KB)
+import groupBy from 'lodash/groupBy';
+```
+
 ## Step 4: Vendor Chunk Strategy
 
-Separate vendor code (node_modules) from your code. Vendor code changes less often and caches longer.
+Separate vendor code from app code. Vendor code changes less often and caches longer.
 
 ```javascript
 // Vite config
@@ -117,10 +105,9 @@ export default {
 
 ## Step 5: Dynamic Imports for Heavy Features
 
-Features not needed on first render should load on demand.
+Features not needed on first render should load on demand:
 
 ```javascript
-// Load a PDF viewer only when the user clicks "View PDF"
 async function handleViewPdf() {
   const { renderPdf } = await import('./pdf-viewer');
   renderPdf(documentUrl);
@@ -139,6 +126,6 @@ async function handleViewPdf() {
 
 ## Key Constraints
 
-- Code splitting adds network requests. Do not split too granularly (aim for 5-15 chunks, not 50).
+- Code splitting adds network requests. Aim for 5-15 chunks, not 50.
 - Tree shaking requires ES module syntax. Check that dependencies ship ESM builds.
 - Dynamic imports need a loading state. Always pair with Suspense or a skeleton.

@@ -2,24 +2,26 @@
 id: PAT-0028
 name: OAuth Flows
 category: patterns
-tags: [oauth, pkce, social-login, authorization, tokens, security, authentication]
+tags: [oauth, pkce, social-login, authorization, tokens, security, authentication, openid-connect, refresh-tokens]
 capabilities: [oauth-implementation, social-auth-setup, token-refresh-logic, logout-flow-design]
 useWhen:
   - adding social login with Google, GitHub, or Apple
   - implementing OAuth 2.0 Authorization Code flow with PKCE
   - handling token refresh and silent re-authentication
-  - building a logout flow that revokes tokens properly
-estimatedTokens: 650
+  - building a secure logout flow that revokes tokens
+  - choosing between OAuth flows for SPAs vs server-rendered apps
+estimatedTokens: 700
 relatedFragments: [PAT-0003, PAT-0029, SKL-0004, SKL-0034]
 dependencies: []
 synonyms: ["how do I add Google login to my app", "sign in with GitHub button", "what is PKCE and do I need it", "how to handle oauth tokens and refresh", "add Apple sign in to my website"]
 lastUpdated: "2026-03-29"
 difficulty: intermediate
+sourceUrl: "https://github.com/OWASP/CheatSheetSeries"
 ---
 
 # OAuth Flows
 
-How to implement OAuth 2.0 securely for web and mobile applications.
+How to implement OAuth 2.0 securely for web and mobile applications. Following OWASP guidance, always use Authorization Code + PKCE for public clients.
 
 ## Authorization Code Flow with PKCE
 
@@ -27,47 +29,44 @@ PKCE (Proof Key for Code Exchange) is required for SPAs and mobile apps. It prev
 
 ```
 1. Client generates random code_verifier (43-128 chars)
-2. Client hashes it → code_challenge = SHA256(code_verifier)
-3. Client redirects to provider:
-   GET /authorize?response_type=code&client_id=X
-     &redirect_uri=Y&code_challenge=Z&code_challenge_method=S256
-     &scope=openid+email+profile&state=random_csrf_value
+2. Client hashes it: code_challenge = SHA256(code_verifier)
+3. Client redirects to provider with code_challenge
 4. User authenticates with provider
-5. Provider redirects back: /callback?code=AUTH_CODE&state=random_csrf_value
+5. Provider redirects back with AUTH_CODE + state
 6. Client sends AUTH_CODE + code_verifier to YOUR backend
-7. Backend exchanges code + code_verifier for tokens with provider
+7. Backend exchanges code + verifier for tokens with provider
 8. Backend issues your own session/JWT to the client
 ```
 
-## Social Login Setup Checklist
+## Social Login Setup
 
 | Provider | Key Steps |
 |----------|-----------|
-| **Google** | Google Cloud Console > OAuth consent screen > Create OAuth 2.0 credentials. Scopes: `openid email profile` |
+| **Google** | Cloud Console > OAuth consent screen > Create credentials. Scopes: `openid email profile` |
 | **GitHub** | Settings > Developer Settings > OAuth Apps. Scopes: `read:user user:email` |
-| **Apple** | Developer portal > Services IDs > Sign In with Apple. Requires domain verification + key file |
+| **Apple** | Developer portal > Services IDs > Sign In with Apple. Requires domain verification |
 
 ## Token Refresh Pattern
 
 ```
 Client -> API request with access token
-Server -> 401 Unauthorized (token expired)
+Server -> 401 (token expired)
 Client -> POST /auth/refresh { refresh_token }
-Server -> Validate refresh token -> Issue new access + refresh tokens
-Client -> Retry original request with new access token
+Server -> Validate -> Issue new access + refresh tokens
+Client -> Retry original request
 ```
 
 **Rules:**
 - Refresh tokens are single-use. Rotate on every refresh.
 - Store refresh tokens server-side or in HttpOnly cookies. Never in localStorage.
-- Set refresh token expiry (7-30 days). Absolute expiry, not sliding.
+- Set absolute expiry (7-30 days), not sliding.
 
 ## Logout Flow
 
-1. Revoke refresh token on your server (delete from DB/store).
-2. Clear client-side session (cookies, in-memory tokens).
-3. Optionally redirect to provider's logout endpoint for full SSO logout.
-4. Invalidate any server-side sessions associated with the user.
+1. Revoke refresh token on your server (delete from DB/store)
+2. Clear client-side session (cookies, in-memory tokens)
+3. Optionally redirect to provider's logout endpoint for SSO logout
+4. Invalidate any server-side sessions for the user
 
 ## Security Checklist
 
@@ -81,8 +80,8 @@ Client -> Retry original request with new access token
 
 ## Common Mistakes
 
-- Exchanging the auth code on the frontend, exposing your client secret
-- Not validating the `state` parameter, allowing CSRF attacks
+- Exchanging the auth code on the frontend, exposing the client secret
+- Not validating the `state` parameter (CSRF vulnerability)
 - Storing tokens in localStorage where XSS can steal them
-- Accepting tokens without verifying the issuer and audience claims
-- Using the implicit flow (deprecated) instead of Authorization Code + PKCE
+- Using the deprecated implicit flow instead of Authorization Code + PKCE
+- Accepting tokens without verifying issuer and audience claims

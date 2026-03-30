@@ -2,37 +2,45 @@
 id: PAT-0023
 name: Database Migrations Strategy
 category: patterns
-tags: [migrations, zero-downtime, rollback, schema-evolution, database-ops, deploy-safety]
+tags: [migrations, zero-downtime, rollback, schema-evolution, database-ops, deploy-safety, postgres, backfill, concurrent-index]
 capabilities: [migration-planning, zero-downtime-deploys, rollback-strategy, schema-evolution]
 useWhen:
   - planning a schema change for a production database
   - need to add or remove a column without downtime
-  - writing a data backfill migration
+  - writing a data backfill migration for large tables
   - designing a rollback strategy for risky schema changes
-estimatedTokens: 650
+  - running concurrent index creation on production
+estimatedTokens: 700
 relatedFragments: [PAT-0004, PAT-0022, SKL-0008, SKL-0006]
 dependencies: []
 synonyms: ["how to change database without breaking production", "zero downtime database migration", "how to rollback a bad migration", "safe way to rename a column in production", "database migration best practices"]
 lastUpdated: "2026-03-29"
 difficulty: advanced
+sourceUrl: "https://github.com/dhamaniasad/awesome-postgres"
 ---
 
 # Database Migrations Strategy
 
-Safe schema evolution for production databases with zero downtime.
+Safe schema evolution for production databases with zero downtime. PostgreSQL supports tools like pgloader, pgcopydb, and reshape that assist with complex migrations.
 
 ## Core Rules
 
 1. **Migrations are immutable once deployed.** Never edit a migration that has run in production. Create a new one.
 2. **One concern per migration.** Don't mix schema changes with data backfills.
 3. **Every migration must be reversible** unless explicitly documented why not.
-4. **Test against production-volume data** before deploying. A migration that takes 2ms on 100 rows can lock a table for minutes on 10M rows.
+4. **Test against production-volume data.** A migration that takes 2ms on 100 rows can lock a table for minutes on 10M rows.
 
-## Zero-Downtime Migration Pattern
+## Safe vs Dangerous Operations
 
-Dangerous operations rewritten as safe multi-step deploys:
+| Safe (no lock / fast) | Dangerous (table lock / slow) |
+|----------------------|------------------------------|
+| Add nullable column | Add column with default (PG < 11) |
+| Add index CONCURRENTLY | Add index without CONCURRENTLY |
+| Create new table | Drop column with dependent views |
+| Add CHECK constraint NOT VALID | Rename column |
+| Drop constraint | Change column type |
 
-### Renaming a Column
+## Zero-Downtime Column Rename
 
 ```
 -- Step 1 (migration): Add new column
@@ -47,9 +55,9 @@ UPDATE users SET display_name = username WHERE display_name IS NULL;
 ALTER TABLE users DROP COLUMN username;
 ```
 
-### Adding a NOT NULL Column
+## Adding a NOT NULL Column Safely
 
-```
+```sql
 -- WRONG: Locks table, fails if rows exist
 ALTER TABLE orders ADD COLUMN region text NOT NULL;
 
@@ -59,28 +67,10 @@ UPDATE orders SET region = 'us-east' WHERE region IS NULL;  -- 2. Backfill
 ALTER TABLE orders ALTER COLUMN region SET NOT NULL;  -- 3. Add constraint
 ```
 
-## Safe vs Dangerous Operations
-
-| Safe (no lock / fast) | Dangerous (table lock / slow) |
-|----------------------|------------------------------|
-| Add nullable column | Add column with default (PG < 11) |
-| Add index CONCURRENTLY | Add index without CONCURRENTLY |
-| Create new table | Drop column with dependent views |
-| Add CHECK constraint NOT VALID | Rename column |
-| Drop constraint | Change column type |
-
-## Rollback Strategy
-
-**Every migration should have a documented rollback plan:**
-
-1. **Additive changes** (add column, add table): Rollback = drop in next migration. Low risk.
-2. **Destructive changes** (drop column, change type): Rollback = restore from backup. Create a backup snapshot before deploying.
-3. **Data migrations**: Rollback = reverse backfill script tested before deploy.
-
-## Data Backfill Patterns
+## Data Backfill Pattern
 
 ```sql
--- Batch backfill to avoid locking (process 1000 rows at a time)
+-- Batch backfill to avoid locking (1000 rows at a time)
 WITH batch AS (
   SELECT id FROM orders
   WHERE region IS NULL
@@ -92,15 +82,17 @@ WHERE id IN (SELECT id FROM batch);
 -- Repeat until 0 rows affected
 ```
 
-**Key rules for backfills:**
-- Always process in batches (1,000-10,000 rows)
-- Use `SKIP LOCKED` to avoid blocking other transactions
-- Run during low-traffic periods
-- Monitor lock wait times and table bloat
+**Key rules:** Process in batches of 1,000-10,000 rows. Use `SKIP LOCKED` to avoid blocking. Run during low-traffic periods. Monitor lock wait times.
+
+## Rollback Strategy
+
+1. **Additive changes** (add column, add table): Rollback = drop in next migration. Low risk.
+2. **Destructive changes** (drop column, change type): Take a backup snapshot before deploying.
+3. **Data migrations**: Prepare and test a reverse backfill script before deploy.
 
 ## Migration Testing Checklist
 
-- [ ] Migration runs forward successfully on a production-sized dataset
+- [ ] Migration runs forward successfully on production-sized dataset
 - [ ] Migration rolls back cleanly
 - [ ] Application works with both old and new schema during transition
 - [ ] No exclusive locks held longer than 1 second

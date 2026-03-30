@@ -2,24 +2,26 @@
 id: PAT-0036
 name: Test Data Factories
 category: patterns
-tags: [test-data, factories, fixtures, faker, seeding, state-builder, test-setup]
+tags: [test-data, factories, fixtures, faker, seeding, state-builder, test-setup, reproducibility, override-pattern]
 capabilities: [test-data-design, factory-pattern, database-seeding]
 useWhen:
   - creating reusable test data for your test suite
   - choosing between factories and static fixtures
   - building complex object graphs for integration tests
-  - seeding a database for development or demos
-estimatedTokens: 550
+  - seeding a database for development or demo environments
+  - reducing test setup boilerplate
+estimatedTokens: 600
 relatedFragments: [PAT-0005, SKL-0003, PAT-0035, PAT-0033]
 dependencies: []
-synonyms: ["how to create test data", "factory pattern for tests", "faker.js setup", "test fixtures vs factories", "how to seed my database for tests"]
+synonyms: ["how to create test data", "factory pattern for tests", "faker.js setup guide", "test fixtures vs factories which is better", "how to seed my database for tests"]
 lastUpdated: "2026-03-29"
 difficulty: intermediate
+sourceUrl: "https://github.com/goldbergyoni/javascript-testing-best-practices"
 ---
 
 # Test Data Factories
 
-Create test data that is readable, flexible, and does not break when your schema changes.
+Create test data that is readable, flexible, and does not break when your schema changes. Following JavaScript testing best practices, avoid global test fixtures and seeds -- add data per-test using factories.
 
 ## Factories vs Fixtures
 
@@ -27,19 +29,17 @@ Create test data that is readable, flexible, and does not break when your schema
 |-----------|----------------|
 | Generate data dynamically | Hardcoded JSON/SQL files |
 | Override only what matters per test | Every test uses the same data |
-| Adapt when schema changes (one place to update) | Break across many files on schema change |
-| Better for relationship-heavy data | Fine for simple config or reference data |
+| Adapt when schema changes (one place) | Break across many files on change |
+| Better for relationship-heavy data | Fine for static reference data |
 
-**Use factories by default.** Use fixtures only for static reference data (countries, categories, permissions).
+**Use factories by default.** Use fixtures only for static reference data (countries, categories).
 
 ## Basic Factory Pattern
 
 ```typescript
 import { faker } from '@faker-js/faker';
 
-type UserOverrides = Partial<User>;
-
-export function buildUser(overrides: UserOverrides = {}): User {
+export function buildUser(overrides: Partial<User> = {}): User {
   return {
     id: faker.string.uuid(),
     email: faker.internet.email(),
@@ -50,9 +50,9 @@ export function buildUser(overrides: UserOverrides = {}): User {
   };
 }
 
-// Usage -- the test reads clearly
+// Tests read clearly
 const admin = buildUser({ role: 'admin' });
-const banned = buildUser({ role: 'member', bannedAt: new Date() });
+const banned = buildUser({ bannedAt: new Date() });
 ```
 
 ## Relationship Builder
@@ -66,20 +66,12 @@ export function buildOrder(overrides: Partial<Order> = {}) {
     user,
     items: [buildOrderItem(), buildOrderItem()],
     status: 'pending',
-    total: 0,  // computed in beforeInsert hook
     ...overrides,
   };
 }
-
-// Deep override
-const bigOrder = buildOrder({
-  items: Array.from({ length: 10 }, () => buildOrderItem({ quantity: 5 })),
-});
 ```
 
 ## State Builder (Fluent API)
-
-For complex test scenarios, a fluent builder improves readability:
 
 ```typescript
 class TestScenario {
@@ -90,13 +82,11 @@ class TestScenario {
     this.users.push(buildUser(overrides));
     return this;
   }
-
   withOrder(overrides?: Partial<Order>) {
     const user = this.users.at(-1) ?? buildUser();
     this.orders.push(buildOrder({ user, ...overrides }));
     return this;
   }
-
   async seed(db: Database) {
     await db.insert(usersTable).values(this.users);
     await db.insert(ordersTable).values(this.orders);
@@ -104,32 +94,16 @@ class TestScenario {
   }
 }
 
-// Usage
 const { users, orders } = await new TestScenario()
   .withUser({ role: 'admin' })
   .withOrder({ status: 'completed' })
-  .withOrder({ status: 'refunded' })
   .seed(db);
-```
-
-## Database Seeding for Scenarios
-
-```typescript
-// seeds/demo.ts -- for local dev and demos
-export async function seedDemo(db: Database) {
-  const owner = buildUser({ email: 'demo@example.com', role: 'owner' });
-  const team = Array.from({ length: 5 }, () => buildUser({ role: 'member' }));
-  const projects = team.map(u => buildProject({ ownerId: u.id }));
-
-  await db.insert(usersTable).values([owner, ...team]);
-  await db.insert(projectsTable).values(projects);
-}
 ```
 
 ## Faker.js Tips
 
-| Need | Faker Method |
-|------|-------------|
+| Need | Method |
+|------|--------|
 | Reproducible data | `faker.seed(12345)` at suite level |
 | Unique emails | `faker.internet.email()` (auto-unique) |
 | Realistic dates | `faker.date.recent({ days: 30 })` |
@@ -138,7 +112,7 @@ export async function seedDemo(db: Database) {
 
 ## Anti-Patterns
 
-- Sharing mutable test data between tests (each test builds its own)
+- Sharing mutable test data between tests
 - Factories that require 10+ arguments (use sensible defaults with overrides)
 - Random data without seed (non-reproducible failures)
 - Building test data in the test body instead of extracting to factories

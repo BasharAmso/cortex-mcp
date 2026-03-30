@@ -2,26 +2,26 @@
 id: PAT-0021
 name: Secrets Management
 category: patterns
-tags: [secrets, vault, key-management, rotation, encryption, kms, environment-secrets]
+tags: [secrets, vault, key-management, rotation, encryption, kms, environment-secrets, security, credentials, dotenv]
 capabilities: [secret-storage, key-rotation, encryption-at-rest, access-control]
 useWhen:
-  - managing secrets in production
-  - rotating API keys
-  - choosing a secrets manager
-  - encrypting sensitive data
-  - auditing secret access
-estimatedTokens: 500
+  - managing secrets and credentials in production environments
+  - rotating API keys safely without downtime
+  - choosing a secrets manager for your infrastructure
+  - encrypting sensitive data at rest
+  - auditing who accessed which secret and when
+estimatedTokens: 550
 relatedFragments: [PAT-0003, PAT-0001, SKL-0004]
 dependencies: []
-synonyms: ["where do I store production secrets", "rotate API keys safely", "secrets manager setup", "encrypt sensitive data", "stop hardcoding passwords"]
+synonyms: ["where do I store production secrets", "rotate API keys safely", "secrets manager comparison", "encrypt sensitive data at rest", "stop hardcoding passwords"]
 lastUpdated: "2026-03-29"
 difficulty: advanced
-sourceUrl: ""
+sourceUrl: "https://github.com/OWASP/CheatSheetSeries"
 ---
 
 # Secrets Management
 
-Keep credentials out of code, limit access, and rotate regularly.
+Keep credentials out of code, limit access, and rotate regularly. Following OWASP guidance, extract secrets from config files and use environment-aware, hierarchical configuration.
 
 ## The Hierarchy of Secret Storage
 
@@ -46,16 +46,14 @@ Keep credentials out of code, limit access, and rotate regularly.
 
 ## Key Rotation Pattern
 
-```
 1. Generate new key/credential
 2. Add new key to secret manager (both old and new active)
 3. Deploy app update that reads new key
 4. Verify new key works in production
 5. Remove old key from secret manager
 6. Revoke old key at the provider
-```
 
-Never rotate by updating a single value in place. The brief window where the old key is invalid but still deployed will cause outages.
+Never rotate by updating a single value in place. The brief window where the old key is invalid but still deployed causes outages.
 
 ## Environment Variable Safety
 
@@ -70,7 +68,7 @@ STRIPE_SECRET_KEY=sk_test_replace_me
 ```
 
 ```typescript
-// Validate all required env vars at startup
+// Validate all required env vars at startup -- fail fast
 const required = ["DATABASE_URL", "STRIPE_SECRET_KEY", "JWT_SECRET"];
 for (const key of required) {
   if (!process.env[key]) {
@@ -82,10 +80,10 @@ for (const key of required) {
 ## Access Control Rules
 
 1. **Least privilege** -- each service gets only the secrets it needs
-2. **Separate by environment** -- dev, staging, and prod secrets are different values and different access policies
+2. **Separate by environment** -- dev, staging, and prod are different values with different access policies
 3. **Audit access** -- log who/what accessed each secret and when
 4. **No shared secrets** -- each service and developer gets their own credentials
-5. **Expire and rotate** -- set rotation schedules (90 days for API keys, 365 for certificates)
+5. **Expire and rotate** -- 90 days for API keys, 365 for certificates
 
 ## Anti-Patterns
 
@@ -94,4 +92,3 @@ for (const key of required) {
 - Using the same secret across all environments
 - No rotation schedule (keys never expire)
 - Logging secrets in application output or error messages
-- Storing secrets in database rows without encryption

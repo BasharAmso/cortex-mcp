@@ -2,25 +2,26 @@
 id: PAT-0013
 name: Feature Flags
 category: patterns
-tags: [feature-flags, feature-toggles, gradual-rollout, a-b-testing, canary, launchdarkly]
+tags: [feature-flags, feature-toggles, gradual-rollout, a-b-testing, canary, launchdarkly, prompt-engineering, experimentation]
 capabilities: [feature-flag-design, gradual-rollout, ab-testing, kill-switch]
 useWhen:
-  - rolling out features gradually
-  - implementing A/B tests
-  - adding kill switches
+  - rolling out features gradually to a subset of users
+  - implementing A/B tests or experiments
+  - adding kill switches for external dependencies
   - managing feature flags across environments
-estimatedTokens: 500
+  - routing between different model versions or prompts
+estimatedTokens: 550
 relatedFragments: [PAT-0010, PAT-0002, SKL-0006]
 dependencies: []
-synonyms: ["release features to some users first", "how to do A/B testing", "feature toggle setup", "turn features on and off without deploying", "gradual rollout"]
+synonyms: ["release features to some users first", "how to do A/B testing", "feature toggle setup", "turn features on and off without deploying", "gradual rollout strategy"]
 lastUpdated: "2026-03-29"
 difficulty: intermediate
-sourceUrl: ""
+sourceUrl: "https://github.com/dair-ai/Prompt-Engineering-Guide"
 ---
 
 # Feature Flags
 
-Decouple deployment from release. Ship code to production without exposing it to all users.
+Decouple deployment from release. Ship code to production without exposing it to all users. Feature flags are also essential for A/B testing prompts, model versions, and AI feature rollouts.
 
 ## Flag Types
 
@@ -28,10 +29,18 @@ Decouple deployment from release. Ship code to production without exposing it to
 |------|----------|---------|
 | **Release toggle** | Days to weeks | New checkout flow for 10% of users |
 | **Ops toggle** | Permanent | Circuit breaker for external service |
-| **Experiment** | Weeks | A/B test on pricing page |
+| **Experiment** | Weeks | A/B test on pricing page or prompt variant |
 | **Permission** | Permanent | Premium features for paid users |
 
-## Implementation (Simple)
+## Implementation Steps
+
+1. **Name flags descriptively.** `enable-new-checkout` not `flag-42`. The name should explain what changes when the flag is on.
+2. **Default to off in production.** Flags should be opt-in. A new flag should never accidentally expose unfinished work.
+3. **Set a cleanup date at creation.** Every release toggle must have a removal deadline. Track flag debt like tech debt.
+4. **Log flag evaluations.** Correlate user behavior with flag state for experiment analysis. Without logging, A/B tests produce no insights.
+5. **Never nest flags.** If flag A depends on flag B, combine them into one flag or create explicit dependencies.
+
+## Simple Implementation
 
 ```typescript
 type FeatureFlags = Record<string, boolean | ((user: User) => boolean)>;
@@ -47,13 +56,6 @@ function isEnabled(flag: keyof typeof flags, user?: User): boolean {
   if (typeof value === "function") return user ? value(user) : false;
   return value;
 }
-
-// Usage
-if (isEnabled("newDashboard", currentUser)) {
-  renderNewDashboard();
-} else {
-  renderLegacyDashboard();
-}
 ```
 
 ## Service Comparison
@@ -66,17 +68,10 @@ if (isEnabled("newDashboard", currentUser)) {
 | **PostHog** | Free tier | Feature flags + analytics combined |
 | **DIY (DB/config)** | Free | Simple on/off flags, small teams |
 
-## Best Practices
-
-1. **Name flags descriptively** -- `enable-new-checkout` not `flag-42`
-2. **Set a cleanup date** when creating each flag. Remove after full rollout.
-3. **Default to off** in production. Flags should be opt-in.
-4. **Log flag evaluations** so you can correlate behavior with flag state.
-5. **Never nest flags** -- if flag A depends on flag B, combine them.
-
 ## Anti-Patterns
 
 - Leaving old flags in code for months (flag debt)
 - Using flags for permanent configuration (use config instead)
 - Testing only the "on" path and forgetting the "off" path
 - No audit trail of who changed a flag and when
+- Running experiments without logging flag state per request

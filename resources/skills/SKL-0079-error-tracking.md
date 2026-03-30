@@ -2,7 +2,7 @@
 id: SKL-0079
 name: Error Tracking
 category: skills
-tags: [error-tracking, sentry, source-maps, breadcrumbs, alerting, triage, debugging, observability]
+tags: [error-tracking, sentry, source-maps, breadcrumbs, alerting, triage, debugging, observability, crash-reporting]
 capabilities: [sentry-integration, source-map-upload, error-grouping-config, release-tracking, triage-workflow]
 useWhen:
   - setting up Sentry or similar error tracking for the first time
@@ -13,17 +13,25 @@ estimatedTokens: 700
 relatedFragments: [SKL-0078, PAT-0008, PAT-0001, SKL-0018]
 dependencies: []
 synonyms: ["set up sentry", "track errors in production", "why is my app crashing", "production debugging", "connect sentry to my app"]
+sourceUrl: "https://github.com/goldbergyoni/nodebestpractices"
 lastUpdated: "2026-03-29"
 difficulty: intermediate
 ---
 
 # Error Tracking
 
-Capture every production error with context. Know what the user did, what code ran, and what broke. Sentry is the default choice for solo devs.
+Capture every production error with context. Distinguish between operational errors (known cases like invalid input) and catastrophic errors (programmer mistakes requiring restart). Sentry is the default choice for solo devs.
+
+## Error Classification
+
+| Type | Example | Action |
+|------|---------|--------|
+| Operational | Invalid input, network timeout, 404 | Handle gracefully, log, continue |
+| Catastrophic | Unhandled exception, memory leak, null ref | Log, shut down gracefully, let orchestrator restart |
+
+Create app-specific error classes extending the built-in Error with properties like error name, code, and whether it is catastrophic. Subscribe to `process.unhandledRejection` and `process.uncaughtException` and exit gracefully on catastrophic errors.
 
 ## Sentry Setup
-
-### JavaScript/Node.js
 
 ```javascript
 import * as Sentry from '@sentry/node';
@@ -32,31 +40,27 @@ Sentry.init({
   dsn: process.env.SENTRY_DSN,
   environment: process.env.NODE_ENV,
   release: process.env.APP_VERSION,
-  tracesSampleRate: 0.1,  // 10% of transactions for performance
+  tracesSampleRate: 0.1,
 });
 ```
 
-### React/Next.js
-
-Use `@sentry/nextjs` which instruments both client and server automatically. Follow the setup wizard: `npx @sentry/wizard@latest -i nextjs`.
+For React/Next.js, use `@sentry/nextjs` which instruments both client and server automatically.
 
 ## Source Maps
 
-Without source maps, you see minified garbage. With them, you see the exact line that broke.
+Without source maps, you see minified garbage. Upload during build:
 
-**Upload during build:**
 ```bash
-# In your CI/CD pipeline
 npx sentry-cli releases new $VERSION
 npx sentry-cli releases files $VERSION upload-sourcemaps ./dist
 npx sentry-cli releases finalize $VERSION
 ```
 
-**Keep source maps private.** Upload to Sentry but don't serve them publicly. Most bundlers can generate source maps without including them in the build output.
+Keep source maps private. Upload to Sentry but do not serve them publicly.
 
-## Breadcrumbs
+## Breadcrumbs and Context
 
-Breadcrumbs show what happened before the error. Sentry auto-captures console logs, network requests, and DOM events. Add custom breadcrumbs for business logic:
+Breadcrumbs show what happened before the error. Add custom breadcrumbs for business logic:
 
 ```javascript
 Sentry.addBreadcrumb({
@@ -67,24 +71,15 @@ Sentry.addBreadcrumb({
 });
 ```
 
-This turns "TypeError on line 42" into a story: user logged in, browsed products, added to cart, clicked checkout, error.
-
-## User Context
-
-Attach user identity so you can answer "who is affected?"
+Assign a transaction ID to each log entry within a single request using `AsyncLocalStorage` for correlation across async calls. Attach user identity so you can answer "who is affected?"
 
 ```javascript
 Sentry.setUser({ id: user.id, email: user.email, plan: user.plan });
 ```
 
-This lets you filter errors by user, prioritize paying customers, and reach out proactively.
-
 ## Error Grouping
 
-Sentry groups similar errors automatically. When grouping is wrong:
-
-- **Too many groups** (same error, different messages): Use fingerprinting to merge them
-- **Too few groups** (different errors lumped together): Add custom fingerprints to split them
+When grouping is wrong, use custom fingerprints:
 
 ```javascript
 Sentry.withScope((scope) => {
@@ -95,13 +90,7 @@ Sentry.withScope((scope) => {
 
 ## Release Tracking
 
-Tag each deploy as a release. This gives you:
-
-- "This error started in release v1.2.3"
-- "This release introduced 4 new issues"
-- Commit-level blame for each error
-
-Wire this into your CI/CD. Most deploy platforms (Vercel, Netlify) can set the release automatically.
+Tag each deploy as a release for "this error started in v1.2.3" and commit-level blame. Wire into CI/CD.
 
 ## Alert Rules
 
@@ -114,18 +103,16 @@ Wire this into your CI/CD. Most deploy platforms (Vercel, Netlify) can set the r
 
 ## Triage Workflow
 
-When errors come in:
-
 1. **Is it new?** Check if it appeared after a recent deploy
 2. **Who's affected?** One user or many? Free or paying?
 3. **Is it critical?** Does it block a core user flow?
 4. **Can you reproduce?** Use breadcrumbs and user context to recreate
 5. **Fix or defer?** Critical = fix now. Edge case = create a task for later
 
-## Key Rules
+## Key Constraints
 
 - Never ignore unhandled exceptions. Capture everything, triage later.
 - Always upload source maps. Minified stack traces are useless.
 - Set user context early in the request lifecycle.
 - Review new errors within 24 hours. Stale error inboxes become ignored.
-- Mark resolved errors as resolved. Sentry will alert you if they regress.
+- Test error flows including uncaught exceptions, not just happy paths.

@@ -2,7 +2,7 @@
 id: SKL-0063
 name: Queue Systems
 category: skills
-tags: [queues, bullmq, redis, async, jobs, workers, messaging]
+tags: [queues, bullmq, redis, async, jobs, workers, messaging, back-pressure, dead-letter-queue]
 capabilities: [queue-setup, job-pattern-design, dead-letter-handling, queue-monitoring]
 useWhen:
   - processing tasks asynchronously outside the request cycle
@@ -13,13 +13,14 @@ estimatedTokens: 600
 relatedFragments: [SKL-0006, SKL-0066, PAT-0002]
 dependencies: []
 synonyms: ["how do I process things in the background", "my API is too slow because it does too much work", "how to set up a job queue in node", "I need to run tasks after the request finishes", "what is a dead letter queue"]
+sourceUrl: "https://github.com/donnemartin/system-design-primer"
 lastUpdated: "2026-03-29"
 difficulty: intermediate
 ---
 
 # Queue Systems
 
-Offload slow or unreliable work from request handlers into background queues for reliability and speed.
+Offload slow or unreliable work from request handlers into background queues. Message queues receive, hold, and deliver messages so your API stays fast while heavy work happens asynchronously.
 
 ## When to Use a Queue
 
@@ -32,19 +33,18 @@ Offload slow or unreliable work from request handlers into background queues for
 
 **Rule of thumb:** If it takes more than 200ms or can fail independently, queue it.
 
-## Procedure
+## Broker Comparison
 
-### 1. Choose a Queue Library
-
-| Library | Best For | Notes |
-|---------|----------|-------|
-| BullMQ | Node.js production apps | Redis-backed, rich features, active maintenance |
-| pg-boss | PostgreSQL-only stacks | No Redis needed, uses Postgres for storage |
-| SQS | AWS-native apps | Managed, scales infinitely, higher latency |
+| Broker | Strengths | Trade-offs |
+|--------|-----------|------------|
+| **Redis + BullMQ** | Simple, rich features, low latency | Messages can be lost on crash without persistence config |
+| **RabbitMQ** | Durable, routing flexibility, AMQP protocol | Requires learning AMQP; more ops overhead |
+| **Amazon SQS** | Managed, scales infinitely | Higher latency, possible duplicate delivery |
+| **pg-boss** | No Redis needed, uses Postgres | Lower throughput ceiling |
 
 **Recommendation:** BullMQ for most Node.js projects. It handles delayed, recurring, and priority jobs out of the box.
 
-### 2. Set Up BullMQ
+## BullMQ Setup
 
 ```typescript
 // queue.ts -- define the queue
@@ -64,35 +64,32 @@ new Worker('emails', async (job) => {
 }, { connection: { host: 'localhost', port: 6379 } });
 ```
 
-### 3. Job Patterns
+## Job Patterns
 
 - **Delayed jobs:** `delay: 60000` sends 1 minute after creation (drip emails, reminders)
 - **Recurring jobs:** `repeat: { cron: '0 9 * * *' }` runs daily at 9 AM
 - **Priority jobs:** `priority: 1` (lower number = higher priority)
 - **Rate-limited jobs:** `limiter: { max: 10, duration: 1000 }` on the worker
 
-### 4. Handle Failures
+## Back Pressure
+
+When queues grow faster than workers process, implement back pressure:
+1. Set a maximum queue depth threshold
+2. Return **HTTP 503** to producers when the threshold is breached
+3. Clients retry with exponential backoff
+4. Alert when queue depth consistently exceeds the threshold
+
+## Handle Failures
 
 - Set `attempts` and `backoff` on every job -- never rely on single-attempt processing
 - After max retries, jobs move to the **failed** state
-- Set up a dead letter queue or event listener for failed jobs:
-
-```typescript
-worker.on('failed', (job, err) => {
-  logger.error(`Job ${job.id} failed: ${err.message}`);
-  // Alert, move to DLQ, or create incident
-});
-```
-
-### 5. Monitor
-
+- Set up a dead letter queue or event listener for failed jobs
 - Use [Bull Board](https://github.com/felixmosh/bull-board) for a web dashboard
-- Track metrics: queue depth, processing time, failure rate
-- Alert when queue depth grows faster than processing rate
 
 ## Key Constraints
 
 - Run workers in a separate process from your API server
-- Never store large payloads in the job data -- store a reference (S3 key, database ID)
-- Make every job handler idempotent -- jobs can be retried
+- Never store large payloads in job data -- store a reference (S3 key, database ID)
+- Make every job handler idempotent -- jobs can and will be retried
 - Always set a maximum number of attempts
+- Monitor: queue depth, processing time, failure rate. Alert when depth grows faster than drain rate

@@ -2,24 +2,26 @@
 id: PAT-0040
 name: Editorial Calendar System
 category: patterns
-tags: [editorial-calendar, content-planning, scheduling, content-cadence, publishing-rhythm, content-management, planning]
+tags: [editorial-calendar, content-planning, scheduling, content-cadence, publishing-rhythm, content-management, planning, consistency]
 capabilities: [content-planning, cadence-management, calendar-design]
 useWhen:
   - planning content for the next week, month, or quarter
   - deciding how often to post on each platform
-  - balancing evergreen and timely content
+  - balancing evergreen and timely content in the mix
   - coordinating content across multiple platforms
-estimatedTokens: 600
+  - removing the daily "what should I post?" decision
+estimatedTokens: 650
 relatedFragments: [SKL-0013, PAT-0039, PAT-0041]
 dependencies: []
-synonyms: ["how far ahead should I plan content", "how often should I post", "I need a content calendar", "how to plan my posts for the month", "what should I post and when", "how do I stay organized with content"]
+synonyms: ["how far ahead should I plan content", "how often should I post on LinkedIn", "I need a content calendar template", "how to plan my posts for the month", "what should I post and when"]
 lastUpdated: "2026-03-29"
 difficulty: beginner
+sourceUrl: "https://github.com/PhilipStark/book-genesis"
 ---
 
 # Editorial Calendar System
 
-Plan what you publish, when, and where. Remove the daily "what should I post?" decision.
+Plan what you publish, when, and where. Remove the daily "what should I post?" decision. Like Book Genesis's 17-phase pipeline, structure creates freedom.
 
 ## Content Cadence by Platform
 
@@ -31,7 +33,6 @@ Plan what you publish, when, and where. Remove the daily "what should I post?" d
 | **YouTube** | 1/month | 1/week | 2/week |
 | **Newsletter** | 1/month | 1/week | 2/week |
 | **Blog** | 2/month | 1/week | 2/week |
-| **TikTok** | 3/week | 1/day | 3/day |
 
 Start at minimum. Consistency at low volume beats burnout at high volume.
 
@@ -39,24 +40,22 @@ Start at minimum. Consistency at low volume beats burnout at high volume.
 
 | Horizon | What You Plan | Detail Level |
 |---------|--------------|-------------|
-| **Quarterly** | Themes, campaigns, product launches | Topic areas only |
-| **Monthly** | Specific topics per week, guest collabs | Titles and formats |
-| **Weekly** | Final topics, drafts, and scheduling | Full drafts ready to publish |
+| **Quarterly** | Themes, campaigns, launches | Topic areas only |
+| **Monthly** | Specific topics per week | Titles and formats |
+| **Weekly** | Final topics, drafts, scheduling | Full drafts ready to publish |
 
 ## Theme Weeks Pattern
 
-Assign a content pillar (see PAT-0041) to each week of the month:
+Assign a content pillar (see PAT-0041) to each week:
 
-| Week | Theme | Example (Marketing Niche) |
-|------|-------|--------------------------|
-| Week 1 | Educational | "How to" and tutorials |
-| Week 2 | Story/Personal | Behind-the-scenes, lessons learned |
-| Week 3 | Opinion/Thought Leadership | Hot takes, industry trends |
-| Week 4 | Engagement/Community | Questions, polls, user spotlights |
+| Week | Theme | Example |
+|------|-------|---------|
+| Week 1 | Educational | How-tos and tutorials |
+| Week 2 | Story/Personal | Behind-the-scenes, lessons |
+| Week 3 | Opinion | Hot takes, industry trends |
+| Week 4 | Engagement | Questions, polls, spotlights |
 
-This prevents the "I posted the same type of thing 5 times in a row" trap.
-
-## Evergreen vs. Timely Content Mix
+## Evergreen vs Timely Content Mix
 
 | Type | % of Calendar | Shelf Life | Examples |
 |------|--------------|------------|----------|
@@ -64,33 +63,13 @@ This prevents the "I posted the same type of thing 5 times in a row" trap.
 | **Timely** | 20-30% | Days to weeks | News reactions, trend commentary |
 | **Promotional** | 10% max | Campaign duration | Launches, offers, announcements |
 
-## Calendar Template (Weekly View)
-
-```
-Monday:    [Pillar A] Educational post (LinkedIn + Twitter)
-Tuesday:   [Pillar B] Story post (LinkedIn)
-Wednesday: [Pillar A] Thread/carousel (Twitter + Instagram)
-Thursday:  [Pillar C] Opinion piece (LinkedIn)
-Friday:    [Engagement] Question or community post (all platforms)
-Weekend:   Buffer / repurpose best performer from the week
-```
-
 ## Review Cycle
 
 | Frequency | Action |
 |-----------|--------|
-| **Weekly (15 min)** | Review next week's calendar, confirm drafts are ready |
-| **Monthly (30 min)** | Check what performed, adjust themes and cadence |
-| **Quarterly (1 hr)** | Review goals, update pillar topics, plan campaigns |
-
-## Tool Options
-
-| Tool | Best For | Cost |
-|------|----------|------|
-| **Notion** | All-in-one with database views | Free-$10/mo |
-| **Google Sheets** | Simple, shareable, no learning curve | Free |
-| **Trello** | Visual kanban (draft -> review -> scheduled -> published) | Free |
-| **Airtable** | Structured data with calendar views | Free-$20/mo |
+| **Weekly (15 min)** | Confirm next week's drafts are ready |
+| **Monthly (30 min)** | Check performance, adjust themes |
+| **Quarterly (1 hr)** | Review goals, update pillars, plan campaigns |
 
 ## Anti-Patterns
 
@@ -98,3 +77,4 @@ Weekend:   Buffer / repurpose best performer from the week
 - No buffer posts (one sick day breaks the whole calendar)
 - All promotional content (audiences unfollow fast)
 - Rigid calendar with no room for timely/reactive posts
+- No review cycle (publishing on autopilot without adjusting)

@@ -2,26 +2,26 @@
 id: PAT-0011
 name: Input Validation
 category: patterns
-tags: [validation, input, sanitization, zod, schema, forms, server-side, client-side]
+tags: [validation, input, sanitization, zod, schema, forms, server-side, client-side, fail-fast, type-safety]
 capabilities: [input-validation, schema-validation, sanitization, form-validation]
 useWhen:
-  - validating user input
-  - choosing a validation library
-  - implementing form validation
-  - preventing injection attacks
-  - validating API request bodies
-estimatedTokens: 550
+  - validating user input on forms or API endpoints
+  - choosing a validation library for a new project
+  - implementing form validation with real-time feedback
+  - preventing injection attacks through input sanitization
+  - validating API request bodies before business logic
+estimatedTokens: 600
 relatedFragments: [PAT-0001, PAT-0002, PAT-0003, SKL-0006]
 dependencies: []
 synonyms: ["how to validate user input", "which validation library should I use", "form validation best practices", "prevent SQL injection", "validate API requests"]
 lastUpdated: "2026-03-29"
 difficulty: intermediate
-sourceUrl: ""
+sourceUrl: "https://github.com/goldbergyoni/nodebestpractices"
 ---
 
 # Input Validation
 
-Never trust user input. Validate on the server, validate on the client, and sanitize before storage.
+Never trust user input. Validate early, validate on the server, and fail fast with dedicated libraries.
 
 ## The Two-Layer Rule
 
@@ -30,7 +30,15 @@ Never trust user input. Validate on the server, validate on the client, and sani
 | **Client-side** | UX feedback (instant errors, field hints) | Browser, before submit |
 | **Server-side** | Security and data integrity | Server, every request |
 
-Client validation is a convenience. Server validation is a requirement. Never skip server-side validation because the client "already checks."
+Client validation is a convenience. Server validation is a requirement. Never skip server-side validation because the client "already checks." Per Node.js best practices, always fail fast by validating arguments using a dedicated library before any business logic runs.
+
+## Validation Strategy
+
+1. **Fail fast at the boundary.** Validate all incoming data at the API route level before it reaches services or database layers. Return 400 with structured error details immediately.
+2. **Use schema-based validation.** Define the expected shape once. Derive TypeScript types, API docs, and runtime checks from a single source of truth.
+3. **Validate incoming JSON schemas.** Never trust payload structure. Libraries like Zod, Joi, or Ajv enforce schema validation at runtime and catch malformed data before it causes downstream errors.
+4. **Separate format from business rules.** Schema validation checks shape and types. Business validation (e.g., "does this user have permission?") belongs in the service layer.
+5. **Return structured errors.** Always include which field failed and why. Clients need machine-readable error details, not just "Bad Request."
 
 ## Library Comparison
 
@@ -39,9 +47,10 @@ Client validation is a convenience. Server validation is a requirement. Never sk
 | **Zod** | TypeScript | Type inference, composable, great DX |
 | **Yup** | JavaScript | Mature, works well with Formik |
 | **Joi** | Node.js | Battle-tested, rich API |
+| **Ajv** | JSON Schema | Standard-based, fastest pure validation |
 | **class-validator** | TypeScript | Decorator-based, NestJS integration |
 
-## Pattern: Zod Schema Validation (API)
+## Zod Schema Validation (API)
 
 ```typescript
 import { z } from "zod";
@@ -58,8 +67,7 @@ app.post("/users", (req, res) => {
   if (!result.success) {
     return res.status(400).json({ errors: result.error.flatten().fieldErrors });
   }
-  // result.data is fully typed and safe
-  createUser(result.data);
+  createUser(result.data); // result.data is fully typed and safe
 });
 ```
 

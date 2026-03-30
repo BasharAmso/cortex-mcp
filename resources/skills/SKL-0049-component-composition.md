@@ -2,17 +2,19 @@
 id: SKL-0049
 name: Component Composition
 category: skills
-tags: [composition, components, slots, headless, patterns, react, inversion-of-control]
+tags: [composition, components, slots, headless, patterns, react, inversion-of-control, radix, ariakit, compound]
 capabilities: [slot-patterns, compound-components, headless-ui, children-composition, render-delegation]
 useWhen:
   - building flexible components that work in many contexts
   - creating headless UI components with no built-in styles
   - designing a component API that gives consumers control
   - refactoring rigid components into composable pieces
+  - wrapping Radix or Headless UI primitives
 estimatedTokens: 600
 relatedFragments: [SKL-0044, SKL-0005, SKL-0048, SKL-0020]
 dependencies: []
 synonyms: ["how do I make my component more flexible", "what is a headless component", "my component has too many props", "how to let users customize what renders inside", "building a reusable component that works everywhere"]
+sourceUrl: "https://github.com/enaqx/awesome-react"
 lastUpdated: "2026-03-29"
 difficulty: advanced
 ---
@@ -23,13 +25,13 @@ Build components that are flexible without being complex. The key principle: giv
 
 ## Composition Strategies
 
-| Strategy | Flexibility | Complexity | Use When |
-|----------|------------|------------|----------|
-| `children` | Medium | Low | Wrapping content (cards, modals, layouts) |
-| Named slots (props) | Medium | Low | Specific insertion points (header, footer) |
-| Compound components | High | Medium | Multi-part UI (tabs, accordion, select) |
-| Headless (hook-based) | Maximum | Medium | Consumer controls all rendering |
-| Render props | High | Medium | Dynamic rendering based on state |
+| Strategy | Flexibility | Complexity | Ecosystem Example |
+|----------|------------|------------|-------------------|
+| `children` | Medium | Low | Every layout component |
+| Named slots (props) | Medium | Low | Page headers, card layouts |
+| Compound components | High | Medium | Radix UI, Headless UI |
+| Headless (hook-based) | Maximum | Medium | Downshift, Ariakit, TanStack Table |
+| Render props | High | Medium | React Router (legacy), Formik |
 
 ## Children Pattern
 
@@ -60,7 +62,7 @@ When you need content in specific locations:
 
 ## Compound Components
 
-Components that share implicit state through Context. Consumers compose them freely.
+The pattern behind Radix UI and Headless UI. Components share implicit state through Context, and consumers compose them freely:
 
 ```tsx
 <Tabs defaultValue="overview">
@@ -90,20 +92,15 @@ function Tabs({ defaultValue, children }) {
 Tabs.Trigger = function Trigger({ value, children }) {
   const { active, setActive } = useContext(TabsContext);
   return (
-    <button
-      role="tab"
-      aria-selected={active === value}
-      onClick={() => setActive(value)}
-    >
-      {children}
-    </button>
+    <button role="tab" aria-selected={active === value}
+      onClick={() => setActive(value)}>{children}</button>
   );
 };
 ```
 
 ## Headless Pattern
 
-Provide behavior via a hook. The consumer renders everything.
+Provide behavior via a hook. The consumer renders everything. Libraries like Downshift, Ariakit, and TanStack Table use this for maximum flexibility:
 
 ```tsx
 const { isOpen, toggle, triggerProps, contentProps } = useDisclosure();
@@ -116,17 +113,15 @@ return (
 );
 ```
 
-**When to use:** The component needs to work with completely different visual designs. Libraries like Radix, Headless UI, and Downshift use this pattern.
-
 ## Inversion of Control Ladder
 
-When a component becomes too rigid, climb this ladder one step at a time:
+When a component becomes too rigid, climb one step at a time:
 
-1. **Hardcoded** -- Component renders fixed markup. (Least flexible)
-2. **Configurable** -- Props control which predefined options render.
-3. **Composable** -- `children` / slots let consumers provide content.
-4. **Compound** -- Sub-components share state through Context.
-5. **Headless** -- Hook provides behavior, consumer renders everything. (Most flexible)
+1. **Hardcoded.** Component renders fixed markup. (Least flexible)
+2. **Configurable.** Props control which predefined options render.
+3. **Composable.** `children` / slots let consumers provide content.
+4. **Compound.** Sub-components share state through Context.
+5. **Headless.** Hook provides behavior, consumer renders everything. (Most flexible)
 
 **Do not jump to step 5.** Start at the lowest level that meets the requirement. Premature flexibility is as costly as premature optimization.
 

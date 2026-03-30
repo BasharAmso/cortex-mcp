@@ -2,24 +2,26 @@
 id: PAT-0022
 name: Query Optimization
 category: patterns
-tags: [query-optimization, n-plus-one, indexing, explain-analyze, pagination, sql-performance]
+tags: [query-optimization, n-plus-one, indexing, explain-analyze, pagination, sql-performance, postgres, database-tuning]
 capabilities: [query-performance-tuning, index-strategy, pagination-design, query-plan-reading]
 useWhen:
   - page load or API response is slow due to database queries
   - you see N+1 query patterns in your ORM logs
   - deciding between cursor-based and offset pagination
   - need to read and interpret EXPLAIN ANALYZE output
+  - adding indexes to speed up slow queries
 estimatedTokens: 700
 relatedFragments: [PAT-0004, SKL-0008, SKL-0006]
 dependencies: []
-synonyms: ["my database queries are slow how to fix", "what is n plus 1 problem", "how to use explain analyze postgres", "cursor vs offset pagination which is better", "how to add indexes to speed up queries"]
+synonyms: ["my database queries are slow how to fix", "what is the n plus one problem", "how to use explain analyze in postgres", "cursor vs offset pagination which is better", "how to add indexes to speed up queries"]
 lastUpdated: "2026-03-29"
 difficulty: intermediate
+sourceUrl: "https://github.com/dhamaniasad/awesome-postgres"
 ---
 
 # Query Optimization
 
-Practical techniques for finding and fixing slow queries in PostgreSQL.
+Practical techniques for finding and fixing slow queries in PostgreSQL. The awesome-postgres ecosystem offers tools like pgHero, pg_stat_statements, and pgBadger for identifying bottlenecks.
 
 ## The N+1 Problem
 
@@ -30,7 +32,6 @@ The most common performance killer. You fetch a list, then query each item indiv
 SELECT * FROM posts;
 SELECT * FROM users WHERE id = 1;
 SELECT * FROM users WHERE id = 2;
--- ...repeated for every post
 
 -- GOOD: 2 queries total
 SELECT * FROM posts;
@@ -38,8 +39,7 @@ SELECT * FROM users WHERE id IN (1, 2, 3, ...);
 
 -- BEST: 1 query with JOIN
 SELECT p.*, u.name as author_name
-FROM posts p
-JOIN users u ON u.id = p.author_id;
+FROM posts p JOIN users u ON u.id = p.author_id;
 ```
 
 **ORM fix:** Use eager loading (`include` in Prisma, `joinedload` in SQLAlchemy, `includes` in ActiveRecord).
@@ -63,7 +63,7 @@ EXPLAIN ANALYZE SELECT * FROM orders WHERE user_id = 42 AND status = 'active';
 1. **Index columns in WHERE, JOIN, and ORDER BY clauses** that appear in frequent queries.
 2. **Composite index column order matters.** Most selective column first. `(status, created_at)` helps `WHERE status = 'active' ORDER BY created_at`, but not `WHERE created_at > ...` alone.
 3. **Partial indexes save space.** `CREATE INDEX idx_active_orders ON orders(user_id) WHERE status = 'active'` only indexes rows you actually query.
-4. **Don't over-index.** Each index slows writes. Measure before adding.
+4. **Don't over-index.** Each index slows writes. Measure before adding. Use pg_stat_user_indexes to find unused indexes.
 
 ## Common Performance Killers
 
@@ -82,4 +82,4 @@ EXPLAIN ANALYZE SELECT * FROM orders WHERE user_id = 42 AND status = 'active';
 | Consistent with inserts | Rows can shift between pages | Stable results |
 | Random page access | Yes | No (forward/backward only) |
 
-**Rule of thumb:** Offset for admin dashboards with < 10K rows. Cursor for feeds, infinite scroll, and anything user-facing with large datasets.
+**Rule of thumb:** Offset for admin dashboards with <10K rows. Cursor for feeds, infinite scroll, and anything user-facing with large datasets.

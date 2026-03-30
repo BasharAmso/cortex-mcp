@@ -2,32 +2,32 @@
 id: PAT-0041
 name: Content Pillars Strategy
 category: patterns
-tags: [content-pillars, content-strategy, brand-consistency, topic-selection, audience-alignment, niche, content-planning]
+tags: [content-pillars, content-strategy, brand-consistency, topic-selection, audience-alignment, niche, personal-brand, focus]
 capabilities: [pillar-definition, topic-mapping, brand-alignment]
 useWhen:
   - deciding what topics to consistently create about
-  - feeling scattered across too many topics
+  - feeling scattered across too many topics without focus
   - building a recognizable personal brand through content
   - aligning content with audience needs and business goals
+  - conducting a quarterly content strategy review
 estimatedTokens: 600
 relatedFragments: [SKL-0013, PAT-0040, PAT-0042]
 dependencies: []
-synonyms: ["what should I post about", "I never know what to post", "my content feels all over the place", "how to pick my niche", "how do I stay on brand", "what topics should I focus on", "how to find my content niche"]
+synonyms: ["what should I post about", "I never know what topics to cover", "my content feels all over the place", "how to pick my content niche", "how do I stay on brand with my posts"]
 lastUpdated: "2026-03-29"
 difficulty: beginner
+sourceUrl: "https://github.com/PhilipStark/book-genesis"
 ---
 
 # Content Pillars Strategy
 
-Pick 3-5 core topics. Post about those. Ignore everything else.
+Pick 3-5 core topics. Post about those. Ignore everything else. Like Book Genesis's design pillars for game development, content pillars give structure to creative output.
 
 ## What Content Pillars Are
 
-Content pillars are the 3-5 recurring themes that define what you're known for. Every post maps to a pillar. If a topic doesn't fit a pillar, you don't post about it.
+Content pillars are the 3-5 recurring themes that define what you're known for. Every post maps to a pillar. If a topic doesn't fit, you don't post about it.
 
 ## How to Identify Your Pillars
-
-Answer these three questions, then find the overlap:
 
 ```
 1. What do I know deeply? (expertise)
@@ -43,54 +43,38 @@ If you only have expertise but no energy, you'll burn out. If you have energy bu
 
 Each pillar generates multiple post formats:
 
-| Pillar | Story Post | How-To Post | Opinion Post | List Post |
-|--------|-----------|-------------|-------------|-----------|
-| AI Tools | "How I used ChatGPT to..." | "5 steps to build a..." | "Why most AI tools fail at..." | "7 AI tools I use daily" |
-| Leadership | "The hardest lesson I learned as..." | "How to give feedback that..." | "Unpopular opinion: managers should..." | "3 signs of a great leader" |
-| Freelancing | "My first $10K month" | "How to find clients on..." | "Stop undercharging because..." | "5 mistakes new freelancers make" |
+| Pillar | Story | How-To | Opinion | List |
+|--------|-------|--------|---------|------|
+| AI Tools | "How I used..." | "5 steps to build..." | "Why most fail at..." | "7 tools I use daily" |
+| Leadership | "Hardest lesson..." | "How to give feedback..." | "Unpopular opinion..." | "3 signs of great..." |
+| Freelancing | "First $10K month" | "How to find clients..." | "Stop undercharging..." | "5 mistakes new..." |
 
-## Example Pillar Sets by Niche
+## Example Pillar Sets
 
-**Solo Founder:**
-1. Building in public (progress, wins, failures)
-2. Product lessons (UX, pricing, launches)
-3. Founder life (time management, mental health)
+**Solo Founder:** Building in public, Product lessons, Founder life
+**Marketing Pro:** Content strategy, Platform tactics, Career growth, Industry trends
+**Developer Advocate:** Technical tutorials, Developer experience, Community building
 
-**Marketing Professional:**
-1. Content strategy (frameworks, systems)
-2. Platform tactics (LinkedIn, email, SEO)
-3. Career growth (personal brand, networking)
-4. Industry trends (AI in marketing, new tools)
+## Pillar Rotation
 
-**Developer Advocate:**
-1. Technical tutorials (code, architecture)
-2. Developer experience (tools, workflows)
-3. Community building (events, open source)
-
-## Pillar Rotation Strategy
-
-Rotate pillars across your publishing schedule to keep the feed balanced:
-
-| If you post 3x/week | Mon | Wed | Fri |
-|---------------------|-----|-----|-----|
+| If 3x/week | Mon | Wed | Fri |
+|------------|-----|-----|-----|
 | **Week 1** | Pillar A | Pillar B | Pillar C |
 | **Week 2** | Pillar B | Pillar C | Pillar A |
 | **Week 3** | Pillar C | Pillar A | Pillar B |
 
-No pillar should dominate more than 40% of your posts in a month.
+No pillar should dominate more than 40% of posts in a month.
 
-## Audience Alignment Check
+## Quarterly Alignment Check
 
-Run this check quarterly:
-
-1. **Which pillar gets the most engagement?** Double down on it.
-2. **Which pillar gets crickets?** Either the angle is wrong or the audience doesn't care. Adjust or replace.
-3. **What are people asking you about in DMs/comments?** If it doesn't fit a pillar, consider adding it.
-4. **Has your expertise or audience shifted?** Pillars can evolve. Don't stay locked into topics you've outgrown.
+1. **Which pillar gets most engagement?** Double down.
+2. **Which pillar gets crickets?** Adjust the angle or replace.
+3. **What are people asking in DMs/comments?** Consider adding it.
+4. **Has your expertise or audience shifted?** Pillars can evolve.
 
 ## Anti-Patterns
 
-- Having 7+ pillars (that's not focus, that's a random blog)
+- Having 7+ pillars (not focus, just a random blog)
 - Picking pillars based on trends instead of genuine expertise
 - Never reviewing whether pillars still resonate
-- Being so rigid that you ignore a viral timely topic because "it's not a pillar" (it's fine to go off-pillar 10% of the time)
+- Being so rigid you ignore a viral timely topic (10% off-pillar is fine)

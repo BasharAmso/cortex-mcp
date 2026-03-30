@@ -2,7 +2,7 @@
 id: SKL-0059
 name: Dark Mode Implementation
 category: skills
-tags: [dark-mode, theming, colors, accessibility, css, design, user-preference]
+tags: [dark-mode, theming, colors, accessibility, css, design, user-preference, semantic-tokens, elevation]
 capabilities: [color-mapping, semantic-color-system, image-adaptation, preference-detection, theme-switching]
 useWhen:
   - adding dark mode to an existing app
@@ -14,13 +14,14 @@ estimatedTokens: 550
 relatedFragments: [SKL-0005, SKL-0048, SKL-0054, SKL-0057]
 dependencies: []
 synonyms: ["how do I add dark mode to my app", "my dark mode looks terrible and washed out", "make my site work in dark and light mode", "detect if user wants dark mode", "my images look wrong on dark background"]
+sourceUrl: "https://github.com/alexpate/awesome-design-systems"
 lastUpdated: "2026-03-29"
 difficulty: intermediate
 ---
 
 # Dark Mode Implementation
 
-Dark mode done well is a color remapping, not an inversion. Build it on semantic tokens and it becomes a variable swap.
+Dark mode done well is a color remapping, not an inversion. Production design systems (Material, Carbon, Polaris, Spectrum) all treat dark mode as a semantic token swap, not a filter.
 
 ## Color Mapping Strategy
 
@@ -39,51 +40,43 @@ Do NOT use `filter: invert(1)`. Build a semantic color layer that remaps per the
 ## The Five Common Mistakes
 
 ### 1. Pure Black Backgrounds
-`#000000` creates maximum contrast that causes eye strain. Use `hsl(220, 10%, 8%)` with a slight hue tint for warmth.
+`#000000` creates maximum contrast that causes eye strain. Use `hsl(220, 10%, 8%)` with a slight hue tint. Material Design, Carbon, and Spectrum all avoid pure black.
 
 ### 2. Pure White Text
-`#FFFFFF` on dark backgrounds vibrates. Use `hsl(220, 10%, 90%)` for body text and reserve near-white for headings only.
+`#FFFFFF` on dark backgrounds vibrates. Use `hsl(220, 10%, 90%)` for body text.
 
 ### 3. Same Colors on Both Themes
-Primary colors that pop on white can be dull or harsh on dark. Increase lightness by 10% and reduce saturation by 5-10% for dark mode.
+Increase lightness by 10% and reduce saturation by 5-10% for dark mode.
 
 ### 4. Ignoring Elevation
-In light mode, elevated elements use shadows. In dark mode, shadows are invisible. Instead, use progressively lighter backgrounds:
-- Page: L 8%
-- Card: L 12%
-- Dropdown: L 16%
-- Modal: L 18%
+In dark mode, shadows are invisible. Use progressively lighter backgrounds (the Material Design approach): Page L 8%, Card L 12%, Dropdown L 16%, Modal L 18%.
 
 ### 5. Forgetting Borders
-Light mode borders at `hsl(0,0%,90%)` disappear on dark backgrounds. Every border needs a dark mode equivalent.
+Light mode borders disappear on dark backgrounds. Every border needs a dark mode equivalent.
 
 ## Image and Icon Adaptation
 
 | Asset Type | Light Mode | Dark Mode |
 |-----------|------------|-----------|
 | **Logos** | Dark version | Light/white version |
-| **Icons (SVG)** | `currentColor` (inherits text color) | Works automatically |
-| **Icons (PNG)** | As-is | Add `filter: brightness(0) invert(1)` or provide dark variants |
-| **Photos** | As-is | Reduce brightness slightly: `filter: brightness(0.9)` |
-| **Screenshots** | As-is | Add subtle border so white screenshots don't bleed into dark bg |
-| **Illustrations** | Light bg variants | Dark bg variants (or reduce opacity to 0.85) |
+| **Icons (SVG)** | `currentColor` | Works automatically |
+| **Icons (PNG)** | As-is | `filter: brightness(0) invert(1)` or dark variants |
+| **Photos** | As-is | `filter: brightness(0.9)` slightly |
+| **Screenshots** | As-is | Add subtle border so white screenshots do not bleed |
 
 **Best practice:** Use SVG icons with `currentColor` so they adapt automatically.
 
 ## User Preference Detection
 
 ```js
-// 1. Check saved preference first, fall back to system
 function getTheme() {
   const saved = localStorage.getItem('theme');
   if (saved) return saved;
   return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 }
-
-// 2. Apply theme
 document.documentElement.dataset.theme = getTheme();
 
-// 3. Listen for system changes
+// Listen for system changes
 window.matchMedia('(prefers-color-scheme: dark)')
   .addEventListener('change', (e) => {
     if (!localStorage.getItem('theme')) {
@@ -97,36 +90,24 @@ window.matchMedia('(prefers-color-scheme: dark)')
 ## CSS Structure
 
 ```css
-/* Light is default */
-:root {
-  --color-bg: hsl(0, 0%, 100%);
-  --color-text: hsl(220, 10%, 10%);
-}
+:root { --color-bg: hsl(0, 0%, 100%); --color-text: hsl(220, 10%, 10%); }
 
-/* Dark via data attribute */
-[data-theme="dark"] {
-  --color-bg: hsl(220, 10%, 8%);
-  --color-text: hsl(220, 10%, 90%);
-}
+[data-theme="dark"] { --color-bg: hsl(220, 10%, 8%); --color-text: hsl(220, 10%, 90%); }
 
-/* Respect system preference if no explicit choice */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --color-bg: hsl(220, 10%, 8%);
-    --color-text: hsl(220, 10%, 90%);
+    --color-bg: hsl(220, 10%, 8%); --color-text: hsl(220, 10%, 90%);
   }
 }
 ```
 
 ## Testing Checklist
 
-- [ ] Body text passes 4.5:1 contrast on dark background
-- [ ] No pure black (#000) backgrounds
-- [ ] No pure white (#FFF) body text
-- [ ] Elevated surfaces are visibly distinct from page background
-- [ ] Borders are visible in both themes
-- [ ] Images and logos adapt (or at minimum do not break)
-- [ ] Theme persists across page navigation (localStorage)
-- [ ] System preference is respected when no explicit choice is saved
-- [ ] Focus indicators are visible on dark backgrounds
-- [ ] Colored elements (success, warning, danger) are readable on dark
+- Body text passes 4.5:1 contrast on dark background
+- No pure black (#000) backgrounds or pure white (#FFF) body text
+- Elevated surfaces are visibly distinct from page background
+- Borders are visible in both themes
+- Images and logos adapt or at minimum do not break
+- Theme persists across page navigation (localStorage)
+- System preference is respected when no explicit choice saved
+- Focus indicators are visible on dark backgrounds

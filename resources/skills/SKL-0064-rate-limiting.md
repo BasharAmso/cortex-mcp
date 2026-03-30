@@ -2,7 +2,7 @@
 id: SKL-0064
 name: Rate Limiting
 category: skills
-tags: [rate-limiting, redis, throttling, api-tiers, security, abuse-prevention, headers]
+tags: [rate-limiting, redis, throttling, api-tiers, security, abuse-prevention, headers, token-bucket, sliding-window]
 capabilities: [rate-limit-implementation, tier-design, redis-rate-limiting, abuse-protection]
 useWhen:
   - protecting an API from abuse or accidental overload
@@ -13,20 +13,21 @@ estimatedTokens: 550
 relatedFragments: [SKL-0006, SKL-0062, PAT-0002]
 dependencies: []
 synonyms: ["how do I stop people from spamming my API", "my server keeps getting overloaded by one user", "how to add rate limiting to express", "what are those X-RateLimit headers", "how to throttle API requests per user"]
+sourceUrl: "https://github.com/donnemartin/system-design-primer"
 lastUpdated: "2026-03-29"
 difficulty: intermediate
 ---
 
 # Rate Limiting
 
-Protect your API from abuse and overload by limiting how many requests each client can make.
+Protect your API from abuse and overload by limiting how many requests each client can make. Without rate limiting, a single misbehaving client can take down your entire service.
 
 ## Algorithm Comparison
 
 | Algorithm | How It Works | Best For |
 |-----------|-------------|----------|
 | Fixed window | Count resets every N seconds | Simple, low memory |
-| Sliding window | Rolling time window | Smoother limits, slightly more complex |
+| Sliding window | Rolling time window tracks requests | Smoother limits, prevents boundary burst |
 | Token bucket | Tokens refill at fixed rate, requests consume tokens | Burst-friendly, most flexible |
 | Leaky bucket | Requests queue and drain at fixed rate | Strict constant-rate output |
 
@@ -35,8 +36,6 @@ Protect your API from abuse and overload by limiting how many requests each clie
 ## Procedure
 
 ### 1. Choose a Scope
-
-Decide what identifies a client:
 
 | Scope | Key | Use Case |
 |-------|-----|----------|
@@ -83,13 +82,13 @@ Store tier configuration in the database, not in code. Look up the user's tier o
 
 ### 4. Required Response Headers
 
-Always include these headers on every response:
+Always include on every response:
 - `X-RateLimit-Limit` -- max requests in the window
 - `X-RateLimit-Remaining` -- requests left in current window
 - `X-RateLimit-Reset` -- seconds until the window resets
 - `Retry-After` -- only on 429 responses
 
-### 5. Handle 429 on the Client Side
+### 5. Client-Side Handling
 
 Clients should implement exponential backoff:
 1. Wait `Retry-After` seconds (or 1s if missing)
@@ -102,3 +101,4 @@ Clients should implement exponential backoff:
 - Always return rate limit headers so clients can self-throttle
 - Use Redis (not in-memory) for rate limiting in multi-instance deployments
 - Log when users consistently hit limits -- it may indicate a UX or integration problem
+- Under sustained overload, return HTTP 503 to shed load and allow client backoff

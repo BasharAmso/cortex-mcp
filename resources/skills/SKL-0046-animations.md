@@ -2,17 +2,19 @@
 id: SKL-0046
 name: Web Animations
 category: skills
-tags: [animation, css, framer-motion, transitions, scroll, performance, motion]
+tags: [animation, css, framer-motion, transitions, scroll, performance, motion, gsap, keyframes, micro-interactions]
 capabilities: [css-transitions, keyframe-animations, scroll-animations, motion-library-usage, performance-optimization]
 useWhen:
   - adding entrance animations or page transitions
   - building scroll-triggered reveal effects
   - implementing micro-interactions on buttons, cards, or modals
   - choosing between CSS animations and a JS animation library
+  - building loading spinners or skeleton pulse effects
 estimatedTokens: 650
 relatedFragments: [SKL-0005, SKL-0053, SKL-0020, SKL-0047]
 dependencies: []
 synonyms: ["how do I add animations to my website", "make things fade in when I scroll", "my page feels static and boring", "should I use Framer Motion or CSS", "add some motion to my UI"]
+sourceUrl: "https://github.com/streamich/awesome-css-animations"
 lastUpdated: "2026-03-29"
 difficulty: intermediate
 ---
@@ -21,16 +23,19 @@ difficulty: intermediate
 
 Add motion that feels intentional, not decorative. Every animation should serve a purpose: guide attention, show relationships, or confirm actions.
 
-## When to Use What
+## Library and Technique Selection
 
-| Technique | Best For | Complexity |
-|-----------|----------|------------|
-| CSS `transition` | Hover states, color changes, simple transforms | Low |
-| CSS `@keyframes` | Looping animations, loading spinners, entrance effects | Low |
-| Framer Motion | Layout animations, gestures, orchestrated sequences | Medium |
-| GSAP | Complex timelines, SVG morphing, scroll-scrubbing | High |
+| Technique | Best For | Bundle Cost | Complexity |
+|-----------|----------|-------------|------------|
+| CSS `transition` | Hover states, color changes, simple transforms | 0kb | Low |
+| CSS `@keyframes` | Looping animations, spinners, pulse effects | 0kb | Low |
+| CSS Scroll-Driven Animations | Native scroll-linked effects (no JS) | 0kb | Low |
+| **Framer Motion** | Layout animations, gestures, orchestrated sequences | ~30kb | Medium |
+| **GSAP** | Complex timelines, SVG morphing, scroll-scrubbing | ~25kb | High |
+| **Animate.css** | Drop-in entrance/exit classes | ~4kb | Low |
+| **Motion One** | Lightweight Web Animations API wrapper | ~4kb | Low |
 
-**Default choice:** CSS transitions for interactions, Framer Motion for page/component animations.
+**Default choice:** CSS transitions for interactions, Framer Motion for page/component animations in React projects.
 
 ## CSS Transitions (Start Here)
 
@@ -44,11 +49,9 @@ Add motion that feels intentional, not decorative. Every animation should serve 
 }
 ```
 
-**Rules:** Only animate `transform` and `opacity` for 60fps performance. Animating `width`, `height`, `top`, or `margin` triggers layout recalculation and causes jank.
+**GPU rule:** Only animate `transform` and `opacity` for 60fps. Animating `width`, `height`, `top`, or `margin` triggers layout recalculation and causes jank.
 
-## Scroll-Triggered Entrance
-
-Using Framer Motion's `whileInView`:
+## Scroll-Triggered Entrance (Framer Motion)
 
 ```tsx
 <motion.div
@@ -61,22 +64,30 @@ Using Framer Motion's `whileInView`:
 </motion.div>
 ```
 
-For staggered lists:
+Staggered lists use `variants` with `staggerChildren`:
 
 ```tsx
-<motion.ul variants={container} initial="hidden" whileInView="visible">
-  {items.map((item, i) => (
-    <motion.li key={item.id} variants={child}>
-      {item.name}
-    </motion.li>
-  ))}
-</motion.ul>
-
 const container = { visible: { transition: { staggerChildren: 0.07 } } };
 const child = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0 },
 };
+```
+
+## CSS Scroll-Driven Animations (Native)
+
+Modern browsers support scroll-linked animations without JavaScript:
+
+```css
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.reveal {
+  animation: fade-in linear both;
+  animation-timeline: view();
+  animation-range: entry 0% entry 100%;
+}
 ```
 
 ## Performance Rules
@@ -88,9 +99,19 @@ const child = {
 | Set `viewport={{ once: true }}` for scroll reveals | Re-trigger animations on every scroll |
 | Keep durations 150-500ms | Use durations over 1s for UI elements |
 
+## Easing Reference
+
+| Easing | Feel | Use For |
+|--------|------|---------|
+| `ease-out` | Decelerating, natural | Entrances, reveals |
+| `ease-in` | Accelerating | Exits, dismissals |
+| `ease-in-out` | Smooth arc | Position changes |
+| `spring` (Framer) | Bouncy, physical | Toggles, drags, playful UI |
+| `cubic-bezier(0.34, 1.56, 0.64, 1)` | Overshoot | Playful entrance pops |
+
 ## Accessibility: Respect Reduced Motion
 
-Every animated component must include this:
+Every animated component must honor user preference:
 
 ```css
 @media (prefers-reduced-motion: reduce) {
@@ -101,18 +122,4 @@ Every animated component must include this:
 }
 ```
 
-Or in Framer Motion:
-
-```tsx
-const prefersReducedMotion = useReducedMotion();
-const animation = prefersReducedMotion ? {} : { y: [20, 0], opacity: [0, 1] };
-```
-
-## Easing Reference
-
-| Easing | Feel | Use For |
-|--------|------|---------|
-| `ease-out` | Decelerating, natural | Entrances, reveals |
-| `ease-in` | Accelerating | Exits, dismissals |
-| `ease-in-out` | Smooth arc | Position changes |
-| `spring` (Framer) | Bouncy, physical | Toggles, drags, playful UI |
+In Framer Motion: `const prefersReducedMotion = useReducedMotion();`

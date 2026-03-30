@@ -2,7 +2,7 @@
 id: SKL-0069
 name: Search Implementation
 category: skills
-tags: [search, full-text-search, postgresql, meilisearch, algolia, typeahead, facets]
+tags: [search, full-text-search, postgresql, meilisearch, algolia, typeahead, facets, gin-index, trigram]
 capabilities: [postgres-fts-setup, search-as-you-type, faceted-search, search-service-integration]
 useWhen:
   - adding search functionality to an application
@@ -13,13 +13,14 @@ estimatedTokens: 650
 relatedFragments: [SKL-0006, PAT-0004, PAT-0002]
 dependencies: []
 synonyms: ["how do I add search to my app", "my search results are terrible and slow", "when should I use algolia vs just postgres", "how to build autocomplete search", "I need to let users filter and search products"]
+sourceUrl: "https://github.com/donnemartin/system-design-primer"
 lastUpdated: "2026-03-29"
 difficulty: intermediate
 ---
 
 # Search Implementation
 
-Build fast, relevant search that helps users find what they need -- from simple text search to faceted product catalogs.
+Build fast, relevant search that helps users find what they need. Start with your database and graduate to a dedicated engine only when you outgrow it.
 
 ## Strategy Decision Tree
 
@@ -32,14 +33,10 @@ Build fast, relevant search that helps users find what they need -- from simple 
 
 **Recommendation:** Start with PostgreSQL full-text search. Move to Meilisearch when you need typo tolerance or sub-50ms search-as-you-type.
 
-## Procedure
-
-### 1. PostgreSQL Full-Text Search
-
-Add a search vector column and index:
+## PostgreSQL Full-Text Search
 
 ```sql
--- Add tsvector column
+-- Add tsvector column with weighted fields
 ALTER TABLE products ADD COLUMN search_vector tsvector
   GENERATED ALWAYS AS (
     setweight(to_tsvector('english', coalesce(name, '')), 'A') ||
@@ -48,57 +45,41 @@ ALTER TABLE products ADD COLUMN search_vector tsvector
 
 -- Create GIN index
 CREATE INDEX idx_products_search ON products USING GIN (search_vector);
-```
 
-Query with ranking:
-
-```sql
+-- Query with ranking
 SELECT id, name, ts_rank(search_vector, query) AS rank
 FROM products, plainto_tsquery('english', $1) query
 WHERE search_vector @@ query
-ORDER BY rank DESC
-LIMIT 20;
+ORDER BY rank DESC LIMIT 20;
 ```
 
-**Weight strategy:** Give titles/names weight 'A' (highest), descriptions 'B', tags/metadata 'C'.
+**Weight strategy:** Titles/names get weight 'A' (highest), descriptions 'B', tags/metadata 'C'.
 
-### 2. Search-as-You-Type
-
-For PostgreSQL, use trigram similarity for partial matches:
+## Search-as-You-Type with Trigram
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS pg_trgm;
 CREATE INDEX idx_products_name_trgm ON products USING GIN (name gin_trgm_ops);
 
--- Query with similarity
 SELECT name, similarity(name, $1) AS sim
-FROM products
-WHERE name % $1
-ORDER BY sim DESC
-LIMIT 10;
+FROM products WHERE name % $1
+ORDER BY sim DESC LIMIT 10;
 ```
 
-For better UX, combine with debouncing on the client (300ms delay).
+Combine with debouncing on the client (300ms delay).
 
-### 3. Meilisearch for Advanced Search
-
-When PostgreSQL is not enough:
+## Meilisearch for Advanced Search
 
 ```typescript
 import { MeiliSearch } from 'meilisearch';
 const client = new MeiliSearch({ host: 'http://localhost:7700', apiKey: process.env.MEILI_KEY });
 
-// Index documents
-await client.index('products').addDocuments(products);
-
-// Configure searchable and filterable attributes
 await client.index('products').updateSettings({
   searchableAttributes: ['name', 'description', 'tags'],
   filterableAttributes: ['category', 'price', 'inStock'],
   sortableAttributes: ['price', 'createdAt'],
 });
 
-// Search with filters
 const results = await client.index('products').search('wireless keyboard', {
   filter: ['category = electronics', 'price < 100'],
   sort: ['price:asc'],
@@ -106,22 +87,17 @@ const results = await client.index('products').search('wireless keyboard', {
 });
 ```
 
-### 4. Keep Search Index in Sync
+## Keep Search Index in Sync
 
 | Strategy | How | Best For |
 |----------|-----|----------|
-| Sync on write | Update index in the same transaction/handler | Low volume, strong consistency |
+| Sync on write | Update index in same transaction/handler | Low volume, strong consistency |
 | Background job | Queue index update after write | High volume, eventual consistency OK |
 | Change Data Capture | Stream DB changes to search | Large scale, decoupled systems |
 
-For most apps, queue a background job after each write:
+For most apps, queue a background job after each write.
 
-```typescript
-await db.product.update({ where: { id }, data });
-await searchQueue.add('index-product', { productId: id });
-```
-
-### 5. Search UX Patterns
+## Search UX Patterns
 
 - Show results as the user types (debounce 200-300ms)
 - Highlight matched terms in results

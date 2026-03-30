@@ -2,26 +2,26 @@
 id: PAT-0018
 name: API Versioning
 category: patterns
-tags: [api-versioning, backward-compatibility, deprecation, migration, breaking-changes, semver]
+tags: [api-versioning, backward-compatibility, deprecation, migration, breaking-changes, semver, api-design, sunset-header]
 capabilities: [version-strategy, deprecation-planning, migration-paths, backward-compatibility]
 useWhen:
-  - versioning an API
-  - handling breaking changes
-  - deprecating old endpoints
-  - maintaining backward compatibility
-  - planning API migrations
-estimatedTokens: 500
+  - versioning a public or internal API
+  - handling breaking changes without disrupting clients
+  - deprecating old endpoints with a migration path
+  - maintaining backward compatibility during evolution
+  - planning a major API version bump
+estimatedTokens: 550
 relatedFragments: [PAT-0002, PAT-0012, SKL-0006]
 dependencies: []
-synonyms: ["how to version my API", "handle breaking API changes", "deprecate old endpoints", "v1 vs v2 API", "backward compatible API changes"]
+synonyms: ["how to version my API", "handle breaking API changes", "deprecate old endpoints safely", "v1 vs v2 API strategy", "backward compatible API changes"]
 lastUpdated: "2026-03-29"
 difficulty: intermediate
-sourceUrl: ""
+sourceUrl: "https://github.com/elsewhencode/project-guidelines"
 ---
 
 # API Versioning
 
-Evolve your API without breaking existing clients.
+Evolve your API without breaking existing clients. Following project guidelines, treat API contracts as promises to your consumers.
 
 ## Strategy Comparison
 
@@ -42,18 +42,16 @@ Evolve your API without breaking existing clients.
 | Renaming a field | Adding a new endpoint |
 | Changing a field's type | Adding optional query parameters |
 | Removing an endpoint | Expanding an enum with new values |
-| Making an optional param required | Loosening validation (wider accepted values) |
+| Making an optional param required | Loosening validation rules |
 
 ## Deprecation Process
 
-```
-1. Announce deprecation (changelog, Deprecation header, docs)
-2. Set a sunset date (minimum 6 months for public APIs)
-3. Add `Sunset: Sat, 01 Nov 2025 00:00:00 GMT` header
-4. Add `Deprecation: true` header to deprecated endpoints
-5. Log usage of deprecated endpoints to track migration
-6. Remove after sunset date + grace period
-```
+1. **Announce deprecation** in changelog, docs, and API response headers
+2. **Set a sunset date** (minimum 6 months for public APIs)
+3. **Add `Sunset` header** with the retirement date on deprecated endpoints
+4. **Add `Deprecation: true` header** so automated tools can detect it
+5. **Log usage** of deprecated endpoints to track migration progress
+6. **Remove** after sunset date plus a grace period
 
 ## Backward-Compatible Evolution
 
@@ -69,7 +67,7 @@ Evolve your API without breaking existing clients.
 // Mark old field as deprecated in docs, remove in next major version
 ```
 
-## Router Pattern (Express)
+## Router Pattern
 
 ```typescript
 import v1Routes from "./routes/v1";
@@ -77,9 +75,7 @@ import v2Routes from "./routes/v2";
 
 app.use("/api/v1", v1Routes);
 app.use("/api/v2", v2Routes);
-
 // Share logic between versions, only differ where needed
-// v2/users.ts imports from v1/users.ts and overrides specific handlers
 ```
 
 ## Anti-Patterns

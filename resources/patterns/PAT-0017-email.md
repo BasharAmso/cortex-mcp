@@ -2,26 +2,26 @@
 id: PAT-0017
 name: Email Integration
 category: patterns
-tags: [email, transactional-email, sendgrid, resend, ses, smtp, email-templates, notifications]
+tags: [email, transactional-email, sendgrid, resend, ses, smtp, email-templates, notifications, deliverability]
 capabilities: [email-sending, template-design, delivery-monitoring, notification-system]
 useWhen:
-  - sending emails from an app
-  - choosing an email provider
-  - building email templates
-  - implementing transactional emails
-  - setting up email notifications
-estimatedTokens: 500
+  - sending transactional or notification emails from an app
+  - choosing an email service provider for a new project
+  - building and managing email templates
+  - setting up password reset or verification emails
+  - debugging email deliverability issues
+estimatedTokens: 550
 relatedFragments: [PAT-0014, PAT-0001, SKL-0010]
 dependencies: []
-synonyms: ["send emails from my app", "which email service should I use", "set up password reset emails", "email template design", "transactional email setup"]
+synonyms: ["send emails from my app", "which email service should I use", "set up password reset emails", "email template design", "my emails go to spam"]
 lastUpdated: "2026-03-29"
 difficulty: beginner
-sourceUrl: ""
+sourceUrl: "https://github.com/goldbergyoni/nodebestpractices"
 ---
 
 # Email Integration
 
-Send reliable transactional emails without landing in spam.
+Send reliable transactional emails without landing in spam. Always delegate email delivery to a background job, never the request handler.
 
 ## Provider Comparison
 
@@ -33,41 +33,24 @@ Send reliable transactional emails without landing in spam.
 | **Postmark** | 100/month | Deliverability-focused transactional |
 | **Mailgun** | 100/day (trial) | API-first, European data residency |
 
-## Implementation (Resend)
-
-```typescript
-import { Resend } from "resend";
-
-const resend = new Resend(process.env.RESEND_API_KEY);
-
-async function sendWelcomeEmail(user: { email: string; name: string }) {
-  await resend.emails.send({
-    from: "App <hello@yourdomain.com>",
-    to: user.email,
-    subject: `Welcome, ${user.name}!`,
-    html: renderTemplate("welcome", { name: user.name }),
-  });
-}
-```
-
-## Email Architecture
+## Architecture
 
 ```
 User Action -> API -> Job Queue -> Email Worker -> Provider -> Inbox
                          |
-                         └── Retry on failure (3 attempts, exponential backoff)
+                         +-- Retry on failure (3 attempts, exponential backoff)
 ```
 
-Always send emails from a background job, not the request handler. This prevents slow or failed email delivery from blocking user actions.
+Always send emails from a background job, not the request handler. This prevents slow or failed email delivery from blocking user actions. Node.js best practices emphasize delegating anything possible to dedicated services.
 
-## Deliverability Checklist
+## Implementation Steps
 
-1. **Set up SPF, DKIM, and DMARC** DNS records for your sending domain
-2. **Use a custom from address** on your domain (not gmail.com or provider default)
-3. **Include an unsubscribe link** in marketing emails (required by law)
-4. **Keep HTML simple** -- avoid heavy CSS, images-only layouts, or URL shorteners
-5. **Monitor bounce rates** -- remove invalid addresses promptly
-6. **Warm up new domains** -- start with low volume and increase gradually
+1. **Set up DNS records first.** Configure SPF, DKIM, and DMARC on your sending domain before sending any email. Without these, emails land in spam.
+2. **Use a custom from address.** Send from `hello@yourdomain.com`, not a provider default or gmail.com.
+3. **Send via background queue.** Enqueue the email job and return 200 to the user immediately. The worker handles delivery and retries.
+4. **Include unsubscribe links** in marketing emails (legally required by CAN-SPAM and GDPR).
+5. **Monitor bounce rates.** Remove invalid addresses promptly. High bounce rates damage sender reputation.
+6. **Warm up new domains.** Start with low volume and increase gradually over 2-4 weeks.
 
 ## Email Types
 

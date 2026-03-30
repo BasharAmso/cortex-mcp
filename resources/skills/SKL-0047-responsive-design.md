@@ -2,17 +2,19 @@
 id: SKL-0047
 name: Responsive Design
 category: skills
-tags: [responsive, mobile-first, breakpoints, typography, images, layout, fluid]
+tags: [responsive, mobile-first, breakpoints, typography, images, layout, fluid, container-queries, clamp]
 capabilities: [mobile-first-layout, breakpoint-strategy, fluid-typography, responsive-images, container-queries]
 useWhen:
   - building layouts that need to work across phone, tablet, and desktop
   - choosing a breakpoint strategy for a new project
   - implementing fluid typography that scales smoothly
   - optimizing images for different screen sizes
+  - using container queries for reusable components
 estimatedTokens: 600
 relatedFragments: [SKL-0005, SKL-0045, SKL-0053, SKL-0020]
 dependencies: []
 synonyms: ["how do I make my website look good on phones", "my layout breaks on mobile", "what breakpoints should I use", "how to make text scale with screen size", "images are too big on mobile"]
+sourceUrl: "https://github.com/enaqx/awesome-react"
 lastUpdated: "2026-03-29"
 difficulty: beginner
 ---
@@ -23,7 +25,7 @@ Build layouts that work on every screen size. Start with mobile, add complexity 
 
 ## Mobile-First Approach
 
-Write your base styles for the smallest screen (320px), then add breakpoints for larger screens. This forces you to prioritize content.
+Write base styles for the smallest screen (320px), then add breakpoints for larger screens. This forces content prioritization.
 
 ```css
 /* Base: mobile */
@@ -42,6 +44,8 @@ Write your base styles for the smallest screen (320px), then add breakpoints for
 ```
 
 ## Breakpoint Strategy
+
+Align with Tailwind defaults (used by Chakra UI, Mantine, and most component libraries):
 
 | Breakpoint | Name | Target |
 |------------|------|--------|
@@ -67,7 +71,7 @@ The formula: `clamp(minimum, preferred, maximum)`. The preferred value uses `vw`
 
 ## Container Queries
 
-Style components based on their container's width, not the viewport. Better for reusable components.
+Style components based on their container width, not the viewport. Essential for reusable components that appear in different-sized containers (sidebar vs main content):
 
 ```css
 .card-container { container-type: inline-size; }
@@ -77,7 +81,7 @@ Style components based on their container's width, not the viewport. Better for 
 }
 ```
 
-**When to use:** Components that appear in different-sized containers (sidebar vs main content).
+Container queries let components be truly responsive regardless of page layout, a concept React component libraries like Radix and Headless UI encourage through composable design.
 
 ## Responsive Images
 

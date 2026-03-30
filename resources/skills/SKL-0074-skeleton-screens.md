@@ -2,7 +2,7 @@
 id: SKL-0074
 name: Skeleton Screens
 category: skills
-tags: [skeleton, loading, placeholder, shimmer, ux, perceived-performance, layout-shift]
+tags: [skeleton, loading, placeholder, shimmer, ux, perceived-performance, layout-shift, suspense, accessibility]
 capabilities: [skeleton-design, shimmer-animation, loading-states, layout-preservation, content-placeholder]
 useWhen:
   - building loading states for pages or components
@@ -13,6 +13,7 @@ estimatedTokens: 550
 relatedFragments: [SKL-0005, SKL-0073, SKL-0075, SKL-0046, PAT-0020]
 dependencies: []
 synonyms: ["how to show loading state", "my page jumps around when data loads", "should I use a spinner or skeleton", "grey boxes while loading", "placeholder content while fetching"]
+sourceUrl: "https://github.com/enaqx/awesome-react"
 lastUpdated: "2026-03-29"
 difficulty: beginner
 ---
@@ -32,33 +33,19 @@ Replace loading spinners with content-shaped placeholders that match the layout 
 | Full page loading (first visit) | **Skeleton** | Prevents blank screen |
 | Error followed by retry | **Spinner** | User triggered the action, expects feedback |
 
-**Rule of thumb:** If the content has a predictable shape, use a skeleton. If the wait is action-triggered and short, use a spinner.
-
 ## Building Content-Shaped Skeletons
 
-The skeleton should mirror the real content layout exactly. Not a generic grey box, but shapes that match headings, text lines, avatars, and images.
+The skeleton must mirror the real content layout exactly:
 
 ```jsx
-// Card skeleton that matches the real card layout
 function CardSkeleton() {
   return (
     <div className="rounded-lg border p-4 space-y-3">
-      {/* Image placeholder */}
       <div className="h-48 w-full rounded bg-gray-200 animate-pulse" />
-
-      {/* Title placeholder */}
       <div className="h-5 w-3/4 rounded bg-gray-200 animate-pulse" />
-
-      {/* Description placeholder - two lines */}
       <div className="space-y-2">
         <div className="h-3 w-full rounded bg-gray-200 animate-pulse" />
         <div className="h-3 w-5/6 rounded bg-gray-200 animate-pulse" />
-      </div>
-
-      {/* Meta info placeholder */}
-      <div className="flex gap-2">
-        <div className="h-3 w-16 rounded bg-gray-200 animate-pulse" />
-        <div className="h-3 w-20 rounded bg-gray-200 animate-pulse" />
       </div>
     </div>
   );
@@ -67,37 +54,26 @@ function CardSkeleton() {
 
 ## Shimmer Animation
 
-A shimmer (moving gradient) feels more alive than a static pulse.
+A shimmer (moving gradient) feels more alive than a static pulse:
 
 ```css
 .skeleton-shimmer {
-  background: linear-gradient(
-    90deg,
-    hsl(0 0% 90%) 0%,
-    hsl(0 0% 96%) 50%,
-    hsl(0 0% 90%) 100%
-  );
+  background: linear-gradient(90deg, hsl(0 0% 90%) 0%, hsl(0 0% 96%) 50%, hsl(0 0% 90%) 100%);
   background-size: 200% 100%;
   animation: shimmer 1.5s ease-in-out infinite;
 }
-
 @keyframes shimmer {
   0% { background-position: 200% 0; }
   100% { background-position: -200% 0; }
 }
-
-/* Respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  .skeleton-shimmer {
-    animation: none;
-    background: hsl(0 0% 90%);
-  }
+  .skeleton-shimmer { animation: none; background: hsl(0 0% 90%); }
 }
 ```
 
 ## Reusable Skeleton Primitives
 
-Build a small set of primitives and compose them:
+Build a small set and compose them:
 
 ```jsx
 function SkeletonBox({ className }) {
@@ -108,10 +84,7 @@ function SkeletonText({ lines = 3, className }) {
   return (
     <div className={`space-y-2 ${className}`}>
       {Array.from({ length: lines }).map((_, i) => (
-        <SkeletonBox
-          key={i}
-          className={`h-3 ${i === lines - 1 ? 'w-4/5' : 'w-full'}`}
-        />
+        <SkeletonBox key={i} className={`h-3 ${i === lines - 1 ? 'w-4/5' : 'w-full'}`} />
       ))}
     </div>
   );
@@ -125,48 +98,14 @@ function SkeletonAvatar({ size = 'md' }) {
 
 ## Preventing Layout Shift
 
-The skeleton must occupy the exact same space as the real content. If it does not, the page jumps when content loads (bad CLS).
+The skeleton must occupy the exact same space as the real content:
 
-**Before (causes shift):**
 ```jsx
+// Bad: causes CLS
 {isLoading ? <Spinner /> : <UserCard user={user} />}
-```
 
-**After (no shift):**
-```jsx
+// Good: zero shift
 {isLoading ? <UserCardSkeleton /> : <UserCard user={user} />}
-```
-
-The `UserCardSkeleton` must have the same height, width, and spacing as `UserCard`.
-
-## Page-Level Skeleton Pattern
-
-```jsx
-function DashboardPage() {
-  const { data, isLoading } = useQuery(['dashboard'], fetchDashboard);
-
-  if (isLoading) return <DashboardSkeleton />;
-
-  return <Dashboard data={data} />;
-}
-
-function DashboardSkeleton() {
-  return (
-    <div className="space-y-6 p-6">
-      {/* Header skeleton */}
-      <div className="flex items-center justify-between">
-        <SkeletonBox className="h-8 w-48" />
-        <SkeletonBox className="h-10 w-32 rounded-md" />
-      </div>
-      {/* Metrics grid skeleton */}
-      <div className="grid grid-cols-3 gap-4">
-        {[1, 2, 3].map(i => <CardSkeleton key={i} />)}
-      </div>
-      {/* Table skeleton */}
-      <SkeletonText lines={8} />
-    </div>
-  );
-}
 ```
 
 ## Quick Win Checklist

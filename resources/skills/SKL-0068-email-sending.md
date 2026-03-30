@@ -2,7 +2,7 @@
 id: SKL-0068
 name: Email Sending
 category: skills
-tags: [email, transactional, resend, sendgrid, templates, spf, dkim, deliverability]
+tags: [email, transactional, resend, sendgrid, templates, spf, dkim, deliverability, dmarc, async]
 capabilities: [email-service-setup, template-design, deliverability-optimization, dns-configuration]
 useWhen:
   - adding transactional emails like welcome messages or password resets
@@ -13,13 +13,14 @@ estimatedTokens: 600
 relatedFragments: [SKL-0006, SKL-0010, SKL-0066]
 dependencies: []
 synonyms: ["how do I send emails from my app", "my emails keep going to spam", "what is the best email API for a startup", "how to set up password reset emails", "how to add SPF and DKIM records"]
+sourceUrl: "https://github.com/donnemartin/system-design-primer"
 lastUpdated: "2026-03-29"
 difficulty: intermediate
 ---
 
 # Email Sending
 
-Send reliable, deliverable emails from your application for transactional and product communication.
+Send reliable, deliverable emails from your application. Always send asynchronously through a queue so user-facing requests never block on email delivery.
 
 ## Email Types
 
@@ -42,9 +43,7 @@ Send reliable, deliverable emails from your application for transactional and pr
 
 **Recommendation:** Resend for new projects (simplest DX). Postmark if deliverability is mission-critical.
 
-## Procedure
-
-### 1. Set Up Resend
+## Setup
 
 ```typescript
 import { Resend } from 'resend';
@@ -58,9 +57,7 @@ await resend.emails.send({
 });
 ```
 
-### 2. Set Up DNS Records
-
-These three DNS records are required for deliverability:
+## Required DNS Records
 
 | Record | Purpose | Example |
 |--------|---------|---------|
@@ -70,44 +67,38 @@ These three DNS records are required for deliverability:
 
 Set these up on a sending subdomain (e.g., `mail.myapp.com`) to isolate from your main domain reputation.
 
-### 3. Template Strategy
+## Send via Background Jobs
 
-- Use a base layout template with header, content area, footer
-- Build templates in React Email or MJML (not raw HTML -- email HTML is painful)
-- Always include a plain-text version
-- Preview and test with Litmus or Email on Acid before going live
-
-### 4. Deliverability Checklist
-
-- Use a consistent "from" address (not a random subdomain)
-- Include a physical mailing address in footer (CAN-SPAM)
-- Add a one-click unsubscribe header for non-transactional emails
-- Warm up new sending domains: start with 50-100/day, increase over 2-4 weeks
-- Monitor bounce rate (keep below 2%) and spam complaint rate (below 0.1%)
-
-### 5. Send Emails via Background Jobs
-
-Never send emails synchronously in request handlers:
+Never send emails synchronously in request handlers. Queue them:
 
 ```typescript
-// In your API handler:
+// In your API handler
 await emailQueue.add('send-email', {
   template: 'welcome',
   to: user.email,
   data: { name: user.name },
 });
 
-// In your email worker:
+// In your email worker
 worker.process(async (job) => {
   const html = renderTemplate(job.data.template, job.data.data);
   await resend.emails.send({ to: job.data.to, html, ... });
 });
 ```
 
+## Deliverability Checklist
+
+1. Set up SPF, DKIM, and DMARC before sending production emails
+2. Use a consistent "from" address on a sending subdomain
+3. Include a physical mailing address in footer (CAN-SPAM)
+4. Add a one-click unsubscribe header for non-transactional emails
+5. Warm up new sending domains: start with 50-100/day, increase over 2-4 weeks
+6. Monitor bounce rate (keep below 2%) and spam complaint rate (below 0.1%)
+
 ## Key Constraints
 
 - Never send email synchronously in API request handlers
 - Never hardcode email content -- use templates
-- Always set up SPF, DKIM, and DMARC before sending production emails
 - Use a subdomain for sending to protect your root domain reputation
 - Log every email sent (recipient, template, status) for debugging delivery issues
+- Build templates in React Email or MJML, not raw HTML

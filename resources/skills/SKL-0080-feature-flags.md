@@ -2,7 +2,7 @@
 id: SKL-0080
 name: Feature Flags
 category: skills
-tags: [feature-flags, feature-toggles, gradual-rollout, ab-testing, launchdarkly, kill-switch, release-management]
+tags: [feature-flags, feature-toggles, gradual-rollout, ab-testing, launchdarkly, kill-switch, release-management, canary, flagsmith]
 capabilities: [flag-implementation, gradual-rollout, ab-test-setup, flag-lifecycle-management, kill-switch-config]
 useWhen:
   - rolling out a new feature to a percentage of users first
@@ -13,6 +13,7 @@ estimatedTokens: 650
 relatedFragments: [PAT-0010, SKL-0018, SKL-0078, SKL-0013]
 dependencies: []
 synonyms: ["feature toggle", "how do I roll out gradually", "A/B test a feature", "kill switch for production", "ship dark feature", "turn off a feature without deploying"]
+sourceUrl: "https://github.com/donnemartin/system-design-primer"
 lastUpdated: "2026-03-29"
 difficulty: intermediate
 ---
@@ -22,8 +23,6 @@ difficulty: intermediate
 Decouple deployment from release. Ship code anytime, enable features when ready. Roll back without redeploying.
 
 ## The Progression
-
-Start simple. Graduate to a service only when you need targeting or analytics.
 
 | Level | When | How |
 |-------|------|-----|
@@ -43,20 +42,10 @@ const flags = {
   darkMode: process.env.ENABLE_DARK_MODE === 'true',
 };
 
-// Usage
 if (flags.newCheckout) {
   renderNewCheckout();
 } else {
   renderLegacyCheckout();
-}
-```
-
-```javascript
-// Level 2: Config file with defaults
-// flags.json
-{
-  "newCheckout": { "enabled": false, "description": "Redesigned checkout flow" },
-  "darkMode": { "enabled": true, "description": "Dark mode toggle in settings" }
 }
 ```
 
@@ -68,7 +57,6 @@ Roll out to a percentage of users to catch problems early:
 function isEnabled(flagName, userId) {
   const flag = flags[flagName];
   if (!flag.percentage) return flag.enabled;
-
   // Deterministic: same user always gets same result
   const hash = simpleHash(flagName + userId);
   return (hash % 100) < flag.percentage;
@@ -86,12 +74,9 @@ function isEnabled(flagName, userId) {
 Feature flags enable A/B testing naturally:
 
 ```javascript
-const variant = getVariant('pricing-page', userId); // 'control' | 'variant-a'
-
-// Track which variant the user saw
+const variant = getVariant('pricing-page', userId);
 analytics.track('pricing_page_view', { variant });
 
-// Render accordingly
 if (variant === 'variant-a') {
   renderNewPricing();
 } else {
@@ -103,23 +88,19 @@ Measure conversion rates per variant. Run for 2+ weeks with enough traffic for s
 
 ## Kill Switches
 
-Every critical feature should have a kill switch: a flag that instantly disables it.
+Every critical feature should have a kill switch that instantly disables it:
 
 ```javascript
-// Kill switch pattern
 if (!flags.paymentsEnabled) {
   return showMaintenancePage('Payments are temporarily unavailable.');
 }
 ```
 
-Kill switches must be:
-- Instantly toggleable without a deploy
-- Tested regularly (flip it in staging)
-- Documented (what does disabling this affect?)
+Kill switches must be instantly toggleable without a deploy, tested regularly in staging, and documented (what does disabling this affect?).
 
 ## Flag Cleanup
 
-Dead flags are tech debt. Every flag should have a lifecycle:
+Dead flags are tech debt. Every flag lifecycle:
 
 1. **Created** with an expiration date or target milestone
 2. **Rolled out** to 100% and verified stable
@@ -128,10 +109,10 @@ Dead flags are tech debt. Every flag should have a lifecycle:
 
 Track active flags. If you have more than 10 active flags as a solo dev, some need cleanup.
 
-## Key Rules
+## Key Constraints
 
 - Every flag needs an owner and a cleanup date
 - Default to "off" for new features, "on" for kill switches
 - Never nest flag checks (if flag A and flag B). Keep logic flat.
-- Test both paths. A flag that's never been "off" is a ticking bomb.
+- Test both paths. A flag that has never been "off" is a ticking bomb.
 - Log flag evaluations so you can debug "why did this user see X?"

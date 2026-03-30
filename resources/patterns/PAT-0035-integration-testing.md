@@ -2,24 +2,26 @@
 id: PAT-0035
 name: Integration Testing
 category: patterns
-tags: [integration-testing, api-testing, database-testing, testcontainers, mocking, test-isolation, supertest]
+tags: [integration-testing, api-testing, database-testing, testcontainers, mocking, test-isolation, supertest, msw, vitest]
 capabilities: [api-test-design, database-test-setup, external-service-mocking]
 useWhen:
-  - writing tests for API endpoints
+  - writing tests for API endpoints with database interaction
   - setting up database test fixtures with proper cleanup
   - deciding what to mock vs test against real services
-  - configuring test containers for local development
-estimatedTokens: 600
+  - configuring test containers for local development and CI
+  - testing service-to-service communication
+estimatedTokens: 650
 relatedFragments: [PAT-0005, SKL-0003, PAT-0036, PAT-0033]
 dependencies: []
-synonyms: ["how to test my API endpoints", "database test setup and teardown", "should I mock external services", "testcontainers setup", "how to test with a real database"]
+synonyms: ["how to test my API endpoints", "database test setup and teardown", "should I mock external services in tests", "testcontainers setup guide", "how to test with a real database"]
 lastUpdated: "2026-03-29"
 difficulty: intermediate
+sourceUrl: "https://github.com/goldbergyoni/javascript-testing-best-practices"
 ---
 
 # Integration Testing
 
-Test components working together -- API routes, databases, and external services.
+Test components working together -- API routes, databases, and external services. Following JavaScript testing best practices, write API (component) testing at minimum. It is the most cost-effective test layer.
 
 ## What to Integration Test
 
@@ -36,7 +38,6 @@ Test components working together -- API routes, databases, and external services
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import request from 'supertest';
 import { app } from '../src/app';
-import { setupTestDb, teardownTestDb } from './helpers/db';
 
 describe('POST /api/users', () => {
   beforeAll(() => setupTestDb());
@@ -46,64 +47,30 @@ describe('POST /api/users', () => {
     const res = await request(app)
       .post('/api/users')
       .send({ email: 'test@example.com', name: 'Test User' });
-
     expect(res.status).toBe(201);
-    expect(res.body).toMatchObject({
-      email: 'test@example.com',
-      id: expect.any(String),
-    });
+    expect(res.body).toMatchObject({ email: 'test@example.com', id: expect.any(String) });
   });
 
   it('returns 400 for invalid email', async () => {
-    const res = await request(app)
-      .post('/api/users')
-      .send({ email: 'not-an-email', name: 'Test' });
-
+    const res = await request(app).post('/api/users').send({ email: 'not-an-email' });
     expect(res.status).toBe(400);
   });
 });
 ```
 
-## Database Setup/Teardown
+## Database Isolation: Transaction Rollback
 
 ```typescript
-// helpers/db.ts
-import { drizzle } from 'drizzle-orm/node-postgres';
-
-let db: ReturnType<typeof drizzle>;
-
 export async function setupTestDb() {
   db = drizzle(process.env.TEST_DATABASE_URL!);
-  await db.execute('BEGIN');           // wrap each test suite in a transaction
+  await db.execute('BEGIN');
 }
-
 export async function teardownTestDb() {
-  await db.execute('ROLLBACK');        // undo all changes, fast and clean
+  await db.execute('ROLLBACK');  // undo all changes, fast and clean
 }
 ```
 
-**Transaction rollback** is the fastest isolation strategy. Each test suite starts a transaction and rolls back at the end -- no data cleanup needed.
-
-## Test Containers
-
-When you need a real database without managing infrastructure:
-
-```typescript
-import { PostgreSqlContainer } from '@testcontainers/postgresql';
-
-let container: StartedPostgreSqlContainer;
-
-beforeAll(async () => {
-  container = await new PostgreSqlContainer()
-    .withDatabase('test')
-    .start();
-  process.env.TEST_DATABASE_URL = container.getConnectionUri();
-}, 30_000);  // container startup timeout
-
-afterAll(async () => {
-  await container.stop();
-});
-```
+**Transaction rollback** is the fastest isolation strategy. No data cleanup needed.
 
 ## Mocking External Services
 
@@ -123,7 +90,6 @@ const server = setupServer(
     return HttpResponse.json({ id: 'ch_test', status: 'succeeded' });
   }),
 );
-
 beforeAll(() => server.listen());
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());

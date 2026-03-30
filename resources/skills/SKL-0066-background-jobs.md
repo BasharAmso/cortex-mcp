@@ -2,7 +2,7 @@
 id: SKL-0066
 name: Background Jobs
 category: skills
-tags: [background-jobs, cron, scheduling, workers, retry, idempotency, monitoring]
+tags: [background-jobs, cron, scheduling, workers, retry, idempotency, monitoring, celery, task-queue]
 capabilities: [cron-scheduling, worker-pattern-design, retry-strategy, idempotent-job-design]
 useWhen:
   - scheduling recurring tasks like daily reports or cleanup
@@ -13,13 +13,14 @@ estimatedTokens: 550
 relatedFragments: [SKL-0006, SKL-0063, PAT-0008]
 dependencies: []
 synonyms: ["how do I run something every night at midnight", "my app needs to do stuff on a schedule", "how to make sure a job doesn't run twice", "background task keeps failing and I don't know why", "how to retry failed jobs without duplicating work"]
+sourceUrl: "https://github.com/donnemartin/system-design-primer"
 lastUpdated: "2026-03-29"
 difficulty: intermediate
 ---
 
 # Background Jobs
 
-Schedule and run tasks outside request handlers -- reliably, on time, and without duplicating work.
+Schedule and run tasks outside request handlers -- reliably, on time, and without duplicating work. Applications publish jobs to queues and workers process them asynchronously so users are never blocked.
 
 ## Job Types
 
@@ -29,28 +30,18 @@ Schedule and run tasks outside request handlers -- reliably, on time, and withou
 | Event-driven | Send receipt after payment, resize after upload | Queue message |
 | One-off delayed | Reminder 24h after signup, trial expiry notice | Delayed queue job |
 
-## Procedure
-
-### 1. Choose a Scheduling Approach
+## Scheduling Approach Comparison
 
 | Approach | Pros | Cons |
 |----------|------|------|
 | BullMQ repeatable jobs | Code-defined, retry built in | Requires Redis |
 | node-cron (in-process) | Zero dependencies | No persistence, skips if server restarts |
 | OS cron + script | Battle-tested, no runtime dependency | Hard to monitor, no retry |
-| Managed (Railway cron, AWS EventBridge) | Zero infra management | Vendor lock-in |
+| Managed (AWS EventBridge, Railway) | Zero infra management | Vendor lock-in |
 
 **Recommendation:** BullMQ repeatable jobs for apps already using Redis. Managed cron for simpler stacks.
 
-### 2. Define Jobs Clearly
-
-Every background job needs:
-- **Name:** descriptive, unique (`daily-usage-report`, `expire-trials`)
-- **Schedule:** cron expression or trigger event
-- **Timeout:** maximum run time before the job is considered stuck
-- **Retry policy:** attempts, backoff type, max delay
-
-### 3. Make Every Job Idempotent
+## Make Every Job Idempotent
 
 A job is idempotent if running it twice with the same input produces the same result. This is critical because jobs WILL be retried.
 
@@ -71,7 +62,7 @@ async function handleJob(job) {
 }
 ```
 
-### 4. Retry Strategy
+## Retry Strategy
 
 | Failure Type | Strategy |
 |-------------|----------|
@@ -83,12 +74,12 @@ async function handleJob(job) {
 await queue.add('task', data, {
   attempts: 5,
   backoff: { type: 'exponential', delay: 2000 },
-  removeOnComplete: 1000,  // keep last 1000 completed for debugging
-  removeOnFail: 5000,      // keep last 5000 failed
+  removeOnComplete: 1000,
+  removeOnFail: 5000,
 });
 ```
 
-### 5. Monitor Failed Jobs
+## Monitoring
 
 - Dashboard: Bull Board, Grafana, or custom admin page
 - Alerts: notify on Slack/email when failure rate exceeds threshold

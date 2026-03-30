@@ -2,48 +2,39 @@
 id: PAT-0019
 name: Webhook Design
 category: patterns
-tags: [webhooks, event-driven, callback, notification, retry, idempotency, signature-verification]
+tags: [webhooks, event-driven, callback, notification, retry, idempotency, signature-verification, security, hmac]
 capabilities: [webhook-design, webhook-security, retry-logic, event-notification]
 useWhen:
-  - implementing webhooks
-  - receiving webhooks from third parties
-  - designing webhook payloads
-  - handling webhook retries
-  - verifying webhook signatures
-estimatedTokens: 550
+  - implementing webhook endpoints to receive events from Stripe, GitHub, etc.
+  - designing outgoing webhooks for your own API consumers
+  - handling webhook retries and duplicate delivery
+  - verifying webhook signatures for security
+  - building event notification systems over HTTP
+estimatedTokens: 600
 relatedFragments: [PAT-0002, PAT-0012, PAT-0014, PAT-0003]
 dependencies: []
-synonyms: ["set up webhooks", "receive Stripe webhooks", "how webhooks work", "webhook retry logic", "verify webhook is real"]
+synonyms: ["set up webhooks in my app", "receive Stripe webhooks", "how webhooks work", "webhook retry logic", "verify webhook signature"]
 lastUpdated: "2026-03-29"
 difficulty: intermediate
-sourceUrl: ""
+sourceUrl: "https://github.com/goldbergyoni/nodebestpractices"
 ---
 
 # Webhook Design
 
-Event notifications over HTTP. Both sending and receiving require careful handling.
+Event notifications over HTTP. Both sending and receiving require careful handling of security, idempotency, and failure recovery.
 
 ## Receiving Webhooks (e.g., Stripe, GitHub)
 
-### Verification Pattern
+### Verification Flow
 
-Always verify the signature before processing. Every reputable provider signs their payloads.
+Always verify the signature before processing. Every reputable provider signs their payloads with HMAC-SHA256.
 
 ```typescript
 import { createHmac } from "crypto";
 
-function verifyWebhookSignature(
-  payload: string,
-  signature: string,
-  secret: string
-): boolean {
-  const expected = createHmac("sha256", secret)
-    .update(payload, "utf8")
-    .digest("hex");
-  return crypto.timingSafeEqual(
-    Buffer.from(signature),
-    Buffer.from(expected)
-  );
+function verifyWebhookSignature(payload: string, signature: string, secret: string): boolean {
+  const expected = createHmac("sha256", secret).update(payload, "utf8").digest("hex");
+  return crypto.timingSafeEqual(Buffer.from(signature), Buffer.from(expected));
 }
 
 app.post("/webhooks/stripe", express.raw({ type: "application/json" }), (req, res) => {
@@ -51,22 +42,19 @@ app.post("/webhooks/stripe", express.raw({ type: "application/json" }), (req, re
   if (!verifyWebhookSignature(req.body.toString(), sig, process.env.WEBHOOK_SECRET!)) {
     return res.status(401).send("Invalid signature");
   }
-  // Respond 200 immediately, process async
-  res.status(200).send("OK");
-  processWebhookAsync(JSON.parse(req.body.toString()));
+  res.status(200).send("OK"); // Respond immediately
+  processWebhookAsync(JSON.parse(req.body.toString())); // Process in background
 });
 ```
 
 ### Idempotency
 
-Webhooks may be delivered more than once. Always handle duplicates.
+Webhooks may be delivered more than once. Always deduplicate by event ID.
 
 ```typescript
 async function processWebhook(event: WebhookEvent) {
-  // Check if already processed
   const existing = await db.webhookEvents.findUnique({ where: { eventId: event.id } });
   if (existing) return; // Already handled
-
   await db.$transaction([
     db.webhookEvents.create({ data: { eventId: event.id, type: event.type } }),
     handleEvent(event),
@@ -75,21 +63,6 @@ async function processWebhook(event: WebhookEvent) {
 ```
 
 ## Sending Webhooks (Your API to Consumers)
-
-### Payload Design
-
-```json
-{
-  "id": "evt_abc123",
-  "type": "order.completed",
-  "timestamp": "2026-03-29T12:00:00Z",
-  "data": {
-    "orderId": "ord_xyz",
-    "total": 4999,
-    "currency": "usd"
-  }
-}
-```
 
 ### Delivery Rules
 
@@ -101,7 +74,7 @@ async function processWebhook(event: WebhookEvent) {
 | Success criteria | 2xx response code |
 | Failure handling | Disable endpoint after N consecutive failures |
 
-## Webhook Endpoint Checklist
+## Endpoint Checklist
 
 1. **Respond fast** -- return 200 immediately, process in background
 2. **Verify signatures** -- never skip, even in development

@@ -2,20 +2,21 @@
 id: PAT-0016
 name: Pagination & Infinite Scroll
 category: patterns
-tags: [pagination, infinite-scroll, cursor, offset, keyset, load-more, virtual-scroll]
+tags: [pagination, infinite-scroll, cursor, offset, keyset, load-more, virtual-scroll, api-design, performance]
 capabilities: [pagination-design, cursor-pagination, virtual-scrolling]
 useWhen:
-  - implementing pagination for lists
-  - choosing between offset and cursor pagination
-  - building infinite scroll
-  - handling large datasets in UI
-estimatedTokens: 500
+  - implementing pagination for list endpoints
+  - choosing between offset and cursor pagination for an API
+  - building infinite scroll in a frontend application
+  - handling large datasets in UI without crushing the browser
+  - designing API pagination for public consumption
+estimatedTokens: 550
 relatedFragments: [PAT-0002, PAT-0004, SKL-0006, SKL-0005]
 dependencies: []
-synonyms: ["add pagination to my list", "infinite scroll setup", "cursor vs offset pagination", "load more button", "my list has thousands of items"]
+synonyms: ["add pagination to my list", "infinite scroll setup", "cursor vs offset pagination", "load more button implementation", "my list has thousands of items"]
 lastUpdated: "2026-03-29"
 difficulty: beginner
-sourceUrl: ""
+sourceUrl: "https://github.com/elsewhencode/project-guidelines"
 ---
 
 # Pagination & Infinite Scroll
@@ -51,19 +52,18 @@ GET /api/posts?limit=20&after=post_abc123
   }
 }
 
-// SQL
+// SQL -- the "+1 trick"
 SELECT * FROM posts
 WHERE id > $afterCursor
 ORDER BY id ASC
-LIMIT $limit + 1;  -- fetch one extra to determine hasMore
+LIMIT $limit + 1;  // fetch one extra to determine hasMore
 ```
 
-The "+1 trick": fetch `limit + 1` rows. If you get the extra row, `hasMore = true`. Return only `limit` rows to the client.
+Fetch `limit + 1` rows. If you get the extra row, `hasMore = true`. Return only `limit` rows to the client.
 
-## Frontend: Infinite Scroll
+## Frontend: Infinite Scroll with Intersection Observer
 
 ```typescript
-// React with Intersection Observer
 const observerRef = useRef<IntersectionObserver>();
 const lastItemRef = useCallback((node: HTMLElement | null) => {
   if (isLoading) return;
@@ -84,7 +84,7 @@ For lists with 10K+ items, render only visible rows. Use `@tanstack/react-virtua
 ## Anti-Patterns
 
 - Using offset pagination for infinite scroll (gets slower as user scrolls)
-- No `hasMore` indicator (client doesn't know when to stop)
+- No `hasMore` indicator (client doesn't know when to stop fetching)
 - Fetching all rows and paginating in JavaScript
 - No loading state or skeleton UI during page fetches
 - Forgetting to handle empty states and end-of-list

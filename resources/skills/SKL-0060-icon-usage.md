@@ -2,7 +2,7 @@
 id: SKL-0060
 name: Icon Usage
 category: skills
-tags: [icons, ui, accessibility, design, svg, components, visual]
+tags: [icons, ui, accessibility, design, svg, components, visual, lucide, heroicons, material-icons, font-awesome]
 capabilities: [icon-library-selection, icon-sizing, text-alignment, icon-accessibility, icon-vs-text-decisions]
 useWhen:
   - choosing an icon library for a project
@@ -14,6 +14,7 @@ estimatedTokens: 500
 relatedFragments: [SKL-0005, SKL-0020, SKL-0048, SKL-0061]
 dependencies: []
 synonyms: ["what icon library should I use", "my icons look off next to the text", "do I need to make icons accessible", "should I use an icon or just text here", "icons are all different sizes in my app"]
+sourceUrl: "https://github.com/gztchan/awesome-design"
 lastUpdated: "2026-03-29"
 difficulty: beginner
 ---
@@ -31,6 +32,9 @@ Icons guide attention and save space, but only when used consistently and access
 | **Phosphor** | Flexible weights (thin to bold) | 1200+ | Apps needing weight variety |
 | **Tabler Icons** | Stroke-based, consistent 24px | 4000+ | Large apps needing broad coverage |
 | **Material Symbols** | Google, variable font | 2500+ | Material Design or Android-adjacent |
+| **Font Awesome** | Comprehensive, brand icons | 7000+ | Projects needing brand logos |
+| **Noun Project** | Searchable symbol database | 5M+ | Finding niche or conceptual icons |
+| **Simple Icons** | SVG brand logos only | 2500+ | Brand/tech logos |
 
 **Recommendation:** Lucide for most projects. It covers common needs, tree-shakes well, and has clean React components.
 
@@ -52,31 +56,22 @@ Icons guide attention and save space, but only when used consistently and access
 
 ## Aligning Icons with Text
 
-The number one icon complaint: "it looks off by a pixel." Fix it:
+The number one icon complaint: "it looks off by a pixel."
 
 ```css
-/* For inline icons next to text */
 .icon-inline {
   display: inline-flex;
   align-items: center;
   vertical-align: middle;
 }
-
-/* For icon + label buttons */
 .btn-with-icon {
   display: inline-flex;
   align-items: center;
   gap: 0.5em;
 }
-
-/* If icon still looks misaligned, nudge optically */
-.icon-nudge {
-  position: relative;
-  top: -1px; /* adjust per icon */
-}
 ```
 
-**Why icons look misaligned:** Icons are optically centered in their bounding box, but text has a baseline. Use `vertical-align: middle` or flexbox `align-items: center` to fix this.
+**Why icons look misaligned:** Icons are optically centered in their bounding box, but text has a baseline. Use flexbox `align-items: center` to fix this.
 
 ## Accessibility for Icons
 
@@ -84,7 +79,7 @@ The number one icon complaint: "it looks off by a pixel." Fix it:
 |-------|-----------|-----|
 | **Decorative** (next to text label) | `aria-hidden="true"` on the icon | Screen reader already reads the label |
 | **Standalone** (no text) | Add `aria-label` to the button | Screen reader needs to announce the action |
-| **Informational** (status indicator) | `role="img"` + `aria-label` | Conveys meaning that sighted users get from the icon |
+| **Informational** (status indicator) | `role="img"` + `aria-label` | Conveys meaning from the icon |
 
 ```html
 <!-- Decorative: label says it all -->
@@ -97,26 +92,23 @@ The number one icon complaint: "it looks off by a pixel." Fix it:
 <span role="img" aria-label="Completed"><CheckCircle /></span>
 ```
 
-**Never use an icon as the only way to convey meaning without an accessible label.**
-
 ## When to Use Icons vs Text
 
 | Scenario | Use | Why |
 |----------|-----|-----|
-| Universal actions (search, close, menu, back) | Icon only (with aria-label) | Universally recognized |
-| Domain-specific actions (archive, merge, deploy) | Icon + text label | Not universally understood |
+| Universal actions (search, close, menu) | Icon only (with aria-label) | Universally recognized |
+| Domain-specific actions (archive, deploy) | Icon + text label | Not universally understood |
 | Navigation items | Icon + text | Clarity over compactness |
-| Form actions (save, submit, cancel) | Text only or text + icon | Text is clearer for important actions |
-| Status indicators (success, error, pending) | Icon + text | Color + icon + text = triple encoding |
-| Dense data tables | Icon only (with tooltip) | Space-constrained, but add tooltips |
+| Form actions (save, submit) | Text only or text + icon | Text is clearer for important actions |
+| Status indicators | Icon + text | Color + icon + text = triple encoding |
+| Dense data tables | Icon only (with tooltip) | Space-constrained |
 
-**Rule of thumb:** If you have to wonder whether the icon is clear enough on its own, add a text label.
+**Rule of thumb:** If you wonder whether the icon is clear enough on its own, add a text label.
 
 ## Common Mistakes
 
 - Mixing icon libraries (inconsistent stroke widths)
 - Icons at random sizes (16px here, 22px there, 19px somewhere else)
-- Missing `aria-hidden` on decorative icons (screen reader announces "image" uselessly)
-- Standalone icon buttons without `aria-label` (invisible to assistive technology)
-- Using icons where text would be clearer (clever is not usable)
-- Icons with different visual weight than surrounding text (too bold or too thin)
+- Missing `aria-hidden` on decorative icons
+- Standalone icon buttons without `aria-label`
+- Using icons where text would be clearer

@@ -2,7 +2,7 @@
 id: SKL-0065
 name: File Uploads
 category: skills
-tags: [file-upload, s3, presigned-url, multipart, image-processing, sharp, storage]
+tags: [file-upload, s3, presigned-url, multipart, image-processing, sharp, storage, validation, streaming]
 capabilities: [upload-handling, presigned-url-generation, image-processing, file-validation, chunked-upload]
 useWhen:
   - adding file or image upload to an application
@@ -13,13 +13,14 @@ estimatedTokens: 650
 relatedFragments: [SKL-0006, SKL-0010, PAT-0002]
 dependencies: []
 synonyms: ["how do I let users upload files", "my file uploads are too slow and crash the server", "how to upload images to S3 from the browser", "I need to resize images after upload", "how to handle large file uploads without timing out"]
+sourceUrl: "https://github.com/goldbergyoni/nodebestpractices"
 lastUpdated: "2026-03-29"
 difficulty: intermediate
 ---
 
 # File Uploads
 
-Handle file uploads safely and efficiently, from simple avatar images to large video files.
+Handle file uploads safely and efficiently. Limit payload sizes, validate content server-side, and never trust client-provided file metadata.
 
 ## Upload Strategy Comparison
 
@@ -31,9 +32,7 @@ Handle file uploads safely and efficiently, from simple avatar images to large v
 
 **Recommendation:** Presigned URLs for most apps. Server passthrough only for tiny files where simplicity matters more.
 
-## Procedure
-
-### 1. Presigned URL Flow
+## Presigned URL Flow
 
 ```
 Browser                    Your API                   S3/R2
@@ -44,8 +43,6 @@ Browser                    Your API                   S3/R2
    |                        |<-- S3 Event Notification--|
    |                        |--- process & save ref --->|
 ```
-
-### 2. Generate Presigned URLs
 
 ```typescript
 import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
@@ -63,19 +60,20 @@ async function getUploadUrl(userId: string, contentType: string) {
 }
 ```
 
-### 3. Validate Before and After
+## Validation: Before and After
 
 **Before upload (client-side):**
 - Check file type against an allowlist (e.g., `image/jpeg`, `image/png`, `application/pdf`)
-- Check file size against maximum (reject early, save bandwidth)
+- Enforce maximum file size (reject early, save bandwidth)
 - Show file preview for images
 
 **After upload (server-side):**
-- Verify the file actually matches the claimed content type (read magic bytes)
+- Verify content type by reading magic bytes, not the file extension
+- Enforce payload size limits at the server/gateway level
 - Scan for malware if handling user content at scale
 - Never trust the file extension alone
 
-### 4. Image Processing with Sharp
+## Image Processing with Sharp
 
 ```typescript
 import sharp from 'sharp';
@@ -90,22 +88,7 @@ async function processAvatar(inputBuffer: Buffer) {
 
 Generate multiple sizes on upload: thumbnail (150px), medium (600px), original. Store all variants.
 
-### 5. Progress Tracking
-
-For presigned URL uploads, track progress on the client:
-
-```typescript
-const xhr = new XMLHttpRequest();
-xhr.upload.addEventListener('progress', (e) => {
-  const percent = Math.round((e.loaded / e.total) * 100);
-  setProgress(percent);
-});
-xhr.open('PUT', presignedUrl);
-xhr.setRequestHeader('Content-Type', file.type);
-xhr.send(file);
-```
-
-### 6. Chunked Uploads for Large Files
+## Chunked Uploads for Large Files
 
 For files over 100MB, use S3 multipart upload:
 1. Initiate multipart upload (get upload ID)
@@ -122,3 +105,4 @@ Libraries like `@aws-sdk/lib-storage` or `tus-js-client` handle this automatical
 - Set presigned URL expiration to 5-15 minutes maximum
 - Generate unique keys (UUIDs) to prevent overwrites and path traversal
 - Set a Content-Length limit on presigned URLs to prevent abuse
+- Log to stdout (not to files) so infrastructure handles routing, per Node.js best practices

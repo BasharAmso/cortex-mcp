@@ -2,25 +2,26 @@
 id: PAT-0020
 name: Multi-tenancy
 category: patterns
-tags: [multi-tenancy, saas, tenant-isolation, row-level-security, schema-per-tenant, shared-database]
+tags: [multi-tenancy, saas, tenant-isolation, row-level-security, schema-per-tenant, shared-database, rls, security]
 capabilities: [tenant-isolation, data-separation, tenant-routing, rls-design]
 useWhen:
-  - building a SaaS with multiple customers
-  - isolating tenant data
-  - choosing a multi-tenancy strategy
-  - implementing row-level security
-estimatedTokens: 550
+  - building a SaaS application serving multiple customers
+  - isolating tenant data in a shared database
+  - choosing between shared-DB, schema-per-tenant, and DB-per-tenant
+  - implementing row-level security in PostgreSQL
+  - resolving tenant context from subdomains, paths, or tokens
+estimatedTokens: 600
 relatedFragments: [PAT-0003, PAT-0004, PAT-0002, SKL-0006]
 dependencies: []
-synonyms: ["build a SaaS for multiple customers", "separate data for each customer", "row level security setup", "multi-tenant database design", "shared vs separate databases"]
+synonyms: ["build a SaaS for multiple customers", "separate data for each customer", "row level security setup", "multi-tenant database design", "shared vs separate databases for SaaS"]
 lastUpdated: "2026-03-29"
 difficulty: advanced
-sourceUrl: ""
+sourceUrl: "https://github.com/donnemartin/system-design-primer"
 ---
 
 # Multi-tenancy
 
-Serve multiple customers from one codebase while keeping their data isolated.
+Serve multiple customers from one codebase while keeping their data isolated. System design decisions here impact scalability, security, and operational complexity.
 
 ## Strategy Comparison
 
@@ -31,51 +32,30 @@ Serve multiple customers from one codebase while keeping their data isolated.
 | **Schema per tenant** | High | High | Medium | Regulated industries, custom schemas |
 | **Database per tenant** | Highest | Highest | Highest | Enterprise, strict compliance |
 
-**Recommendation:** Start with shared database + tenant column. Add RLS when you need defense in depth. Move to isolation only when regulations or contracts require it.
+**Recommendation:** Start with shared database + tenant column. Add RLS for defense in depth. Move to higher isolation only when regulations or contracts require it.
 
-## Shared Database with Tenant Column
+## Implementation Steps
 
-```sql
--- Every table includes tenant_id
-CREATE TABLE projects (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  tenant_id UUID NOT NULL REFERENCES tenants(id),
-  name TEXT NOT NULL,
-  created_at TIMESTAMPTZ DEFAULT now()
-);
-
-CREATE INDEX idx_projects_tenant ON projects(tenant_id);
-```
-
-```typescript
-// Middleware sets tenant context
-app.use((req, res, next) => {
-  req.tenantId = extractTenantFromAuth(req);
-  next();
-});
-
-// Every query includes tenant filter
-async function getProjects(tenantId: string) {
-  return db.projects.findMany({ where: { tenantId } });
-}
-```
+1. **Add `tenant_id` to every table from day one.** Retrofitting is painful and error-prone. Include it in your initial schema design.
+2. **Index `tenant_id` on every table.** Queries always filter by it. Without indexes, full table scans on large datasets.
+3. **Scope unique constraints to tenant.** Email uniqueness should be per-tenant, not global: `UNIQUE(tenant_id, email)`.
+4. **Set tenant context in middleware.** Extract from auth token, subdomain, or header. Every downstream query uses it.
+5. **Test isolation explicitly.** Write automated tests that verify Tenant A cannot access Tenant B's data.
 
 ## Row-Level Security (Postgres)
 
 ```sql
--- Enable RLS
 ALTER TABLE projects ENABLE ROW LEVEL SECURITY;
 
--- Policy: users can only see their tenant's rows
 CREATE POLICY tenant_isolation ON projects
   USING (tenant_id = current_setting('app.tenant_id')::uuid);
 
--- Set tenant context per request
+-- Set per request
 SET app.tenant_id = 'tenant_abc123';
-SELECT * FROM projects; -- Only returns tenant_abc123's projects
+SELECT * FROM projects; -- Only returns this tenant's data
 ```
 
-RLS is enforced at the database level. Even if your app code has a bug that omits the tenant filter, the wrong tenant's data won't leak.
+RLS is enforced at the database level. Even buggy application code that omits the tenant filter cannot leak data.
 
 ## Tenant Resolution
 
@@ -85,13 +65,6 @@ RLS is enforced at the database level. Even if your app code has a bug that omit
 | **Path prefix** | `yourapp.com/acme/dashboard` | Simpler DNS, shared cert |
 | **Auth token claim** | JWT contains `tenantId` | API-first, mobile apps |
 | **Header** | `X-Tenant-ID: acme` | Internal microservices |
-
-## Migration Considerations
-
-- Add `tenant_id` to every table from day one (retrofitting is painful)
-- Index `tenant_id` on every table (queries always filter by it)
-- Unique constraints must include `tenant_id` (email unique per tenant, not globally)
-- Backups and data exports scoped to tenant
 
 ## Anti-Patterns
 

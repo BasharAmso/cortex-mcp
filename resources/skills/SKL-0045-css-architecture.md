@@ -2,17 +2,19 @@
 id: SKL-0045
 name: CSS Architecture
 category: skills
-tags: [css, tailwind, styling, architecture, design-tokens, modules, organization]
+tags: [css, tailwind, styling, architecture, bem, modules, organization, postcss, sass, specificity]
 capabilities: [style-organization, naming-conventions, specificity-management, token-systems, css-strategy]
 useWhen:
   - choosing a CSS approach for a new project
   - organizing stylesheets to prevent specificity conflicts
   - setting up design tokens or a theming system
   - migrating from one CSS approach to another
+  - establishing a team-wide CSS convention
 estimatedTokens: 600
 relatedFragments: [SKL-0005, SKL-0048, SKL-0020, PAT-0006]
 dependencies: []
 synonyms: ["how should I organize my CSS", "tailwind or CSS modules which is better", "my styles keep overriding each other", "how to set up design tokens", "my CSS is a mess and I need to fix it"]
+sourceUrl: "https://github.com/awesome-css-group/awesome-css"
 lastUpdated: "2026-03-29"
 difficulty: intermediate
 ---
@@ -21,14 +23,16 @@ difficulty: intermediate
 
 Pick a CSS strategy, organize it cleanly, and never fight specificity wars again.
 
-## Approach Comparison
+## Methodology Comparison
 
-| Approach | Best For | Trade-off |
-|----------|----------|-----------|
-| **Utility-first (Tailwind)** | Rapid prototyping, consistent spacing/color | Verbose class lists, learning curve |
-| **CSS Modules** | Component isolation, team projects | Extra file per component, no global utilities |
-| **CSS-in-JS (styled-components)** | Dynamic styles based on props | Runtime cost, bundle size, React-only |
-| **Vanilla CSS + BEM** | Simple projects, no build tools | Manual discipline required, no scoping |
+| Methodology | Core Idea | Best For | Trade-off |
+|-------------|-----------|----------|-----------|
+| **BEM** | Block__Element--Modifier naming | Vanilla CSS, server-rendered apps | Manual discipline, verbose class names |
+| **OOCSS** | Separate structure from skin | Large-scale sites with reusable patterns | Requires upfront planning |
+| **SMACSS** | Categorize rules (base, layout, module, state, theme) | Team projects needing clear organization | Learning curve for categories |
+| **ITCSS** | Inverted triangle by specificity (settings > tools > generic > elements > objects > components > utilities) | Enterprise codebases | Over-engineered for small projects |
+| **Utility-first (Tailwind)** | Composable utility classes | Rapid prototyping, consistent design | Verbose class lists, learning curve |
+| **CSS Modules** | Locally scoped class names via build tool | Component isolation in React/Vue | Extra file per component |
 
 ## Recommended: Utility-First + Component Layer
 
@@ -46,27 +50,14 @@ components/
     Button.module.css  # Only if Tailwind classes get unwieldy
 ```
 
-### Design Tokens as CSS Custom Properties
+## Preprocessor and Tooling Selection
 
-```css
-:root {
-  --color-primary: #2563eb;
-  --color-surface: #ffffff;
-  --radius-md: 0.5rem;
-  --space-4: 1rem;
-  --font-body: 'Inter', sans-serif;
-}
-```
-
-Reference tokens in Tailwind config or CSS modules. Never hardcode hex values in components.
-
-## Naming Conventions
-
-| Approach | Convention | Example |
-|----------|-----------|---------|
-| BEM | block__element--modifier | `.card__title--highlighted` |
-| CSS Modules | camelCase | `styles.cardTitle` |
-| Tailwind | Utility classes | `text-lg font-bold text-gray-900` |
+| Tool | Role | When to Use |
+|------|------|-------------|
+| **PostCSS** | Plugin-based CSS transforms | Always (Tailwind uses it, handles autoprefixer) |
+| **Sass** | Nesting, mixins, partials | Legacy projects, complex theming without Tailwind |
+| **Vanilla Extract** | Type-safe CSS in TypeScript | TypeScript-heavy projects needing static extraction |
+| **Styled Components** | CSS-in-JS with dynamic props | Existing projects already using it (avoid for new) |
 
 ## Avoiding Specificity Wars
 
@@ -74,22 +65,29 @@ Reference tokens in Tailwind config or CSS modules. Never hardcode hex values in
 2. **Never use ID selectors** for styling.
 3. **Keep nesting to 2 levels max** in preprocessors.
 4. **Use CSS Modules or Tailwind** for automatic scoping.
-5. **Order your stylesheet layers:** reset, tokens, base, components, utilities.
+5. **Order stylesheet layers:** reset, tokens, base, components, utilities.
 
-## CSS Layer Order (if using `@layer`)
+## CSS Cascade Layers
 
 ```css
 @layer reset, tokens, base, components, utilities;
 ```
 
-Later layers beat earlier layers regardless of specificity. This eliminates most conflicts.
+Later layers beat earlier layers regardless of specificity. This eliminates most conflicts and is the modern replacement for ITCSS ordering.
+
+## Naming Conventions
+
+| Approach | Convention | Example |
+|----------|-----------|---------|
+| BEM | block__element--modifier | `.card__title--highlighted` |
+| SUIT CSS | ComponentName-descendant--modifier | `.Card-title--active` |
+| CSS Modules | camelCase | `styles.cardTitle` |
+| Tailwind | Utility classes | `text-lg font-bold text-gray-900` |
 
 ## Migration Checklist
 
-When moving to a new CSS approach:
-
-1. Audit current styles -- identify global, component, and one-off styles.
-2. Extract design tokens (colors, spacing, fonts) into custom properties.
+1. Audit current styles: identify global, component, and one-off styles.
+2. Extract design tokens (colors, spacing, fonts) into CSS custom properties.
 3. Migrate component-by-component, not all at once.
-4. Delete old styles only after verifying the component visually.
-5. Set up linting (Stylelint) to enforce the new conventions.
+4. Delete old styles only after visual verification.
+5. Set up Stylelint to enforce the new conventions.

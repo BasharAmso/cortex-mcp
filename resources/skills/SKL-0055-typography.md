@@ -2,7 +2,7 @@
 id: SKL-0055
 name: Typography
 category: skills
-tags: [typography, fonts, type-scale, responsive, css, design, readability]
+tags: [typography, fonts, type-scale, responsive, css, design, readability, google-fonts, variable-fonts, font-pairing]
 capabilities: [font-pairing, type-scale-generation, responsive-sizing, web-font-loading, line-height-tuning]
 useWhen:
   - choosing fonts for a new project
@@ -14,6 +14,7 @@ estimatedTokens: 600
 relatedFragments: [SKL-0005, SKL-0020, SKL-0048, SKL-0054]
 dependencies: []
 synonyms: ["what font should I use for my app", "my text looks weird and I dont know why", "how to make fonts look good on mobile", "pick fonts that go together", "my headings and body text dont match"]
+sourceUrl: "https://github.com/gztchan/awesome-design"
 lastUpdated: "2026-03-29"
 difficulty: beginner
 ---
@@ -21,6 +22,16 @@ difficulty: beginner
 # Typography
 
 Make text look intentional. Good typography is the single fastest way to make a dev project look designed.
+
+## Font Selection Resources
+
+| Resource | Purpose |
+|----------|---------|
+| **Google Fonts** | Free, open-source typeface library (the default starting point) |
+| **Font Squirrel** | 100% free for commercial use |
+| **Typewolf** | What is trending in type, real-world usage examples |
+| **Fonts in Use** | Typography indexed by typeface, format, and industry |
+| **Butterick's Practical Typography** | Comprehensive methodology for developers |
 
 ## Font Pairing Rules
 
@@ -60,16 +71,11 @@ Use a ratio to generate consistent sizes. Do not pick sizes randomly.
 
 ## Responsive Font Sizing with Clamp
 
-Stop using breakpoints for font sizes. Use `clamp()`:
-
 ```css
-/* clamp(minimum, preferred, maximum) */
 h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
 h2 { font-size: clamp(1.5rem, 3.5vw, 2.5rem); }
 body { font-size: clamp(1rem, 1.2vw, 1.125rem); }
 ```
-
-The middle value (`vw`) makes it fluid. The min/max prevent extremes.
 
 ## Line Height and Spacing
 
@@ -80,32 +86,16 @@ The middle value (`vw`) makes it fluid. The min/max prevent extremes.
 | Captions/labels | 1.4 | 0.02em to 0.05em (loosen) |
 | ALL CAPS text | 1.2 | 0.05em to 0.1em (always loosen) |
 
-**Measure (line length):** Keep body text between 45-75 characters per line. Use `max-width: 65ch` on text containers.
+**Measure (line length):** Keep body text between 45-75 characters per line. Use `max-width: 65ch`.
 
 ## Web Font Loading Strategy
 
-```css
-/* 1. Preload critical fonts in HTML <head> */
-<link rel="preload" href="/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
-
-/* 2. Use font-display: swap to prevent invisible text */
-@font-face {
-  font-family: 'Inter';
-  src: url('/fonts/inter-var.woff2') format('woff2');
-  font-display: swap;
-}
-
-/* 3. Set system font fallback with similar metrics */
-body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-}
-```
-
-**Performance tips:**
-- Use variable fonts (one file for all weights)
-- Subset to Latin if you only need English
-- Self-host instead of Google Fonts for privacy and speed
-- Limit to 2 font families maximum
+1. **Preload** critical fonts in HTML `<head>` with `rel="preload"`.
+2. **Use `font-display: swap`** to prevent invisible text during loading.
+3. **Set system font fallback** with similar metrics.
+4. **Use variable fonts** (one file for all weights) to reduce requests.
+5. **Self-host** instead of Google Fonts for privacy and speed.
+6. **Limit to 2 font families** maximum.
 
 ## Quick Diagnosis
 
@@ -113,6 +103,6 @@ body {
 |---------|-----|
 | Text feels cramped | Increase line-height to 1.6, add paragraph margin |
 | Headings feel disconnected | Tighten letter-spacing (-0.02em), reduce line-height to 1.2 |
-| Everything looks the same importance | Increase scale ratio or add weight contrast |
+| Everything looks same importance | Increase scale ratio or add weight contrast |
 | Body text is hard to read | Check line length (max 65ch) and size (min 16px) |
-| Page feels unprofessional | You probably have 3+ fonts. Cut to 1-2. |
+| Page feels unprofessional | Probably 3+ fonts. Cut to 1-2. |

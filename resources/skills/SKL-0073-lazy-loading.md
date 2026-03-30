@@ -2,7 +2,7 @@
 id: SKL-0073
 name: Lazy Loading
 category: skills
-tags: [lazy-loading, code-splitting, react-lazy, intersection-observer, deferred, performance]
+tags: [lazy-loading, code-splitting, react-lazy, intersection-observer, deferred, performance, suspense, loadable-components]
 capabilities: [component-lazy-loading, route-splitting, deferred-data, intersection-observer, priority-loading]
 useWhen:
   - the initial page load downloads too much JavaScript or data
@@ -13,17 +13,16 @@ estimatedTokens: 550
 relatedFragments: [SKL-0005, SKL-0071, SKL-0074, SKL-0075, PAT-0020]
 dependencies: []
 synonyms: ["my page loads too much stuff upfront", "how to only load what the user needs", "defer loading things below the fold", "react lazy loading setup", "load components on scroll"]
+sourceUrl: "https://github.com/enaqx/awesome-react"
 lastUpdated: "2026-03-29"
 difficulty: intermediate
 ---
 
 # Lazy Loading
 
-Load only what the user needs right now. Defer everything else until they scroll to it, click on it, or navigate to it.
+Load only what the user needs right now. Defer everything else until they scroll to it, click on it, or navigate to it. Use `React.lazy` for built-in splitting or `loadable-components` for advanced SSR-compatible code splitting.
 
 ## The Priority Framework
-
-Decide when each piece of content should load:
 
 | Priority | When to Load | Examples |
 |----------|-------------|----------|
@@ -34,7 +33,7 @@ Decide when each piece of content should load:
 
 ## Lazy Routes (React)
 
-Every route that is not the landing page should be lazy loaded.
+Every route that is not the landing page should be lazy loaded:
 
 ```jsx
 import { lazy, Suspense } from 'react';
@@ -47,10 +46,10 @@ function App() {
   return (
     <Suspense fallback={<PageSkeleton />}>
       <Routes>
-        <Route path="/" element={<Home />} />           {/* Eager - landing page */}
-        <Route path="/dashboard" element={<Dashboard />} /> {/* Lazy */}
-        <Route path="/settings" element={<Settings />} />   {/* Lazy */}
-        <Route path="/profile" element={<Profile />} />     {/* Lazy */}
+        <Route path="/" element={<Home />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/settings" element={<Settings />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </Suspense>
   );
@@ -62,20 +61,16 @@ function App() {
 For heavy components within a page:
 
 ```jsx
-import { lazy, Suspense } from 'react';
-
-// Heavy chart library - only load when needed
 const AnalyticsChart = lazy(() => import('./AnalyticsChart'));
 
 function Dashboard({ showChart }) {
   return (
     <div>
-      <DashboardHeader />    {/* Always loaded */}
-      <MetricsGrid />        {/* Always loaded - above the fold */}
-
+      <DashboardHeader />
+      <MetricsGrid />
       {showChart && (
         <Suspense fallback={<ChartSkeleton />}>
-          <AnalyticsChart />  {/* Loaded only when showChart is true */}
+          <AnalyticsChart />
         </Suspense>
       )}
     </div>
@@ -85,11 +80,9 @@ function Dashboard({ showChart }) {
 
 ## Intersection Observer (Load on Scroll)
 
-Load content when it enters the viewport.
+Load content when it enters the viewport:
 
 ```jsx
-import { useEffect, useRef, useState } from 'react';
-
 function useInView(options = {}) {
   const ref = useRef(null);
   const [inView, setInView] = useState(false);
@@ -99,10 +92,10 @@ function useInView(options = {}) {
       ([entry]) => {
         if (entry.isIntersecting) {
           setInView(true);
-          observer.disconnect(); // Only trigger once
+          observer.disconnect();
         }
       },
-      { rootMargin: '200px', ...options } // Start loading 200px before visible
+      { rootMargin: '200px', ...options }
     );
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
@@ -110,50 +103,23 @@ function useInView(options = {}) {
 
   return [ref, inView];
 }
-
-// Usage
-function TestimonialsSection() {
-  const [ref, inView] = useInView();
-
-  return (
-    <div ref={ref}>
-      {inView ? <Testimonials /> : <TestimonialsSkeleton />}
-    </div>
-  );
-}
 ```
 
 ## Deferred Data Loading
 
-Do not fetch all data on page load. Fetch critical data first, then fill in details.
+Fetch critical data first, fill in details later:
 
 ```jsx
-// React Router v7 / Remix - deferred data
+// React Router / Remix - deferred data
 export async function loader() {
-  const criticalData = await getUser();           // Awaited - needed for first paint
-  const deferredData = getNotifications();         // NOT awaited - loads in background
+  const criticalData = await getUser();
+  const deferredData = getNotifications(); // NOT awaited
 
-  return defer({
-    user: criticalData,
-    notifications: deferredData,
-  });
-}
-
-function Page() {
-  const { user, notifications } = useLoaderData();
-
-  return (
-    <div>
-      <Header user={user} />           {/* Renders immediately */}
-      <Suspense fallback={<NotificationsSkeleton />}>
-        <Await resolve={notifications}>
-          {(data) => <NotificationsList data={data} />}
-        </Await>
-      </Suspense>
-    </div>
-  );
+  return defer({ user: criticalData, notifications: deferredData });
 }
 ```
+
+Use `tanstack-query` or `swr` for client-side data fetching with built-in caching, deduplication, and background refetching.
 
 ## Quick Win Checklist
 

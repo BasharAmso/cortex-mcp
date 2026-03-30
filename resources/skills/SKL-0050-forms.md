@@ -2,17 +2,19 @@
 id: SKL-0050
 name: Form Handling
 category: skills
-tags: [forms, validation, accessibility, file-upload, multi-step, error-handling, inputs]
+tags: [forms, validation, accessibility, file-upload, multi-step, error-handling, inputs, react-hook-form, zod]
 capabilities: [form-validation, error-display, multi-step-forms, file-upload-handling, accessible-forms]
 useWhen:
   - building forms with client-side validation
   - implementing multi-step wizards or checkout flows
   - handling file uploads with preview and progress
   - making forms accessible to screen readers
+  - choosing a form library for a React project
 estimatedTokens: 650
 relatedFragments: [SKL-0005, SKL-0053, SKL-0020, PAT-0001]
 dependencies: []
 synonyms: ["how do I validate a form in React", "build a multi step form wizard", "my form errors are confusing users", "how to handle file uploads", "make my form work with screen readers"]
+sourceUrl: "https://github.com/enaqx/awesome-react"
 lastUpdated: "2026-03-29"
 difficulty: intermediate
 ---
@@ -23,14 +25,15 @@ Build forms that validate clearly, handle errors gracefully, and work for everyo
 
 ## Library Choice
 
-| Library | Best For | Bundle Size |
-|---------|----------|-------------|
-| React Hook Form | Performance-critical forms, large forms | ~9kb |
-| Formik | Simple forms, familiar API | ~13kb |
-| Native HTML + `useActionState` | Server actions (Next.js), simple forms | 0kb |
-| Zod + React Hook Form | Type-safe validation with schema | ~11kb + 9kb |
+| Library | Best For | Bundle Size | Ecosystem |
+|---------|----------|-------------|-----------|
+| **React Hook Form** | Performance-critical, large forms | ~9kb | Dominant in React ecosystem |
+| **TanStack Form** | Headless, framework-agnostic, type-safe | ~8kb | Newer, growing adoption |
+| **Formik** | Simple forms, familiar API | ~13kb | Mature, large user base |
+| Native HTML + `useActionState` | Server actions (Next.js), simple forms | 0kb | Built-in |
+| **Zod** + React Hook Form | Type-safe schema validation | ~11kb + 9kb | Best DX for TypeScript |
 
-**Default recommendation:** React Hook Form + Zod for type-safe validation.
+**Default recommendation:** React Hook Form + Zod for type-safe validation. This is the most common pairing in the React ecosystem.
 
 ## Validation Pattern
 
@@ -59,14 +62,13 @@ const { register, handleSubmit, formState: { errors } } = useForm({
 1. **Show errors next to the field**, not in a banner at the top.
 2. **Use `aria-describedby`** to connect error text to the input.
 3. **Use `aria-invalid="true"`** on fields with errors.
-4. **Red is not enough** -- add an icon or text prefix like "Error:" for colorblind users.
-5. **Tell users how to fix it**, not just what is wrong. "Enter a valid email" not "Invalid input."
+4. **Red is not enough.** Add an icon or text prefix like "Error:" for colorblind users.
+5. **Tell users how to fix it**, not just what is wrong.
 
 ```tsx
 <label htmlFor="email">Email</label>
 <input
-  id="email"
-  type="email"
+  id="email" type="email"
   aria-invalid={!!errors.email}
   aria-describedby={errors.email ? "email-error" : undefined}
   {...register("email")}
@@ -86,12 +88,6 @@ const { register, handleSubmit, formState: { errors } } = useForm({
 4. **Validate per step**, not all at once on final submit.
 5. **Save progress** to localStorage or URL params for long forms.
 
-```tsx
-const steps = [PersonalInfo, Address, Payment, Review];
-const [step, setStep] = useState(0);
-const CurrentStep = steps[step];
-```
-
 ## File Uploads
 
 | Feature | Implementation |
@@ -102,7 +98,7 @@ const CurrentStep = steps[step];
 | Drag and drop | `onDragOver`, `onDrop` events on a drop zone |
 | Multiple files | `<input type="file" multiple>` |
 
-**Always validate:** file type, file size, and count on the client. Validate again on the server.
+**Always validate** file type, file size, and count on client and server.
 
 ## Accessibility Checklist
 

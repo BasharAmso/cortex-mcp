@@ -33,7 +33,7 @@ export async function startServer(): Promise<void> {
   });
 
   const server = new McpServer({
-    name: "cortex-mcp",
+    name: "cortex-mcp-server",
     version: "0.1.0",
   });
 

@@ -9,7 +9,7 @@ Instead of every project loading its own framework files into context (wasting 9
 ### 1. Install
 
 ```bash
-npm install -g cortex-mcp
+npm install -g cortex-mcp-server
 ```
 
 Requires Node.js 20+. Check with `node --version`.
@@ -19,7 +19,7 @@ Requires Node.js 20+. Check with `node --version`.
 **Claude Code** (recommended):
 
 ```bash
-claude mcp add -s user cortex -- cortex-mcp
+claude mcp add -s user cortex -- cortex-mcp-server
 ```
 
 That's it. One command. Restart Claude Code and you're connected.
@@ -32,7 +32,7 @@ Add to `~/.cursor/mcp.json`:
 {
   "mcpServers": {
     "cortex": {
-      "command": "cortex-mcp"
+      "command": "cortex-mcp-server"
     }
   }
 }
@@ -40,7 +40,7 @@ Add to `~/.cursor/mcp.json`:
 
 **Windsurf:**
 
-Add `cortex-mcp` as an MCP server in your Windsurf settings. The command is just `cortex-mcp`.
+Add `cortex-mcp-server` as an MCP server in your Windsurf settings. The command is just `cortex-mcp-server`.
 
 ### 3. Use it
 
@@ -167,7 +167,7 @@ npm run typecheck   # Type check
 
 ## Troubleshooting
 
-**"command not found" after install?** Close and reopen your terminal. If it still doesn't work, try `npx cortex-mcp` instead.
+**"command not found" after install?** Close and reopen your terminal. If it still doesn't work, try `npx cortex-mcp-server` instead.
 
 **Not seeing results?** Restart your AI tool after adding the MCP config. Changes only take effect on restart.
 

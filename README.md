@@ -1,6 +1,6 @@
 # Cortex MCP
 
-A knowledge delivery engine that ships with a built-in library of 83 agents, skills, patterns, and examples — and serves them on-demand to any MCP-compatible AI tool.
+A knowledge delivery engine that ships with a built-in library of 169 agents, skills, patterns, and examples — and serves them on-demand to any MCP-compatible AI tool.
 
 Instead of every project loading its own framework files into context (wasting 90%+ of the token budget), Cortex MCP is installed once and feeds the right knowledge to any project that needs it.
 
@@ -56,10 +56,10 @@ Just work normally. Your AI tool will pull knowledge from the library when it ne
 ```
 Cortex MCP (installed once, contains the library)
   ├── resources/
-  │   ├── agents/     10 agent definitions
-  │   ├── skills/     43 skill procedures
-  │   ├── patterns/   21 reusable patterns
-  │   └── examples/    9 code examples
+  │   ├── agents/      10 agent definitions
+  │   ├── skills/     101 skill procedures
+  │   ├── patterns/    42 reusable patterns
+  │   └── examples/    16 code examples
   └── custom/         (your own directories, optional)
          ↓ serves on-demand via MCP
    ┌─────────┬──────────┬──────────┐
@@ -73,15 +73,21 @@ Your project repos stay lightweight. The knowledge lives in Cortex MCP and gets 
 | Category | Count | Examples |
 |----------|-------|---------|
 | **Agents** | 10 | Builder, Reviewer, Architect, Product Manager, Designer, Fixer, Deployer |
-| **Skills** | 43 | Code Review, Testing, Security Audit, Auth, Payments, Search, i18n, Performance |
-| **Patterns** | 21 | Error Handling, API Design, Database, Caching, CI/CD, Webhooks, Multi-tenancy |
-| **Examples** | 9 | MCP Tool, React Component, REST API, Stripe Checkout, Auth Flow, GitHub Actions |
+| **Skills** | 101 | React Patterns, CSS Architecture, Animations, State Management, Typography, Color Theory, API Versioning, WebSockets, Rate Limiting, Hook Writing, LinkedIn Strategy, YouTube Scripting, AI Editing Workflow, Voice Preservation |
+| **Patterns** | 42 | Error Handling, API Design, Database, OAuth Flows, RBAC, Query Optimization, E2E Testing, Content Repurposing, Editorial Calendar |
+| **Examples** | 16 | MCP Tool, React Component, REST API, PWA Setup, Push Notifications, Offline-First, Thumbnail Design, Brand Consistency |
 
-Every fragment includes synonyms for natural language matching. Ask "how do I add logins" and it finds the authentication pattern. Ask "my app is slow" and it finds the performance skill.
+Every fragment includes synonyms for natural language matching. Ask "how do I add logins" and it finds the authentication pattern. Ask "my app is slow" and it finds the performance skill. Ask "how do I grow on LinkedIn" and it finds the LinkedIn strategy skill.
+
+### Two Pillars
+
+**Ship Beautiful Apps** — Frontend craft, visual design, backend mastery, database deep dives, auth & security, performance, testing, DevOps, and mobile/PWA.
+
+**Content Creation** — Writing foundations, platform playbooks (LinkedIn, Twitter, YouTube, newsletters), content systems, audience building, AI-assisted creation, and visual content.
 
 ## Features
 
-- **83 built-in fragments** — agents, skills, patterns, and code examples
+- **169 built-in fragments** — agents, skills, patterns, and code examples
 - **Synonym matching** — finds fragments even when you use informal language
 - **Three-tier search** — quick cache (~2ms), pre-built index (~5-10ms), fuzzy fallback (~15-20ms)
 - **Token budgeting** — respects context limits with four output modes
@@ -161,7 +167,7 @@ npm install         # Install dependencies
 npm run dev         # Dev mode (hot reload)
 npm run build       # Build
 npm run build-index # Rebuild search indexes
-npm test            # Run tests (29 tests)
+npm test            # Run tests
 npm run typecheck   # Type check
 ```
 

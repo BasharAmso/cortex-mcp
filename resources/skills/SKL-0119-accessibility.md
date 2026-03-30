@@ -1,5 +1,5 @@
 ---
-id: SKL-0039
+id: SKL-0119
 name: Accessibility Implementation
 category: skills
 tags: [accessibility, a11y, wcag, aria, screen-reader, keyboard-navigation, contrast, semantic-html]
@@ -14,14 +14,14 @@ estimatedTokens: 650
 relatedFragments: [SKL-0005, SKL-0020, SKL-0015, PAT-0002]
 dependencies: []
 synonyms: ["make my app accessible", "how to add ARIA labels", "keyboard navigation not working", "screen reader support", "WCAG compliance checklist"]
-lastUpdated: "2026-03-29"
-sourceUrl: ""
+lastUpdated: "2026-03-30"
+sourceUrl: "https://github.com/18F/ux-guide"
 difficulty: intermediate
 ---
 
 # Accessibility Implementation
 
-Accessibility is not a feature you add later. It is a quality of correct HTML. Most accessibility problems come from using `<div>` and `<span>` where semantic elements already exist.
+Accessibility is not a feature you add later. It is a quality of correct HTML. Per the 18F UX Guide, design goals are achieved only when "people with real needs can accomplish their goals with minimal frustration," confirmed through research with diverse user populations. Having varied team perspectives around accessibility and technology usage produces more usable products for everyone.
 
 ## Rule Zero: Use Semantic HTML First
 
@@ -41,32 +41,32 @@ Native elements provide keyboard handling, focus management, and screen reader a
 ## WCAG 2.1 AA Checklist
 
 ### Perceivable
-- [ ] All images have descriptive `alt` text (or `alt=""` for decorative images)
-- [ ] Color contrast is 4.5:1 minimum for normal text, 3:1 for large text (18px+ bold or 24px+)
-- [ ] Color is never the only means of conveying information (add icons, text, or patterns)
-- [ ] Video has captions; audio has transcripts
-- [ ] Text can be resized to 200% without loss of functionality
+- All images have descriptive `alt` text (or `alt=""` for decorative images)
+- Color contrast is 4.5:1 minimum for normal text, 3:1 for large text (18px+ bold or 24px+)
+- Color is never the only means of conveying information
+- Video has captions; audio has transcripts
+- Text can be resized to 200% without loss of functionality
 
 ### Operable
-- [ ] All interactive elements are reachable and usable via keyboard alone
-- [ ] Focus order follows a logical reading sequence
-- [ ] Focus indicators are clearly visible (never `outline: none` without a replacement)
-- [ ] No keyboard traps (user can always Tab away from a component)
-- [ ] Skip-to-content link is present for keyboard users
-- [ ] Animations respect `prefers-reduced-motion`
+- All interactive elements reachable and usable via keyboard alone
+- Focus order follows a logical reading sequence
+- Focus indicators are clearly visible (never `outline: none` without a replacement)
+- No keyboard traps (user can always Tab away)
+- Skip-to-content link is present for keyboard users
+- Animations respect `prefers-reduced-motion`
 
 ### Understandable
-- [ ] `<html lang="en">` (or appropriate language) is set
-- [ ] Form inputs have associated `<label>` elements (not just placeholder text)
-- [ ] Error messages identify the field and describe the fix
-- [ ] Navigation is consistent across pages
+- `<html lang="en">` (or appropriate language) is set
+- Form inputs have associated `<label>` elements (not just placeholder text)
+- Error messages identify the field and describe the fix
+- Navigation is consistent across pages
 
 ### Robust
-- [ ] Valid HTML (no duplicate IDs, proper nesting)
-- [ ] ARIA attributes are used correctly (valid roles, states, properties)
-- [ ] Custom components expose correct roles and states to assistive technology
+- Valid HTML (no duplicate IDs, proper nesting)
+- ARIA attributes used correctly (valid roles, states, properties)
+- Custom components expose correct roles and states to assistive technology
 
-## ARIA Role Quick Reference
+## ARIA Patterns for Common Components
 
 | Pattern | Role | Key Attributes |
 |---------|------|---------------|
@@ -75,7 +75,15 @@ Native elements provide keyboard handling, focus management, and screen reader a
 | Accordion | `<button aria-expanded>` | `aria-controls` pointing to content panel |
 | Toast/alert | `role="alert"` or `role="status"` | Live region, auto-announced |
 | Menu | `role="menu"`, `role="menuitem"` | `aria-haspopup`, arrow key navigation |
-| Combobox | `role="combobox"` | `aria-expanded`, `aria-activedescendant` |
+
+## Focus Management
+
+When content changes dynamically, manage focus explicitly:
+
+1. **Modal opens:** Move focus to first focusable element inside. Trap focus within.
+2. **Modal closes:** Return focus to the trigger element.
+3. **Route changes (SPA):** Move focus to main content heading or announce new page.
+4. **Item deleted from list:** Move focus to nearest remaining item.
 
 ## Keyboard Navigation Patterns
 
@@ -83,25 +91,16 @@ Native elements provide keyboard handling, focus management, and screen reader a
 - **Enter/Space:** Activate buttons and links
 - **Arrow keys:** Navigate within composite widgets (tabs, menus, radio groups)
 - **Escape:** Close modals, menus, and popups
-- **Home/End:** Jump to first/last item in a list
 
-## Focus Management
+## Testing Strategy
 
-When content changes dynamically (modal opens, route changes, item deleted), manage focus explicitly:
-
-1. **Modal opens:** Move focus to the first focusable element inside. Trap focus within the modal.
-2. **Modal closes:** Return focus to the element that triggered it.
-3. **Route changes (SPA):** Move focus to the main content heading or announce the new page.
-4. **Item deleted from list:** Move focus to the nearest remaining item.
-
-## Testing Tools
+Per 18F's iterative research approach, test with real users including those with disabilities:
 
 | Tool | Type | Catches |
 |------|------|---------|
-| axe DevTools (browser extension) | Automated | ~30-40% of WCAG issues |
+| axe DevTools | Automated | ~30-40% of WCAG issues |
 | Lighthouse Accessibility | Automated | Common violations, contrast |
 | NVDA (Windows) / VoiceOver (Mac) | Manual | Screen reader experience |
 | Keyboard-only testing | Manual | Focus order, traps, missing handlers |
-| WAVE (web tool) | Automated | Structure, ARIA, contrast |
 
 Automated tools catch less than half of real accessibility issues. Manual testing with keyboard and screen reader is essential.

@@ -4,29 +4,39 @@ A knowledge delivery engine that ships with a built-in library of 202 agents, sk
 
 Instead of every project loading its own framework files into context (wasting 90%+ of the token budget), Cortex MCP is installed once and feeds the right knowledge to any project that needs it.
 
-## Quick Start (60 seconds)
+## Setup
 
-### 1. Install
+Two steps. Copy-paste each line into your terminal.
+
+**Step 1 — Install it:**
 
 ```bash
 npm install -g cortex-mcp-server
 ```
 
-Requires Node.js 20+. Check with `node --version`.
+> Don't have Node.js? Download it from [nodejs.org](https://nodejs.org) (pick the LTS version). Then come back and run the line above.
 
-### 2. Connect to your AI tool
+**Step 2 — Connect it to your AI tool:**
 
-**Claude Code** (recommended):
+<details>
+<summary><strong>Claude Code</strong> (one command)</summary>
 
 ```bash
 claude mcp add -s user cortex -- cortex-mcp-server
 ```
 
-That's it. One command. Restart Claude Code and you're connected.
+Restart Claude Code. Done.
+</details>
 
-**Cursor:**
+<details>
+<summary><strong>Cursor</strong></summary>
 
-Add to `~/.cursor/mcp.json`:
+1. Open Cursor
+2. Go to **Settings** (gear icon) > **MCP**
+3. Click **Add new MCP server**
+4. Name: `cortex` | Command: `cortex-mcp-server`
+
+Or paste this into `~/.cursor/mcp.json` if you prefer:
 
 ```json
 {
@@ -37,14 +47,17 @@ Add to `~/.cursor/mcp.json`:
   }
 }
 ```
+</details>
 
-**Windsurf:**
+<details>
+<summary><strong>Windsurf</strong></summary>
 
-Add `cortex-mcp-server` as an MCP server in your Windsurf settings. The command is just `cortex-mcp-server`.
+1. Open Windsurf
+2. Go to **Settings** > **MCP Servers**
+3. Add a new server with command: `cortex-mcp-server`
+</details>
 
-### 3. Use it
-
-Just work normally. Your AI tool will pull knowledge from the library when it needs it. You can also ask directly:
+**That's it.** Now just work normally. Your AI tool will pull knowledge from the library when it needs it. You can also ask directly:
 
 - "Search for error handling patterns"
 - "Find the authentication skill"

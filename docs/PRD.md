@@ -71,7 +71,7 @@ No sharing across projects.      One library, all projects.        Install and g
 **Primary:** Anyone using an MCP-compatible AI tool who wants their tool to be smarter.
 
 - **Developers at any level** — install Cortex MCP, instantly get access to a library of agents and skills that make their AI tool better at coding tasks. No framework required.
-- **AI Orchestrator System users** — the heaviest context consumers. Cortex MCP replaces loading all agents/skills from project files. Immediate, massive value.
+- **Bashi users** — the heaviest context consumers. Cortex MCP replaces loading all agents/skills from project files. Immediate, massive value.
 - **Framework authors** — want to distribute their knowledge through MCP without building a server. Add fragments to Cortex MCP or point it at their own directory.
 
 **Future (post-v1, enabled by Frame Brain):**
@@ -114,7 +114,7 @@ No sharing across projects.      One library, all projects.        Install and g
 | Frame Brain integration | Frame Brain doesn't exist yet. Build the engine first, the generator second. |
 | Domain content packs | Content for non-dev professions requires Frame Brain. Engine comes first. |
 | Web UI dashboard | Nice to have for debugging, not essential for users. Add post-launch. |
-| REGISTRY.md replacement | Requires deep AI Orchestrator System integration. Phase 2 feature. |
+| REGISTRY.md replacement | Requires deep Bashi integration. Phase 2 feature. |
 | Writing to AI-Memory | v1 is read-only. Writing adds complexity and risk. |
 | Cloud or network features | Local-only by design. No accounts, no subscriptions, no data leaving the machine. |
 | File modification | Read-only server. Never writes to the user's project files. |
@@ -133,7 +133,7 @@ No sharing across projects.      One library, all projects.        Install and g
 
 6. **As someone building my own agents**, I want to add my custom fragments to Cortex MCP's library (or point it at my own directory) so that my knowledge is served alongside the built-in library.
 
-7. **As an AI Orchestrator System user**, I want Cortex MCP to serve my framework's agents and skills on-demand so that my project repos stay lightweight and my context window isn't wasted on knowledge I don't need right now.
+7. **As a Bashi user**, I want Cortex MCP to serve my framework's agents and skills on-demand so that my project repos stay lightweight and my context window isn't wasted on knowledge I don't need right now.
 
 ## Risks and Assumptions
 
@@ -170,7 +170,7 @@ If 3 months after public launch: fewer than 20 GitHub stars AND zero community e
 ## Open Questions
 
 1. ~~What categories should the built-in library launch with?~~ **Resolved:** All four (agents, skills, patterns, examples).
-2. ~~How many fragments should v1 ship with?~~ **Resolved:** Convert existing AI Orchestrator System agents (12) and skills (36) into fragments with frontmatter. That's ~48 fragments. Quality over quantity — 30 good fragments beats 300 mediocre ones. Library grows organically post-launch.
+2. ~~How many fragments should v1 ship with?~~ **Resolved:** Convert existing Bashi agents (12) and skills (36) into fragments with frontmatter. That's ~48 fragments. Quality over quantity — 30 good fragments beats 300 mediocre ones. Library grows organically post-launch.
 3. How should Cortex MCP handle markdown files without YAML frontmatter — skip them, or attempt best-effort keyword matching on content?
 4. What's the right scoring weight for AI-Memory results relative to built-in library fragments?
 5. Should MCP prompts (slash commands) be included in v1, or are resources + tools sufficient?
@@ -182,7 +182,7 @@ If 3 months after public launch: fewer than 20 GitHub stars AND zero community e
 |-------|------|-----|
 | v1.x | Expand built-in library | More agents, skills, patterns, examples |
 | v1.x | Web UI for testing and monitoring | Developer experience, debugging |
-| v1.x | REGISTRY.md replacement | Live routing for AI Orchestrator users |
+| v1.x | REGISTRY.md replacement | Live routing for Bashi users |
 | v2 | Frame Brain | Generate domain knowledge for any profession |
 | v2 | Domain content packs | Ready-made agents/skills for non-dev professions |
 | v2+ | AI-Memory write support | Cortex MCP captures lessons during sessions |

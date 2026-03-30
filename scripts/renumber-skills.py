@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Renumber Cortex MCP skill IDs to match the AI Orchestrator System framework REGISTRY.
+Renumber Cortex MCP skill IDs to match the Bashi framework REGISTRY.
 Also adds 'owner' field to all fragment frontmatter.
 
 Steps:
@@ -417,7 +417,7 @@ def verify_results():
 if __name__ == "__main__":
     print("=" * 60)
     print("Cortex MCP Skill Renumbering")
-    print("Aligning with AI Orchestrator System REGISTRY")
+    print("Aligning with Bashi REGISTRY")
     print("=" * 60)
     print()
 

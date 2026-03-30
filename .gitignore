@@ -2,7 +2,7 @@
 # Cortex MCP — .gitignore
 # ==============================================
 
-# ----- AI Orchestrator System (dev framework, not part of the product) -----
+# ----- Bashi (dev framework, not part of the product) -----
 .claude/
 .claudeignore
 custom-skills/

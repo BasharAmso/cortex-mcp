@@ -12,14 +12,14 @@ Framework-agnostic MCP server that serves structured knowledge on-demand to any 
 
 1. Achieve 90%+ token reduction compared to loading all files into context
 2. Work with any MCP-compatible client from day one
-3. Work out of the box with the AI Orchestrator System
+3. Work out of the box with Bashi
 4. Accept any directory of structured markdown with zero configuration
 5. Publish as open source on GitHub and npm
 
 ## Target Users
 
 - Claude Code, Cursor, Windsurf, and VS Code users with markdown-based knowledge systems
-- AI Orchestrator System users
+- Bashi users
 - Framework authors who want MCP-based knowledge delivery
 
 ## Constraints
@@ -34,7 +34,7 @@ Framework-agnostic MCP server that serves structured knowledge on-demand to any 
 - Token usage drops 90%+ compared to loading framework files from disk
 - Query latency under 15ms for index lookups, under 20ms for fuzzy matching
 - Works with Claude Code, Cursor, and Windsurf without tool-specific code
-- AI Orchestrator System agents and skills are queryable on first install
+- Bashi agents and skills are queryable on first install
 - Published on GitHub with MIT license
 - Published on npm as installable package
 

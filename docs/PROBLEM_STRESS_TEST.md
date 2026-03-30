@@ -7,7 +7,7 @@
 
 **Name:** Cortex MCP
 **Problem Statement:** Loading all framework files into AI context wastes tokens and hits context limits. No standard, tool-agnostic way to serve structured knowledge on-demand.
-**Target User:** Claude Code, Cursor, and Windsurf users working with markdown-based knowledge systems; AI Orchestrator System users; framework authors.
+**Target User:** Claude Code, Cursor, and Windsurf users working with markdown-based knowledge systems; Bashi users; framework authors.
 **Input Richness:** Moderate (problem + target user present; orchestr8 validates demand indirectly; no direct user interviews)
 
 ---
@@ -21,7 +21,7 @@
 | 3 | Problem Scale & Frequency | Pass (2) | Every AI coding tool user hits context limits every session |
 | 4 | Value Creation Test | Pass (2) | 90%+ token reduction is concrete and measurable |
 | 5 | Disruption Framework | Partial (1) | Current workaround (load all files) is painful; improvement over orchestr8 is incremental (tool-agnostic) not disruptive |
-| 6 | Founder-Problem Fit | Needs More Data (1) | Built the AI Orchestrator System, lives the pain daily; hasn't validated breadth beyond personal use |
+| 6 | Founder-Problem Fit | Needs More Data (1) | Built Bashi, lives the pain daily; hasn't validated breadth beyond personal use |
 | 7 | Retention Signal Test | Pass (2) | Developers use MCP servers every coding session; high-frequency, recurring need |
 | 8 | Entrepreneurial Zone | Partial (1) | Open source passion project, not a startup; commitment matches scope but no multi-year signal |
 | 9 | Narrative Test | Pass (2) | "I'm devising a way to stop wasting 90% of your AI context window" makes people lean in |
@@ -40,7 +40,7 @@ The idea description is squarely problem-first: "Loading all framework files int
 
 ### Lens 2: 100 Conversations Rule — Needs More Data (1)
 
-There's indirect validation: orchestr8 (64 stars, 4 forks) proves that other developers independently identified and tried to solve the same problem. The AI Orchestrator System's own growing complexity creates firsthand experience with context waste. However, there are no documented user interviews, surveys, or quotes from other framework authors confirming they'd use a tool-agnostic alternative. The evidence is plausible but secondhand.
+There's indirect validation: orchestr8 (64 stars, 4 forks) proves that other developers independently identified and tried to solve the same problem. The Bashi's own growing complexity creates firsthand experience with context waste. However, there are no documented user interviews, surveys, or quotes from other framework authors confirming they'd use a tool-agnostic alternative. The evidence is plausible but secondhand.
 
 **Strengthening question:** "Can you find 5 people using orchestr8 or similar tools and ask what they wish was different?"
 
@@ -60,7 +60,7 @@ The current workaround is well-understood: dump all markdown files into CLAUDE.m
 
 ### Lens 6: Founder-Problem Fit — Needs More Data (1)
 
-Bashar built the AI Orchestrator System with 12+ agents, 36+ skills, and a full project lifecycle framework. He lives this problem daily — his own framework is the heaviest context consumer. That's genuine founder-problem fit. The gap is breadth validation: does this pain extend to framework authors outside the AI Orchestrator ecosystem? The orchestr8 data suggests yes, but it's worth confirming directly.
+Bashar built Bashi with 12+ agents, 36+ skills, and a full project lifecycle framework. He lives this problem daily — his own framework is the heaviest context consumer. That's genuine founder-problem fit. The gap is breadth validation: does this pain extend to framework authors outside the Bashi ecosystem? The orchestr8 data suggests yes, but it's worth confirming directly.
 
 **Strengthening question:** "Talk to 3 people who use Cursor or Windsurf with markdown-based systems. Do they have the same context waste problem?"
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Sync content from AI Orchestrator System framework SKILL.md files
+Sync content from Bashi framework SKILL.md files
 to Cortex MCP fragment files. Keeps cortex frontmatter, replaces body.
 
 Framework is the source of truth for the 35 core skills.
@@ -9,7 +9,7 @@ Framework is the source of truth for the 35 core skills.
 import os
 import re
 
-FRAMEWORK_DIR = os.path.normpath("c:/Users/basha/Projects/AI-Orchestrator-System")
+FRAMEWORK_DIR = os.path.normpath("c:/Users/basha/Projects/bashi")
 CORTEX_SKILLS_DIR = os.path.normpath("c:/Users/basha/Projects/cortex-mcp/resources/skills")
 
 # Mapping: framework skill folder name -> cortex filename

@@ -63,7 +63,7 @@ None.
 
 | # | Task | Priority | Skill |
 |---|------|----------|-------|
-| 16 | Convert AI Orchestrator agents and skills into Cortex MCP fragments (resources/) | Medium | — |
+| 16 | Convert Bashi agents and skills into Cortex MCP fragments (resources/) | Medium | — |
 | 18 | Prepare npm package — entry point, bin field, publish config | Medium | SKL-0021 |
 
 ## Suggested Next Steps

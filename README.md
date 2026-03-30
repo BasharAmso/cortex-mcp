@@ -1,20 +1,66 @@
 # Cortex MCP
 
-A knowledge delivery engine that ships with a built-in library of agents, skills, patterns, and examples — and serves them on-demand to any MCP-compatible AI tool.
+A knowledge delivery engine that ships with a built-in library of 83 agents, skills, patterns, and examples — and serves them on-demand to any MCP-compatible AI tool.
 
 Instead of every project loading its own framework files into context (wasting 90%+ of the token budget), Cortex MCP is installed once and feeds the right knowledge to any project that needs it.
+
+## Quick Start (60 seconds)
+
+### 1. Install
+
+```bash
+npm install -g cortex-mcp
+```
+
+Requires Node.js 20+. Check with `node --version`.
+
+### 2. Connect to your AI tool
+
+**Claude Code** (recommended):
+
+```bash
+claude mcp add -s user cortex -- cortex-mcp
+```
+
+That's it. One command. Restart Claude Code and you're connected.
+
+**Cursor:**
+
+Add to `~/.cursor/mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "cortex": {
+      "command": "cortex-mcp"
+    }
+  }
+}
+```
+
+**Windsurf:**
+
+Add `cortex-mcp` as an MCP server in your Windsurf settings. The command is just `cortex-mcp`.
+
+### 3. Use it
+
+Just work normally. Your AI tool will pull knowledge from the library when it needs it. You can also ask directly:
+
+- "Search for error handling patterns"
+- "Find the authentication skill"
+- "Show me how to set up Stripe payments"
+- "What agents are available?"
 
 ## How It Works
 
 ```
 Cortex MCP (installed once, contains the library)
   ├── resources/
-  │   ├── agents/       (agent definitions)
-  │   ├── skills/       (skill procedures)
-  │   ├── patterns/     (reusable patterns)
-  │   └── examples/     (code examples)
-  ├── AI-Memory/        (your personal lessons and patterns)
-  └── custom/           (additional directories you configure)
+  │   ├── agents/     10 agent definitions
+  │   ├── skills/     43 skill procedures
+  │   ├── patterns/   21 reusable patterns
+  │   └── examples/    9 code examples
+  └── custom/         (your own directories, optional)
          ↓ serves on-demand via MCP
    ┌─────────┬──────────┬──────────┐
 Project A   Project B   Project C
@@ -22,198 +68,120 @@ Project A   Project B   Project C
 
 Your project repos stay lightweight. The knowledge lives in Cortex MCP and gets delivered based on what the current task needs.
 
-## Getting Started
+## What's in the Library
 
-### Before you begin
+| Category | Count | Examples |
+|----------|-------|---------|
+| **Agents** | 10 | Builder, Reviewer, Architect, Product Manager, Designer, Fixer, Deployer |
+| **Skills** | 43 | Code Review, Testing, Security Audit, Auth, Payments, Search, i18n, Performance |
+| **Patterns** | 21 | Error Handling, API Design, Database, Caching, CI/CD, Webhooks, Multi-tenancy |
+| **Examples** | 9 | MCP Tool, React Component, REST API, Stripe Checkout, Auth Flow, GitHub Actions |
 
-You need **Node.js 20 or newer** on your computer. If you're not sure, open a terminal and type `node --version`. If you see a number like `v20.x.x` or higher, you're good. If not, download it from [nodejs.org](https://nodejs.org).
-
-### Step 1: Install Cortex MCP
-
-Open your terminal (Command Prompt, PowerShell, or Mac Terminal) and run:
-
-```bash
-npm install -g cortex-mcp
-```
-
-This installs Cortex MCP on your computer. You only do this once. It's not tied to any project — it works across all of them.
-
-### Step 2: Tell your AI tool about it
-
-Cortex MCP works with Claude Code, Cursor, Windsurf, and other MCP-compatible tools. Pick the one you use and follow the steps below.
-
-**If you use Claude Code:**
-
-Open your settings file. You can find it at:
-- **Windows:** `C:\Users\YourName\.claude\settings.json`
-- **Mac:** `~/.claude/settings.json`
-
-Add this inside the file (or add the `mcpServers` section if it doesn't exist):
-
-```json
-{
-  "mcpServers": {
-    "cortex": {
-      "command": "cortex-mcp"
-    }
-  }
-}
-```
-
-**If you use Cursor:**
-
-Open (or create) the file `.cursor/mcp.json` in your home folder and add:
-
-```json
-{
-  "mcpServers": {
-    "cortex": {
-      "command": "cortex-mcp"
-    }
-  }
-}
-```
-
-**If you use Windsurf:**
-
-Add `cortex-mcp` as an MCP server in your Windsurf settings. The command is just `cortex-mcp`.
-
-### Step 3: Start using it
-
-That's it. There's no Step 3 setup. Just open your AI tool and start working.
-
-Cortex MCP runs quietly in the background. When your AI tool needs knowledge about how to build something, review code, write tests, or follow a pattern, it pulls the right information from the library automatically.
-
-You can also ask it directly:
-
-- "Search for error handling patterns"
-- "Find the skill for writing tests"
-- "What agents are available?"
-- "Show me how to create an MCP tool"
-
-### Troubleshooting
-
-**"command not found" after install?** Close and reopen your terminal. If it still doesn't work, try `npx cortex-mcp` instead.
-
-**Not seeing results?** Make sure you saved the settings file and restarted your AI tool. The MCP connection only picks up config changes on restart.
+Every fragment includes synonyms for natural language matching. Ask "how do I add logins" and it finds the authentication pattern. Ask "my app is slow" and it finds the performance skill.
 
 ## Features
 
-- **Built-in knowledge library** — ships with agents, skills, patterns, and examples
-- **On-demand delivery** — only serves what's relevant to the current task
-- **Three-tier matching** — quick cache (~2ms), pre-built index (~5-10ms), fuzzy fallback (~15-20ms)
-- **Token efficient** — 90%+ reduction vs loading all files. Four output modes for progressive loading
-- **Works with any MCP client** — Claude Code, Cursor, Windsurf, and any tool that supports MCP
-- **AI-Memory integration** — surfaces your personal lessons and patterns alongside library results
-- **Zero cost** — no cloud, no network, no API keys. Pure algorithmic matching
-
-## Configuration
-
-Create a `cortex.config.json` in your project root (optional — defaults work out of the box):
-
-```json
-{
-  "directories": ["./resources"],
-  "customDirectories": ["./my-knowledge"],
-  "aiMemoryPath": "~/Projects/AI-Memory",
-  "cache": {
-    "maxSize": 100,
-    "ttl": 14400000
-  },
-  "matching": {
-    "fuzzyThreshold": 0.3,
-    "maxResults": 10,
-    "defaultMode": "minimal",
-    "defaultBudget": 4000
-  },
-  "devMode": false
-}
-```
+- **83 built-in fragments** — agents, skills, patterns, and code examples
+- **Synonym matching** — finds fragments even when you use informal language
+- **Three-tier search** — quick cache (~2ms), pre-built index (~5-10ms), fuzzy fallback (~15-20ms)
+- **Token budgeting** — respects context limits with four output modes
+- **Zero-result recovery** — suggests alternatives when nothing matches exactly
+- **Stack detection** — `detect_project` tool identifies your stack and suggests relevant searches
+- **Works with any MCP client** — Claude Code, Cursor, Windsurf, and others
+- **Zero cost** — no cloud, no API keys, runs locally
 
 ## MCP Tools
 
 | Tool | Description |
 |------|-------------|
-| `search_knowledge` | Search the library with natural language. Supports mode, budget, and category filters. |
-| `get_fragment` | Retrieve a specific fragment by ID |
-| `list_categories` | List available categories and fragment counts |
+| `search_knowledge` | Natural language search with mode, budget, and category filters |
+| `get_fragment` | Retrieve a fragment by ID with dependency and related notes |
+| `browse_library` | Browse all fragments or filter by category |
+| `list_categories` | List categories and fragment counts |
+| `detect_project` | Detect your project's stack and get suggested searches |
 
 ## Output Modes
 
 | Mode | What you get | Use when |
 |------|-------------|----------|
-| `index` | IDs and names only | Quick overview of what's available |
-| `minimal` | JSON metadata + URIs | Default — good balance of info and tokens |
-| `catalog` | Full metadata, no content | Browsing before loading full content |
-| `full` | Complete markdown content | Ready to use the knowledge |
+| `index` | IDs and names only | Quick overview |
+| `minimal` | JSON metadata + URIs | Default — good balance |
+| `catalog` | Full metadata, no content | Browsing before loading |
+| `full` | Complete markdown content | Ready to use |
 
-## Writing Fragments
+## Configuration (optional)
 
-Fragments are markdown files with YAML frontmatter:
+Create `cortex.config.json` in your project root if you want to customize:
+
+```json
+{
+  "customDirectories": ["./my-knowledge"],
+  "matching": {
+    "maxResults": 10,
+    "defaultMode": "minimal",
+    "defaultBudget": 4000
+  }
+}
+```
+
+Defaults work out of the box. Most users don't need a config file.
+
+## Writing Your Own Fragments
+
+See [docs/FRAGMENT-AUTHORING-GUIDE.md](docs/FRAGMENT-AUTHORING-GUIDE.md) for the complete guide.
+
+Quick version: create a markdown file with YAML frontmatter in any configured directory:
 
 ```yaml
 ---
-id: SKL-0001
-name: Plan From Idea
+id: SKL-CUSTOM-001
+name: My Custom Skill
 category: skills
-tags: [planning, idea, capture]
-capabilities: [idea-intake, task-seeding]
+tags: [my-tag, another-tag]
+capabilities: [what-it-can-do]
 useWhen:
-  - user captures a new project idea
-  - starting a project from scratch
-estimatedTokens: 850
-relatedFragments: [SKL-0004]
+  - when to use this skill
+synonyms: ["informal way to ask for it", "another way to ask"]
+estimatedTokens: 500
+lastUpdated: "2026-03-29"
+difficulty: intermediate
+relatedFragments: []
 dependencies: []
 ---
 
-# Plan From Idea
+# My Custom Skill
 
-Your fragment content here...
+Content here...
 ```
 
 ## Development
 
 ```bash
-# Install dependencies
-npm install
-
-# Run in dev mode (hot reload)
-npm run dev
-
-# Build
-npm run build
-
-# Run tests
-npm test
-
-# Build indexes
-npm run build-index
-
-# Type check
-npm run typecheck
+npm install         # Install dependencies
+npm run dev         # Dev mode (hot reload)
+npm run build       # Build
+npm run build-index # Rebuild search indexes
+npm test            # Run tests (29 tests)
+npm run typecheck   # Type check
 ```
 
-## Tech Stack
+## Troubleshooting
 
-- **Runtime:** Node.js 20+, TypeScript
-- **MCP SDK:** @modelcontextprotocol/sdk
-- **Matching:** Fuse.js (fuzzy), custom scoring engine
-- **Transport:** stdio (standard MCP)
-- **Dependencies:** 3 runtime packages (MCP SDK, yaml, fuse.js)
+**"command not found" after install?** Close and reopen your terminal. If it still doesn't work, try `npx cortex-mcp` instead.
+
+**Not seeing results?** Restart your AI tool after adding the MCP config. Changes only take effect on restart.
+
+**Wrong fragments returned?** Try broader search terms. Use `browse_library` to see everything available.
 
 ## About
 
 My name is Bashar Amso. I've spent my career in software development — not as a developer, but working alongside them. Managing projects, understanding systems, figuring out how to get things built and shipped.
 
-When AI coding tools came along, they changed everything for me. Suddenly I could build things myself. Not just plan them or hand them off — actually build them. But I kept hitting the same wall. Every time I started a new project, I had to load all my framework files into context. My agents, my skills, my patterns — everything. And every time, it ate up most of my token budget before I even asked my first question.
+When AI coding tools came along, they changed everything for me. Suddenly I could build things myself. But I kept hitting the same wall: every new project, I had to load all my framework files into context. My agents, my skills, my patterns — everything. And every time, it ate up most of my token budget before I even asked my first question.
 
 I thought: why am I loading the entire library when I only need two or three things right now?
 
-That's what Cortex MCP solves. Instead of dumping everything into context and hoping for the best, it serves only the knowledge that's relevant to what you're working on. You install it once, and every project you open gets access to the full library without the cost.
-
-I built this on top of my experience creating the [AI Orchestrator System](https://github.com/BasharAmso/AI-Orchestrator-System) — a framework for structured AI development with agents, skills, and workflows. Cortex MCP is the delivery layer. The orchestrator tells you what to do. Cortex tells your AI tool how to do it.
-
-If you're tired of running out of context or re-explaining the same patterns to your AI every session, this is for you. Beginner or senior dev — Cortex MCP is the playbook your AI tool has been missing.
+That's what Cortex MCP solves. Install it once, and every project gets access to the full library without the cost. Built on top of the [AI Orchestrator System](https://github.com/BasharAmso/AI-Orchestrator-System) — a framework for structured AI development with agents, skills, and workflows.
 
 ## License
 

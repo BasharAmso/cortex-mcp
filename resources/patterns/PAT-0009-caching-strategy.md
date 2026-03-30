@@ -12,6 +12,9 @@ useWhen:
 estimatedTokens: 600
 relatedFragments: [PAT-0004, PAT-0002]
 dependencies: []
+synonyms: ["how to make my app faster with caching", "should I use redis or memcached", "my app is slow how to speed it up", "how to cache api responses", "data is stale after I update it"]
+lastUpdated: "2026-03-29"
+difficulty: advanced
 ---
 
 # Caching Strategy

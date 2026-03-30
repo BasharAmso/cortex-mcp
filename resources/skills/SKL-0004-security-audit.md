@@ -12,6 +12,9 @@ useWhen:
 estimatedTokens: 650
 relatedFragments: [SKL-0002, AGT-0002]
 dependencies: []
+synonyms: ["is my app secure", "check for security holes", "find vulnerabilities in my code", "am I exposing any secrets", "scan my dependencies for risks"]
+lastUpdated: "2026-03-29"
+difficulty: advanced
 ---
 
 # Security Audit

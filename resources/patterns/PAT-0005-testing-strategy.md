@@ -12,6 +12,9 @@ useWhen:
 estimatedTokens: 600
 relatedFragments: [EX-0006, PAT-0010]
 dependencies: []
+synonyms: ["how to test my code", "what tests should I write first", "how to set up a test suite", "my tests keep breaking randomly", "do I need unit tests or integration tests"]
+lastUpdated: "2026-03-29"
+difficulty: intermediate
 ---
 
 # Testing Strategy

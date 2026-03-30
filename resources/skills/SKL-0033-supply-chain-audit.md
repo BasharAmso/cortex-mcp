@@ -12,6 +12,9 @@ useWhen:
 estimatedTokens: 600
 relatedFragments: [SKL-0034, SKL-0035, SKL-0003]
 dependencies: []
+synonyms: ["are my npm packages safe", "check if my dependencies are trustworthy", "audit my project libraries", "is this package sketchy", "scan for risky dependencies"]
+lastUpdated: "2026-03-29"
+difficulty: advanced
 ---
 
 # Supply Chain Audit

@@ -12,6 +12,9 @@ useWhen:
 estimatedTokens: 750
 relatedFragments: [SKL-0002, AGT-0002]
 dependencies: []
+synonyms: ["how do I write tests", "add tests to my code", "I need unit tests", "set up testing for my project", "make sure my code works"]
+lastUpdated: "2026-03-29"
+difficulty: intermediate
 ---
 
 # Test Writing

@@ -12,6 +12,9 @@ useWhen:
 estimatedTokens: 600
 relatedFragments: [SKL-0001, SKL-0025, SKL-0032]
 dependencies: []
+synonyms: ["who are my competitors", "what else is out there like my app", "research the market", "how is my product different", "compare features with competitors"]
+lastUpdated: "2026-03-29"
+difficulty: beginner
 ---
 
 # Competitor Analysis

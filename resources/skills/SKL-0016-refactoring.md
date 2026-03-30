@@ -11,6 +11,9 @@ useWhen:
 estimatedTokens: 500
 relatedFragments: [SKL-0002, SKL-0003]
 dependencies: []
+synonyms: ["clean up my messy code", "organize my code better", "remove duplicate code", "rename things to make sense", "simplify this function"]
+lastUpdated: "2026-03-29"
+difficulty: intermediate
 ---
 
 # Refactoring

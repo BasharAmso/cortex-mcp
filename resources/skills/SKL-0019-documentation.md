@@ -12,6 +12,9 @@ useWhen:
 estimatedTokens: 600
 relatedFragments: [SKL-0001, SKL-0015]
 dependencies: []
+synonyms: ["write a README", "document my API", "create setup instructions", "how do I explain this project", "update the changelog"]
+lastUpdated: "2026-03-29"
+difficulty: beginner
 ---
 
 # Documentation

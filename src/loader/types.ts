@@ -8,6 +8,10 @@ export interface FragmentFrontmatter {
   estimatedTokens: number;
   relatedFragments: string[];
   dependencies: string[];
+  synonyms: string[];
+  lastUpdated: string;
+  sourceUrl: string;
+  difficulty: string;
 }
 
 export interface Fragment extends FragmentFrontmatter {

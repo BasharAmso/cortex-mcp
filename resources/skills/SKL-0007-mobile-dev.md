@@ -12,6 +12,9 @@ useWhen:
 estimatedTokens: 750
 relatedFragments: [SKL-0005, SKL-0011, SKL-0014]
 dependencies: []
+synonyms: ["build a phone app", "make an iOS app", "create an Android app", "I want a mobile app", "build with React Native"]
+lastUpdated: "2026-03-29"
+difficulty: advanced
 ---
 
 # Mobile Development

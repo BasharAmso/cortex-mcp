@@ -12,6 +12,9 @@ useWhen:
 estimatedTokens: 450
 relatedFragments: [AGT-0001, SKL-0024]
 dependencies: []
+synonyms: ["write a readme for my project", "document how this works", "create setup instructions", "explain the code for others", "write API docs"]
+lastUpdated: "2026-03-29"
+difficulty: beginner
 ---
 
 # Documenter Agent

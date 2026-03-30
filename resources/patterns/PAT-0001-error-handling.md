@@ -12,6 +12,9 @@ useWhen:
 estimatedTokens: 600
 relatedFragments: [PAT-0002, SKL-0002]
 dependencies: []
+synonyms: ["how to handle errors in my app", "my app crashes when something goes wrong", "how do I show error messages to users", "try catch best practices", "what to do when api call fails"]
+lastUpdated: "2026-03-29"
+difficulty: intermediate
 ---
 
 # Error Handling Pattern

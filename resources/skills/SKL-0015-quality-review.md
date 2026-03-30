@@ -11,6 +11,9 @@ useWhen:
 estimatedTokens: 700
 relatedFragments: [SKL-0002, SKL-0003, AGT-0002]
 dependencies: []
+synonyms: ["check if my document is good", "review my PRD", "is this architecture doc complete", "quality check my deliverable", "proofread my spec"]
+lastUpdated: "2026-03-29"
+difficulty: intermediate
 ---
 
 # Quality Review

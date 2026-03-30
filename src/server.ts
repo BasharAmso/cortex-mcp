@@ -148,11 +148,62 @@ export async function startServer(): Promise<void> {
       const mode: OutputMode = args.mode ?? config.matching.defaultMode;
       const budget = args.budget ?? config.matching.defaultBudget;
 
-      const results = engine.search(
+      let results = engine.search(
         args.query,
         args.category,
         config.matching.maxResults,
       );
+
+      // Zero-result recovery: if no results, try without category filter
+      // and suggest broader terms
+      if (results.length === 0 && args.category) {
+        results = engine.search(args.query, undefined, config.matching.maxResults);
+        if (results.length > 0) {
+          const budgeted = selectWithinBudget(results, budget);
+          const formatted = formatResults(budgeted, mode);
+          return {
+            content: [
+              {
+                type: "text" as const,
+                text: JSON.stringify(
+                  {
+                    note: `No results in "${args.category}". Showing results from all categories instead.`,
+                    ...formatted,
+                  },
+                  null,
+                  2,
+                ),
+              },
+            ],
+          };
+        }
+      }
+
+      if (results.length === 0) {
+        // Suggest browsing categories when nothing matches
+        const counts: Record<string, number> = {};
+        for (const f of fragments) {
+          counts[f.category] = (counts[f.category] ?? 0) + 1;
+        }
+        return {
+          content: [
+            {
+              type: "text" as const,
+              text: JSON.stringify(
+                {
+                  results: [],
+                  suggestion:
+                    "No fragments matched your query. Try broader terms, or use browse_library to explore by category.",
+                  availableCategories: counts,
+                },
+                null,
+                2,
+              ),
+            },
+          ],
+        };
+      }
+
       const budgeted = selectWithinBudget(results, budget);
       const formatted = formatResults(budgeted, mode);
 
@@ -181,11 +232,37 @@ export async function startServer(): Promise<void> {
           ],
         };
       }
+
+      // Build dependency and related notes
+      const notes: string[] = [];
+
+      if (fragment.dependencies.length > 0) {
+        const depNames = fragment.dependencies
+          .map((depId) => {
+            const dep = fragmentMap.get(depId);
+            return dep ? `${depId} (${dep.name})` : depId;
+          })
+          .join(", ");
+        notes.push(`**Prerequisites:** ${depNames}`);
+      }
+
+      if (fragment.relatedFragments.length > 0) {
+        const relNames = fragment.relatedFragments
+          .map((relId) => {
+            const rel = fragmentMap.get(relId);
+            return rel ? `${relId} (${rel.name})` : relId;
+          })
+          .join(", ");
+        notes.push(`**Related:** ${relNames}`);
+      }
+
+      const noteBlock = notes.length > 0 ? `\n\n---\n${notes.join("\n")}` : "";
+
       return {
         content: [
           {
             type: "text" as const,
-            text: `# ${fragment.name}\n\n${fragment.content}`,
+            text: `# ${fragment.name}\n\n${fragment.content}${noteBlock}`,
           },
         ],
       };
@@ -219,6 +296,85 @@ export async function startServer(): Promise<void> {
             type: "text" as const,
             text: JSON.stringify(
               { total: listing.length, category: cat, fragments: listing },
+              null,
+              2,
+            ),
+          },
+        ],
+      };
+    },
+  );
+
+  server.tool(
+    "detect_project",
+    {
+      files: z
+        .array(z.string())
+        .describe(
+          "List of filenames in the project root (e.g., package.json, requirements.txt, Cargo.toml)",
+        ),
+    },
+    async (args) => {
+      const files = args.files.map((f) => f.toLowerCase());
+
+      const signals: string[] = [];
+      const suggestedQueries: string[] = [];
+
+      // Detect stack from project files
+      if (files.includes("package.json")) {
+        signals.push("Node.js / JavaScript");
+        suggestedQueries.push("backend API", "testing strategy");
+      }
+      if (files.includes("tsconfig.json")) {
+        signals.push("TypeScript");
+      }
+      if (
+        files.includes("next.config.js") ||
+        files.includes("next.config.ts") ||
+        files.includes("next.config.mjs")
+      ) {
+        signals.push("Next.js");
+        suggestedQueries.push("frontend development", "authentication", "deployment");
+      }
+      if (files.includes("requirements.txt") || files.includes("pyproject.toml")) {
+        signals.push("Python");
+        suggestedQueries.push("backend API", "testing strategy");
+      }
+      if (files.includes("cargo.toml")) {
+        signals.push("Rust");
+      }
+      if (files.includes("go.mod")) {
+        signals.push("Go");
+      }
+      if (files.includes("prisma") || files.some((f) => f.includes("prisma"))) {
+        signals.push("Prisma ORM");
+        suggestedQueries.push("database design", "database migration");
+      }
+      if (files.includes("docker-compose.yml") || files.includes("dockerfile")) {
+        signals.push("Docker");
+        suggestedQueries.push("deployment", "CI/CD");
+      }
+      if (files.includes(".github")) {
+        signals.push("GitHub Actions");
+        suggestedQueries.push("CI/CD pipeline");
+      }
+      if (files.includes("stripe") || files.some((f) => f.includes("stripe"))) {
+        suggestedQueries.push("payments", "webhooks");
+      }
+
+      // Deduplicate suggestions
+      const uniqueQueries = [...new Set(suggestedQueries)];
+
+      return {
+        content: [
+          {
+            type: "text" as const,
+            text: JSON.stringify(
+              {
+                detectedStack: signals,
+                suggestedSearches: uniqueQueries,
+                tip: "Run search_knowledge with each suggested search to get relevant fragments for your stack.",
+              },
               null,
               2,
             ),

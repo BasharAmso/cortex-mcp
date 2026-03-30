@@ -12,6 +12,9 @@ useWhen:
 estimatedTokens: 600
 relatedFragments: [SKL-0033, SKL-0035, SKL-0003]
 dependencies: []
+synonyms: ["did I leave any passwords in my code", "check for hardcoded secrets", "are my config defaults safe", "scan for API keys in source", "find insecure settings"]
+lastUpdated: "2026-03-29"
+difficulty: intermediate
 ---
 
 # Insecure Defaults Detection

@@ -12,6 +12,9 @@ useWhen:
 estimatedTokens: 800
 relatedFragments: [SKL-0031, SKL-0002, AGT-0001]
 dependencies: []
+synonyms: ["how do I deploy my app", "push my code to production", "set up CI CD pipeline", "ship this feature", "submit my app to the app store"]
+lastUpdated: "2026-03-29"
+difficulty: advanced
 ---
 
 # Deployment

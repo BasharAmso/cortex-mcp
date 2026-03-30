@@ -12,6 +12,9 @@ useWhen:
 estimatedTokens: 550
 relatedFragments: [SKL-0005, SKL-0013, PAT-0001]
 dependencies: []
+synonyms: ["build onboarding for new users", "write better error messages", "create a help page", "set up welcome emails", "make the empty state less confusing"]
+lastUpdated: "2026-03-29"
+difficulty: intermediate
 ---
 
 # Customer Support Infrastructure

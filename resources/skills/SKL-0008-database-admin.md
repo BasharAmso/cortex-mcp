@@ -12,6 +12,9 @@ useWhen:
 estimatedTokens: 550
 relatedFragments: [SKL-0006, SKL-0009, SKL-0010]
 dependencies: []
+synonyms: ["set up my database", "design database tables", "my queries are slow", "write a migration", "how should I store this data"]
+lastUpdated: "2026-03-29"
+difficulty: intermediate
 ---
 
 # Database Administration

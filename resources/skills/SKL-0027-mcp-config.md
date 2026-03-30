@@ -11,6 +11,9 @@ useWhen:
 estimatedTokens: 550
 relatedFragments: [SKL-0018, AGT-0001]
 dependencies: []
+synonyms: ["connect Claude to my tools", "set up MCP server", "hook up GitHub or Slack to Claude", "configure external tool access", "add a new tool integration"]
+lastUpdated: "2026-03-29"
+difficulty: advanced
 ---
 
 # MCP Configuration

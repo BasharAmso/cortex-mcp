@@ -11,6 +11,9 @@ useWhen:
 estimatedTokens: 600
 relatedFragments: [SKL-0025, SKL-0028, SKL-0001]
 dependencies: []
+synonyms: ["make a pitch deck", "I need to present to investors", "create slides for my startup", "help me pitch my product", "build an investor presentation"]
+lastUpdated: "2026-03-29"
+difficulty: intermediate
 ---
 
 # Pitch Deck

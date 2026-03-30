@@ -12,6 +12,9 @@ useWhen:
 estimatedTokens: 650
 relatedFragments: [PAT-0002, EX-0005]
 dependencies: []
+synonyms: ["how to set up my database tables", "how should I structure my data", "sql vs nosql which one to pick", "how to add indexes to make queries faster", "how do I plan my database schema"]
+lastUpdated: "2026-03-29"
+difficulty: intermediate
 ---
 
 # Database Design Patterns

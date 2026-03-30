@@ -12,6 +12,9 @@ useWhen:
 estimatedTokens: 600
 relatedFragments: [PAT-0010, PAT-0006]
 dependencies: []
+synonyms: ["how to use git branches", "what should my commit messages look like", "how to do pull requests", "best way to manage code with a team", "how to set up a git workflow"]
+lastUpdated: "2026-03-29"
+difficulty: beginner
 ---
 
 # Git Workflow

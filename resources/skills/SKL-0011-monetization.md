@@ -12,6 +12,9 @@ useWhen:
 estimatedTokens: 650
 relatedFragments: [SKL-0006, SKL-0010, SKL-0012]
 dependencies: []
+synonyms: ["how do I charge users", "add payments to my app", "set up subscriptions", "build a paywall", "I need Stripe billing"]
+lastUpdated: "2026-03-29"
+difficulty: advanced
 ---
 
 # Monetization

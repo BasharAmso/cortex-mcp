@@ -11,6 +11,9 @@ useWhen:
 estimatedTokens: 550
 relatedFragments: [PAT-0005, EX-0004]
 dependencies: []
+synonyms: ["how to write a unit test", "vitest or jest test example", "how to mock a function in tests", "arrange act assert pattern example", "how to test my functions"]
+lastUpdated: "2026-03-29"
+difficulty: beginner
 ---
 
 # Unit Test Example

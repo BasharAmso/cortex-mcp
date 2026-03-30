@@ -12,6 +12,9 @@ useWhen:
 estimatedTokens: 550
 relatedFragments: [AGT-0001, SKL-0003, SKL-0004]
 dependencies: []
+synonyms: ["check my code for mistakes", "is this code any good", "find bugs before I ship", "review what I wrote", "make sure this is safe"]
+lastUpdated: "2026-03-29"
+difficulty: beginner
 ---
 
 # Reviewer Agent

@@ -12,6 +12,9 @@ useWhen:
 estimatedTokens: 600
 relatedFragments: [SKL-0029, SKL-0031, SKL-0015]
 dependencies: []
+synonyms: ["why doesnt my site show up on Google", "check my SEO", "are my meta tags right", "optimize my page for search", "audit my site for SEO issues"]
+lastUpdated: "2026-03-29"
+difficulty: intermediate
 ---
 
 # SEO Audit

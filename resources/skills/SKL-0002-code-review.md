@@ -12,6 +12,9 @@ useWhen:
 estimatedTokens: 700
 relatedFragments: [SKL-0003, AGT-0002]
 dependencies: []
+synonyms: ["check my code for mistakes", "review my pull request", "is my code any good", "find bugs in my code", "look over my changes"]
+lastUpdated: "2026-03-29"
+difficulty: intermediate
 ---
 
 # Code Review

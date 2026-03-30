@@ -11,6 +11,9 @@ useWhen:
 estimatedTokens: 550
 relatedFragments: [EX-0004, PAT-0006]
 dependencies: []
+synonyms: ["how to make a react component", "react component with typescript example", "how to use useState and useEffect", "how to build a reusable component in react", "react hooks example"]
+lastUpdated: "2026-03-29"
+difficulty: beginner
 ---
 
 # React Component Example

@@ -12,6 +12,9 @@ useWhen:
 estimatedTokens: 650
 relatedFragments: [SKL-0006, SKL-0010, SKL-0012]
 dependencies: []
+synonyms: ["add AI to my app", "use ChatGPT in my project", "build a RAG pipeline", "I need prompt engineering help", "make my app smarter with AI"]
+lastUpdated: "2026-03-29"
+difficulty: advanced
 ---
 
 # AI Feature Implementation

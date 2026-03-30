@@ -12,6 +12,9 @@ useWhen:
 estimatedTokens: 600
 relatedFragments: [PAT-0007, EX-0007, AGT-0008]
 dependencies: []
+synonyms: ["how to set up automatic deploys", "how to run tests automatically on every push", "how to build a ci cd pipeline", "how to automate my deployments", "what is continuous integration and how to set it up"]
+lastUpdated: "2026-03-29"
+difficulty: intermediate
 ---
 
 # CI/CD Pipeline Patterns

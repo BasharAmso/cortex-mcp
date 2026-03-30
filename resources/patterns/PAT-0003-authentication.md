@@ -12,6 +12,9 @@ useWhen:
 estimatedTokens: 650
 relatedFragments: [PAT-0001, PAT-0002, EX-0004]
 dependencies: []
+synonyms: ["how do I add logins to my app", "how to make users sign up and log in", "should I use jwt or sessions", "how to add google login", "how to protect my api routes"]
+lastUpdated: "2026-03-29"
+difficulty: intermediate
 ---
 
 # Authentication Patterns

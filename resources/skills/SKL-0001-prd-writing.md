@@ -12,6 +12,9 @@ useWhen:
 estimatedTokens: 800
 relatedFragments: [SKL-0002, AGT-0003]
 dependencies: []
+synonyms: ["how do I write a product spec", "what should I build", "help me define requirements", "I need to plan my app features", "write a PRD for me"]
+lastUpdated: "2026-03-29"
+difficulty: intermediate
 ---
 
 # PRD Writing

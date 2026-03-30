@@ -11,6 +11,9 @@ useWhen:
 estimatedTokens: 400
 relatedFragments: [EX-0001]
 dependencies: []
+synonyms: ["how to create an mcp resource", "how to serve data from mcp server", "mcp resource template example", "how to expose files through mcp"]
+lastUpdated: "2026-03-29"
+difficulty: intermediate
 ---
 
 # MCP Resource Registration Example

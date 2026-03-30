@@ -12,6 +12,9 @@ useWhen:
 estimatedTokens: 600
 relatedFragments: [SKL-0006, SKL-0009, SKL-0011]
 dependencies: []
+synonyms: ["connect to an external API", "integrate Stripe into my app", "set up webhooks", "hook up a third party service", "how do I use this API"]
+lastUpdated: "2026-03-29"
+difficulty: intermediate
 ---
 
 # API Integration

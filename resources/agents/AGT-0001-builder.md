@@ -12,6 +12,9 @@ useWhen:
 estimatedTokens: 650
 relatedFragments: [AGT-0002, SKL-0001, SKL-0002]
 dependencies: []
+synonyms: ["how do I build a feature", "write code for me", "make the app do something new", "I need to code this thing", "help me implement this"]
+lastUpdated: "2026-03-29"
+difficulty: beginner
 ---
 
 # Builder Agent

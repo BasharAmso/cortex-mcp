@@ -11,6 +11,9 @@ useWhen:
 estimatedTokens: 500
 relatedFragments: [SKL-0016, SKL-0003]
 dependencies: []
+synonyms: ["something is broken", "why is this not working", "find the bug in my code", "my app crashes when I do this", "help me debug this issue"]
+lastUpdated: "2026-03-29"
+difficulty: intermediate
 ---
 
 # Bug Investigation

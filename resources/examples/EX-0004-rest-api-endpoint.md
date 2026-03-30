@@ -11,6 +11,9 @@ useWhen:
 estimatedTokens: 550
 relatedFragments: [EX-0003, PAT-0001, PAT-0002]
 dependencies: []
+synonyms: ["how to create an api endpoint in express", "rest api route example with validation", "how to build a post endpoint in node", "express api with error handling example", "how to validate request body in express"]
+lastUpdated: "2026-03-29"
+difficulty: beginner
 ---
 
 # REST API Endpoint Example

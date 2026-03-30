@@ -10,6 +10,7 @@ export interface ScoreWeights {
   tagMatch: number;
   capabilityMatch: number;
   useWhenMatch: number;
+  synonymMatch: number;
   categoryBonus: number;
   smallResourceBonus: number;
 }
@@ -18,6 +19,7 @@ const DEFAULT_WEIGHTS: ScoreWeights = {
   tagMatch: 10,
   capabilityMatch: 8,
   useWhenMatch: 5,
+  synonymMatch: 8,
   categoryBonus: 15,
   smallResourceBonus: 5,
 };
@@ -55,6 +57,13 @@ export function scoreFragment(
   if (useWhenMatches > 0) {
     score += useWhenMatches * weights.useWhenMatch;
     matchReasons.push(`useWhen(${useWhenMatches})`);
+  }
+
+  // Synonym matches (phrase-level: check if query matches any synonym phrase)
+  const synonymMatches = countSynonymMatches(fragment.synonyms, queryTokens);
+  if (synonymMatches > 0) {
+    score += synonymMatches * weights.synonymMatch;
+    matchReasons.push(`synonyms(${synonymMatches})`);
   }
 
   // Name match (bonus for direct name hit)
@@ -126,6 +135,36 @@ function countUseWhenMatches(
     const scenarioLower = scenario.toLowerCase();
     const hits = queryTokens.filter((t) => scenarioLower.includes(t));
     if (hits.length > 0) {
+      count++;
+    }
+  }
+
+  return count;
+}
+
+/**
+ * Count how many synonym phrases match the query.
+ * Synonyms are full phrases like "iPhone app" or "how do I add logins".
+ * A synonym matches if any query token appears in it OR any synonym token appears in the query.
+ */
+function countSynonymMatches(
+  synonyms: string[],
+  queryTokens: string[],
+): number {
+  if (!synonyms || synonyms.length === 0) return 0;
+
+  let count = 0;
+  const queryJoined = queryTokens.join(" ");
+
+  for (const synonym of synonyms) {
+    const synonymLower = synonym.toLowerCase();
+    // Check if query tokens appear in this synonym
+    const tokenHits = queryTokens.filter((t) => synonymLower.includes(t));
+    // Check if synonym words appear in the joined query
+    const synonymTokens = synonymLower.split(/\s+/);
+    const reverseHits = synonymTokens.filter((st) => queryJoined.includes(st));
+
+    if (tokenHits.length > 0 || reverseHits.length > 0) {
       count++;
     }
   }

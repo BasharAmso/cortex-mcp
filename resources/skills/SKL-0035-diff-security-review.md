@@ -12,6 +12,9 @@ useWhen:
 estimatedTokens: 550
 relatedFragments: [SKL-0034, SKL-0033, SKL-0002]
 dependencies: []
+synonyms: ["is my code change safe to merge", "security check my pull request", "did I break any security stuff", "review my diff for vulnerabilities", "check if my changes open any holes"]
+lastUpdated: "2026-03-29"
+difficulty: advanced
 ---
 
 # Differential Security Review

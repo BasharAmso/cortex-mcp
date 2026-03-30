@@ -12,6 +12,9 @@ useWhen:
 estimatedTokens: 600
 relatedFragments: [PAT-0002, PAT-0010]
 dependencies: []
+synonyms: ["how to organize my project files", "what folder structure should I use", "my codebase is a mess how to fix it", "monorepo vs separate repos", "where should I put my code files"]
+lastUpdated: "2026-03-29"
+difficulty: beginner
 ---
 
 # Project Structure

@@ -11,6 +11,9 @@ useWhen:
 estimatedTokens: 800
 relatedFragments: [SKL-0001, SKL-0024, SKL-0028]
 dependencies: []
+synonyms: ["is my idea any good", "validate my startup idea", "will anyone actually use this", "stress test my product concept", "should I build this or not"]
+lastUpdated: "2026-03-29"
+difficulty: beginner
 ---
 
 # Problem Stress Test

@@ -12,6 +12,9 @@ useWhen:
 estimatedTokens: 600
 relatedFragments: [PAT-0001, PAT-0010]
 dependencies: []
+synonyms: ["how to add logging to my app", "how to track errors in production", "I cant figure out whats happening in my server", "how to monitor my app", "how to debug issues in production"]
+lastUpdated: "2026-03-29"
+difficulty: intermediate
 ---
 
 # Logging and Monitoring

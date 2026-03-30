@@ -12,6 +12,9 @@ useWhen:
 estimatedTokens: 600
 relatedFragments: [SKL-0030, SKL-0020, SKL-0001]
 dependencies: []
+synonyms: ["write my landing page text", "I need a good headline", "help me write a call to action", "make my signup page more convincing", "write onboarding emails"]
+lastUpdated: "2026-03-29"
+difficulty: intermediate
 ---
 
 # Copywriting

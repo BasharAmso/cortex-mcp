@@ -11,6 +11,9 @@ useWhen:
 estimatedTokens: 550
 relatedFragments: [PAT-0004, EX-0004]
 dependencies: []
+synonyms: ["how to create a database migration", "how to add a new table to my database", "prisma migration example", "how to change my database schema", "how to add a column to an existing table"]
+lastUpdated: "2026-03-29"
+difficulty: beginner
 ---
 
 # Database Migration Example

@@ -23,6 +23,10 @@ useWhen:
 estimatedTokens: 200
 relatedFragments: []
 dependencies: []
+synonyms: ["how to write tests", "add unit tests to my code"]
+lastUpdated: "2026-03-29"
+sourceUrl: ""
+difficulty: beginner
 ---
 
 # Test Skill
@@ -59,6 +63,16 @@ describe("loadFragments", () => {
     expect(fragments[0].name).toBe("Test Skill");
     expect(fragments[0].category).toBe("skills");
     expect(fragments[0].tags).toEqual(["testing", "example"]);
+  });
+
+  it("parses synonym fields from frontmatter", () => {
+    const fragments = loadFragments([TEST_DIR]);
+    expect(fragments[0].synonyms).toEqual([
+      "how to write tests",
+      "add unit tests to my code",
+    ]);
+    expect(fragments[0].lastUpdated).toBe("2026-03-29");
+    expect(fragments[0].difficulty).toBe("beginner");
   });
 
   it("skips files without frontmatter", () => {

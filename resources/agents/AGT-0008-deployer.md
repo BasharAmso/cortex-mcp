@@ -12,6 +12,9 @@ useWhen:
 estimatedTokens: 500
 relatedFragments: [AGT-0001, AGT-0002, SKL-0021, SKL-0022]
 dependencies: []
+synonyms: ["how do I put my app online", "deploy to production", "set up automatic deploys", "ship this to users", "get my code running on a server"]
+lastUpdated: "2026-03-29"
+difficulty: intermediate
 ---
 
 # Deployer Agent

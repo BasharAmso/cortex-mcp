@@ -12,6 +12,9 @@ useWhen:
 estimatedTokens: 550
 relatedFragments: [SKL-0005, SKL-0012, SKL-0014]
 dependencies: []
+synonyms: ["build a landing page", "how do I get users", "set up a waitlist", "add referral system", "make my site show up on Google"]
+lastUpdated: "2026-03-29"
+difficulty: intermediate
 ---
 
 # Growth & Distribution

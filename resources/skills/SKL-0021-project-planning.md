@@ -12,6 +12,9 @@ useWhen:
 estimatedTokens: 650
 relatedFragments: [SKL-0001, SKL-0023, AGT-0003]
 dependencies: []
+synonyms: ["plan my project", "what should I work on next", "organize my tasks into a sprint", "give me a status update", "help me prioritize"]
+lastUpdated: "2026-03-29"
+difficulty: beginner
 ---
 
 # Project Planning

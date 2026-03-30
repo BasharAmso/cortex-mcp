@@ -12,6 +12,9 @@ useWhen:
 estimatedTokens: 500
 relatedFragments: [AGT-0004, AGT-0003]
 dependencies: []
+synonyms: ["research options before I decide", "what library should I use", "compare these two approaches", "I need to figure something out first", "explore what tools are available"]
+lastUpdated: "2026-03-29"
+difficulty: beginner
 ---
 
 # Explorer Agent

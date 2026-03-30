@@ -11,6 +11,9 @@ useWhen:
 estimatedTokens: 450
 relatedFragments: [EX-0002]
 dependencies: []
+synonyms: ["how to create an mcp tool", "how to build an mcp server", "mcp tool registration example", "how to add a tool to mcp"]
+lastUpdated: "2026-03-29"
+difficulty: intermediate
 ---
 
 # MCP Tool Registration Example

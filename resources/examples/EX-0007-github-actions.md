@@ -11,6 +11,9 @@ useWhen:
 estimatedTokens: 550
 relatedFragments: [PAT-0010, PAT-0007, AGT-0008]
 dependencies: []
+synonyms: ["how to set up github actions", "github ci workflow example", "how to run tests automatically on pull requests", "how to automate builds with github actions", "github actions yaml example"]
+lastUpdated: "2026-03-29"
+difficulty: beginner
 ---
 
 # GitHub Actions CI Workflow

@@ -13,6 +13,10 @@ const makeFragment = (overrides: Partial<Fragment> = {}): Fragment => ({
   estimatedTokens: 200,
   relatedFragments: [],
   dependencies: [],
+  synonyms: [],
+  lastUpdated: "",
+  sourceUrl: "",
+  difficulty: "",
   content: "Test content",
   filePath: "/test.md",
   ...overrides,
@@ -63,6 +67,31 @@ describe("scoreFragment", () => {
     // Only the small resource bonus applies (no tag/capability/useWhen hits)
     expect(result.score).toBe(5);
     expect(result.matchReasons).toEqual(["small"]);
+  });
+
+  it("scores synonym matches", () => {
+    const fragment = makeFragment({
+      synonyms: ["how do I add logins to my app", "set up authentication"],
+    });
+    const result = scoreFragment(fragment, ["logins", "app"]);
+    expect(result.matchReasons.some((r) => r.startsWith("synonyms"))).toBe(true);
+    expect(result.score).toBeGreaterThan(5); // More than just small bonus
+  });
+
+  it("scores zero for empty synonyms", () => {
+    const fragment = makeFragment({ synonyms: [], estimatedTokens: 1000 });
+    const result = scoreFragment(fragment, ["logins"]);
+    // No tag/capability/useWhen/synonym/name match, no small bonus
+    expect(result.score).toBe(0);
+  });
+
+  it("matches synonym phrases bidirectionally", () => {
+    const fragment = makeFragment({
+      synonyms: ["add login to my app"],
+    });
+    // Query token "login" appears in synonym "add login to my app"
+    const result = scoreFragment(fragment, ["login"]);
+    expect(result.matchReasons.some((r) => r.startsWith("synonyms"))).toBe(true);
   });
 });
 

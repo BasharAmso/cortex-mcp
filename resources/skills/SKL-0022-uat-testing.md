@@ -12,6 +12,9 @@ useWhen:
 estimatedTokens: 800
 relatedFragments: [SKL-0015, SKL-0017, SKL-0002]
 dependencies: []
+synonyms: ["test my app like a real user", "does this feature actually work", "run QA on my app", "smoke test before launch", "check if everything works end to end"]
+lastUpdated: "2026-03-29"
+difficulty: intermediate
 ---
 
 # User Acceptance Testing

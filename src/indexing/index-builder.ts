@@ -174,6 +174,11 @@ function extractKeywords(fragment: Fragment): string[] {
     for (const w of tokenize(cap)) words.add(w);
   }
 
+  // From synonyms
+  for (const synonym of fragment.synonyms) {
+    for (const w of tokenize(synonym)) words.add(w);
+  }
+
   // Category as keyword
   words.add(fragment.category);
 

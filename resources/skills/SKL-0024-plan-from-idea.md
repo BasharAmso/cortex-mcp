@@ -11,6 +11,9 @@ useWhen:
 estimatedTokens: 400
 relatedFragments: [SKL-0001, SKL-0023, SKL-0025]
 dependencies: []
+synonyms: ["I have an idea for an app", "turn my idea into a plan", "where do I start with this project", "help me go from idea to building", "kick off a new project"]
+lastUpdated: "2026-03-29"
+difficulty: beginner
 ---
 
 # Plan From Idea

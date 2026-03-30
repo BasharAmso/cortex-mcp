@@ -73,6 +73,10 @@ function parseFragment(filePath: string): Fragment | null {
       estimatedTokens: frontmatter.estimatedTokens ?? estimateTokens(content),
       relatedFragments: frontmatter.relatedFragments ?? [],
       dependencies: frontmatter.dependencies ?? [],
+      synonyms: frontmatter.synonyms ?? [],
+      lastUpdated: frontmatter.lastUpdated ?? "",
+      sourceUrl: frontmatter.sourceUrl ?? "",
+      difficulty: frontmatter.difficulty ?? "",
       content: content.trim(),
       filePath,
     };

@@ -12,6 +12,9 @@ useWhen:
 estimatedTokens: 800
 relatedFragments: [SKL-0001, SKL-0023, SKL-0025]
 dependencies: []
+synonyms: ["write a game design doc", "plan my game mechanics", "I want to make a game", "design the gameplay loops", "define how my game works"]
+lastUpdated: "2026-03-29"
+difficulty: intermediate
 ---
 
 # GDD Writing

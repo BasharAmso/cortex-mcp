@@ -12,6 +12,9 @@ useWhen:
 estimatedTokens: 650
 relatedFragments: [SKL-0001, SKL-0029, AGT-0003]
 dependencies: []
+synonyms: ["design the user flow", "plan my app screens", "what should the onboarding look like", "map out how users navigate", "sketch the layout before building"]
+lastUpdated: "2026-03-29"
+difficulty: intermediate
 ---
 
 # UX Design

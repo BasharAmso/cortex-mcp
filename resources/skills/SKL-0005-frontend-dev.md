@@ -12,6 +12,9 @@ useWhen:
 estimatedTokens: 700
 relatedFragments: [SKL-0006, SKL-0013, PAT-0002]
 dependencies: []
+synonyms: ["build a web page", "make the UI look good", "create a React component", "I need a responsive layout", "add animations to my site"]
+lastUpdated: "2026-03-29"
+difficulty: intermediate
 ---
 
 # Frontend Development

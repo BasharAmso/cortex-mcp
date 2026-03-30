@@ -12,6 +12,9 @@ useWhen:
 estimatedTokens: 500
 relatedFragments: [SKL-0005, SKL-0011, SKL-0013]
 dependencies: []
+synonyms: ["track what users do", "add analytics to my app", "how do I measure signups", "set up event tracking", "build a dashboard for metrics"]
+lastUpdated: "2026-03-29"
+difficulty: intermediate
 ---
 
 # Analytics & Tracking

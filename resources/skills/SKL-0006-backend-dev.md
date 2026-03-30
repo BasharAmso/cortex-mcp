@@ -12,6 +12,9 @@ useWhen:
 estimatedTokens: 500
 relatedFragments: [SKL-0005, SKL-0008, SKL-0010]
 dependencies: []
+synonyms: ["build an API", "create a server endpoint", "write backend logic", "I need a REST API", "handle requests on the server"]
+lastUpdated: "2026-03-29"
+difficulty: intermediate
 ---
 
 # Backend Development

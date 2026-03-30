@@ -11,6 +11,9 @@ useWhen:
 estimatedTokens: 600
 relatedFragments: [SKL-0001, SKL-0021, SKL-0024]
 dependencies: []
+synonyms: ["break my PRD into tasks", "turn requirements into work items", "what do I build first", "create a task list from my spec", "split this plan into steps"]
+lastUpdated: "2026-03-29"
+difficulty: beginner
 ---
 
 # PRD to Tasks

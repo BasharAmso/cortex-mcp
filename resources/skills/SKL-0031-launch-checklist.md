@@ -11,6 +11,9 @@ useWhen:
 estimatedTokens: 600
 relatedFragments: [SKL-0018, SKL-0030, SKL-0034]
 dependencies: []
+synonyms: ["am I ready to launch", "what do I need before going live", "pre-launch checklist", "did I forget anything before release", "go live readiness check"]
+lastUpdated: "2026-03-29"
+difficulty: beginner
 ---
 
 # Launch Checklist

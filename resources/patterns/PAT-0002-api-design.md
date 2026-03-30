@@ -12,6 +12,9 @@ useWhen:
 estimatedTokens: 550
 relatedFragments: [PAT-0001, SKL-0002]
 dependencies: []
+synonyms: ["how to design an api", "what url structure should my api use", "how do I build a rest api", "which http methods should I use", "how to structure api responses"]
+lastUpdated: "2026-03-29"
+difficulty: intermediate
 ---
 
 # REST API Design Pattern

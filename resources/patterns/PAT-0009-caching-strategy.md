@@ -2,69 +2,81 @@
 id: PAT-0009
 name: Caching Strategy
 category: patterns
-tags: [caching, redis, cdn, performance, invalidation, in-memory]
+tags: [caching, redis, cdn, performance, invalidation, in-memory, cache-aside, write-through, cache-stampede, ttl]
 capabilities: [cache-design, invalidation-strategy, performance-optimization]
 useWhen:
-  - adding caching to improve performance
+  - adding caching to improve application performance
   - choosing between CDN, Redis, and in-memory caching
   - designing a cache invalidation strategy
-  - diagnosing stale data issues
-estimatedTokens: 600
+  - diagnosing stale data or cache stampede issues
+  - scaling a read-heavy service
+estimatedTokens: 650
 relatedFragments: [PAT-0004, PAT-0002]
 dependencies: []
 synonyms: ["how to make my app faster with caching", "should I use redis or memcached", "my app is slow how to speed it up", "how to cache api responses", "data is stale after I update it"]
 lastUpdated: "2026-03-29"
+sourceUrl: "https://github.com/donnemartin/system-design-primer"
 difficulty: advanced
 ---
 
 # Caching Strategy
 
-When to cache, what to cache, and how to invalidate.
+When to cache, where to cache, and how to invalidate. "There are only two hard things in computer science: cache invalidation and naming things."
 
-## Cache Types
+## Cache Hierarchy
 
-| Type | Speed | Scope | Best For |
-|------|-------|-------|----------|
-| **In-memory** (Map, LRU) | Fastest | Single process | Config, computed values, hot data |
-| **Redis / Memcached** | Fast | Shared across processes | Sessions, API responses, rate limits |
-| **CDN** (Cloudflare, Vercel) | Fast for users | Global edge | Static assets, public API responses |
-| **Browser cache** | Instant | Single user | Assets, GET responses |
+Per the System Design Primer, caching occurs at every layer. Choose the right level:
 
-## When to Cache
+| Layer | Tool | Latency | Scope | Best For |
+|-------|------|---------|-------|----------|
+| **Client/Browser** | HTTP cache headers | Instant | Single user | Static assets, GET responses |
+| **CDN** | Cloudflare, CloudFront | ~10ms | Global edge | Public content, images, API responses |
+| **Application (in-memory)** | LRU Map, node-cache | <1ms | Single process | Config, computed values, hot data |
+| **Distributed cache** | Redis, Memcached | 1-5ms | Shared across processes | Sessions, API responses, rate limits |
+| **Database cache** | Query cache, materialized views | 10-50ms | Database | Expensive aggregations, reports |
 
-- Data that is read far more often than written
-- Expensive computations or slow external API calls
-- Data that can tolerate being slightly stale
-- Static or rarely-changing content (assets, config)
+## Cache Update Strategies
 
-## When NOT to Cache
+| Strategy | Mechanism | Trade-off |
+|----------|-----------|-----------|
+| **Cache-aside (lazy)** | App checks cache, misses fall through to DB, result stored in cache | Most common; risk of thundering herd on cold start |
+| **Write-through** | Every write updates DB and cache simultaneously | Always fresh; slower writes |
+| **Write-behind (write-back)** | Write to cache immediately, async flush to DB | Fastest writes; risk of data loss on cache failure |
+| **Refresh-ahead** | Proactively refresh cache before TTL expires | Reduces latency spikes; complex to implement |
 
-- Data that must always be fresh (account balance, inventory count)
-- Write-heavy data where invalidation cost exceeds cache benefit
-- Small datasets that are fast to fetch anyway
+**Default choice:** Cache-aside with TTL. Simple, effective, and easy to reason about.
 
-## Invalidation Strategies
+## When to Cache vs. When Not To
 
-| Strategy | How It Works | Trade-off |
-|----------|-------------|-----------|
-| **TTL (Time-to-Live)** | Cache expires after N seconds | Simple but data can be stale until expiry |
-| **Write-through** | Update cache on every write | Always fresh but slower writes |
-| **Cache-aside** | App checks cache, falls back to DB, fills cache | Most common; risk of stale reads |
-| **Event-driven** | Invalidate on specific events | Fresh data; requires event infrastructure |
+| Cache | Do Not Cache |
+|-------|-------------|
+| Read-heavy data (10:1+ read:write ratio) | Data requiring real-time accuracy (balance, inventory) |
+| Expensive computations or slow API calls | Write-heavy data where invalidation cost > cache benefit |
+| Data tolerant of brief staleness | Small datasets that are already fast to query |
+| Static or rarely-changing content | Security-sensitive per-user data without proper isolation |
 
 ## Cache Key Design
 
 ```
 // Include all parameters that affect the result
-cache_key = "users:list:page=2:sort=name:filter=active"
+"users:list:page=2:sort=name:filter=active"
 
 // Version the key format for safe deployments
-cache_key = "v2:products:123"
+"v2:products:123:en-US"
 ```
+
+## Preventing Cache Stampede
+
+When a popular cache key expires, hundreds of concurrent requests can hit the database simultaneously. Mitigations:
+
+1. **Locking:** First requester acquires a lock, others wait for the cache to be refilled
+2. **Stale-while-revalidate:** Serve stale data while one request refreshes the cache in the background
+3. **Jittered TTL:** Add random variance to TTL values to prevent synchronized expiration
 
 ## Anti-Patterns
 
 - Caching without a TTL (stale data forever)
-- Cache stampede: many requests miss cache simultaneously (use locking or stale-while-revalidate)
-- Caching errors or empty results
+- Caching error responses or empty results
 - No monitoring on cache hit/miss ratio
+- Using cache as primary data store without persistence fallback
+- Cache keys that don't include all relevant parameters (serving wrong data)

@@ -2,24 +2,26 @@
 id: SKL-0007
 name: Mobile Development
 category: skills
-tags: [mobile, react-native, expo, swift, swiftui, kotlin, compose, ios, android]
-capabilities: [cross-platform-apps, native-ios, native-android, mobile-navigation, platform-conventions]
+tags: [mobile, react-native, expo, swift, swiftui, kotlin, compose, ios, android, versioning, app-store]
+capabilities: [cross-platform-apps, native-ios, native-android, mobile-navigation, platform-conventions, version-management]
 useWhen:
   - building mobile app screens or navigation
   - implementing React Native, Swift/SwiftUI, or Kotlin/Compose features
   - handling mobile-specific concerns like permissions, safe areas, or app store requirements
   - creating cross-platform or native mobile experiences
+  - managing app versioning and update notifications
 estimatedTokens: 750
 relatedFragments: [SKL-0005, SKL-0011, SKL-0014]
 dependencies: []
 synonyms: ["build a phone app", "make an iOS app", "create an Android app", "I want a mobile app", "build with React Native"]
 lastUpdated: "2026-03-29"
+sourceUrl: "https://github.com/nicklockwood/iVersion"
 difficulty: advanced
 ---
 
 # Mobile Development
 
-Build mobile apps for iOS, Android, or both. Supports React Native + Expo (cross-platform default), Swift/SwiftUI (native iOS), and Kotlin/Jetpack Compose (native Android).
+Build mobile apps for iOS, Android, or both. Supports React Native + Expo (cross-platform default), Swift/SwiftUI (native iOS), and Kotlin/Jetpack Compose (native Android). Includes version management patterns inspired by iVersion (automatic update detection and user notification).
 
 ## Platform Defaults
 
@@ -43,17 +45,29 @@ Check project decisions for platform choice. If none exists, ask: React Native (
 
 ### 3. Device Considerations
 
-- **Permissions:** Request only when the user triggers the feature. Show rationale before system dialog. Handle denial gracefully.
-- **Safe areas:** SafeAreaView (RN), `.ignoresSafeArea()` deliberately (Swift), `systemBarsPadding()` (Kotlin)
-- **Keyboard:** KeyboardAvoidingView (RN), `@FocusState` (Swift), handle configuration changes (Kotlin)
+| Concern | React Native | Swift/SwiftUI | Kotlin/Compose |
+|---------|-------------|---------------|----------------|
+| Safe areas | SafeAreaView | `.ignoresSafeArea()` deliberately | `systemBarsPadding()` |
+| Keyboard | KeyboardAvoidingView | `@FocusState` | Handle config changes |
+| Permissions | Request on feature trigger | Request on feature trigger | Runtime permissions |
+| Lists (20+ items) | FlatList | LazyVStack | LazyColumn |
 
-### 4. Performance
+### 4. Version Management
 
-- Use lazy lists for 20+ items (FlatList / LazyVStack / LazyColumn)
+Implement update awareness (inspired by iVersion patterns):
+- Check for new versions on app launch (non-blocking)
+- Show informative alert with release notes for new versions
+- Link directly to the App Store / Play Store download page
+- For enterprise/non-store apps, use a remote config or plist for version checking
+- Never force-update unless a critical security fix requires it
+
+### 5. Performance
+
+- Use lazy lists for 20+ items
 - Avoid expensive computations in render/body
-- Use platform memoization (remember, derivedStateOf, etc.)
+- Use platform memoization (remember, useMemo, derivedStateOf)
 
-### 5. Anti-Patterns to Avoid
+### 6. Anti-Patterns to Avoid
 
 **Swift:** No ObservableObject/@Published (use @Observable), no NavigationView (use NavigationStack), no DispatchQueue (use async/await), no Combine for UI binding.
 
@@ -63,6 +77,7 @@ Check project decisions for platform choice. If none exists, ask: React Native (
 
 - **iOS:** Privacy usage descriptions, App Transport Security, export compliance, Mac required for build/submit
 - **Android:** Runtime permissions in manifest, targetSdk 35 for new submissions, data safety form
+- **Both:** Version bump before every store submission, meaningful release notes, screenshot updates for major UI changes
 
 ## Key Constraints
 

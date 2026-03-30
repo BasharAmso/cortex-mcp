@@ -2,24 +2,38 @@
 id: SKL-0029
 name: Copywriting
 category: skills
-tags: [marketing, copywriting, content, conversion, cta]
-capabilities: [headline-writing, cta-optimization, landing-page-copy, micro-copy, email-sequences]
+tags: [marketing, copywriting, content, conversion, cta, landing-page, email-sequences, micro-copy]
+capabilities: [headline-writing, cta-optimization, landing-page-copy, micro-copy, email-sequences, framework-selection]
 useWhen:
   - writing conversion-focused headlines and CTAs
   - creating landing page copy that communicates value
   - writing micro-copy for error messages, empty states, and loading states
   - drafting email sequences for onboarding or re-engagement
+  - applying copywriting frameworks like AIDA, PAS, or StoryBrand
 estimatedTokens: 600
 relatedFragments: [SKL-0030, SKL-0020, SKL-0001]
 dependencies: []
 synonyms: ["write my landing page text", "I need a good headline", "help me write a call to action", "make my signup page more convincing", "write onboarding emails"]
 lastUpdated: "2026-03-29"
+sourceUrl: "https://github.com/PhilipStark/book-genesis"
 difficulty: intermediate
 ---
 
 # Copywriting
 
-Write copy that converts. Apply proven frameworks to produce headlines, CTAs, landing page sections, email sequences, and micro-copy.
+Write copy that converts. Apply proven frameworks to produce headlines, CTAs, landing page sections, email sequences, and micro-copy. Informed by professional writing craft principles: every word must earn its place, avoid AI-sounding patterns, and write with voice authenticity.
+
+## Anti-AI Writing Patterns to Avoid
+
+Before writing any copy, internalize these patterns that make copy feel artificial:
+
+| Pattern | Example | Fix |
+|---------|---------|-----|
+| Explanatory extension | "Fast search. Not just fast, but the kind of fast that..." | Stop after the first statement |
+| Precision flex | "Save 247 minutes per week" | "Save hours every week" feels more human |
+| Forced symmetry | "More speed. More power. More control." | Break the pattern. Vary rhythm. |
+| Generic superlatives | "Revolutionary", "Game-changing" | Specific benefit instead |
+| Philosophical aside | "In a world where..." | Cut to the action |
 
 ## Frameworks
 
@@ -35,15 +49,22 @@ Write copy that converts. Apply proven frameworks to produce headlines, CTAs, la
 
 ### 1. Understand Context
 
-Extract value proposition, target users, and problem statement from the PRD. Identify copy type needed: hero section, feature descriptions, social proof, email sequence, micro-copy, or about page.
+Extract value proposition, target users, and problem statement from the PRD. Identify copy type: hero section, feature descriptions, social proof, email sequence, micro-copy, or about page.
 
 ### 2. Select Framework
 
-Choose the framework that best fits the copy type and audience awareness level.
+Match framework to audience awareness level:
+
+| Awareness Level | Best Framework |
+|----------------|---------------|
+| Unaware of the problem | AIDA (grab attention first) |
+| Problem-aware, solution-unaware | PAS (agitate then solve) |
+| Solution-aware, comparing options | 4Ps (prove your claims) |
+| Ready to act | BAB (show the transformation) |
 
 ### 3. Write Copy
 
-**Headlines:** Lead with benefit, not feature. Provide 3 options: safe, bold, and provocative.
+**Headlines:** Lead with benefit, not feature. Provide 3 options varying in tone: safe, bold, and provocative. Each should pass the "Tomorrow Test": would someone remember this headline the next morning?
 
 **CTAs:** Action verb + value ("Start saving time" not "Submit"). One primary CTA per section. Add friction-reducing micro-copy underneath ("No credit card required").
 
@@ -57,7 +78,7 @@ Choose the framework that best fits the copy type and audience awareness level.
 
 ### 4. Voice Consistency
 
-Verify all copy matches brand tone, vocabulary level (target 8th-grade reading for public content), and pronoun style.
+Verify all copy matches brand tone, vocabulary level (target 8th-grade reading for public content), and pronoun style. Read it aloud. If it sounds like a brochure, rewrite it.
 
 ## Key Rules
 
@@ -65,3 +86,4 @@ Verify all copy matches brand tone, vocabulary level (target 8th-grade reading f
 - Always lead with benefits, not features
 - Copy must be factual with no unsupported claims
 - Always provide multiple options for headlines and CTAs
+- Write like a human. If it sounds AI-generated, it is not done.

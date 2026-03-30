@@ -2,44 +2,58 @@
 id: SKL-0005
 name: Frontend Development
 category: skills
-tags: [frontend, ui, react, css, responsive, components, web]
+tags: [frontend, ui, react, css, responsive, components, web, next-js, tailwind, accessibility, shadcn]
 capabilities: [component-building, responsive-design, visual-polish, accessibility, scroll-animations]
 useWhen:
   - building web UI components or pages
   - implementing responsive layouts and styling
   - adding scroll animations, micro-interactions, or visual polish
   - creating accessible, mobile-first web interfaces
-estimatedTokens: 700
+  - choosing React component libraries or state management
+estimatedTokens: 750
 relatedFragments: [SKL-0006, SKL-0013, PAT-0002]
 dependencies: []
 synonyms: ["build a web page", "make the UI look good", "create a React component", "I need a responsive layout", "add animations to my site"]
 lastUpdated: "2026-03-29"
+sourceUrl: "https://github.com/enaqx/awesome-react"
 difficulty: intermediate
 ---
 
 # Frontend Development
 
-Build web UI components, pages, and styling with a mandatory visual polish pass covering animations, typography, and design depth.
+Build web UI components, pages, and styling with a mandatory visual polish pass. Grounded in the awesome-react ecosystem covering frameworks (Next.js, Remix, Vike), component libraries (shadcn/ui, Radix, Mantine), state management (Zustand, TanStack Query, Jotai), and testing (React Testing Library, Playwright).
+
+## Recommended Stack Defaults
+
+| Concern | Default | Alternatives |
+|---------|---------|-------------|
+| Framework | Next.js | Remix, Vike, Gatsby |
+| Components | shadcn/ui + Radix | Mantine, Chakra, Ant Design |
+| Styling | Tailwind CSS | CSS Modules, vanilla-extract |
+| State (client) | Zustand | Jotai, Redux Toolkit |
+| State (server) | TanStack Query | SWR, Apollo Client |
+| Forms | react-hook-form | TanStack Form |
+| Tables | TanStack Table | react-data-grid |
+| Animation | Framer Motion | react-spring, auto-animate |
+| Testing | React Testing Library + Playwright | Cypress, Jest |
 
 ## Procedure
 
 ### 1. Read Context
 
-- Confirm framework (React, Next.js, Vue, Astro) and styling (Tailwind, CSS modules) from project decisions
+- Confirm framework and styling from project decisions
 - Extract brand tone and visual expectations from the PRD
 - Scan existing code for conventions, color tokens, font choices
 
 ### 2. Build the Component
 
-- Mobile-first responsive design
+- Mobile-first responsive design (320px, 768px, 1440px breakpoints)
 - Semantic HTML with ARIA labels and keyboard navigation
 - Handle all states: loading, error, empty, populated
-- No hardcoded data — use props, state, or labeled placeholders
+- No hardcoded data -- use props, state, or labeled placeholders
 - Match existing file structure and naming conventions
 
 ### 3. Visual Polish Pass (Mandatory)
-
-Every page must pass these checks before it is done:
 
 **Typography Rhythm**
 - Clear heading hierarchy with noticeable size jumps
@@ -70,11 +84,11 @@ Every page must pass these checks before it is done:
 
 - Test at 320px, 768px, and 1440px
 - Verify light and dark modes (if applicable)
-- Confirm at least one visual moment worth screenshotting
+- Run accessibility check (heading order, alt text, focus management)
 
 ## Key Constraints
 
 - Never modify backend or API files
 - Never hardcode data that should come from an API or prop
-- Use component libraries (shadcn/ui, Radix) when available — do not rebuild what exists
+- Use component libraries (shadcn/ui, Radix) when available -- do not rebuild what exists
 - Visual polish is not optional, even for "simple" pages

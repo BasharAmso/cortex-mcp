@@ -1,6 +1,6 @@
 # Cortex MCP
 
-A knowledge delivery engine that ships with a built-in library of 202 agents, skills, patterns, and examples — and serves them on-demand to any MCP-compatible AI tool.
+A knowledge delivery engine that ships with a built-in library of 220 agents, skills, patterns, and examples — and serves them on-demand to any MCP-compatible AI tool.
 
 Instead of every project loading its own framework files into context (wasting 90%+ of the token budget), Cortex MCP is installed once and feeds the right knowledge to any project that needs it.
 
@@ -70,8 +70,8 @@ Or paste this into `~/.cursor/mcp.json` if you prefer:
 Cortex MCP (installed once, contains the library)
   ├── resources/
   │   ├── agents/      10 agent definitions
-  │   ├── skills/     123 skill procedures
-  │   ├── patterns/    53 reusable patterns
+  │   ├── skills/     134 skill procedures
+  │   ├── patterns/    60 reusable patterns
   │   └── examples/    16 code examples
   └── custom/         (your own directories, optional)
          ↓ serves on-demand via MCP
@@ -86,21 +86,25 @@ Your project repos stay lightweight. The knowledge lives in Cortex MCP and gets 
 | Category | Count | Examples |
 |----------|-------|---------|
 | **Agents** | 10 | Builder, Reviewer, Architect, Product Manager, Designer, Fixer, Deployer |
-| **Skills** | 123 | React Patterns, SwiftUI, Kotlin Compose, Flutter, Vue, Svelte, Angular, Tailwind, UX Research, Usability Testing, Wireframing, Accessibility, State Management, Performance, Hook Writing, LinkedIn Strategy, YouTube Scripting, AI Editing Workflow, Onboarding Flows |
-| **Patterns** | 53 | Error Handling, API Design, Database, OAuth Flows, RBAC, SwiftUI Architecture, Compose Architecture, Landing Pages, Dashboard Design, Dark Mode, Mobile Navigation, Empty States, Responsive Email |
+| **Skills** | 134 | React, SwiftUI, Kotlin Compose, Flutter, Vue, Svelte, Angular, Tailwind, Next.js, Python, Go, Rust, TypeScript, GraphQL, Kubernetes, DDD, Microservices, Monorepos, MLOps, UX Research, Content Creation, AI Pipelines |
+| **Patterns** | 60 | Error Handling, API Design, Database, OAuth, RBAC, Hexagonal Architecture, Bounded Contexts, Event Sourcing, CQRS, Saga, Event-Driven Architecture, Kubernetes Production, Landing Pages, Dashboard Design, Dark Mode, Responsive Email |
 | **Examples** | 16 | MCP Tool, React Component, REST API, PWA Setup, Push Notifications, Offline-First, Stripe Checkout, GitHub Actions |
 
 Every fragment includes synonyms for natural language matching. Ask "how do I add logins" and it finds the authentication pattern. Ask "my app is slow" and it finds the performance skill. Ask "how do I grow on LinkedIn" and it finds the LinkedIn strategy skill.
 
 ### Two Pillars
 
-**Ship Beautiful Apps** — Frontend craft (React, SwiftUI, Kotlin Compose, Flutter, Vue, Svelte, Angular, Tailwind), UX research & design, visual design, backend mastery, database deep dives, auth & security, performance, testing, DevOps, mobile/PWA, and app polish (onboarding, landing pages, dashboards, dark mode).
+**Ship Beautiful Apps** — Frontend craft (React, SwiftUI, Kotlin Compose, Flutter, Vue, Svelte, Angular, Tailwind, Next.js), UX research & design, visual design, backend mastery, database deep dives, auth & security, performance, testing, DevOps, mobile/PWA, and app polish (onboarding, landing pages, dashboards, dark mode).
+
+**Architecture at Scale** — Domain-Driven Design, hexagonal architecture, microservices patterns, event sourcing & CQRS, saga pattern, event-driven architecture, Kubernetes patterns & production checklist, GraphQL schema design, monorepo management, clean TypeScript, and AI pipeline orchestration.
+
+**Multi-Language** — Python patterns, Go project layout, Rust idioms, MLOps fundamentals.
 
 **Content Creation** — Writing foundations, platform playbooks (LinkedIn, Twitter, YouTube, newsletters), content systems, audience building, AI-assisted creation, and visual content.
 
 ## Features
 
-- **202 built-in fragments** — agents, skills, patterns, and code examples
+- **220 built-in fragments** — agents, skills, patterns, and code examples
 - **Synonym matching** — finds fragments even when you use informal language
 - **Three-tier search** — quick cache (~2ms), pre-built index (~5-10ms), fuzzy fallback (~15-20ms)
 - **Token budgeting** — respects context limits with four output modes

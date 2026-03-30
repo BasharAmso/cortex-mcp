@@ -1,0 +1,114 @@
+---
+id: SKL-0050
+name: Form Handling
+category: skills
+tags: [forms, validation, accessibility, file-upload, multi-step, error-handling, inputs]
+capabilities: [form-validation, error-display, multi-step-forms, file-upload-handling, accessible-forms]
+useWhen:
+  - building forms with client-side validation
+  - implementing multi-step wizards or checkout flows
+  - handling file uploads with preview and progress
+  - making forms accessible to screen readers
+estimatedTokens: 650
+relatedFragments: [SKL-0005, SKL-0053, SKL-0020, PAT-0001]
+dependencies: []
+synonyms: ["how do I validate a form in React", "build a multi step form wizard", "my form errors are confusing users", "how to handle file uploads", "make my form work with screen readers"]
+lastUpdated: "2026-03-29"
+difficulty: intermediate
+---
+
+# Form Handling
+
+Build forms that validate clearly, handle errors gracefully, and work for everyone.
+
+## Library Choice
+
+| Library | Best For | Bundle Size |
+|---------|----------|-------------|
+| React Hook Form | Performance-critical forms, large forms | ~9kb |
+| Formik | Simple forms, familiar API | ~13kb |
+| Native HTML + `useActionState` | Server actions (Next.js), simple forms | 0kb |
+| Zod + React Hook Form | Type-safe validation with schema | ~11kb + 9kb |
+
+**Default recommendation:** React Hook Form + Zod for type-safe validation.
+
+## Validation Pattern
+
+```tsx
+const schema = z.object({
+  email: z.string().email("Enter a valid email address"),
+  password: z.string().min(8, "Password must be at least 8 characters"),
+});
+
+const { register, handleSubmit, formState: { errors } } = useForm({
+  resolver: zodResolver(schema),
+});
+```
+
+### Validation Timing
+
+| Event | Validate | Why |
+|-------|----------|-----|
+| On submit | Always | First validation pass |
+| On blur (after first submit) | Field-level | Immediate feedback after initial attempt |
+| On change (after error shown) | Field-level | Clear errors as user fixes them |
+| On keystroke (before submit) | Never | Annoying and distracting |
+
+## Error Display Rules
+
+1. **Show errors next to the field**, not in a banner at the top.
+2. **Use `aria-describedby`** to connect error text to the input.
+3. **Use `aria-invalid="true"`** on fields with errors.
+4. **Red is not enough** -- add an icon or text prefix like "Error:" for colorblind users.
+5. **Tell users how to fix it**, not just what is wrong. "Enter a valid email" not "Invalid input."
+
+```tsx
+<label htmlFor="email">Email</label>
+<input
+  id="email"
+  type="email"
+  aria-invalid={!!errors.email}
+  aria-describedby={errors.email ? "email-error" : undefined}
+  {...register("email")}
+/>
+{errors.email && (
+  <p id="email-error" role="alert" className="text-red-600 text-sm">
+    {errors.email.message}
+  </p>
+)}
+```
+
+## Multi-Step Forms
+
+1. **Store state in a parent** or use React Hook Form's `useFormContext`.
+2. **Show a progress indicator** (Step 2 of 4).
+3. **Allow going back** without losing data.
+4. **Validate per step**, not all at once on final submit.
+5. **Save progress** to localStorage or URL params for long forms.
+
+```tsx
+const steps = [PersonalInfo, Address, Payment, Review];
+const [step, setStep] = useState(0);
+const CurrentStep = steps[step];
+```
+
+## File Uploads
+
+| Feature | Implementation |
+|---------|---------------|
+| Preview | `URL.createObjectURL(file)` for images |
+| Size limit | Validate in `onChange` before upload |
+| Progress | Use `XMLHttpRequest` or `fetch` with `ReadableStream` |
+| Drag and drop | `onDragOver`, `onDrop` events on a drop zone |
+| Multiple files | `<input type="file" multiple>` |
+
+**Always validate:** file type, file size, and count on the client. Validate again on the server.
+
+## Accessibility Checklist
+
+- Every `<input>` has an associated `<label>` (not just placeholder text).
+- Required fields use `aria-required="true"` and visual indicator.
+- Error messages are announced with `role="alert"` or `aria-live="assertive"`.
+- Form can be completed entirely by keyboard (Tab, Enter, Space).
+- Submit button is disabled during submission with `aria-busy="true"`.
+- Focus moves to the first error field after a failed submission.

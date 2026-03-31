@@ -1,6 +1,6 @@
 {
   "name": "cortex-mcp-server",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Framework-agnostic MCP server that serves structured knowledge on-demand to any MCP-compatible AI tool",
   "type": "module",
   "main": "dist/index.js",

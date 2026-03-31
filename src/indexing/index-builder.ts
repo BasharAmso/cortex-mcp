@@ -197,7 +197,7 @@ const STOP_WORDS = new Set([
 ]);
 
 function tokenize(text: string): string[] {
-  return text
+  return String(text ?? "")
     .toLowerCase()
     .replace(/[^a-z0-9\s-]/g, "")
     .split(/[\s-]+/)

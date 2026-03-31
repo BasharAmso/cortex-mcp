@@ -1,6 +1,6 @@
 # Cortex MCP
 
-A knowledge delivery engine that ships with a built-in library of 264 agents, skills, patterns, and examples across 20 domains — and serves them on-demand to any MCP-compatible AI tool.
+A knowledge delivery engine that ships with a built-in library of 680 agents, skills, patterns, and examples across 26 domains — and serves them on-demand to any MCP-compatible AI tool.
 
 Instead of every project loading its own framework files into context (wasting 90%+ of the token budget), Cortex MCP is installed once and feeds the right knowledge to any project that needs it.
 
@@ -86,46 +86,47 @@ Your project repos stay lightweight. The knowledge lives in Cortex MCP and gets 
 | Category | Count | Examples |
 |----------|-------|---------|
 | **Agents** | 10 | Builder, Reviewer, Architect, Product Manager, Designer, Fixer, Deployer |
-| **Skills** | 155 | React, SwiftUI, Flutter, Vue, Next.js, Python, Go, Rust, GraphQL, Kubernetes, DDD, Microservices, E-Commerce, Game Dev, Workflow Automation, IoT, Healthcare (FHIR), Property Management, Structural Engineering, Content Creation |
-| **Patterns** | 83 | Error Handling, API Design, OAuth, CQRS, Saga, Game Loop, ECS, Shopping Cart, Order Lifecycle, MQTT, Spaced Repetition, CRDT Sync, Kanban, Retaining Wall Design, Booking Availability, Landing Pages, Dark Mode |
+| **Skills** | 434 | CRM, Lead Scoring, Market Sizing, LinkedIn Strategy, Salon Booking, Restaurant POS, Code Review, Debugging, Game Physics, Level Design, E-Commerce, IoT, Healthcare, Finance, Education |
+| **Patterns** | 221 | Error Handling, API Design, Circuit Breaker, Saga, Cart State, Checkout Recovery, Appointment Booking, POS Architecture, CRM Data Model, Inventory Tracking, Achievement System |
 | **Examples** | 16 | MCP Tool, React Component, REST API, PWA Setup, Push Notifications, Offline-First, Stripe Checkout, GitHub Actions |
 
 Every fragment includes synonyms for natural language matching. Ask "how do I add logins" and it finds the authentication pattern. Ask "my app is slow" and it finds the performance skill. Ask "how do I grow on LinkedIn" and it finds the LinkedIn strategy skill.
 
-### Two Pillars
+### 26 Knowledge Pillars
 
-**Software Development** — Frontend (React, CSS, animations, forms), backend (APIs, databases, auth, testing, DevOps), and app polish (landing pages, dashboards, dark mode, onboarding).
-
-**Architecture & Platform** — DDD, microservices, CQRS, Kubernetes, event-driven, GraphQL, monorepos. Platform-specific: SwiftUI, Compose, Flutter, Vue, Svelte, Angular, Tailwind, Next.js. Languages: Python, Go, Rust, TypeScript, MLOps.
-
-**E-Commerce** — Headless commerce architecture, shopping cart state, order lifecycle, inventory management.
-
-**Game Development** — Game programming patterns, game loop, Phaser web games, entity component system, game state machines.
-
-**Automation & Workflows** — Workflow automation, DAG orchestration, durable execution, state machines, webhooks, event-driven integration.
-
-**Finance** — Double-entry accounting, ledger architecture, payment gateway patterns.
-
-**Education** — LMS design, spaced repetition (FSRS), gamification mechanics, quiz & assessment systems.
-
-**IoT & Hardware** — IoT platform architecture, MQTT messaging, sensor data pipelines, home automation.
-
-**Health & Wellness** — FHIR healthcare data, health tracking data models.
-
-**Collaboration** — Real-time collaboration (CRDTs), kanban board patterns, sync architecture.
-
-**Religious & Spiritual** — Scripture app architecture, multi-translation text, offline sync for religious content.
-
-**Engineering** — Geotechnical calculations, retaining wall design, structural engineering.
-
-**Content Creation** — Writing, copywriting, LinkedIn, YouTube, newsletters, AI-assisted creation.
-
-**Developer Growth** — Reading code, debugging methodology, shipping side projects, developer marketing, getting first users.
+| Pillar | Fragments | What's Covered |
+|--------|-----------|---------------|
+| **Software Dev** | 78 | Error handling, APIs, testing, security, DevOps, CI/CD |
+| **Framework Core** | 31 | Agents, orchestration, quality review, deployment |
+| **Frontend** | 30 | React, state management, testing, performance, i18n, security |
+| **UX Design** | 30 | Usability testing, design systems, accessibility, prototyping |
+| **Architecture** | 30 | API gateways, message queues, caching, serverless, GraphQL |
+| **App Polish** | 30 | Loading states, animations, keyboard shortcuts, feature flags |
+| **E-Commerce** | 30 | Product catalogs, checkout, shipping, subscriptions, fraud prevention |
+| **Game Dev** | 30 | Physics, audio, level design, multiplayer, procedural generation |
+| **Education** | 30 | Course platforms, flashcards, grading, adaptive learning, AI tutoring |
+| **Coding Literacy** | 30 | Reading code, code review, debugging, understanding abstractions |
+| **Business Automation** | 30 | Salon booking, POS systems, invoicing, scheduling, loyalty programs |
+| **Sales** | 30 | CRM, lead scoring, pipeline management, cold outreach, forecasting |
+| **Market Research** | 30 | Competitor analysis, market sizing, surveys, trend analysis |
+| **Personal Brand** | 30 | LinkedIn, newsletters, podcasting, speaking, community building |
+| **Product Business** | 30 | MVP strategy, pricing, A/B testing, metrics, churn prevention |
+| **Content Creation** | 29 | Writing, copywriting, YouTube, newsletters, AI-assisted creation |
+| **Platform** | 17 | SwiftUI, Compose, Flutter, Vue, Svelte, Angular, Next.js |
+| **Health** | 15 | Telehealth, FHIR, mental health apps, wearables, medication tracking |
+| **Finance** | 15 | Personal finance, banking APIs, portfolios, tax engines, billing |
+| **Collaboration** | 15 | Wikis, project management, video conferencing, team chat |
+| **Religious** | 15 | Prayer times, scripture readers, donations, devotionals, sermons |
+| **IoT** | 15 | Edge computing, MQTT, dashboards, smart home, industrial IoT |
+| **Developer Growth** | 15 | Technical writing, open source, career growth, interview prep |
+| **Language** | 15 | Java, C#, Swift, Kotlin, PHP, Ruby, concurrency patterns |
+| **Automation** | 15 | Web scraping, browser automation, data pipelines, chatbots |
+| **Domain-Specific** | 15 | Legal tech, construction, agriculture, logistics, event management |
 
 ## Features
 
-- **264 built-in fragments** across 20 domains — agents, skills, patterns, and code examples
-- **Pillar filtering** — filter by domain (e.g., `game-dev`, `ecommerce`, `architecture`)
+- **680 built-in fragments** across 26 domains — agents, skills, patterns, and code examples
+- **Pillar filtering** — filter by domain (e.g., `game-dev`, `ecommerce`, `sales`, `coding-literacy`)
 - **Synonym matching** — finds fragments even when you use informal language
 - **Three-tier search** — quick cache (~2ms), pre-built index (~5-10ms), fuzzy fallback (~15-20ms)
 - **Token budgeting** — respects context limits with four output modes

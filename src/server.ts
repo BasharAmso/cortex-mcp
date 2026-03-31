@@ -143,6 +143,10 @@ export async function startServer(): Promise<void> {
         .enum(["agents", "skills", "patterns", "examples"])
         .optional()
         .describe("Filter to a specific category"),
+      pillar: z
+        .string()
+        .optional()
+        .describe("Filter to a specific pillar/domain (e.g., 'game-dev', 'ecommerce', 'architecture')"),
     },
     async (args) => {
       const mode: OutputMode = args.mode ?? config.matching.defaultMode;
@@ -153,6 +157,11 @@ export async function startServer(): Promise<void> {
         args.category,
         config.matching.maxResults,
       );
+
+      // Filter by pillar if specified
+      if (args.pillar) {
+        results = results.filter((r) => r.fragment.pillar === args.pillar);
+      }
 
       // Zero-result recovery: if no results, try without category filter
       // and suggest broader terms
@@ -276,16 +285,25 @@ export async function startServer(): Promise<void> {
         .enum(["agents", "skills", "patterns", "examples", "all"])
         .optional()
         .describe("Category to browse, or 'all' for everything (default: all)"),
+      pillar: z
+        .string()
+        .optional()
+        .describe("Filter to a specific pillar/domain (e.g., 'game-dev', 'ecommerce', 'architecture')"),
     },
     async (args) => {
       const cat = args.category ?? "all";
-      const filtered =
+      let filtered =
         cat === "all" ? fragments : fragments.filter((f) => f.category === cat);
+
+      if (args.pillar) {
+        filtered = filtered.filter((f) => f.pillar === args.pillar);
+      }
 
       const listing = filtered.map((f) => ({
         id: f.id,
         name: f.name,
         category: f.category,
+        pillar: f.pillar,
         tags: f.tags,
         estimatedTokens: f.estimatedTokens,
       }));
@@ -386,8 +404,10 @@ export async function startServer(): Promise<void> {
 
   server.tool("list_categories", {}, async () => {
     const counts: Record<string, number> = {};
+    const pillarCounts: Record<string, number> = {};
     for (const f of fragments) {
       counts[f.category] = (counts[f.category] ?? 0) + 1;
+      pillarCounts[f.pillar] = (pillarCounts[f.pillar] ?? 0) + 1;
     }
     return {
       content: [
@@ -397,6 +417,7 @@ export async function startServer(): Promise<void> {
             {
               totalFragments: fragments.length,
               categories: counts,
+              pillars: pillarCounts,
             },
             null,
             2,

@@ -77,6 +77,8 @@ function parseFragment(filePath: string): Fragment | null {
       lastUpdated: frontmatter.lastUpdated ?? "",
       sourceUrl: frontmatter.sourceUrl ?? "",
       difficulty: frontmatter.difficulty ?? "",
+      owner: frontmatter.owner ?? "",
+      pillar: frontmatter.pillar ?? "general",
       content: content.trim(),
       filePath,
     };

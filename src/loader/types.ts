@@ -13,6 +13,7 @@ export interface FragmentFrontmatter {
   sourceUrl: string;
   difficulty: string;
   owner: string;
+  pillar: string;
 }
 
 export interface Fragment extends FragmentFrontmatter {

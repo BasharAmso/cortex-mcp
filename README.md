@@ -224,6 +224,10 @@ Built by [Bashar Amso](https://github.com/BasharAmso). I got tired of loading th
 
 Part of the [Bashi](https://github.com/BasharAmso/bashi) ecosystem.
 
+## Acknowledgments
+
+This library was built by researching patterns from hundreds of open-source projects, technical documentation, and community best practices. We're grateful to the open-source community whose shared knowledge made this possible.
+
 ## License
 
 MIT

@@ -1,6 +1,6 @@
 # Cortex MCP
 
-A knowledge delivery engine that ships with a built-in library of 220 agents, skills, patterns, and examples — and serves them on-demand to any MCP-compatible AI tool.
+A knowledge delivery engine that ships with a built-in library of 264 agents, skills, patterns, and examples across 20 domains — and serves them on-demand to any MCP-compatible AI tool.
 
 Instead of every project loading its own framework files into context (wasting 90%+ of the token budget), Cortex MCP is installed once and feeds the right knowledge to any project that needs it.
 
@@ -70,8 +70,8 @@ Or paste this into `~/.cursor/mcp.json` if you prefer:
 Cortex MCP (installed once, contains the library)
   ├── resources/
   │   ├── agents/      10 agent definitions
-  │   ├── skills/     134 skill procedures
-  │   ├── patterns/    60 reusable patterns
+  │   ├── skills/     155 skill procedures
+  │   ├── patterns/    83 reusable patterns
   │   └── examples/    16 code examples
   └── custom/         (your own directories, optional)
          ↓ serves on-demand via MCP
@@ -86,25 +86,46 @@ Your project repos stay lightweight. The knowledge lives in Cortex MCP and gets 
 | Category | Count | Examples |
 |----------|-------|---------|
 | **Agents** | 10 | Builder, Reviewer, Architect, Product Manager, Designer, Fixer, Deployer |
-| **Skills** | 134 | React, SwiftUI, Kotlin Compose, Flutter, Vue, Svelte, Angular, Tailwind, Next.js, Python, Go, Rust, TypeScript, GraphQL, Kubernetes, DDD, Microservices, Monorepos, MLOps, UX Research, Content Creation, AI Pipelines |
-| **Patterns** | 60 | Error Handling, API Design, Database, OAuth, RBAC, Hexagonal Architecture, Bounded Contexts, Event Sourcing, CQRS, Saga, Event-Driven Architecture, Kubernetes Production, Landing Pages, Dashboard Design, Dark Mode, Responsive Email |
+| **Skills** | 155 | React, SwiftUI, Flutter, Vue, Next.js, Python, Go, Rust, GraphQL, Kubernetes, DDD, Microservices, E-Commerce, Game Dev, Workflow Automation, IoT, Healthcare (FHIR), Property Management, Structural Engineering, Content Creation |
+| **Patterns** | 83 | Error Handling, API Design, OAuth, CQRS, Saga, Game Loop, ECS, Shopping Cart, Order Lifecycle, MQTT, Spaced Repetition, CRDT Sync, Kanban, Retaining Wall Design, Booking Availability, Landing Pages, Dark Mode |
 | **Examples** | 16 | MCP Tool, React Component, REST API, PWA Setup, Push Notifications, Offline-First, Stripe Checkout, GitHub Actions |
 
 Every fragment includes synonyms for natural language matching. Ask "how do I add logins" and it finds the authentication pattern. Ask "my app is slow" and it finds the performance skill. Ask "how do I grow on LinkedIn" and it finds the LinkedIn strategy skill.
 
 ### Two Pillars
 
-**Ship Beautiful Apps** — Frontend craft (React, SwiftUI, Kotlin Compose, Flutter, Vue, Svelte, Angular, Tailwind, Next.js), UX research & design, visual design, backend mastery, database deep dives, auth & security, performance, testing, DevOps, mobile/PWA, and app polish (onboarding, landing pages, dashboards, dark mode).
+**Software Development** — Frontend (React, CSS, animations, forms), backend (APIs, databases, auth, testing, DevOps), and app polish (landing pages, dashboards, dark mode, onboarding).
 
-**Architecture at Scale** — Domain-Driven Design, hexagonal architecture, microservices patterns, event sourcing & CQRS, saga pattern, event-driven architecture, Kubernetes patterns & production checklist, GraphQL schema design, monorepo management, clean TypeScript, and AI pipeline orchestration.
+**Architecture & Platform** — DDD, microservices, CQRS, Kubernetes, event-driven, GraphQL, monorepos. Platform-specific: SwiftUI, Compose, Flutter, Vue, Svelte, Angular, Tailwind, Next.js. Languages: Python, Go, Rust, TypeScript, MLOps.
 
-**Multi-Language** — Python patterns, Go project layout, Rust idioms, MLOps fundamentals.
+**E-Commerce** — Headless commerce architecture, shopping cart state, order lifecycle, inventory management.
 
-**Content Creation** — Writing foundations, platform playbooks (LinkedIn, Twitter, YouTube, newsletters), content systems, audience building, AI-assisted creation, and visual content.
+**Game Development** — Game programming patterns, game loop, Phaser web games, entity component system, game state machines.
+
+**Automation & Workflows** — Workflow automation, DAG orchestration, durable execution, state machines, webhooks, event-driven integration.
+
+**Finance** — Double-entry accounting, ledger architecture, payment gateway patterns.
+
+**Education** — LMS design, spaced repetition (FSRS), gamification mechanics, quiz & assessment systems.
+
+**IoT & Hardware** — IoT platform architecture, MQTT messaging, sensor data pipelines, home automation.
+
+**Health & Wellness** — FHIR healthcare data, health tracking data models.
+
+**Collaboration** — Real-time collaboration (CRDTs), kanban board patterns, sync architecture.
+
+**Religious & Spiritual** — Scripture app architecture, multi-translation text, offline sync for religious content.
+
+**Engineering** — Geotechnical calculations, retaining wall design, structural engineering.
+
+**Content Creation** — Writing, copywriting, LinkedIn, YouTube, newsletters, AI-assisted creation.
+
+**Developer Growth** — Reading code, debugging methodology, shipping side projects, developer marketing, getting first users.
 
 ## Features
 
-- **220 built-in fragments** — agents, skills, patterns, and code examples
+- **264 built-in fragments** across 20 domains — agents, skills, patterns, and code examples
+- **Pillar filtering** — filter by domain (e.g., `game-dev`, `ecommerce`, `architecture`)
 - **Synonym matching** — finds fragments even when you use informal language
 - **Three-tier search** — quick cache (~2ms), pre-built index (~5-10ms), fuzzy fallback (~15-20ms)
 - **Token budgeting** — respects context limits with four output modes

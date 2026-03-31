@@ -18,6 +18,7 @@ lastUpdated: "2026-03-29"
 sourceUrl: "https://github.com/donnemartin/system-design-primer"
 difficulty: intermediate
 owner: builder
+pillar: "software-dev"
 ---
 
 # REST API Design Pattern

@@ -18,6 +18,7 @@ lastUpdated: "2026-03-30"
 sourceUrl: "https://github.com/uixmat/onborda"
 difficulty: beginner
 owner: builder
+pillar: "app-polish"
 ---
 
 # Empty States

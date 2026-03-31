@@ -16,6 +16,7 @@ synonyms: ["how do I build a feature", "write code for me", "make the app do som
 lastUpdated: "2026-03-29"
 difficulty: beginner
 owner: builder
+pillar: "framework-core"
 ---
 
 # Builder Agent

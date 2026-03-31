@@ -17,6 +17,7 @@ synonyms: ["my database queries are slow how to fix", "what is the n plus one pr
 lastUpdated: "2026-03-29"
 difficulty: intermediate
 owner: builder
+pillar: "software-dev"
 sourceUrl: "https://github.com/dhamaniasad/awesome-postgres"
 ---
 

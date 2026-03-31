@@ -17,6 +17,7 @@ synonyms: ["how to prevent csrf attacks on my forms", "how to stop xss in user i
 lastUpdated: "2026-03-29"
 difficulty: intermediate
 owner: builder
+pillar: "software-dev"
 sourceUrl: "https://github.com/OWASP/CheatSheetSeries"
 ---
 

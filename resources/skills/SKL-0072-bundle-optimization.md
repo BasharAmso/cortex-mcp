@@ -17,6 +17,7 @@ sourceUrl: "https://github.com/donnemartin/system-design-primer"
 lastUpdated: "2026-03-29"
 difficulty: intermediate
 owner: builder
+pillar: "software-dev"
 ---
 
 # Bundle Optimization

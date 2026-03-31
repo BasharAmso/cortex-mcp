@@ -16,6 +16,7 @@ synonyms: ["something is broken fix it", "my app has a bug", "why is this not wo
 lastUpdated: "2026-03-29"
 difficulty: beginner
 owner: fixer
+pillar: "framework-core"
 ---
 
 # Fixer Agent

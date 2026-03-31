@@ -18,6 +18,7 @@ lastUpdated: "2026-03-30"
 sourceUrl: "https://github.com/18F/ux-guide"
 difficulty: intermediate
 owner: reviewer
+pillar: "software-dev"
 ---
 
 # Accessibility Implementation

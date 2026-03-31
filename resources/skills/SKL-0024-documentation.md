@@ -18,6 +18,7 @@ lastUpdated: "2026-03-29"
 sourceUrl: "https://github.com/matiassingers/awesome-readme"
 difficulty: beginner
 owner: documenter
+pillar: "framework-core"
 ---
 
 # Skill: Documentation

@@ -18,6 +18,7 @@ lastUpdated: "2026-03-30"
 sourceUrl: "https://github.com/aredridel/how-to-read-code"
 difficulty: beginner
 owner: cortex
+pillar: "developer-growth"
 ---
 
 # Skill: Reading Code & Stack Traces

@@ -17,6 +17,7 @@ synonyms: ["how do I add Google login to my app", "sign in with GitHub button", 
 lastUpdated: "2026-03-29"
 difficulty: intermediate
 owner: builder
+pillar: "software-dev"
 sourceUrl: "https://github.com/OWASP/CheatSheetSeries"
 ---
 

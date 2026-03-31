@@ -17,6 +17,7 @@ synonyms: ["how to version my API", "handle breaking API changes", "deprecate ol
 lastUpdated: "2026-03-29"
 difficulty: intermediate
 owner: builder
+pillar: "software-dev"
 sourceUrl: "https://github.com/elsewhencode/project-guidelines"
 ---
 

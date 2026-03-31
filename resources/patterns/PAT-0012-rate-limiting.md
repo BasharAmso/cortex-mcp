@@ -17,6 +17,7 @@ synonyms: ["protect my API from abuse", "add rate limiting to my API", "too many
 lastUpdated: "2026-03-29"
 difficulty: intermediate
 owner: builder
+pillar: "software-dev"
 sourceUrl: "https://github.com/elsewhencode/project-guidelines"
 ---
 

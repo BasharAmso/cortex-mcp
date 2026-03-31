@@ -17,6 +17,7 @@ sourceUrl: "https://github.com/dair-ai/Prompt-Engineering-Guide"
 lastUpdated: "2026-03-30"
 difficulty: intermediate
 owner: builder
+pillar: "content-creation"
 ---
 
 # Voice Preservation with AI

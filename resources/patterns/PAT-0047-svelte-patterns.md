@@ -18,6 +18,7 @@ lastUpdated: "2026-03-30"
 sourceUrl: "https://github.com/sveltejs/kit"
 difficulty: advanced
 owner: builder
+pillar: "platform"
 ---
 
 # Svelte Patterns

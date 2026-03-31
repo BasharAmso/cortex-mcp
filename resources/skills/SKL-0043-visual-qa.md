@@ -18,6 +18,7 @@ lastUpdated: "2026-03-29"
 sourceUrl: "https://github.com/nicklockwood/iVersion"
 difficulty: intermediate
 owner: reviewer
+pillar: "framework-core"
 ---
 
 # Visual QA

@@ -17,6 +17,7 @@ sourceUrl: "https://github.com/enaqx/awesome-react"
 lastUpdated: "2026-03-29"
 difficulty: beginner
 owner: builder
+pillar: "app-polish"
 ---
 
 # Skeleton Screens

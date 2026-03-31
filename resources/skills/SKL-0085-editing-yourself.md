@@ -17,6 +17,7 @@ sourceUrl: "https://github.com/btford/write-good"
 lastUpdated: "2026-03-30"
 difficulty: beginner
 owner: builder
+pillar: "content-creation"
 ---
 
 # Self-Editing

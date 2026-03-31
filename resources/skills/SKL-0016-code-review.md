@@ -18,6 +18,7 @@ lastUpdated: "2026-03-29"
 sourceUrl: "https://github.com/goldbergyoni/nodebestpractices"
 difficulty: intermediate
 owner: reviewer
+pillar: "framework-core"
 ---
 
 # Skill: Code Review

@@ -18,6 +18,7 @@ sourceUrl: "https://github.com/gztchan/awesome-design"
 lastUpdated: "2026-03-29"
 difficulty: intermediate
 owner: designer
+pillar: "ux-design"
 ---
 
 # Visual Hierarchy

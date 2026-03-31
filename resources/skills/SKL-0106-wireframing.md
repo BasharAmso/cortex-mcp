@@ -17,6 +17,7 @@ lastUpdated: "2026-03-30"
 sourceUrl: "https://github.com/Patternslib/Patterns"
 difficulty: beginner
 owner: designer
+pillar: "ux-design"
 ---
 
 # Wireframing & Prototyping

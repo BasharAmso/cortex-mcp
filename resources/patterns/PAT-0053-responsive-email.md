@@ -18,6 +18,7 @@ lastUpdated: "2026-03-30"
 sourceUrl: "https://github.com/alexpate/awesome-design-systems"
 difficulty: advanced
 owner: builder
+pillar: "app-polish"
 ---
 
 # Responsive Email

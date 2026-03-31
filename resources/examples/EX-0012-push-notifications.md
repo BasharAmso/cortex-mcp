@@ -16,6 +16,7 @@ sourceUrl: "https://github.com/nicedoc/nicedoc.io"
 lastUpdated: "2026-03-30"
 difficulty: advanced
 owner: builder
+pillar: "platform"
 ---
 
 # Push Notifications Example

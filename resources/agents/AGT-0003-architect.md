@@ -16,6 +16,7 @@ synonyms: ["how should I structure my app", "what tech stack should I use", "pla
 lastUpdated: "2026-03-29"
 difficulty: intermediate
 owner: architecture-designer
+pillar: "framework-core"
 ---
 
 # Architecture Designer Agent

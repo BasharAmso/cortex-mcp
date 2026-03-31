@@ -18,6 +18,7 @@ lastUpdated: "2026-03-30"
 sourceUrl: "https://github.com/learnk8s/kubernetes-production-best-practices"
 difficulty: advanced
 owner: "cortex"
+pillar: "architecture"
 ---
 
 # Kubernetes Production Checklist

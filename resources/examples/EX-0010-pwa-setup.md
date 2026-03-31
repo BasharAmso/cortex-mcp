@@ -16,6 +16,7 @@ sourceUrl: "https://github.com/nicklockwood/iVersion"
 lastUpdated: "2026-03-30"
 difficulty: intermediate
 owner: builder
+pillar: "platform"
 ---
 
 # PWA Setup Example

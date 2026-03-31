@@ -18,6 +18,7 @@ lastUpdated: "2026-03-30"
 sourceUrl: "https://github.com/goldbergyoni/nodebestpractices"
 difficulty: advanced
 owner: builder
+pillar: "software-dev"
 ---
 
 # Error Handling & Resilience

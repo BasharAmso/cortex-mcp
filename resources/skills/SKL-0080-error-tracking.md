@@ -17,6 +17,7 @@ sourceUrl: "https://github.com/goldbergyoni/nodebestpractices"
 lastUpdated: "2026-03-29"
 difficulty: intermediate
 owner: deployer
+pillar: "software-dev"
 ---
 
 # Error Tracking

@@ -18,6 +18,7 @@ lastUpdated: "2026-03-30"
 sourceUrl: "https://github.com/nalexn/clean-architecture-swiftui"
 difficulty: intermediate
 owner: builder
+pillar: "platform"
 ---
 
 # SwiftUI Patterns

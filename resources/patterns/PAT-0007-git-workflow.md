@@ -18,6 +18,7 @@ lastUpdated: "2026-03-29"
 sourceUrl: "https://github.com/conventional-changelog/conventionalcommits.org"
 difficulty: beginner
 owner: builder
+pillar: "software-dev"
 ---
 
 # Git Workflow

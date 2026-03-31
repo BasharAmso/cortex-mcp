@@ -18,6 +18,7 @@ lastUpdated: "2026-03-29"
 sourceUrl: "https://github.com/ryanmcdermott/clean-code-javascript"
 difficulty: intermediate
 owner: fixer
+pillar: "framework-core"
 ---
 
 # Skill: Refactoring

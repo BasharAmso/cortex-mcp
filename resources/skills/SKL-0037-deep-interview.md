@@ -18,6 +18,7 @@ lastUpdated: "2026-03-29"
 sourceUrl: "https://github.com/dair-ai/Prompt-Engineering-Guide"
 difficulty: intermediate
 owner: product-manager
+pillar: "product-business"
 ---
 
 # Deep Interview

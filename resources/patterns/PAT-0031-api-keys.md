@@ -17,6 +17,7 @@ synonyms: ["how to create api keys for my users", "should I hash api keys in the
 lastUpdated: "2026-03-29"
 difficulty: advanced
 owner: builder
+pillar: "software-dev"
 sourceUrl: "https://github.com/OWASP/CheatSheetSeries"
 ---
 

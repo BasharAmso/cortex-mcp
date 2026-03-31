@@ -16,6 +16,7 @@ synonyms: ["research options before I decide", "what library should I use", "com
 lastUpdated: "2026-03-29"
 difficulty: beginner
 owner: explorer
+pillar: "framework-core"
 ---
 
 # Explorer Agent

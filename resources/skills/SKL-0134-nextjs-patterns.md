@@ -18,6 +18,7 @@ lastUpdated: "2026-03-30"
 sourceUrl: "https://github.com/vercel/next.js"
 difficulty: intermediate
 owner: cortex
+pillar: "platform"
 ---
 
 # Next.js App Router Patterns

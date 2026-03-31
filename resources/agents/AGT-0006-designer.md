@@ -16,6 +16,7 @@ synonyms: ["design the screens before coding", "plan out the user experience", "
 lastUpdated: "2026-03-29"
 difficulty: intermediate
 owner: designer
+pillar: "framework-core"
 ---
 
 # Designer Agent

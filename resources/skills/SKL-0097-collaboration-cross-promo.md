@@ -17,6 +17,7 @@ sourceUrl: "https://github.com/mezod/awesome-indie"
 lastUpdated: "2026-03-30"
 difficulty: intermediate
 owner: builder
+pillar: "content-creation"
 ---
 
 # Collaboration & Cross-Promotion

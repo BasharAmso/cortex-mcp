@@ -18,6 +18,7 @@ lastUpdated: "2026-03-30"
 sourceUrl: "https://github.com/apollographql/principled-graphql"
 difficulty: intermediate
 owner: "cortex"
+pillar: "architecture"
 ---
 
 # GraphQL Schema Design

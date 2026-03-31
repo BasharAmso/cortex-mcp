@@ -18,6 +18,7 @@ lastUpdated: "2026-03-29"
 sourceUrl: "https://github.com/newTendermint/awesome-analytics"
 difficulty: intermediate
 owner: builder
+pillar: "product-business"
 ---
 
 # Skill: Analytics & Tracking

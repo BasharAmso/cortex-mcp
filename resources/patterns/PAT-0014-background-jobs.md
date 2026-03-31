@@ -17,6 +17,7 @@ synonyms: ["run tasks in the background", "set up a job queue", "process things 
 lastUpdated: "2026-03-29"
 difficulty: advanced
 owner: builder
+pillar: "software-dev"
 sourceUrl: "https://github.com/dair-ai/Prompt-Engineering-Guide"
 ---
 

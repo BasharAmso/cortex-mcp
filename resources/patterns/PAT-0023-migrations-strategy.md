@@ -17,6 +17,7 @@ synonyms: ["how to change database without breaking production", "zero downtime 
 lastUpdated: "2026-03-29"
 difficulty: advanced
 owner: builder
+pillar: "software-dev"
 sourceUrl: "https://github.com/dhamaniasad/awesome-postgres"
 ---
 

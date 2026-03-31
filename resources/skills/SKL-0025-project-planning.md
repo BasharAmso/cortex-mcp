@@ -18,6 +18,7 @@ lastUpdated: "2026-03-29"
 sourceUrl: "https://github.com/deanpeters/Product-Manager-Skills"
 difficulty: beginner
 owner: project-manager
+pillar: "framework-core"
 ---
 
 # Skill: Project Planning

@@ -16,6 +16,7 @@ synonyms: ["how do I put my app online", "deploy to production", "set up automat
 lastUpdated: "2026-03-29"
 difficulty: intermediate
 owner: deployer
+pillar: "framework-core"
 ---
 
 # Deployer Agent

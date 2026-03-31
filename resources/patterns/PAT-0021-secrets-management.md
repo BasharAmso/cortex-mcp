@@ -17,6 +17,7 @@ synonyms: ["where do I store production secrets", "rotate API keys safely", "sec
 lastUpdated: "2026-03-29"
 difficulty: advanced
 owner: builder
+pillar: "software-dev"
 sourceUrl: "https://github.com/OWASP/CheatSheetSeries"
 ---
 

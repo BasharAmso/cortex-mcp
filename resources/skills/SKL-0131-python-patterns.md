@@ -18,6 +18,7 @@ lastUpdated: "2026-03-30"
 sourceUrl: "https://github.com/faif/python-patterns"
 difficulty: intermediate
 owner: cortex
+pillar: "language"
 ---
 
 # Python Design Patterns & Idioms

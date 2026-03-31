@@ -18,6 +18,7 @@ lastUpdated: "2026-03-29"
 sourceUrl: "https://github.com/modelcontextprotocol/servers"
 difficulty: advanced
 owner: deployer
+pillar: "framework-core"
 ---
 
 # Skill: MCP Configuration

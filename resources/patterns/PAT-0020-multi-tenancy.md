@@ -17,6 +17,7 @@ synonyms: ["build a SaaS for multiple customers", "separate data for each custom
 lastUpdated: "2026-03-29"
 difficulty: advanced
 owner: builder
+pillar: "software-dev"
 sourceUrl: "https://github.com/donnemartin/system-design-primer"
 ---
 

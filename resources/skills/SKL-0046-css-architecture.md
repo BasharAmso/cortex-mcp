@@ -18,6 +18,7 @@ sourceUrl: "https://github.com/awesome-css-group/awesome-css"
 lastUpdated: "2026-03-29"
 difficulty: intermediate
 owner: builder
+pillar: "frontend"
 ---
 
 # CSS Architecture

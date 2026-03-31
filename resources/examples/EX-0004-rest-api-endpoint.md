@@ -16,6 +16,7 @@ sourceUrl: "https://github.com/goldbergyoni/nodebestpractices"
 lastUpdated: "2026-03-30"
 difficulty: beginner
 owner: builder
+pillar: "software-dev"
 ---
 
 # REST API Endpoint Example

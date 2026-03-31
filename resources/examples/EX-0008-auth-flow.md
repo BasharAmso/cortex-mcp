@@ -17,6 +17,7 @@ sourceUrl: "https://github.com/OWASP/CheatSheetSeries"
 lastUpdated: "2026-03-30"
 difficulty: intermediate
 owner: builder
+pillar: "software-dev"
 ---
 
 # Authentication Flow (Next.js + NextAuth)

@@ -18,6 +18,7 @@ sourceUrl: "https://github.com/streamich/awesome-css-animations"
 lastUpdated: "2026-03-29"
 difficulty: intermediate
 owner: builder
+pillar: "frontend"
 ---
 
 # Web Animations

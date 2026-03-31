@@ -17,6 +17,7 @@ synonyms: ["how to upload files in my app", "store images in the cloud", "S3 vs 
 lastUpdated: "2026-03-29"
 difficulty: intermediate
 owner: builder
+pillar: "software-dev"
 sourceUrl: "https://github.com/goldbergyoni/nodebestpractices"
 ---
 

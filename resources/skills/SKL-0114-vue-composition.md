@@ -18,6 +18,7 @@ lastUpdated: "2026-03-30"
 sourceUrl: "https://github.com/vuejs/core"
 difficulty: intermediate
 owner: builder
+pillar: "platform"
 ---
 
 # Vue 3 Composition API

@@ -17,6 +17,7 @@ synonyms: ["add pagination to my list", "infinite scroll setup", "cursor vs offs
 lastUpdated: "2026-03-29"
 difficulty: beginner
 owner: builder
+pillar: "software-dev"
 sourceUrl: "https://github.com/elsewhencode/project-guidelines"
 ---
 

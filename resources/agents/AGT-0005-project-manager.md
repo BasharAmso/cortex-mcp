@@ -16,6 +16,7 @@ synonyms: ["plan out my tasks", "how long will this take", "what should I work o
 lastUpdated: "2026-03-29"
 difficulty: beginner
 owner: project-manager
+pillar: "framework-core"
 ---
 
 # Project Manager Agent

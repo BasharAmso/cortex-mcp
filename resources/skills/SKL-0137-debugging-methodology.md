@@ -18,6 +18,7 @@ lastUpdated: "2026-03-30"
 sourceUrl: "https://github.com/uds-se/debuggingbook"
 difficulty: beginner
 owner: cortex
+pillar: "developer-growth"
 ---
 
 # Skill: Debugging Methodology

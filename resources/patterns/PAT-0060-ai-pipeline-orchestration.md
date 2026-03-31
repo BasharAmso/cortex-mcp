@@ -18,6 +18,7 @@ lastUpdated: "2026-03-30"
 sourceUrl: "https://github.com/digitalsamba/claude-code-video-toolkit"
 difficulty: advanced
 owner: cortex
+pillar: "language"
 ---
 
 # AI Pipeline Orchestration

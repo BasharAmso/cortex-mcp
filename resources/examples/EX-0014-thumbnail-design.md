@@ -17,6 +17,7 @@ sourceUrl: ""
 lastUpdated: "2026-03-30"
 difficulty: beginner
 owner: builder
+pillar: "content-creation"
 ---
 
 # Thumbnail Design Guide

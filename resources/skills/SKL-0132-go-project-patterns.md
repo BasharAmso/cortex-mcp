@@ -18,6 +18,7 @@ lastUpdated: "2026-03-30"
 sourceUrl: "https://github.com/golang-standards/project-layout"
 difficulty: intermediate
 owner: cortex
+pillar: "language"
 ---
 
 # Go Project Patterns

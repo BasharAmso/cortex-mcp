@@ -18,6 +18,7 @@ lastUpdated: "2026-03-29"
 sourceUrl: "https://github.com/mezod/awesome-indie"
 difficulty: beginner
 owner: builder
+pillar: "product-business"
 ---
 
 # Skill: Launch Checklist

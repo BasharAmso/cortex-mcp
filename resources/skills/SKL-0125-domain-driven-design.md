@@ -18,6 +18,7 @@ lastUpdated: "2026-03-30"
 sourceUrl: "https://github.com/Sairyss/domain-driven-hexagon"
 difficulty: intermediate
 owner: "cortex"
+pillar: "architecture"
 ---
 
 # Domain-Driven Design

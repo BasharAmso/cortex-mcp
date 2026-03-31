@@ -16,6 +16,7 @@ synonyms: ["figure out what to build", "write requirements for my app", "is this
 lastUpdated: "2026-03-29"
 difficulty: beginner
 owner: product-manager
+pillar: "framework-core"
 ---
 
 # Product Manager Agent

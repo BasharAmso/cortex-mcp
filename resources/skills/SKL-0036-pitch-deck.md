@@ -18,6 +18,7 @@ lastUpdated: "2026-03-29"
 sourceUrl: "https://github.com/deanpeters/Product-Manager-Skills"
 difficulty: intermediate
 owner: product-manager
+pillar: "product-business"
 ---
 
 # Skill: Pitch Deck

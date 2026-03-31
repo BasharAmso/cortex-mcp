@@ -18,6 +18,7 @@ lastUpdated: "2026-03-29"
 sourceUrl: "https://github.com/goldbergyoni/javascript-testing-best-practices"
 difficulty: intermediate
 owner: builder
+pillar: "software-dev"
 ---
 
 # Testing Strategy

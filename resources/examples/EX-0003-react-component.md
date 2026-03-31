@@ -16,6 +16,7 @@ sourceUrl: "https://github.com/alan2207/bulletproof-react"
 lastUpdated: "2026-03-30"
 difficulty: beginner
 owner: builder
+pillar: "frontend"
 ---
 
 # React Component Example

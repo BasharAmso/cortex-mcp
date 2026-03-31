@@ -17,6 +17,7 @@ synonyms: ["release features to some users first", "how to do A/B testing", "fea
 lastUpdated: "2026-03-29"
 difficulty: intermediate
 owner: builder
+pillar: "software-dev"
 sourceUrl: "https://github.com/dair-ai/Prompt-Engineering-Guide"
 ---
 

@@ -18,6 +18,7 @@ lastUpdated: "2026-03-29"
 sourceUrl: "https://github.com/veggiemonk/awesome-docker"
 difficulty: intermediate
 owner: builder
+pillar: "software-dev"
 ---
 
 # CI/CD Pipeline Patterns

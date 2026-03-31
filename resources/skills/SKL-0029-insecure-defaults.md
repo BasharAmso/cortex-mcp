@@ -18,6 +18,7 @@ lastUpdated: "2026-03-29"
 sourceUrl: "https://github.com/OWASP/CheatSheetSeries"
 difficulty: intermediate
 owner: reviewer
+pillar: "software-dev"
 ---
 
 # Skill: Insecure Defaults Detection

@@ -17,6 +17,7 @@ sourceUrl: "https://github.com/btford/write-good"
 lastUpdated: "2026-03-30"
 difficulty: intermediate
 owner: builder
+pillar: "content-creation"
 ---
 
 # Copywriting Formulas

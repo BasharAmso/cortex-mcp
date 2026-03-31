@@ -17,6 +17,7 @@ lastUpdated: "2026-03-30"
 sourceUrl: "https://github.com/goldbergyoni/nodebestpractices"
 difficulty: beginner
 owner: builder
+pillar: "software-dev"
 ---
 
 # Environment Variables & Config Management

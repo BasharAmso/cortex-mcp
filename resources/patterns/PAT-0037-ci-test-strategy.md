@@ -17,6 +17,7 @@ synonyms: ["how to run tests faster in CI", "github actions test setup", "parall
 lastUpdated: "2026-03-29"
 difficulty: advanced
 owner: builder
+pillar: "software-dev"
 sourceUrl: "https://github.com/goldbergyoni/javascript-testing-best-practices"
 ---
 

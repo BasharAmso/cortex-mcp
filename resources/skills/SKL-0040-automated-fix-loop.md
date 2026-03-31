@@ -18,6 +18,7 @@ lastUpdated: "2026-03-29"
 sourceUrl: "https://github.com/dair-ai/Prompt-Engineering-Guide"
 difficulty: advanced
 owner: fixer
+pillar: "framework-core"
 ---
 
 # Automated Fix Loop

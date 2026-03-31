@@ -16,6 +16,7 @@ sourceUrl: "https://github.com/modelcontextprotocol/servers"
 lastUpdated: "2026-03-30"
 difficulty: intermediate
 owner: builder
+pillar: "framework-core"
 ---
 
 # MCP Tool Registration Example

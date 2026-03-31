@@ -17,6 +17,7 @@ synonyms: ["I never know what to write about", "how to come up with content idea
 lastUpdated: "2026-03-29"
 difficulty: beginner
 owner: builder
+pillar: "content-creation"
 sourceUrl: "https://github.com/PhilipStark/book-genesis"
 ---
 

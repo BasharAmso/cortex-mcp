@@ -16,6 +16,7 @@ synonyms: ["write a readme for my project", "document how this works", "create s
 lastUpdated: "2026-03-29"
 difficulty: beginner
 owner: documenter
+pillar: "framework-core"
 ---
 
 # Documenter Agent

@@ -18,6 +18,7 @@ lastUpdated: "2026-03-30"
 sourceUrl: "https://github.com/heavybit/devmarketingguide"
 difficulty: beginner
 owner: cortex
+pillar: "developer-growth"
 ---
 
 # Skill: Developer Marketing

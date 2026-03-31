@@ -18,6 +18,7 @@ lastUpdated: "2026-03-30"
 sourceUrl: "https://github.com/k8spatterns/examples"
 difficulty: intermediate
 owner: "cortex"
+pillar: "architecture"
 ---
 
 # Kubernetes Patterns

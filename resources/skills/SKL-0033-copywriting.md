@@ -18,6 +18,7 @@ lastUpdated: "2026-03-29"
 sourceUrl: "https://github.com/PhilipStark/book-genesis"
 difficulty: intermediate
 owner: builder
+pillar: "product-business"
 ---
 
 # Skill: Copywriting

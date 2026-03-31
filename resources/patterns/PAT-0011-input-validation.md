@@ -17,6 +17,7 @@ synonyms: ["how to validate user input", "which validation library should I use"
 lastUpdated: "2026-03-29"
 difficulty: intermediate
 owner: builder
+pillar: "software-dev"
 sourceUrl: "https://github.com/goldbergyoni/nodebestpractices"
 ---
 

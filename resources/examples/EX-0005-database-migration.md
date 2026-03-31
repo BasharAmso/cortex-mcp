@@ -16,6 +16,7 @@ sourceUrl: "https://github.com/prisma/prisma"
 lastUpdated: "2026-03-30"
 difficulty: beginner
 owner: builder
+pillar: "software-dev"
 ---
 
 # Database Migration Example

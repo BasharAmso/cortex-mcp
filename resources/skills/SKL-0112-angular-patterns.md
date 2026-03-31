@@ -18,6 +18,7 @@ lastUpdated: "2026-03-30"
 sourceUrl: "https://github.com/angular/angular"
 difficulty: intermediate
 owner: builder
+pillar: "platform"
 ---
 
 # Angular Patterns

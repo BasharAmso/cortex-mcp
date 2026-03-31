@@ -17,6 +17,7 @@ synonyms: ["should I normalize or denormalize my database", "when to use json co
 lastUpdated: "2026-03-29"
 difficulty: intermediate
 owner: builder
+pillar: "software-dev"
 sourceUrl: "https://github.com/dhamaniasad/awesome-postgres"
 ---
 

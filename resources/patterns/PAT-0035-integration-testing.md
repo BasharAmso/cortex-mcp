@@ -17,6 +17,7 @@ synonyms: ["how to test my API endpoints", "database test setup and teardown", "
 lastUpdated: "2026-03-29"
 difficulty: intermediate
 owner: builder
+pillar: "software-dev"
 sourceUrl: "https://github.com/goldbergyoni/javascript-testing-best-practices"
 ---
 

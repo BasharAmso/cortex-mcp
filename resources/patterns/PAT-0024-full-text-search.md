@@ -17,6 +17,7 @@ synonyms: ["how to add search to my app", "postgres full text search setup", "ts
 lastUpdated: "2026-03-29"
 difficulty: intermediate
 owner: builder
+pillar: "software-dev"
 sourceUrl: "https://github.com/dhamaniasad/awesome-postgres"
 ---
 

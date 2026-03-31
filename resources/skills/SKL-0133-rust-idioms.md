@@ -18,6 +18,7 @@ lastUpdated: "2026-03-30"
 sourceUrl: "https://github.com/rust-unofficial/patterns"
 difficulty: advanced
 owner: cortex
+pillar: "language"
 ---
 
 # Rust Idioms & Patterns

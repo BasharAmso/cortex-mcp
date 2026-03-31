@@ -16,6 +16,7 @@ sourceUrl: "https://github.com/nicedoc/nicedoc.io"
 lastUpdated: "2026-03-30"
 difficulty: intermediate
 owner: builder
+pillar: "app-polish"
 ---
 
 # App-Like UX Patterns

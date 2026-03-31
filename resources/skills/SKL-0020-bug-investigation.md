@@ -17,6 +17,7 @@ lastUpdated: "2026-03-29"
 sourceUrl: "https://github.com/goldbergyoni/nodebestpractices"
 difficulty: intermediate
 owner: fixer
+pillar: "framework-core"
 ---
 
 # Skill: Bug Investigation

@@ -18,6 +18,7 @@ lastUpdated: "2026-03-30"
 sourceUrl: "https://github.com/EdoStra/Marketing-for-Founders"
 difficulty: beginner
 owner: cortex
+pillar: "developer-growth"
 ---
 
 # Skill: Getting First Users

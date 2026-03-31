@@ -17,6 +17,7 @@ lastUpdated: "2026-03-30"
 sourceUrl: "https://github.com/alan2207/bulletproof-react"
 difficulty: intermediate
 owner: builder
+pillar: "software-dev"
 ---
 
 # State Management

@@ -18,6 +18,7 @@ lastUpdated: "2026-03-30"
 sourceUrl: "https://github.com/microservices-patterns/ftgo-application"
 difficulty: intermediate
 owner: "cortex"
+pillar: "architecture"
 ---
 
 # Microservices Patterns

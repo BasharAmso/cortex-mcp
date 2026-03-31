@@ -17,6 +17,7 @@ sourceUrl: "https://github.com/alexpate/awesome-design-systems"
 lastUpdated: "2026-03-30"
 difficulty: intermediate
 owner: builder
+pillar: "content-creation"
 ---
 
 # Brand Visual Consistency

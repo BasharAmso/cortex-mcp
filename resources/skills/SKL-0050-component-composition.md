@@ -18,6 +18,7 @@ sourceUrl: "https://github.com/enaqx/awesome-react"
 lastUpdated: "2026-03-29"
 difficulty: advanced
 owner: builder
+pillar: "frontend"
 ---
 
 # Component Composition

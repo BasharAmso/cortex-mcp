@@ -18,6 +18,7 @@ lastUpdated: "2026-03-30"
 sourceUrl: "https://github.com/flutter/samples"
 difficulty: intermediate
 owner: builder
+pillar: "platform"
 ---
 
 # Flutter Patterns

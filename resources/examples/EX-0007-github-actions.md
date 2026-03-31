@@ -16,6 +16,7 @@ sourceUrl: "https://github.com/sdras/awesome-actions"
 lastUpdated: "2026-03-30"
 difficulty: beginner
 owner: builder
+pillar: "software-dev"
 ---
 
 # GitHub Actions CI Workflow

@@ -17,6 +17,7 @@ sourceUrl: "https://github.com/stripe/stripe-node"
 lastUpdated: "2026-03-30"
 difficulty: intermediate
 owner: builder
+pillar: "software-dev"
 ---
 
 # Stripe Checkout Integration

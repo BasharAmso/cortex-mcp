@@ -17,6 +17,7 @@ synonyms: ["what should I post about", "I never know what topics to cover", "my 
 lastUpdated: "2026-03-29"
 difficulty: beginner
 owner: builder
+pillar: "content-creation"
 sourceUrl: "https://github.com/PhilipStark/book-genesis"
 ---
 

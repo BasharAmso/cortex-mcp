@@ -16,6 +16,7 @@ sourceUrl: "https://github.com/goldbergyoni/javascript-testing-best-practices"
 lastUpdated: "2026-03-30"
 difficulty: beginner
 owner: builder
+pillar: "software-dev"
 ---
 
 # Unit Test Example

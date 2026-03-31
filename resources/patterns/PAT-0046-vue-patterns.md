@@ -18,6 +18,7 @@ lastUpdated: "2026-03-30"
 sourceUrl: "https://github.com/vuejs/core"
 difficulty: advanced
 owner: builder
+pillar: "platform"
 ---
 
 # Vue Patterns

@@ -17,6 +17,7 @@ synonyms: ["how to undo deleting a record from database", "soft delete vs hard d
 lastUpdated: "2026-03-29"
 difficulty: intermediate
 owner: builder
+pillar: "software-dev"
 sourceUrl: "https://github.com/dhamaniasad/awesome-postgres"
 ---
 

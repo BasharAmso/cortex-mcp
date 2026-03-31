@@ -18,6 +18,7 @@ lastUpdated: "2026-03-29"
 sourceUrl: "https://github.com/gztchan/awesome-design"
 difficulty: intermediate
 owner: designer
+pillar: "framework-core"
 ---
 
 # Skill: UX Design

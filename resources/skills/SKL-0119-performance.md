@@ -18,6 +18,7 @@ lastUpdated: "2026-03-30"
 sourceUrl: "https://github.com/nicklockwood/SwiftUI-BestPractices"
 difficulty: intermediate
 owner: builder
+pillar: "software-dev"
 ---
 
 # Performance Optimization

@@ -17,6 +17,7 @@ synonyms: ["how to catch visual bugs automatically", "screenshot testing setup",
 lastUpdated: "2026-03-29"
 difficulty: intermediate
 owner: builder
+pillar: "software-dev"
 sourceUrl: "https://github.com/goldbergyoni/javascript-testing-best-practices"
 ---
 

@@ -17,6 +17,7 @@ synonyms: ["how far ahead should I plan content", "how often should I post on Li
 lastUpdated: "2026-03-29"
 difficulty: beginner
 owner: builder
+pillar: "content-creation"
 sourceUrl: "https://github.com/PhilipStark/book-genesis"
 ---
 

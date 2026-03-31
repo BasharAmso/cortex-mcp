@@ -18,6 +18,7 @@ lastUpdated: "2026-03-30"
 sourceUrl: "https://github.com/labs42io/clean-code-typescript"
 difficulty: intermediate
 owner: "cortex"
+pillar: "language"
 ---
 
 # Clean TypeScript

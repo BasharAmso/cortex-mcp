@@ -16,6 +16,7 @@ synonyms: ["check my code for mistakes", "is this code any good", "find bugs bef
 lastUpdated: "2026-03-29"
 difficulty: beginner
 owner: reviewer
+pillar: "framework-core"
 ---
 
 # Reviewer Agent

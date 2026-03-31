@@ -18,6 +18,7 @@ lastUpdated: "2026-03-30"
 sourceUrl: "https://github.com/nordicgiant2/awesome-landing-page"
 difficulty: intermediate
 owner: builder
+pillar: "app-polish"
 ---
 
 # Landing Page Patterns

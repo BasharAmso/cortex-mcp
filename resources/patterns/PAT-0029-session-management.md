@@ -17,6 +17,7 @@ synonyms: ["should I use jwt or cookies for login", "how to keep users logged in
 lastUpdated: "2026-03-29"
 difficulty: intermediate
 owner: builder
+pillar: "software-dev"
 sourceUrl: "https://github.com/OWASP/CheatSheetSeries"
 ---
 

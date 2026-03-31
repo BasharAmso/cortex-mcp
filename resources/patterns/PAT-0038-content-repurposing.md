@@ -17,6 +17,7 @@ synonyms: ["how do I get more out of one post", "I spend hours writing and only 
 lastUpdated: "2026-03-29"
 difficulty: beginner
 owner: builder
+pillar: "content-creation"
 sourceUrl: "https://github.com/PhilipStark/book-genesis"
 ---
 

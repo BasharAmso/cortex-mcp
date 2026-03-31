@@ -17,6 +17,7 @@ synonyms: ["send emails from my app", "which email service should I use", "set u
 lastUpdated: "2026-03-29"
 difficulty: beginner
 owner: builder
+pillar: "software-dev"
 sourceUrl: "https://github.com/goldbergyoni/nodebestpractices"
 ---
 

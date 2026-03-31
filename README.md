@@ -1,6 +1,6 @@
 # Cortex MCP
 
-A knowledge delivery engine that ships with a built-in library of 680 agents, skills, patterns, and examples across 26 domains — and serves them on-demand to any MCP-compatible AI tool.
+A knowledge delivery engine that ships with a built-in library of 694 agents, skills, patterns, and examples across 26 domains — and serves them on-demand to any MCP-compatible AI tool.
 
 Instead of every project loading its own framework files into context (wasting 90%+ of the token budget), Cortex MCP is installed once and feeds the right knowledge to any project that needs it.
 
@@ -86,8 +86,8 @@ Your project repos stay lightweight. The knowledge lives in Cortex MCP and gets 
 | Category | Count | Examples |
 |----------|-------|---------|
 | **Agents** | 10 | Builder, Reviewer, Architect, Product Manager, Designer, Fixer, Deployer |
-| **Skills** | 434 | CRM, Lead Scoring, Market Sizing, LinkedIn Strategy, Salon Booking, Restaurant POS, Code Review, Debugging, Game Physics, Level Design, E-Commerce, IoT, Healthcare, Finance, Education |
-| **Patterns** | 221 | Error Handling, API Design, Circuit Breaker, Saga, Cart State, Checkout Recovery, Appointment Booking, POS Architecture, CRM Data Model, Inventory Tracking, Achievement System |
+| **Skills** | 444 | CRM, Lead Scoring, Market Sizing, LinkedIn Strategy, Salon Booking, Restaurant POS, Code Review, Debugging, Game Physics, Level Design, E-Commerce, IoT, Healthcare, Finance, Education |
+| **Patterns** | 225 | Error Handling, API Design, Circuit Breaker, Saga, Cart State, Checkout Recovery, Appointment Booking, POS Architecture, CRM Data Model, Inventory Tracking, Achievement System |
 | **Examples** | 16 | MCP Tool, React Component, REST API, PWA Setup, Push Notifications, Offline-First, Stripe Checkout, GitHub Actions |
 
 Every fragment includes synonyms for natural language matching. Ask "how do I add logins" and it finds the authentication pattern. Ask "my app is slow" and it finds the performance skill. Ask "how do I grow on LinkedIn" and it finds the LinkedIn strategy skill.
@@ -111,8 +111,8 @@ Every fragment includes synonyms for natural language matching. Ask "how do I ad
 | **Market Research** | 30 | Competitor analysis, market sizing, surveys, trend analysis |
 | **Personal Brand** | 30 | LinkedIn, newsletters, podcasting, speaking, community building |
 | **Product Business** | 30 | MVP strategy, pricing, A/B testing, metrics, churn prevention |
-| **Content Creation** | 29 | Writing, copywriting, YouTube, newsletters, AI-assisted creation |
-| **Platform** | 17 | SwiftUI, Compose, Flutter, Vue, Svelte, Angular, Next.js |
+| **Content Creation** | 30 | Writing, copywriting, YouTube, newsletters, AI-assisted creation |
+| **Platform** | 30 | SwiftUI, Compose, Flutter, Vue, Svelte, Angular, Next.js |
 | **Health** | 15 | Telehealth, FHIR, mental health apps, wearables, medication tracking |
 | **Finance** | 15 | Personal finance, banking APIs, portfolios, tax engines, billing |
 | **Collaboration** | 15 | Wikis, project management, video conferencing, team chat |
@@ -125,7 +125,7 @@ Every fragment includes synonyms for natural language matching. Ask "how do I ad
 
 ## Features
 
-- **680 built-in fragments** across 26 domains — agents, skills, patterns, and code examples
+- **694 built-in fragments** across 26 domains — agents, skills, patterns, and code examples
 - **Pillar filtering** — filter by domain (e.g., `game-dev`, `ecommerce`, `sales`, `coding-literacy`)
 - **Synonym matching** — finds fragments even when you use informal language
 - **Three-tier search** — quick cache (~2ms), pre-built index (~5-10ms), fuzzy fallback (~15-20ms)

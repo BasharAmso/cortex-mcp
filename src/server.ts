@@ -34,7 +34,7 @@ export async function startServer(): Promise<void> {
 
   const server = new McpServer({
     name: "cortex-mcp-server",
-    version: "0.1.0",
+    version: "0.4.1",
   });
 
   // --- Resources ---
@@ -127,8 +127,12 @@ export async function startServer(): Promise<void> {
 
   // --- Tools ---
 
+  // Compute counts once for dynamic tool descriptions
+  const uniquePillars = new Set(fragments.map((f) => f.pillar));
+
   server.tool(
     "search_knowledge",
+    `Search ${fragments.length} knowledge fragments across ${uniquePillars.size} domains for validated patterns, skill procedures, and implementation examples. Use before writing code, designing architecture, or reviewing work to ground your approach in battle-tested practices.`,
     {
       query: z.string().describe("Natural language search query"),
       mode: z
@@ -229,6 +233,7 @@ export async function startServer(): Promise<void> {
 
   server.tool(
     "get_fragment",
+    "Retrieve the full content of a specific knowledge fragment by ID (e.g. SKL-0001, PAT-0042). Use after search_knowledge returns relevant results and you need the complete procedure, pattern, or example.",
     {
       id: z.string().describe("Fragment ID (e.g., SKL-0001, AGT-0003)"),
     },
@@ -280,6 +285,7 @@ export async function startServer(): Promise<void> {
 
   server.tool(
     "browse_library",
+    "List all available knowledge fragments, optionally filtered by category (skills, patterns, agents, examples) or domain pillar (e.g. game-dev, ecommerce). Use to discover what knowledge exists before searching.",
     {
       category: z
         .enum(["agents", "skills", "patterns", "examples", "all"])
@@ -325,6 +331,7 @@ export async function startServer(): Promise<void> {
 
   server.tool(
     "detect_project",
+    "Analyze a list of project root filenames to detect the tech stack and suggest relevant knowledge searches. Use at project start to auto-scope knowledge to the right domains.",
     {
       files: z
         .array(z.string())
@@ -402,7 +409,7 @@ export async function startServer(): Promise<void> {
     },
   );
 
-  server.tool("list_categories", {}, async () => {
+  server.tool("list_categories", "Show all categories and domain pillars with fragment counts. Use to understand library coverage and available filtering options.", {}, async () => {
     const counts: Record<string, number> = {};
     const pillarCounts: Record<string, number> = {};
     for (const f of fragments) {

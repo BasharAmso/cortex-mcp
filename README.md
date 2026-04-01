@@ -70,8 +70,8 @@ Or paste this into `~/.cursor/mcp.json` if you prefer:
 Cortex MCP (installed once, contains the library)
   ├── resources/
   │   ├── agents/      10 agent definitions
-  │   ├── skills/     155 skill procedures
-  │   ├── patterns/    83 reusable patterns
+  │   ├── skills/     443 skill procedures
+  │   ├── patterns/   225 reusable patterns
   │   └── examples/    16 code examples
   └── custom/         (your own directories, optional)
          ↓ serves on-demand via MCP
@@ -81,12 +81,24 @@ Project A   Project B   Project C
 
 Your project repos stay lightweight. The knowledge lives in Cortex MCP and gets delivered based on what the current task needs.
 
+## For Skill Authors
+
+Skills define **what to do**. Cortex provides **what to know**.
+
+Any skill -- in Claude Code, Cursor, Copilot, or custom agents -- can call Cortex mid-execution to ground its output in validated patterns:
+
+1. `search_knowledge("auth patterns", category="patterns")` -- find relevant knowledge
+2. `get_fragment("PAT-0042")` -- pull the full pattern into context
+3. Apply the pattern alongside the skill's own procedure
+
+Your skills get smarter without getting longer. The knowledge stays in Cortex, versioned and searchable, instead of duplicated across every skill file.
+
 ## What's in the Library
 
 | Category | Count | Examples |
 |----------|-------|---------|
 | **Agents** | 10 | Builder, Reviewer, Architect, Product Manager, Designer, Fixer, Deployer |
-| **Skills** | 444 | CRM, Lead Scoring, Market Sizing, LinkedIn Strategy, Salon Booking, Restaurant POS, Code Review, Debugging, Game Physics, Level Design, E-Commerce, IoT, Healthcare, Finance, Education |
+| **Skills** | 443 | CRM, Lead Scoring, Market Sizing, LinkedIn Strategy, Salon Booking, Restaurant POS, Code Review, Debugging, Game Physics, Level Design, E-Commerce, IoT, Healthcare, Finance, Education |
 | **Patterns** | 225 | Error Handling, API Design, Circuit Breaker, Saga, Cart State, Checkout Recovery, Appointment Booking, POS Architecture, CRM Data Model, Inventory Tracking, Achievement System |
 | **Examples** | 16 | MCP Tool, React Component, REST API, PWA Setup, Push Notifications, Offline-First, Stripe Checkout, GitHub Actions |
 

@@ -11,7 +11,7 @@ useWhen:
   - creating spending analysis and budget overview screens
   - helping users visualize where their money goes
 estimatedTokens: 650
-relatedFragments: [SKL-0367, SKL-0369, PAT-0188, PAT-0189]
+relatedFragments: [SKL-0367, SKL-0369, PAT-0188, PAT-0189, EX-0038]
 dependencies: []
 synonyms: ["how to build a budget tracker app", "personal finance app features", "expense tracking app design", "savings goal feature development", "money management app architecture", "spending category tracker"]
 lastUpdated: "2026-03-30"

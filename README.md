@@ -76,7 +76,7 @@ Cortex MCP (installed once, contains the library)
   │   ├── agents/      10 agent definitions
   │   ├── skills/     443 skill procedures
   │   ├── patterns/   225 reusable patterns
-  │   └── examples/    28 code examples
+  │   └── examples/    50 code examples
   └── custom/         (your own directories, optional)
          ↓ serves on-demand via MCP
    ┌─────────┬──────────┬──────────┐
@@ -104,7 +104,7 @@ Your skills get smarter without getting longer. The knowledge stays in Cortex, v
 | **Agents** | 10 | Builder, Reviewer, Architect, Product Manager, Designer, Fixer, Deployer |
 | **Skills** | 443 | CRM, Lead Scoring, Market Sizing, LinkedIn Strategy, Salon Booking, Restaurant POS, Code Review, Debugging, Game Physics, Level Design, E-Commerce, IoT, Healthcare, Finance, Education |
 | **Patterns** | 225 | Error Handling, API Design, Circuit Breaker, Saga, Cart State, Checkout Recovery, Appointment Booking, POS Architecture, CRM Data Model, Inventory Tracking, Achievement System |
-| **Examples** | 28 | MCP Tool, React Component, REST API, Phaser Game Scene, ECS Pattern, Product Catalog, Checkout Flow, API Gateway, Circuit Breaker, MVP Landing Page, A/B Testing, CRM Pipeline, Salon Booking, Online Course, IoT Dashboard |
+| **Examples** | 50 | Phaser Game, ECS, Product Catalog, Checkout, API Gateway, Circuit Breaker, MVP Landing Page, A/B Testing, CRM Pipeline, Salon Booking, Online Course, IoT Dashboard, Competitor Analysis, Prayer Times, Go Server, Web Scraper, Kanban Board, and more |
 
 Every fragment includes synonyms for natural language matching. Ask "how do I add logins" and it finds the authentication pattern. Ask "my app is slow" and it finds the performance skill. Ask "how do I grow on LinkedIn" and it finds the LinkedIn strategy skill.
 
@@ -141,7 +141,7 @@ Every fragment includes synonyms for natural language matching. Ask "how do I ad
 
 ## Features
 
-- **706 built-in fragments** across 26 domains — agents, skills, patterns, and code examples
+- **728 built-in fragments** across 26 domains — agents, skills, patterns, and code examples
 - **Pillar filtering** — filter by domain (e.g., `game-dev`, `ecommerce`, `sales`, `coding-literacy`)
 - **Synonym matching** — finds fragments even when you use informal language
 - **Three-tier search** — quick cache (~2ms), pre-built index (~5-10ms), fuzzy fallback (~15-20ms)

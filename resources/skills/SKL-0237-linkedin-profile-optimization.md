@@ -11,7 +11,7 @@ useWhen:
   - auditing your profile for completeness and clarity
   - repositioning yourself for a career pivot or new niche
 estimatedTokens: 650
-relatedFragments: [SKL-0094, SKL-0088, SKL-0242]
+relatedFragments: [SKL-0094, SKL-0088, SKL-0242, EX-0033]
 dependencies: []
 synonyms: ["how do I optimize my LinkedIn profile", "what should my LinkedIn headline say", "how to write a good LinkedIn About section", "how to use LinkedIn Featured section", "LinkedIn profile tips", "how to get noticed on LinkedIn"]
 lastUpdated: "2026-03-30"

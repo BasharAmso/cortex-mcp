@@ -11,7 +11,7 @@ useWhen:
   - allowing employees to swap or pick up shifts
   - generating weekly schedules for a small business team
 estimatedTokens: 650
-relatedFragments: [SKL-0177, PAT-0094, SKL-0182]
+relatedFragments: [SKL-0177, PAT-0094, SKL-0182, EX-0050]
 dependencies: []
 synonyms: ["how do I schedule employee shifts automatically", "how to manage staff availability and time off", "what is the best way to handle shift swaps", "how do I prevent overtime when scheduling", "how to build a weekly schedule for my team", "how do I let employees set their availability"]
 lastUpdated: "2026-03-30"

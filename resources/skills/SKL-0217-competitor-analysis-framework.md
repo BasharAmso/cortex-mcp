@@ -11,7 +11,7 @@ useWhen:
   - preparing competitive positioning for a pitch deck
   - deciding how to differentiate your product
 estimatedTokens: 650
-relatedFragments: [SKL-0218, PAT-0115, SKL-0222]
+relatedFragments: [SKL-0218, PAT-0115, SKL-0222, EX-0031]
 dependencies: []
 synonyms: ["how do I analyze competitors", "what are my competitors doing", "competitive analysis template", "how to compare features against competitors", "who are my competitors", "competitive landscape overview"]
 lastUpdated: "2026-03-30"

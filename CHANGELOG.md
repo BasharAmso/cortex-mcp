@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [0.5.0] - 2026-04-01
+
+### Added
+- 22 new code examples (EX-0029 through EX-0050) covering all remaining zero-coverage pillars
+- All 26 pillars now have at least 1 example (12 previously uncovered pillars filled)
+- 18 more skills cross-linked to examples
+- Pillar coverage assertion in tests (all 26 pillars must have examples)
+- Example count assertion bumped to >= 50
+
+### Changed
+- Fragment count: 706 to 728
+- Example count: 28 to 50 (50 total across all 26 pillars)
+- Tests: 144 to 175
+
 ## [0.4.3] - 2026-04-01
 
 ### Added

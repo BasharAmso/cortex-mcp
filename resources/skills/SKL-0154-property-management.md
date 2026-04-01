@@ -12,7 +12,7 @@ useWhen:
   - designing multi-property portfolio support
   - setting up automated payment scheduling and invoicing
 estimatedTokens: 650
-relatedFragments: [PAT-0082, SKL-0010, SKL-0006]
+relatedFragments: [PAT-0082, SKL-0010, SKL-0006, EX-0042]
 dependencies: []
 synonyms: ["how to build a rental management app", "track tenants and rent payments", "lease management system", "landlord tenant software", "property manager tool", "manage multiple rental properties"]
 lastUpdated: "2026-03-30"

@@ -11,7 +11,7 @@ useWhen:
   - personalizing outreach at scale
   - improving email open and reply rates
 estimatedTokens: 650
-relatedFragments: [SKL-0198, SKL-0199, PAT-0106]
+relatedFragments: [SKL-0198, SKL-0199, PAT-0106, EX-0047]
 dependencies: []
 synonyms: ["how to write cold emails", "how to do cold outreach", "best cold email sequence", "how to follow up with prospects", "how to personalize sales emails", "building an outreach sequence"]
 lastUpdated: "2026-03-30"

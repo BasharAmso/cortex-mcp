@@ -11,7 +11,7 @@ useWhen:
   - computing Qibla direction from any location
   - supporting high-latitude prayer time adjustments
 estimatedTokens: 650
-relatedFragments: [SKL-0383, SKL-0153, PAT-0198]
+relatedFragments: [SKL-0383, SKL-0153, PAT-0198, EX-0040]
 dependencies: []
 synonyms: ["how to calculate prayer times", "how to build an adhan app", "how to compute fajr and isha times", "how to find Qibla direction programmatically", "how to handle prayer times in northern latitudes", "how to implement Islamic prayer time algorithms"]
 lastUpdated: "2026-03-30"

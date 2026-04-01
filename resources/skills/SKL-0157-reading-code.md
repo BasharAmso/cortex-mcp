@@ -11,7 +11,7 @@ useWhen:
   - understanding how a library or framework works internally
   - evaluating open-source projects before adopting them
 estimatedTokens: 650
-relatedFragments: [SKL-0158, SKL-0162, PAT-0084]
+relatedFragments: [SKL-0158, SKL-0162, PAT-0084, EX-0029]
 dependencies: []
 synonyms: ["how to read other people's code", "how to understand a codebase", "how to review code I didn't write", "how to navigate a large codebase", "how to learn from reading source code", "what should I look at first in unfamiliar code"]
 lastUpdated: "2026-03-30"

@@ -11,7 +11,7 @@ useWhen:
   - managing credentials securely across workflow nodes
   - replacing manual repetitive tasks with automated sequences
 estimatedTokens: 650
-relatedFragments: [SKL-0145, PAT-0059, PAT-0067, PAT-0070, SKL-0010]
+relatedFragments: [SKL-0145, PAT-0059, PAT-0067, PAT-0070, SKL-0010, EX-0044]
 dependencies: []
 synonyms: ["how to automate my workflow", "connect apps together automatically", "set up triggers between services", "build a no-code automation", "make things run automatically", "automate repetitive tasks"]
 lastUpdated: "2026-03-30"

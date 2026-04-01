@@ -11,7 +11,7 @@ useWhen:
   - narrowing down a problem in a large codebase
   - understanding why code behaves differently than expected
 estimatedTokens: 650
-relatedFragments: [SKL-0157, SKL-0162, PAT-0085]
+relatedFragments: [SKL-0157, SKL-0162, PAT-0085, EX-0030]
 dependencies: []
 synonyms: ["how to debug code", "how to find a bug", "my code is not working what do I do", "how to troubleshoot errors", "systematic debugging for beginners", "how to figure out why my code broke"]
 lastUpdated: "2026-03-30"

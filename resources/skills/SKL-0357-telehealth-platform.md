@@ -11,7 +11,7 @@ useWhen:
   - designing provider-patient scheduling workflows
   - ensuring HIPAA compliance for video consultations
 estimatedTokens: 650
-relatedFragments: [SKL-0362, SKL-0363, PAT-0185, PAT-0186]
+relatedFragments: [SKL-0362, SKL-0363, PAT-0185, PAT-0186, EX-0037]
 dependencies: []
 synonyms: ["how to build a telehealth app", "video doctor visit platform", "virtual care consultation system", "HIPAA compliant video chat", "remote medical appointment app", "telemedicine platform design"]
 lastUpdated: "2026-03-30"

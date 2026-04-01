@@ -11,7 +11,7 @@ useWhen:
   - comparing market opportunities across product ideas
   - building a business case for stakeholders
 estimatedTokens: 650
-relatedFragments: [PAT-0116, SKL-0217, SKL-0222]
+relatedFragments: [PAT-0116, SKL-0217, SKL-0222, EX-0032]
 dependencies: []
 synonyms: ["how big is my market", "how to calculate TAM SAM SOM", "market size estimation", "is this market big enough", "revenue potential analysis", "total addressable market"]
 lastUpdated: "2026-03-30"

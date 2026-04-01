@@ -11,7 +11,7 @@ useWhen:
   - creating custom workflow states and transitions
   - building a self-hosted alternative to Jira or Linear
 estimatedTokens: 650
-relatedFragments: [PAT-0078, PAT-0193, SKL-0152]
+relatedFragments: [PAT-0078, PAT-0193, SKL-0152, EX-0039]
 dependencies: []
 synonyms: ["how to build a project tracker", "how to design an issue tracking system", "how to implement sprints and roadmaps", "how to build something like Jira", "how to create a kanban board with workflows", "how to manage project tasks programmatically"]
 lastUpdated: "2026-03-30"

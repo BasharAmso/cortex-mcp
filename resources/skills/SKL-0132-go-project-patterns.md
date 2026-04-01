@@ -11,7 +11,7 @@ useWhen:
   - setting up Go modules and dependency management
   - writing idiomatic Go tests
 estimatedTokens: 700
-relatedFragments: [SKL-0006, PAT-0006]
+relatedFragments: [SKL-0006, PAT-0006, EX-0043]
 dependencies: []
 synonyms: ["go project structure", "golang best practices", "how to organize go code", "go error handling patterns", "golang concurrency", "go directory layout"]
 lastUpdated: "2026-03-30"

@@ -11,7 +11,7 @@ useWhen:
   - stuck in perfectionism and not shipping
   - planning what to do after launch day
 estimatedTokens: 650
-relatedFragments: [SKL-0139, SKL-0140, SKL-0034, SKL-0013, SKL-0136]
+relatedFragments: [SKL-0139, SKL-0140, SKL-0034, SKL-0013, SKL-0136, EX-0041]
 dependencies: []
 synonyms: ["how to finish my side project", "I keep starting but never launching", "what should my MVP include", "when is it ready to ship", "how to launch my app", "stop overthinking and ship it"]
 lastUpdated: "2026-03-30"

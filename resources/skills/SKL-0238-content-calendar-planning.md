@@ -11,7 +11,7 @@ useWhen:
   - setting up a batch creation workflow
   - deciding how often and when to post
 estimatedTokens: 650
-relatedFragments: [PAT-0124, SKL-0239, SKL-0242]
+relatedFragments: [PAT-0124, SKL-0239, SKL-0242, EX-0034]
 dependencies: []
 synonyms: ["how often should I post on LinkedIn", "how to plan content in advance", "content calendar template", "how to stay consistent with content", "batch content creation", "when is the best time to post"]
 lastUpdated: "2026-03-30"

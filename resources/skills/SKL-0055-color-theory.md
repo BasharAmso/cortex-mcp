@@ -11,7 +11,7 @@ useWhen:
   - adapting a light theme to dark mode
   - picking colors that actually look good together
 estimatedTokens: 650
-relatedFragments: [SKL-0005, SKL-0023, SKL-0049, SKL-0060]
+relatedFragments: [SKL-0005, SKL-0023, SKL-0049, SKL-0060, EX-0036]
 dependencies: []
 synonyms: ["how do I pick colors for my app", "my colors look ugly together", "what colors go with this brand color", "make my color palette not look terrible", "how to choose good colors for a website"]
 sourceUrl: "https://github.com/gztchan/awesome-design"

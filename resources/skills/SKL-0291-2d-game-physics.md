@@ -11,7 +11,7 @@ useWhen:
   - configuring gravity, bounce, and friction for game objects
   - building platformer or top-down physics interactions
 estimatedTokens: 650
-relatedFragments: [SKL-0296, SKL-0293, PAT-0154]
+relatedFragments: [SKL-0296, SKL-0293, PAT-0154, EX-0017]
 dependencies: []
 synonyms: ["how do I add physics to my game", "collision detection in 2D games", "gravity and jumping in platformers", "arcade physics vs matter physics", "how to make objects bounce and collide", "rigid body physics for 2D"]
 lastUpdated: "2026-03-30"

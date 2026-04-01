@@ -11,7 +11,7 @@ useWhen:
   - adding certificates or completion verification
   - modeling roles like instructor, learner, and admin
 estimatedTokens: 650
-relatedFragments: [PAT-0073, PAT-0074, SKL-0148]
+relatedFragments: [PAT-0073, PAT-0074, SKL-0148, EX-0027]
 dependencies: []
 synonyms: ["how to build an online course platform", "course module lesson structure", "how to track student progress", "how to issue certificates", "LMS database design", "how to build an e-learning site"]
 lastUpdated: "2026-03-30"

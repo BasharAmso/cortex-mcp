@@ -11,7 +11,7 @@ useWhen:
   - adding customer self-service booking to a website
   - handling appointment confirmations and cancellations
 estimatedTokens: 650
-relatedFragments: [PAT-0094, SKL-0181, SKL-0182]
+relatedFragments: [PAT-0094, SKL-0181, SKL-0182, EX-0026]
 dependencies: []
 synonyms: ["how do I let customers book appointments online", "how to build a salon scheduling app", "what is the best way to manage salon appointments", "how do I show available time slots on my website", "how to prevent double-booking at my salon", "how do I set up online booking for my spa"]
 lastUpdated: "2026-03-30"

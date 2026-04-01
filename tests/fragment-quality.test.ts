@@ -21,7 +21,7 @@ beforeAll(() => {
   fragmentMap = new Map(fragments.map((f) => [f.id, f]));
 });
 
-// Stratified sample: 2 agents, 5 skills (diverse pillars), 3 patterns, 2 examples
+// Stratified sample: 2 agents, 5 skills (diverse pillars), 3 patterns, 8 examples
 const SAMPLE_IDS = [
   // Agents
   "AGT-0001", // Builder (framework-core)
@@ -36,9 +36,15 @@ const SAMPLE_IDS = [
   "PAT-0058", // Kubernetes Production (software-dev)
   "PAT-0065", // Entity Component System (game-dev)
   "PAT-0096", // Inventory Tracking (ecommerce)
-  // Examples
+  // Examples — original + new (diverse pillars)
   "EX-0001", // MCP Tool (framework-core)
   "EX-0002", // MCP Resource (framework-core)
+  "EX-0017", // Phaser Game Scene (game-dev)
+  "EX-0020", // Checkout Flow (ecommerce)
+  "EX-0022", // Circuit Breaker (architecture)
+  "EX-0025", // CRM Lead Pipeline (sales)
+  "EX-0027", // Online Course Module (education)
+  "EX-0028", // IoT Dashboard MQTT (iot)
 ];
 
 describe("fragment quality (stratified sample)", () => {
@@ -100,5 +106,10 @@ describe("library-wide sanity checks", () => {
   it("has at least 20 unique pillars", () => {
     const pillars = new Set(fragments.map((f) => f.pillar));
     expect(pillars.size).toBeGreaterThanOrEqual(20);
+  });
+
+  it("has at least 28 examples", () => {
+    const examples = fragments.filter((f) => f.category === "examples");
+    expect(examples.length).toBeGreaterThanOrEqual(28);
   });
 });

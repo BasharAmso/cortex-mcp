@@ -11,7 +11,7 @@ useWhen:
   - creating sales forecasting dashboards
   - improving pipeline visibility for a sales team
 estimatedTokens: 650
-relatedFragments: [PAT-0105, SKL-0197, SKL-0203]
+relatedFragments: [PAT-0105, SKL-0197, SKL-0203, EX-0025]
 dependencies: []
 synonyms: ["how to manage a sales pipeline", "how to track deals", "what are pipeline stages", "how to forecast sales", "best way to organize sales deals", "how to build a deal tracker"]
 lastUpdated: "2026-03-30"

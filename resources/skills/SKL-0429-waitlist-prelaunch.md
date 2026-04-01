@@ -11,7 +11,7 @@ useWhen:
   - planning a launch announcement sequence
   - growing an audience before the product is ready
 estimatedTokens: 650
-relatedFragments: [SKL-0423, PAT-0220, SKL-0013, SKL-0033]
+relatedFragments: [SKL-0423, PAT-0220, SKL-0013, SKL-0033, EX-0023]
 dependencies: []
 synonyms: ["how to build a waitlist", "how to create a pre-launch landing page", "how to validate demand before building", "how to grow an audience before launch", "how to set up viral referrals for waitlist", "pre-launch marketing strategy"]
 lastUpdated: "2026-03-30"

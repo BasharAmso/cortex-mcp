@@ -11,7 +11,7 @@ useWhen:
   - adding custom attributes to products for filtering
   - structuring a catalog that supports search and faceted navigation
 estimatedTokens: 650
-relatedFragments: [SKL-0141, PAT-0136, PAT-0063]
+relatedFragments: [SKL-0141, PAT-0136, PAT-0063, EX-0019]
 dependencies: []
 synonyms: ["how to model products with variants", "product catalog data model", "how to organize product categories", "ecommerce product schema design", "how to add product attributes", "product variant architecture"]
 lastUpdated: "2026-03-30"

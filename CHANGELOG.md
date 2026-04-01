@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [0.4.3] - 2026-04-01
+
+### Added
+- 12 new code examples (EX-0017 through EX-0028) covering game-dev, ecommerce, architecture, product-business, sales, business-automation, education, and IoT
+- Bidirectional cross-links: 20 skills now reference related examples
+- Fragment quality test expanded to sample new examples (144 tests, up from 107)
+- Example count assertion in tests (>= 28)
+
+### Changed
+- Fragment count: 694 to 706
+- Example-to-skill ratio: 27:1 to 16:1
+
 ## [0.4.2] - 2026-04-01
 
 ### Added

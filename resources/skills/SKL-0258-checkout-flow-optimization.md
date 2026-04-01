@@ -11,7 +11,7 @@ useWhen:
   - building cart abandonment recovery workflows
   - reducing friction in the purchase funnel
 estimatedTokens: 650
-relatedFragments: [PAT-0061, PAT-0134, SKL-0141, PAT-0062]
+relatedFragments: [PAT-0061, PAT-0134, SKL-0141, PAT-0062, EX-0020]
 dependencies: []
 synonyms: ["how to design a checkout flow", "reduce cart abandonment", "guest checkout implementation", "checkout conversion optimization", "how to build a multi-step checkout", "one page vs multi step checkout"]
 lastUpdated: "2026-03-30"

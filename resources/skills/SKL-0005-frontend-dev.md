@@ -11,7 +11,7 @@ useWhen:
   - creating accessible, mobile-first web interfaces
   - choosing React component libraries or state management
 estimatedTokens: 750
-relatedFragments: [SKL-0006, SKL-0013, PAT-0002]
+relatedFragments: [SKL-0006, SKL-0013, PAT-0002, EX-0003]
 dependencies: []
 synonyms: ["build a web page", "make the UI look good", "create a React component", "I need a responsive layout", "add animations to my site"]
 lastUpdated: "2026-03-29"

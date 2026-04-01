@@ -11,7 +11,7 @@ useWhen:
   - writing database queries or creating migrations
   - structuring a Node.js project for maintainability
 estimatedTokens: 600
-relatedFragments: [SKL-0005, SKL-0008, SKL-0010]
+relatedFragments: [SKL-0005, SKL-0008, SKL-0010, EX-0004]
 dependencies: []
 synonyms: ["build an API", "create a server endpoint", "write backend logic", "I need a REST API", "handle requests on the server"]
 lastUpdated: "2026-03-29"

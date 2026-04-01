@@ -11,7 +11,7 @@ useWhen:
   - choosing visualization types for different sensor data
   - creating historical trend views for time-series data
 estimatedTokens: 650
-relatedFragments: [PAT-0076, PAT-0203, SKL-0149, PAT-0201]
+relatedFragments: [PAT-0076, PAT-0203, SKL-0149, PAT-0201, EX-0028]
 dependencies: []
 synonyms: ["how to build an IoT dashboard", "show sensor data on a screen", "real-time device monitoring UI", "grafana for IoT", "visualize temperature readings", "device status page design"]
 lastUpdated: "2026-03-30"

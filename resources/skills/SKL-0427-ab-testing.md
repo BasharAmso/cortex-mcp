@@ -11,7 +11,7 @@ useWhen:
   - designing experiments with proper statistical rigor
   - optimizing conversion rates on landing pages or funnels
 estimatedTokens: 700
-relatedFragments: [SKL-0428, SKL-0012, PAT-0218, SKL-0424]
+relatedFragments: [SKL-0428, SKL-0012, PAT-0218, SKL-0424, EX-0024]
 dependencies: []
 synonyms: ["how to run an A/B test", "how to know if a change is statistically significant", "how to set up feature flags", "how to test which version performs better", "experiment design for product changes", "how to validate product changes with data"]
 lastUpdated: "2026-03-30"

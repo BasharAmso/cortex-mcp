@@ -11,7 +11,7 @@ useWhen:
   - creating animations, tilemaps, or input controls in Phaser
   - learning the Phaser framework for the first time
 estimatedTokens: 700
-relatedFragments: [SKL-0142, PAT-0064, PAT-0065, PAT-0066]
+relatedFragments: [SKL-0142, PAT-0064, PAT-0065, PAT-0066, EX-0017]
 dependencies: []
 synonyms: ["how to make a web game with Phaser", "Phaser getting started guide", "browser game framework", "2D game in JavaScript", "how to add physics to my web game", "Phaser scenes and sprites tutorial"]
 lastUpdated: "2026-03-30"

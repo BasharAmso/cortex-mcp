@@ -11,7 +11,7 @@ useWhen:
   - structuring game entity behavior and state
   - learning which classic patterns apply to game development
 estimatedTokens: 750
-relatedFragments: [PAT-0064, PAT-0065, PAT-0066, SKL-0143]
+relatedFragments: [PAT-0064, PAT-0065, PAT-0066, SKL-0143, EX-0018]
 dependencies: []
 synonyms: ["game design patterns overview", "which pattern should I use for my game", "how to structure game code", "game architecture best practices", "common patterns in game development", "how do game engines organize code"]
 lastUpdated: "2026-03-30"

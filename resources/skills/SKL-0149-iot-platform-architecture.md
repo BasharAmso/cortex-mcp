@@ -11,7 +11,7 @@ useWhen:
   - architecting state management for real-time device data
   - planning a modular integration system for third-party devices
 estimatedTokens: 700
-relatedFragments: [PAT-0075, PAT-0076, SKL-0150]
+relatedFragments: [PAT-0075, PAT-0076, SKL-0150, EX-0028]
 dependencies: []
 synonyms: ["how to build a smart home platform", "connect different IoT devices together", "manage all my sensors in one place", "build a device dashboard backend", "IoT hub architecture", "how does home assistant work"]
 lastUpdated: "2026-03-30"

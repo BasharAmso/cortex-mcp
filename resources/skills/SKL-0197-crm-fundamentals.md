@@ -11,7 +11,7 @@ useWhen:
   - organizing contacts, companies, and interactions in an application
   - adding CRM capabilities to an existing product
 estimatedTokens: 650
-relatedFragments: [PAT-0104, SKL-0199, SKL-0198]
+relatedFragments: [PAT-0104, SKL-0199, SKL-0198, EX-0025]
 dependencies: []
 synonyms: ["how do I build a CRM", "what is a CRM system", "how to manage customer contacts", "best way to track customer relationships", "how to organize sales contacts", "building a contact database"]
 lastUpdated: "2026-03-30"

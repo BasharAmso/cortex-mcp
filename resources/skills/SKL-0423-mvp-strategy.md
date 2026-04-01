@@ -11,7 +11,7 @@ useWhen:
   - deciding what features to include in v1
   - transitioning from idea to first usable release
 estimatedTokens: 650
-relatedFragments: [SKL-0424, SKL-0432, PAT-0217, SKL-0013]
+relatedFragments: [SKL-0424, SKL-0432, PAT-0217, SKL-0013, EX-0023]
 dependencies: []
 synonyms: ["how do I build an MVP", "what should I include in v1", "how to cut scope for launch", "minimum viable product strategy", "how to validate my product idea", "what features should I ship first"]
 lastUpdated: "2026-03-30"

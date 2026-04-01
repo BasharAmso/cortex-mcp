@@ -11,7 +11,7 @@ useWhen:
   - configuring load balancing across service instances
   - transforming or aggregating API requests before routing
 estimatedTokens: 650
-relatedFragments: [SKL-0126, SKL-0333, PAT-0175]
+relatedFragments: [SKL-0126, SKL-0333, PAT-0175, EX-0021]
 dependencies: []
 synonyms: ["how to design an API gateway", "what does an API gateway do", "rate limiting at the gateway", "API routing best practices", "reverse proxy vs API gateway", "when do I need an API gateway"]
 lastUpdated: "2026-03-30"

@@ -11,7 +11,7 @@ useWhen:
   - structuring category and collection page hierarchies
   - fixing duplicate content issues across product variants
 estimatedTokens: 650
-relatedFragments: [SKL-0270, PAT-0141, SKL-0269]
+relatedFragments: [SKL-0270, PAT-0141, SKL-0269, EX-0019]
 dependencies: []
 synonyms: ["how to do SEO for an online store", "product page schema markup", "ecommerce site speed optimization", "how to rank product pages on Google", "structured data for products", "category page SEO best practices"]
 lastUpdated: "2026-03-30"

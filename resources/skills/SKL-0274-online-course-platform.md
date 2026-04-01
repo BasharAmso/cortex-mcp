@@ -11,7 +11,7 @@ useWhen:
   - adding completion tracking and certificate delivery
   - creating instructor dashboards for course management
 estimatedTokens: 650
-relatedFragments: [SKL-0276, SKL-0277, SKL-0279, PAT-0143]
+relatedFragments: [SKL-0276, SKL-0277, SKL-0279, PAT-0143, EX-0027]
 dependencies: []
 synonyms: ["how to build an LMS", "create an online course site", "build a learning platform", "how to structure courses online", "course enrollment system", "education platform architecture"]
 lastUpdated: "2026-03-30"

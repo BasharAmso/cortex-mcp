@@ -11,7 +11,7 @@ useWhen:
   - implementing an API gateway or service mesh
   - deciding on service boundaries and decomposition strategy
 estimatedTokens: 700
-relatedFragments: [PAT-0057, PAT-0056, PAT-0059, SKL-0125]
+relatedFragments: [PAT-0057, PAT-0056, PAT-0059, SKL-0125, EX-0021, EX-0022]
 dependencies: []
 synonyms: ["how to split my app into microservices", "microservices for beginners", "when to use microservices", "how services talk to each other", "API gateway explained", "database per service pattern"]
 lastUpdated: "2026-03-30"

@@ -1,13 +1,7 @@
 import { writeFileSync, mkdirSync, existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import type { Fragment } from "../loader/types.js";
-import type {
-  KeywordIndex,
-  UseWhenIndex,
-  UseWhenEntry,
-  QuickLookup,
-  IndexData,
-} from "./types.js";
+import type { KeywordIndex, UseWhenIndex, UseWhenEntry, QuickLookup, IndexData } from "./types.js";
 
 /**
  * Build all three indexes from a list of fragments.
@@ -46,11 +40,7 @@ export function writeIndexes(indexData: IndexData, indexPath: string): void {
  * Load indexes from disk. Returns null if any index file is missing.
  */
 export function loadIndexes(indexPath: string): IndexData | null {
-  const files = [
-    "keyword-index.json",
-    "usewhen-index.json",
-    "quick-lookup.json",
-  ];
+  const files = ["keyword-index.json", "usewhen-index.json", "quick-lookup.json"];
 
   for (const file of files) {
     if (!existsSync(resolve(indexPath, file))) {
@@ -128,18 +118,13 @@ function buildUseWhenIndex(fragments: Fragment[]): UseWhenIndex {
  * Pre-computed results for common queries.
  * Uses the top keywords from the keyword index (most connected fragments).
  */
-function buildQuickLookup(
-  fragments: Fragment[],
-  keywordIndex: KeywordIndex,
-): QuickLookup {
+function buildQuickLookup(fragments: Fragment[], keywordIndex: KeywordIndex): QuickLookup {
   const lookup: QuickLookup = {};
 
   // Category lookups
   const categories = ["agents", "skills", "patterns", "examples"] as const;
   for (const cat of categories) {
-    const ids = fragments
-      .filter((f) => f.category === cat)
-      .map((f) => f.id);
+    const ids = fragments.filter((f) => f.category === cat).map((f) => f.id);
     if (ids.length > 0) {
       lookup[cat] = ids;
     }
@@ -189,11 +174,49 @@ function extractKeywords(fragment: Fragment): string[] {
  * Tokenize a string into lowercase words, filtering stopwords and short tokens.
  */
 const STOP_WORDS = new Set([
-  "a", "an", "the", "is", "it", "to", "in", "of", "and", "or",
-  "for", "on", "at", "by", "with", "from", "as", "be", "was",
-  "are", "that", "this", "has", "have", "had", "not", "but",
-  "can", "do", "does", "did", "will", "would", "should", "could",
-  "when", "you", "your", "they", "them", "their", "what", "how",
+  "a",
+  "an",
+  "the",
+  "is",
+  "it",
+  "to",
+  "in",
+  "of",
+  "and",
+  "or",
+  "for",
+  "on",
+  "at",
+  "by",
+  "with",
+  "from",
+  "as",
+  "be",
+  "was",
+  "are",
+  "that",
+  "this",
+  "has",
+  "have",
+  "had",
+  "not",
+  "but",
+  "can",
+  "do",
+  "does",
+  "did",
+  "will",
+  "would",
+  "should",
+  "could",
+  "when",
+  "you",
+  "your",
+  "they",
+  "them",
+  "their",
+  "what",
+  "how",
 ]);
 
 function tokenize(text: string): string[] {

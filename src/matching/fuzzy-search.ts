@@ -8,10 +8,7 @@ let fuseInstance: Fuse<Fragment> | null = null;
  * Initialize the Fuse.js instance with fragment data.
  * Call once after loading fragments.
  */
-export function initFuzzySearch(
-  fragments: Fragment[],
-  threshold: number = 0.3,
-): void {
+export function initFuzzySearch(fragments: Fragment[], threshold: number = 0.3): void {
   fuseInstance = new Fuse(fragments, {
     keys: [
       { name: "name", weight: 0.3 },
@@ -42,11 +39,7 @@ export function fuzzySearch(
 
   return fuseResults
     .map((result) => {
-      const scored = scoreFragment(
-        result.item,
-        queryTokens,
-        categoryFilter,
-      );
+      const scored = scoreFragment(result.item, queryTokens, categoryFilter);
       // Boost score based on Fuse relevance (lower fuse score = better match)
       const fuseBoost = result.score != null ? (1 - result.score) * 10 : 0;
       return {

@@ -10,10 +10,7 @@ import { resolve } from "node:path";
  * This test prevents regression back to description-less tools.
  */
 describe("MCP tool descriptions", () => {
-  const serverSource = readFileSync(
-    resolve(import.meta.dirname, "../src/server.ts"),
-    "utf-8",
-  );
+  const serverSource = readFileSync(resolve(import.meta.dirname, "../src/server.ts"), "utf-8");
 
   // Extract all server.tool( calls and their arguments
   // Pattern: server.tool(\n    "toolName",\n    <next-arg>
@@ -32,7 +29,7 @@ describe("MCP tool descriptions", () => {
     });
   }
 
-  it("should find all 5 registered tools", () => {
+  it("should find all 6 registered tools", () => {
     const toolNames = tools.map((t) => t.name).sort();
     expect(toolNames).toEqual([
       "browse_library",
@@ -40,13 +37,12 @@ describe("MCP tool descriptions", () => {
       "get_fragment",
       "list_categories",
       "search_knowledge",
+      "search_metrics",
     ]);
   });
 
   it("every tool should have a description string", () => {
     const missing = tools.filter((t) => !t.hasDescription).map((t) => t.name);
-    expect(missing, `Tools missing descriptions: ${missing.join(", ")}`).toEqual(
-      [],
-    );
+    expect(missing, `Tools missing descriptions: ${missing.join(", ")}`).toEqual([]);
   });
 });

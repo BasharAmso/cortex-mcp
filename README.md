@@ -160,6 +160,7 @@ Every fragment includes synonyms for natural language matching. Ask "how do I ad
 | `browse_library` | Browse all fragments or filter by category |
 | `list_categories` | List categories and fragment counts |
 | `detect_project` | Detect your project's stack and get suggested searches |
+| `search_metrics` | View diagnostic search metrics (tier rates, zero-results, top fragments) |
 
 ## Output Modes
 

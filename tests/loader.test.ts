@@ -67,10 +67,7 @@ describe("loadFragments", () => {
 
   it("parses synonym fields from frontmatter", () => {
     const fragments = loadFragments([TEST_DIR]);
-    expect(fragments[0].synonyms).toEqual([
-      "how to write tests",
-      "add unit tests to my code",
-    ]);
+    expect(fragments[0].synonyms).toEqual(["how to write tests", "add unit tests to my code"]);
     expect(fragments[0].lastUpdated).toBe("2026-03-29");
     expect(fragments[0].difficulty).toBe("beginner");
   });

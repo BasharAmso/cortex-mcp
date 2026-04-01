@@ -34,7 +34,7 @@ export async function startServer(): Promise<void> {
 
   const server = new McpServer({
     name: "cortex-mcp-server",
-    version: "0.5.0",
+    version: "0.5.1",
   });
 
   // --- Resources ---
@@ -139,10 +139,7 @@ export async function startServer(): Promise<void> {
         .enum(["index", "minimal", "catalog", "full"])
         .optional()
         .describe("Output detail level (default: minimal)"),
-      budget: z
-        .number()
-        .optional()
-        .describe("Token budget limit (default: 4000)"),
+      budget: z.number().optional().describe("Token budget limit (default: 4000)"),
       category: z
         .enum(["agents", "skills", "patterns", "examples"])
         .optional()
@@ -150,17 +147,15 @@ export async function startServer(): Promise<void> {
       pillar: z
         .string()
         .optional()
-        .describe("Filter to a specific pillar/domain (e.g., 'game-dev', 'ecommerce', 'architecture')"),
+        .describe(
+          "Filter to a specific pillar/domain (e.g., 'game-dev', 'ecommerce', 'architecture')",
+        ),
     },
     async (args) => {
       const mode: OutputMode = args.mode ?? config.matching.defaultMode;
       const budget = args.budget ?? config.matching.defaultBudget;
 
-      let results = engine.search(
-        args.query,
-        args.category,
-        config.matching.maxResults,
-      );
+      let results = engine.search(args.query, args.category, config.matching.maxResults);
 
       // Filter by pillar if specified
       if (args.pillar) {
@@ -241,11 +236,12 @@ export async function startServer(): Promise<void> {
       const fragment = fragmentMap.get(args.id);
       if (!fragment) {
         return {
-          content: [
-            { type: "text" as const, text: `Fragment not found: ${args.id}` },
-          ],
+          content: [{ type: "text" as const, text: `Fragment not found: ${args.id}` }],
         };
       }
+
+      // Track retrieval for usage metrics
+      engine.recordFragmentRetrieval(args.id);
 
       // Build dependency and related notes
       const notes: string[] = [];
@@ -294,12 +290,13 @@ export async function startServer(): Promise<void> {
       pillar: z
         .string()
         .optional()
-        .describe("Filter to a specific pillar/domain (e.g., 'game-dev', 'ecommerce', 'architecture')"),
+        .describe(
+          "Filter to a specific pillar/domain (e.g., 'game-dev', 'ecommerce', 'architecture')",
+        ),
     },
     async (args) => {
       const cat = args.category ?? "all";
-      let filtered =
-        cat === "all" ? fragments : fragments.filter((f) => f.category === cat);
+      let filtered = cat === "all" ? fragments : fragments.filter((f) => f.category === cat);
 
       if (args.pillar) {
         filtered = filtered.filter((f) => f.pillar === args.pillar);
@@ -409,64 +406,107 @@ export async function startServer(): Promise<void> {
     },
   );
 
-  server.tool("list_categories", "Show all categories and domain pillars with fragment counts. Use to understand library coverage and available filtering options.", {}, async () => {
-    const counts: Record<string, number> = {};
-    const pillarCounts: Record<string, number> = {};
-    for (const f of fragments) {
-      counts[f.category] = (counts[f.category] ?? 0) + 1;
-      pillarCounts[f.pillar] = (pillarCounts[f.pillar] ?? 0) + 1;
-    }
-    return {
-      content: [
-        {
-          type: "text" as const,
-          text: JSON.stringify(
-            {
-              totalFragments: fragments.length,
-              categories: counts,
-              pillars: pillarCounts,
-            },
-            null,
-            2,
-          ),
-        },
-      ],
-    };
-  });
+  server.tool(
+    "list_categories",
+    "Show all categories and domain pillars with fragment counts. Use to understand library coverage and available filtering options.",
+    {},
+    async () => {
+      const counts: Record<string, number> = {};
+      const pillarCounts: Record<string, number> = {};
+      for (const f of fragments) {
+        counts[f.category] = (counts[f.category] ?? 0) + 1;
+        pillarCounts[f.pillar] = (pillarCounts[f.pillar] ?? 0) + 1;
+      }
+      return {
+        content: [
+          {
+            type: "text" as const,
+            text: JSON.stringify(
+              {
+                totalFragments: fragments.length,
+                categories: counts,
+                pillars: pillarCounts,
+              },
+              null,
+              2,
+            ),
+          },
+        ],
+      };
+    },
+  );
+
+  server.tool(
+    "search_metrics",
+    "View diagnostic search metrics: query counts, tier resolution rates, zero-result frequency, and top-10 most retrieved fragments. Use to understand search quality and inform optimization decisions.",
+    {},
+    async () => {
+      const m = engine.getMetrics();
+      const t3pct = m.totalQueries > 0 ? ((m.tier3Hits / m.totalQueries) * 100).toFixed(1) : "0";
+      const zeroPct =
+        m.totalQueries > 0 ? ((m.zeroResultQueries / m.totalQueries) * 100).toFixed(1) : "0";
+
+      // Top 10 most retrieved fragments
+      const topFragments = [...m.fragmentRetrievals.entries()]
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 10)
+        .map(([id, count]) => {
+          const frag = fragmentMap.get(id);
+          return { id, name: frag?.name ?? "unknown", retrievals: count };
+        });
+
+      return {
+        content: [
+          {
+            type: "text" as const,
+            text: JSON.stringify(
+              {
+                totalQueries: m.totalQueries,
+                tierBreakdown: {
+                  tier1_cache: m.tier1Hits,
+                  tier2_index: m.tier2Hits,
+                  tier3_fuzzy: m.tier3Hits,
+                  tier3_percentage: `${t3pct}%`,
+                },
+                zeroResultQueries: m.zeroResultQueries,
+                zeroResultPercentage: `${zeroPct}%`,
+                topRetrievedFragments: topFragments,
+                totalUniqueRetrievals: m.fragmentRetrievals.size,
+              },
+              null,
+              2,
+            ),
+          },
+        ],
+      };
+    },
+  );
 
   // --- Prompts ---
 
-  server.prompt(
-    "find",
-    { query: z.string().describe("Search query") },
-    async (args) => ({
-      messages: [
-        {
-          role: "user" as const,
-          content: {
-            type: "text" as const,
-            text: `Search the Cortex MCP knowledge library for: ${args.query}\n\nUse the search_knowledge tool with this query to find relevant fragments.`,
-          },
+  server.prompt("find", { query: z.string().describe("Search query") }, async (args) => ({
+    messages: [
+      {
+        role: "user" as const,
+        content: {
+          type: "text" as const,
+          text: `Search the Cortex MCP knowledge library for: ${args.query}\n\nUse the search_knowledge tool with this query to find relevant fragments.`,
         },
-      ],
-    }),
-  );
+      },
+    ],
+  }));
 
-  server.prompt(
-    "explain",
-    { topic: z.string().describe("Topic to explain") },
-    async (args) => ({
-      messages: [
-        {
-          role: "user" as const,
-          content: {
-            type: "text" as const,
-            text: `Find and explain the concept of "${args.topic}" using the Cortex MCP knowledge library.\n\nUse search_knowledge with mode "full" to get the complete content, then explain it clearly.`,
-          },
+  server.prompt("explain", { topic: z.string().describe("Topic to explain") }, async (args) => ({
+    messages: [
+      {
+        role: "user" as const,
+        content: {
+          type: "text" as const,
+          text: `Find and explain the concept of "${args.topic}" using the Cortex MCP knowledge library.\n\nUse search_knowledge with mode "full" to get the complete content, then explain it clearly.`,
         },
-      ],
-    }),
-  );
+      },
+    ],
+  }));
 
   server.prompt(
     "related",

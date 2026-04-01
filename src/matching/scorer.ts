@@ -108,7 +108,7 @@ export function rankFragments(
  */
 function countMatches(values: string[], queryTokens: string[]): number {
   let count = 0;
-  const lowerValues = values.map((v) => v.toLowerCase());
+  const lowerValues = values.filter((v) => typeof v === "string").map((v) => v.toLowerCase());
 
   for (const token of queryTokens) {
     for (const value of lowerValues) {
@@ -125,10 +125,7 @@ function countMatches(values: string[], queryTokens: string[]): number {
 /**
  * Count how many useWhen scenarios match the query tokens.
  */
-function countUseWhenMatches(
-  scenarios: string[],
-  queryTokens: string[],
-): number {
+function countUseWhenMatches(scenarios: string[], queryTokens: string[]): number {
   let count = 0;
 
   for (const scenario of scenarios) {
@@ -147,10 +144,7 @@ function countUseWhenMatches(
  * Synonyms are full phrases like "iPhone app" or "how do I add logins".
  * A synonym matches if any query token appears in it OR any synonym token appears in the query.
  */
-function countSynonymMatches(
-  synonyms: string[],
-  queryTokens: string[],
-): number {
+function countSynonymMatches(synonyms: string[], queryTokens: string[]): number {
   if (!synonyms || synonyms.length === 0) return 0;
 
   let count = 0;

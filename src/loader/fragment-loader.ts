@@ -57,9 +57,7 @@ function parseFragment(filePath: string): Fragment | null {
     const frontmatter = parseYaml(yamlStr) as Partial<FragmentFrontmatter>;
 
     if (!frontmatter.id || !frontmatter.name) {
-      console.error(
-        `[cortex-mcp] Warning: missing id or name in ${filePath}, skipping`,
-      );
+      console.error(`[cortex-mcp] Warning: missing id or name in ${filePath}, skipping`);
       return null;
     }
 
@@ -83,9 +81,7 @@ function parseFragment(filePath: string): Fragment | null {
       filePath,
     };
   } catch (err) {
-    console.error(
-      `[cortex-mcp] Warning: could not parse ${filePath}: ${err}`,
-    );
+    console.error(`[cortex-mcp] Warning: could not parse ${filePath}: ${err}`);
     return null;
   }
 }
@@ -100,9 +96,7 @@ function estimateTokens(text: string): number {
 /**
  * Build a lookup map from fragment ID to Fragment for fast retrieval.
  */
-export function buildFragmentMap(
-  fragments: Fragment[],
-): Map<string, Fragment> {
+export function buildFragmentMap(fragments: Fragment[]): Map<string, Fragment> {
   const map = new Map<string, Fragment>();
   for (const f of fragments) {
     map.set(f.id, f);

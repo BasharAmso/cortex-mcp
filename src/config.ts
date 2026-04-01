@@ -32,9 +32,7 @@ export interface CortexConfig {
 const DEFAULTS: CortexConfig = {
   directories: [resolve(PACKAGE_ROOT, "resources")],
   customDirectories: [],
-  aiMemoryPath:
-    process.env.AI_MEMORY_PATH ??
-    resolve(homedir(), "Projects", "AI-Memory"),
+  aiMemoryPath: process.env.AI_MEMORY_PATH ?? resolve(homedir(), "Projects", "AI-Memory"),
   cache: {
     maxSize: 100,
     ttl: 14_400_000, // 4 hours
@@ -70,9 +68,7 @@ export function loadConfig(baseDir?: string): CortexConfig {
     return resolveDirectories(merged, dir);
   } catch {
     // Bad config — use defaults with a warning
-    console.error(
-      `[cortex-mcp] Warning: could not parse ${configPath}, using defaults`,
-    );
+    console.error(`[cortex-mcp] Warning: could not parse ${configPath}, using defaults`);
     return resolveDirectories(DEFAULTS, dir);
   }
 }
@@ -80,16 +76,11 @@ export function loadConfig(baseDir?: string): CortexConfig {
 /**
  * Resolve relative directory paths to absolute paths.
  */
-function resolveDirectories(
-  config: CortexConfig,
-  baseDir: string,
-): CortexConfig {
+function resolveDirectories(config: CortexConfig, baseDir: string): CortexConfig {
   return {
     ...config,
     directories: config.directories.map((d) => resolve(baseDir, d)),
-    customDirectories: config.customDirectories.map((d) =>
-      resolve(baseDir, d),
-    ),
+    customDirectories: config.customDirectories.map((d) => resolve(baseDir, d)),
     aiMemoryPath: config.aiMemoryPath.startsWith("~")
       ? resolve(homedir(), config.aiMemoryPath.slice(2))
       : resolve(baseDir, config.aiMemoryPath),
@@ -100,14 +91,10 @@ function resolveDirectories(
 /**
  * Simple two-level deep merge. Nested objects are merged, not replaced.
  */
-function deepMerge(
-  defaults: CortexConfig,
-  overrides: Partial<CortexConfig>,
-): CortexConfig {
+function deepMerge(defaults: CortexConfig, overrides: Partial<CortexConfig>): CortexConfig {
   return {
     directories: overrides.directories ?? defaults.directories,
-    customDirectories:
-      overrides.customDirectories ?? defaults.customDirectories,
+    customDirectories: overrides.customDirectories ?? defaults.customDirectories,
     aiMemoryPath: overrides.aiMemoryPath ?? defaults.aiMemoryPath,
     cache: { ...defaults.cache, ...overrides.cache },
     matching: { ...defaults.matching, ...overrides.matching },

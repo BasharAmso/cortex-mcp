@@ -17,7 +17,9 @@ const fragments = loadFragments(allDirs);
 console.log(`Found ${fragments.length} fragments`);
 
 if (fragments.length === 0) {
-  console.log("No fragments found. Add markdown files with YAML frontmatter to your resource directories.");
+  console.log(
+    "No fragments found. Add markdown files with YAML frontmatter to your resource directories.",
+  );
   process.exit(0);
 }
 

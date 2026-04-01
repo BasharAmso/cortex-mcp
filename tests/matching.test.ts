@@ -41,9 +41,7 @@ describe("scoreFragment", () => {
       useWhen: ["writing tests for a module"],
     });
     const result = scoreFragment(fragment, ["tests", "module"]);
-    expect(result.matchReasons.some((r) => r.startsWith("useWhen"))).toBe(
-      true,
-    );
+    expect(result.matchReasons.some((r) => r.startsWith("useWhen"))).toBe(true);
   });
 
   it("applies category bonus", () => {
@@ -135,9 +133,7 @@ describe("rankFragments", () => {
 describe("QuickCache", () => {
   it("stores and retrieves results", () => {
     const cache = new QuickCache(10, 60_000);
-    const results = [
-      { fragment: makeFragment(), score: 10, matchReasons: ["test"] },
-    ];
+    const results = [{ fragment: makeFragment(), score: 10, matchReasons: ["test"] }];
     cache.set("query1", results);
     expect(cache.get("query1")).toEqual(results);
   });

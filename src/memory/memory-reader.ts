@@ -15,10 +15,7 @@ const MEMORY_FOLDERS = ["lessons", "patterns", "failures", "decisions"];
  * Returns matching entries as "Related from your experience" results.
  * Read-only — never writes to AI-Memory.
  */
-export function scanAIMemory(
-  aiMemoryPath: string,
-  queryTokens: string[],
-): MemoryEntry[] {
+export function scanAIMemory(aiMemoryPath: string, queryTokens: string[]): MemoryEntry[] {
   if (!existsSync(aiMemoryPath)) {
     return [];
   }
@@ -59,11 +56,7 @@ export function scanAIMemory(
  * Check if a memory entry matches any of the query tokens.
  * Simple keyword matching — no scoring, just relevance filtering.
  */
-function matchesQuery(
-  content: string,
-  filename: string,
-  queryTokens: string[],
-): boolean {
+function matchesQuery(content: string, filename: string, queryTokens: string[]): boolean {
   const lowerContent = content.toLowerCase();
   const lowerFilename = filename.toLowerCase();
 
@@ -99,9 +92,7 @@ export function formatMemoryResults(entries: MemoryEntry[]): string {
     lines.push(`### ${entry.title} (${entry.folder})`);
     // Truncate long entries to ~500 chars
     const preview =
-      entry.content.length > 500
-        ? entry.content.slice(0, 500) + "..."
-        : entry.content;
+      entry.content.length > 500 ? entry.content.slice(0, 500) + "..." : entry.content;
     lines.push(preview);
     lines.push("");
   }

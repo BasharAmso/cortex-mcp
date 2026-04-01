@@ -4,6 +4,22 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [0.5.1] - 2026-04-01
+
+### Added
+- ESLint v9 flat config with `@typescript-eslint`
+- Prettier with consistent formatting across codebase
+- `lint`, `format`, and `format:check` npm scripts
+- CI workflow now includes lint + format check
+- `search_metrics` diagnostic tool (6th MCP tool): query counts, tier resolution rates, zero-result frequency, top-10 retrieved fragments
+- `SearchMetrics` interface in matching engine with per-query tier tracking
+- Per-fragment retrieval counter in `get_fragment` handler
+- Metrics summary logged to stderr every 100 queries
+- `tests/search-metrics.test.ts` with 6 tests
+
+### Fixed
+- Scorer crash on non-string values in fragment tag arrays (`v.toLowerCase is not a function`)
+
 ## [0.5.0] - 2026-04-01
 
 ### Added

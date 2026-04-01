@@ -16,14 +16,8 @@ export interface FormattedResult {
  * - catalog: Full metadata without content
  * - full:    Complete markdown content
  */
-export function formatResults(
-  scored: ScoredFragment[],
-  mode: OutputMode,
-): FormattedResult {
-  const totalTokens = scored.reduce(
-    (sum, sf) => sum + sf.fragment.estimatedTokens,
-    0,
-  );
+export function formatResults(scored: ScoredFragment[], mode: OutputMode): FormattedResult {
+  const totalTokens = scored.reduce((sum, sf) => sum + sf.fragment.estimatedTokens, 0);
 
   switch (mode) {
     case "index":

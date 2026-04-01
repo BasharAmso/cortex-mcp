@@ -4,11 +4,7 @@ import { formatResults } from "../src/budgeting/output-modes.js";
 import type { ScoredFragment } from "../src/matching/scorer.js";
 import type { Fragment } from "../src/loader/types.js";
 
-const makeScored = (
-  id: string,
-  score: number,
-  tokens: number,
-): ScoredFragment => ({
+const makeScored = (id: string, score: number, tokens: number): ScoredFragment => ({
   fragment: {
     id,
     name: `Fragment ${id}`,

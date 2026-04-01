@@ -9,10 +9,7 @@ export interface WatcherCallbacks {
  * Start a file watcher for dev mode.
  * Watches fragment directories for changes and triggers reloading.
  */
-export function startWatcher(
-  directories: string[],
-  callbacks: WatcherCallbacks,
-): FSWatcher {
+export function startWatcher(directories: string[], callbacks: WatcherCallbacks): FSWatcher {
   const watcher = watch(
     directories.map((d) => `${d}/**/*.md`),
     {
@@ -36,9 +33,7 @@ export function startWatcher(
     callbacks.onFragmentChange(path);
   });
 
-  console.error(
-    `[cortex-mcp] Dev mode: watching ${directories.length} directories for changes`,
-  );
+  console.error(`[cortex-mcp] Dev mode: watching ${directories.length} directories for changes`);
 
   return watcher;
 }

@@ -64,6 +64,10 @@ Or paste this into `~/.cursor/mcp.json` if you prefer:
 - "Show me how to set up Stripe payments"
 - "What agents are available?"
 
+## Architecture
+
+For the full architecture with visual diagrams, see [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+
 ## How It Works
 
 ```
@@ -229,6 +233,10 @@ npm run typecheck   # Type check
 **Not seeing results?** Restart your AI tool after adding the MCP config. Changes only take effect on restart.
 
 **Wrong fragments returned?** Try broader search terms. Use `browse_library` to see everything available.
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for how to set up locally, submit fragments, and open pull requests.
 
 ## About
 

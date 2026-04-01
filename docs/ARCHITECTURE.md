@@ -31,71 +31,95 @@ Cortex MCP is a local-only MCP server that ships with a built-in library of stru
 
 ---
 
+## Two-Layer System Overview
+
+Cortex MCP is the **knowledge layer** ("what to know") in a two-layer architecture. It pairs with [Bashi](https://github.com/BasharAmso/bashi), the **orchestration layer** ("what to do"). Any MCP-compatible tool can use either or both layers.
+
+```mermaid
+flowchart TB
+    User["User / Developer"]
+
+    subgraph Bashi["Bashi — What To Do"]
+        Orchestrator["Orchestrator"]
+        Agents["12 Agents"]
+        Skills["37+ Skills"]
+    end
+
+    subgraph MCP["MCP Protocol (stdio JSON-RPC)"]
+        Bridge["search_knowledge · get_fragment"]
+    end
+
+    subgraph Cortex["Cortex MCP — What To Know"]
+        Engine["Search Engine"]
+        Library["694 Fragments"]
+        Pillars["26 Domain Pillars"]
+    end
+
+    User --> Bashi
+    User --> Cortex
+    Bashi --> MCP
+    MCP --> Cortex
+    Engine --> Library
+    Engine --> Pillars
+    Orchestrator --> Agents
+    Agents --> Skills
+
+    style Bashi fill:#e8f4fd,stroke:#2196f3
+    style Cortex fill:#e8f5e9,stroke:#4caf50
+    style MCP fill:#fff3e0,stroke:#ff9800
+```
+
 ## Component Diagram
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                     MCP Client                              │
-│          (Claude Code / Cursor / Windsurf)                  │
-└─────────────────────┬───────────────────────────────────────┘
-                      │ stdio (JSON-RPC)
-                      ▼
-┌─────────────────────────────────────────────────────────────┐
-│                   MCP Server Core                           │
-│                    (src/server.ts)                           │
-│                                                             │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────────┐  │
-│  │  Resources   │  │    Tools     │  │     Prompts      │  │
-│  │  (static +   │  │  (search,    │  │  (slash commands  │  │
-│  │   dynamic)   │  │   lookup)    │  │   with args)     │  │
-│  └──────┬───────┘  └──────┬───────┘  └──────┬───────────┘  │
-└─────────┼─────────────────┼─────────────────┼───────────────┘
-          │                 │                 │
-          ▼                 ▼                 ▼
-┌─────────────────────────────────────────────────────────────┐
-│                   Matching Engine                            │
-│                  (src/matching/)                             │
-│                                                             │
-│  ┌─────────────┐  ┌──────────────┐  ┌───────────────────┐  │
-│  │ Quick Cache  │  │ Index Lookup │  │  Fuzzy Fallback   │  │
-│  │   (~2ms)     │──▶   (~5-10ms) │──▶   (~15-20ms)      │  │
-│  │  LRU map     │  │ keyword +   │  │   fuse.js         │  │
-│  │              │  │ useWhen idx  │  │                   │  │
-│  └─────────────┘  └──────────────┘  └───────────────────┘  │
-└─────────────────────────┬───────────────────────────────────┘
-                          │
-                          ▼
-┌─────────────────────────────────────────────────────────────┐
-│                   Token Budgeter                            │
-│                  (src/budgeting/)                            │
-│                                                             │
-│  Greedy selection · Top-3 guarantee · 80% budget cap        │
-│  Output modes: index | minimal | catalog | full             │
-└─────────────────────────┬───────────────────────────────────┘
-                          │
-          ┌───────────────┼───────────────┐
-          ▼               ▼               ▼
-┌──────────────┐ ┌──────────────┐ ┌──────────────────┐
-│  Fragment    │ │  Index       │ │  AI-Memory       │
-│  Loader      │ │  Builder     │ │  Reader          │
-│ (src/loader/)│ │(src/indexing/)│ │ (src/memory/)    │
-│              │ │              │ │                  │
-│ Scan dirs,   │ │ Build keyword│ │ Read-only scan   │
-│ parse YAML   │ │ + useWhen +  │ │ of AI-Memory/    │
-│ frontmatter  │ │ quick-lookup │ │ lessons, patterns│
-│              │ │ indexes      │ │ failures         │
-└──────┬───────┘ └──────┬───────┘ └──────┬───────────┘
-       │                │                │
-       ▼                ▼                ▼
-┌─────────────────────────────────────────────────────────────┐
-│                   File System                               │
-│                                                             │
-│  resources/          custom/            ~/AI-Memory/        │
-│  ├── agents/         ├── (user dirs)    ├── lessons/        │
-│  ├── skills/                            ├── patterns/       │
-│  ├── patterns/                          ├── failures/       │
-│  └── examples/                          └── decisions/      │
-└─────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TB
+    Client["MCP Client\n(Claude Code / Cursor / Windsurf)"]
+
+    subgraph Server["MCP Server Core (src/server.ts)"]
+        Resources["Resources\n(static + dynamic)"]
+        Tools["Tools\n(search, lookup)"]
+        Prompts["Prompts\n(slash commands)"]
+    end
+
+    subgraph Matching["Matching Engine (src/matching/)"]
+        Cache["Tier 1: Quick Cache\n~2ms · LRU map"]
+        Index["Tier 2: Index Lookup\n~5-10ms · keyword + useWhen"]
+        Fuzzy["Tier 3: Fuzzy Fallback\n~15-20ms · fuse.js"]
+        Cache -->|miss| Index
+        Index -->|below threshold| Fuzzy
+    end
+
+    subgraph Budget["Token Budgeter (src/budgeting/)"]
+        Budgeter["Greedy selection · Top-3 guarantee · 80% cap\nOutput: index | minimal | catalog | full"]
+    end
+
+    subgraph Data["Data Layer"]
+        Loader["Fragment Loader\n(src/loader/)\nScan dirs, parse YAML"]
+        IndexBuilder["Index Builder\n(src/indexing/)\nkeyword + useWhen\n+ quick-lookup"]
+        Memory["AI-Memory Reader\n(src/memory/)\nRead-only scan"]
+    end
+
+    subgraph FS["File System"]
+        Resources2["resources/\nagents · skills\npatterns · examples"]
+        Custom["custom/\n(user dirs)"]
+        AIMem["~/AI-Memory/\nlessons · patterns\nfailures · decisions"]
+    end
+
+    Client -->|"stdio (JSON-RPC)"| Server
+    Resources --> Matching
+    Tools --> Matching
+    Prompts --> Matching
+    Matching --> Budget
+    Budget --> Data
+    Loader --> FS
+    IndexBuilder --> FS
+    Memory --> AIMem
+
+    style Server fill:#e3f2fd,stroke:#1976d2
+    style Matching fill:#fce4ec,stroke:#c62828
+    style Budget fill:#fff8e1,stroke:#f9a825
+    style Data fill:#f3e5f5,stroke:#7b1fa2
+    style FS fill:#e8f5e9,stroke:#388e3c
 ```
 
 ---
@@ -216,67 +240,87 @@ Read-only scan of the user's AI-Memory directory. Entries are not indexed — th
 
 ### Query Flow (runtime)
 
+```mermaid
+sequenceDiagram
+    participant C as MCP Client
+    participant S as Server Core
+    participant T1 as Tier 1: Cache
+    participant T2 as Tier 2: Index
+    participant T3 as Tier 3: Fuzzy
+    participant B as Token Budgeter
+
+    C->>S: search_knowledge(query, mode, budget)
+    S->>T1: Check LRU cache
+    alt Cache HIT
+        T1-->>S: Cached results
+    else Cache MISS
+        T1->>T2: Forward query
+        T2->>T2: Extract keywords
+        T2->>T2: Look up keyword + useWhen indexes
+        T2->>T2: Score candidates (+10 tag, +8 cap, +5 useWhen)
+        alt Above threshold
+            T2-->>S: Ranked results
+        else Below threshold
+            T2->>T3: Forward to fuzzy
+            T3->>T3: Fuse.js search (names, tags, useWhen)
+            T3-->>S: Ranked results
+        end
+    end
+    S->>B: Ranked fragments + budget
+    B->>B: Greedy select (top-3 guarantee, 80% cap)
+    B->>B: Format per output mode
+    B-->>C: JSON response via stdio
 ```
-1. Client sends MCP request (tool call or resource read)
-         │
-2. Server extracts query string + optional parameters
-   (output mode, token budget, category filter)
-         │
-3. Matching Engine receives query
-         │
-4. Tier 1 — Quick Cache
-   ├── Cache HIT → return cached results (skip to step 7)
-   └── Cache MISS → continue to Tier 2
-         │
-5. Tier 2 — Index Lookup
-   ├── Extract keywords from query
-   ├── Look up keyword-index.json and usewhen-index.json
-   ├── Score each candidate fragment:
-   │   ├── tag match:        +10 per matching tag
-   │   ├── capability match: +8 per matching capability
-   │   ├── useWhen match:    +5 per matching scenario
-   │   ├── category bonus:   +15 if category matches filter
-   │   └── small resource:   +5 if estimatedTokens < 500
-   ├── If results meet confidence threshold → continue to step 7
-   └── If below threshold → continue to Tier 3
-         │
-6. Tier 3 — Fuzzy Fallback (fuse.js)
-   ├── Search across fragment names, tags, capabilities, useWhen
-   ├── Apply same scoring weights
-   └── Return ranked results
-         │
-7. AI-Memory Scan (parallel, optional)
-   ├── Scan AI-Memory directory for keyword matches
-   ├── Apply reduced scoring weight (see OQ-0004)
-   └── Append as "Related from your experience" section
-         │
-8. Token Budgeter
-   ├── Receive ranked fragment list + token budget
-   ├── Greedy selection: pick highest-scored fragments
-   ├── Always include top 3 (guaranteed minimum)
-   ├── Stop adding when cumulative tokens reach 80% of budget
-   └── Format output per requested mode
-         │
-9. Return response to client via stdio
-```
+
+**Scoring weights:**
+| Signal | Weight |
+|--------|--------|
+| Tag match | +10 per tag |
+| Capability match | +8 per capability |
+| Synonym match | +8 per synonym |
+| useWhen match | +5 per scenario |
+| Category filter bonus | +15 if matches |
+| Small resource bonus | +5 if < 500 tokens |
 
 ### Index Build Flow (offline)
 
+```mermaid
+flowchart LR
+    CLI["npm run build-index"]
+    Loader["Fragment Loader"]
+    Parse["Parse YAML\nfrontmatter"]
+    Build["Index Builder"]
+    KW["keyword-index.json\ntag + capability + name"]
+    UW["usewhen-index.json\nscenario keywords"]
+    QL["quick-lookup.json\npre-computed results"]
+
+    CLI --> Loader
+    Loader -->|"resources/ + custom/"| Parse
+    Parse --> Build
+    Build --> KW
+    Build --> UW
+    Build --> QL
+
+    style Build fill:#fff3e0,stroke:#ff9800
 ```
-1. npm run build-index
-         │
-2. Fragment Loader scans all configured directories
-   ├── resources/ (built-in library)
-   └── custom directories (from config)
-         │
-3. Parse YAML frontmatter from each .md file
-         │
-4. Index Builder creates three indexes:
-   ├── keyword-index.json  (tag + capability + name → fragmentId)
-   ├── usewhen-index.json  (useWhen scenario keywords → fragmentId + scenario)
-   └── quick-lookup.json   (top N common queries → pre-computed results)
-         │
-5. Write indexes to disk (.cortex/ or configurable location)
+
+### Skill Calling Cortex (integration pattern)
+
+This sequence shows how any skill (in Bashi, Cursor, Copilot, or custom agents) uses Cortex mid-execution to ground its output in validated patterns:
+
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant S as Skill (any framework)
+    participant C as Cortex MCP
+
+    U->>S: "Set up authentication"
+    S->>C: search_knowledge("auth patterns", category="patterns")
+    C-->>S: [{id: "PAT-0042", name: "JWT Auth Flow", score: 85}, ...]
+    S->>C: get_fragment("PAT-0042")
+    C-->>S: Full pattern content (markdown)
+    S->>S: Apply pattern to generate output
+    S-->>U: Auth implementation grounded in PAT-0042
 ```
 
 ---
@@ -303,9 +347,11 @@ Read-only scan of the user's AI-Memory directory. Entries are not indexed — th
 
 | Tool Name | Parameters | Purpose |
 |-----------|------------|---------|
-| `search_knowledge` | query, mode?, budget?, category? | Primary search tool — runs the three-tier pipeline |
+| `search_knowledge` | query, mode?, budget?, category?, pillar? | Primary search tool — runs the three-tier pipeline |
 | `get_fragment` | id | Retrieve a specific fragment by ID |
-| `list_categories` | — | List available categories and fragment counts |
+| `browse_library` | category?, pillar? | Browse all fragments or filter by category/pillar |
+| `list_categories` | — | List categories and pillars with fragment counts |
+| `detect_project` | files[] | Detect tech stack from project filenames and suggest searches |
 
 ### Prompts (slash commands)
 

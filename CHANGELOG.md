@@ -1,0 +1,68 @@
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/).
+
+## [0.4.2] - 2026-04-01
+
+### Added
+- Mermaid architecture diagrams in `docs/ARCHITECTURE.md` (renders on GitHub)
+- Two-Layer System Overview diagram showing Cortex + Bashi relationship
+- Skill Calling Cortex integration pattern diagram
+- GitHub Actions CI workflow (typecheck, test, build, build-index)
+- CONTRIBUTING.md with fragment submission guide
+- Pull request template with quality checklist
+- This changelog
+
+## [0.4.1] - 2026-04-01
+
+### Added
+- Routing-signal descriptions on all 5 MCP tools (agents see when to use each tool)
+- Dynamic fragment count in `search_knowledge` description (self-updates)
+- "For Skill Authors" section in README
+- Regression test for tool descriptions (prevents silent description loss)
+- Fragment quality smoke test (76 assertions across 12 sampled fragments)
+
+### Fixed
+- README skill count: 444 to 443 (actual)
+- Server version: 0.1.0 to 0.4.1 (was stale since initial scaffold)
+
+## [0.4.0] - 2026-03-31
+
+### Added
+- 430 new fragments across 26 pillars (264 to 694 total)
+- 5 new pillars: coding-literacy, business-automation, sales, market-research, personal-brand
+- All 26 pillars at 15-30+ fragments each
+- npm v0.4.0 published
+
+### Fixed
+- `tokenize()` bug that affected index building
+
+## [0.3.0] - 2026-03-30
+
+### Added
+- Pillar system for domain-based filtering across all tools
+- 39 domain fragments (ecommerce, game-dev, automation, finance, education, IoT, health, collaboration, religious, engineering)
+- Developer growth skills (reading code, debugging, shipping, marketing)
+- Bashi rename across all files
+
+## [0.2.0] - 2026-03-30
+
+### Added
+- Pillar 3: 18 architecture + language + AI pipeline fragments
+- npm v0.2.0 published (220 fragments)
+
+### Changed
+- Full library rewrite: all fragments research-grounded from open-source repos
+- 25 new UX/platform/polish fragments
+
+## [0.1.0] - 2026-03-29
+
+### Added
+- Initial MCP server with 5 tools, 3 resources, 3 prompts
+- Three-tier matching engine (cache, index, fuzzy)
+- Token budgeter with 4 output modes
+- 83 knowledge fragments across agents, skills, patterns, examples
+- Synonym matching, AI-Memory reader, detect_project tool
+- npm package configured as `cortex-mcp-server`

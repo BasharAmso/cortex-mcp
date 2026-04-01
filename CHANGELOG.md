@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [0.6.0] - 2026-04-01
+
+### Added
+- GitHub issue templates: bug report, fragment submission, feature request
+- README badges: CI status, npm version, MIT license
+- Final count reconciliation across all README references
+
+### Changed
+- Version bump to 0.6.0 (improvement roadmap complete)
+
 ## [0.5.2] - 2026-04-01
 
 ### Added

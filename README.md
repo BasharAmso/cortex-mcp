@@ -1,6 +1,10 @@
 # Cortex MCP
 
-A knowledge delivery engine that ships with a built-in library of 706 agents, skills, patterns, and examples across 26 domains — and serves them on-demand to any MCP-compatible AI tool.
+[![CI](https://github.com/BasharAmso/cortex-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/BasharAmso/cortex-mcp/actions/workflows/ci.yml)
+[![npm version](https://img.shields.io/npm/v/cortex-mcp-server)](https://www.npmjs.com/package/cortex-mcp-server)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+A knowledge delivery engine that ships with a built-in library of 728 agents, skills, patterns, and examples across 26 domains — and serves them on-demand to any MCP-compatible AI tool.
 
 Instead of every project loading its own framework files into context (wasting 90%+ of the token budget), Cortex MCP is installed once and feeds the right knowledge to any project that needs it.
 

@@ -13,7 +13,7 @@ useWhen:
 estimatedTokens: 700
 relatedFragments: [SKL-0006, SKL-0010, SKL-0012]
 dependencies: []
-synonyms: ["how do I charge users", "add payments to my app", "set up subscriptions", "build a paywall", "I need Stripe billing"]
+synonyms: ["how do I charge users", "add payments to my app", "set up subscriptions", "build a paywall", "I need Stripe billing", "how to make money from my app", "revenue model for startups"]
 lastUpdated: "2026-03-29"
 sourceUrl: "https://github.com/mezod/awesome-indie"
 difficulty: advanced

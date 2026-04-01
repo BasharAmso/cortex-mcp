@@ -13,7 +13,7 @@ useWhen:
 estimatedTokens: 600
 relatedFragments: [SKL-0004, SKL-0027, SKL-0036]
 dependencies: []
-synonyms: ["who are my competitors", "what else is out there like my app", "research the market", "how is my product different", "compare features with competitors"]
+synonyms: ["who are my competitors", "what else is out there like my app", "research the market", "how is my product different", "compare features with competitors", "competitive landscape research", "what makes my app stand out"]
 lastUpdated: "2026-03-29"
 sourceUrl: "https://github.com/deanpeters/Product-Manager-Skills"
 difficulty: beginner

@@ -13,7 +13,7 @@ useWhen:
 estimatedTokens: 650
 relatedFragments: [SKL-0196, PAT-0102, SKL-0195]
 dependencies: []
-synonyms: ["how do I automate social media posts", "how to schedule posts across platforms", "what is the best way to cross-post content", "how to set up a social media content calendar", "how do I track social media engagement automatically"]
+synonyms: ["how do I automate social media posts", "how to schedule posts across platforms", "what is the best way to cross-post content", "how to set up a social media content calendar", "how do I track social media engagement automatically", "auto post to social media", "schedule social posts"]
 lastUpdated: "2026-03-30"
 sourceUrl: "https://github.com/n8n-io/n8n"
 difficulty: beginner

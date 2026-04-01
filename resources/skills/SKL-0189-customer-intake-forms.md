@@ -13,7 +13,7 @@ useWhen:
 estimatedTokens: 650
 relatedFragments: [SKL-0186, SKL-0188, PAT-0098]
 dependencies: []
-synonyms: ["how do I create intake forms for my business", "digital waiver for my customers", "how to collect customer information before appointments", "online consent forms for services", "replacing paper forms with digital ones"]
+synonyms: ["how do I create intake forms for my business", "digital waiver for my customers", "how to collect customer information before appointments", "online consent forms for services", "replacing paper forms with digital ones", "client registration form", "new customer signup"]
 lastUpdated: "2026-03-30"
 sourceUrl: "https://github.com/formbricks/formbricks"
 difficulty: beginner

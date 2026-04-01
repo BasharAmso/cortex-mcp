@@ -13,7 +13,7 @@ useWhen:
 estimatedTokens: 650
 relatedFragments: [SKL-0194, PAT-0100, PAT-0101]
 dependencies: []
-synonyms: ["how do I manage vendors for my small business", "what is the best way to track inventory and reorder stock", "how to automate purchase orders", "how do I reduce supply chain costs", "how to track deliveries from suppliers"]
+synonyms: ["how do I manage vendors for my small business", "what is the best way to track inventory and reorder stock", "how to automate purchase orders", "how do I reduce supply chain costs", "how to track deliveries from suppliers", "track inventory and suppliers", "small business supply chain"]
 lastUpdated: "2026-03-30"
 sourceUrl: "https://github.com/frappe/erpnext"
 difficulty: intermediate

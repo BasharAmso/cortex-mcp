@@ -13,7 +13,7 @@ useWhen:
 estimatedTokens: 650
 relatedFragments: [PAT-0100, SKL-0191, PAT-0102]
 dependencies: []
-synonyms: ["how do I set up a referral program for my business", "what is the best way to track referral sources", "how to reward customers for referring friends", "how do I build a refer-a-friend system", "how to measure referral program effectiveness"]
+synonyms: ["how do I set up a referral program for my business", "what is the best way to track referral sources", "how to reward customers for referring friends", "how do I build a refer-a-friend system", "how to measure referral program effectiveness", "refer a friend feature", "word of mouth program"]
 lastUpdated: "2026-03-30"
 sourceUrl: "https://github.com/mautic/mautic"
 difficulty: beginner

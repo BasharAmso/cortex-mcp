@@ -13,7 +13,7 @@ useWhen:
 estimatedTokens: 600
 relatedFragments: [SKL-0027, SKL-0035, SKL-0004]
 dependencies: []
-synonyms: ["make a pitch deck", "I need to present to investors", "create slides for my startup", "help me pitch my product", "build an investor presentation"]
+synonyms: ["make a pitch deck", "I need to present to investors", "create slides for my startup", "help me pitch my product", "build an investor presentation", "how to pitch to investors", "startup presentation template"]
 lastUpdated: "2026-03-29"
 sourceUrl: "https://github.com/deanpeters/Product-Manager-Skills"
 difficulty: intermediate

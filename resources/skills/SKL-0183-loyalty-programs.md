@@ -13,7 +13,7 @@ useWhen:
 estimatedTokens: 650
 relatedFragments: [SKL-0182, SKL-0180, PAT-0095]
 dependencies: []
-synonyms: ["how do I create a loyalty program for my business", "how to build a digital punch card system", "what is the best way to reward repeat customers", "how do I set up a referral program", "how to design a points and rewards system", "how do I create customer tiers like gold and silver"]
+synonyms: ["how do I create a loyalty program for my business", "how to build a digital punch card system", "what is the best way to reward repeat customers", "how do I set up a referral program", "how to design a points and rewards system", "how do I create customer tiers like gold and silver", "customer rewards program", "punch card app"]
 lastUpdated: "2026-03-30"
 sourceUrl: "https://github.com/odoo/odoo"
 difficulty: beginner

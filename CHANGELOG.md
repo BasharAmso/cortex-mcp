@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [0.5.2] - 2026-04-01
+
+### Added
+- Plain-English synonym expansion on 32 high-traffic fragments (product-business + business-automation pillars)
+- DEC-0024: BM25 deferred pending real search metrics data
+
+### Changed
+- All high-traffic pillar fragments now have 6+ synonyms (jargon-to-plain-English gap closed)
+- Keyword index: 3813 to 3823 (new synonym terms indexed)
+
 ## [0.5.1] - 2026-04-01
 
 ### Added

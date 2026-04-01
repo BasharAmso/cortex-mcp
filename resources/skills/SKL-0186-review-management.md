@@ -13,7 +13,7 @@ useWhen:
 estimatedTokens: 650
 relatedFragments: [SKL-0189, PAT-0098, SKL-0188]
 dependencies: []
-synonyms: ["how do I manage my business reviews", "how to respond to negative reviews", "how to get more customer reviews", "reputation management for small business", "how do I track customer satisfaction"]
+synonyms: ["how do I manage my business reviews", "how to respond to negative reviews", "how to get more customer reviews", "reputation management for small business", "how do I track customer satisfaction", "how to handle bad reviews", "online reputation management"]
 lastUpdated: "2026-03-30"
 sourceUrl: "https://github.com/chatwoot/chatwoot"
 difficulty: beginner

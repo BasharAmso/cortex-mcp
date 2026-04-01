@@ -13,7 +13,7 @@ useWhen:
 estimatedTokens: 600
 relatedFragments: [SKL-0005, SKL-0011, SKL-0013]
 dependencies: []
-synonyms: ["track what users do", "add analytics to my app", "how do I measure signups", "set up event tracking", "build a dashboard for metrics"]
+synonyms: ["track what users do", "add analytics to my app", "how do I measure signups", "set up event tracking", "build a dashboard for metrics", "how to track user behavior", "which metrics should I measure"]
 lastUpdated: "2026-03-29"
 sourceUrl: "https://github.com/newTendermint/awesome-analytics"
 difficulty: intermediate

@@ -13,7 +13,7 @@ useWhen:
 estimatedTokens: 650
 relatedFragments: [SKL-0195, PAT-0100, SKL-0191]
 dependencies: []
-synonyms: ["how do I set up online booking for my spa", "how to manage treatment rooms and staff schedules", "what is the best way to offer spa membership packages", "how do I reduce no-shows at my wellness business", "how to build a treatment menu with pricing"]
+synonyms: ["how do I set up online booking for my spa", "how to manage treatment rooms and staff schedules", "what is the best way to offer spa membership packages", "how do I reduce no-shows at my wellness business", "how to build a treatment menu with pricing", "spa booking software", "wellness center management"]
 lastUpdated: "2026-03-30"
 sourceUrl: "https://github.com/calcom/cal.com"
 difficulty: beginner

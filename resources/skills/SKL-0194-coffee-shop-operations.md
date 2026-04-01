@@ -13,7 +13,7 @@ useWhen:
 estimatedTokens: 650
 relatedFragments: [SKL-0192, PAT-0100, PAT-0103]
 dependencies: []
-synonyms: ["how do I manage a coffee shop menu and orders", "what is the best POS setup for a small cafe", "how to reduce food waste in a coffee shop", "how do I track daily prep and inventory", "how to handle peak hour order queues"]
+synonyms: ["how do I manage a coffee shop menu and orders", "what is the best POS setup for a small cafe", "how to reduce food waste in a coffee shop", "how do I track daily prep and inventory", "how to handle peak hour order queues", "coffee shop pos system", "cafe management app"]
 lastUpdated: "2026-03-30"
 sourceUrl: "https://github.com/odoo/odoo"
 difficulty: beginner

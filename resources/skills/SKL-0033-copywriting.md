@@ -13,7 +13,7 @@ useWhen:
 estimatedTokens: 600
 relatedFragments: [SKL-0032, SKL-0023, SKL-0004]
 dependencies: []
-synonyms: ["write my landing page text", "I need a good headline", "help me write a call to action", "make my signup page more convincing", "write onboarding emails"]
+synonyms: ["write my landing page text", "I need a good headline", "help me write a call to action", "make my signup page more convincing", "write onboarding emails", "how to write text that sells", "marketing copy tips"]
 lastUpdated: "2026-03-29"
 sourceUrl: "https://github.com/PhilipStark/book-genesis"
 difficulty: intermediate

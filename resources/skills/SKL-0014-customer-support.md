@@ -13,7 +13,7 @@ useWhen:
 estimatedTokens: 600
 relatedFragments: [SKL-0005, SKL-0013, PAT-0001]
 dependencies: []
-synonyms: ["build onboarding for new users", "write better error messages", "create a help page", "set up welcome emails", "make the empty state less confusing"]
+synonyms: ["build onboarding for new users", "write better error messages", "create a help page", "set up welcome emails", "make the empty state less confusing", "how to handle user complaints", "help desk setup"]
 lastUpdated: "2026-03-29"
 sourceUrl: "https://github.com/mezod/awesome-indie"
 difficulty: intermediate

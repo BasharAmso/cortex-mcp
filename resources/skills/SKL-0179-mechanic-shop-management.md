@@ -13,7 +13,7 @@ useWhen:
 estimatedTokens: 650
 relatedFragments: [PAT-0096, SKL-0180, SKL-0182]
 dependencies: []
-synonyms: ["how do I manage work orders for my mechanic shop", "how to track vehicle repair history", "what is the best way to manage parts inventory for auto repair", "how do I send customers updates on their car repair", "how to build a shop management system", "how do I estimate repair costs for customers"]
+synonyms: ["how do I manage work orders for my mechanic shop", "how to track vehicle repair history", "what is the best way to manage parts inventory for auto repair", "how do I send customers updates on their car repair", "how to build a shop management system", "how do I estimate repair costs for customers", "auto repair shop software", "garage management system"]
 lastUpdated: "2026-03-30"
 sourceUrl: "https://github.com/inventree/InvenTree"
 difficulty: beginner

@@ -13,7 +13,7 @@ useWhen:
 estimatedTokens: 600
 relatedFragments: [SKL-0038, SKL-0039, PAT-0002]
 dependencies: []
-synonyms: ["how to ask better questions about requirements", "how to figure out what the client really wants", "how to interview someone about their idea", "getting requirements from stakeholders", "how to do a discovery call"]
+synonyms: ["how to ask better questions about requirements", "how to figure out what the client really wants", "how to interview someone about their idea", "getting requirements from stakeholders", "how to do a discovery call", "how to interview users", "customer discovery questions"]
 lastUpdated: "2026-03-29"
 sourceUrl: "https://github.com/dair-ai/Prompt-Engineering-Guide"
 difficulty: intermediate

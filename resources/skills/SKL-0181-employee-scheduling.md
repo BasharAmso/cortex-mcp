@@ -13,7 +13,7 @@ useWhen:
 estimatedTokens: 650
 relatedFragments: [SKL-0177, PAT-0094, SKL-0182, EX-0050]
 dependencies: []
-synonyms: ["how do I schedule employee shifts automatically", "how to manage staff availability and time off", "what is the best way to handle shift swaps", "how do I prevent overtime when scheduling", "how to build a weekly schedule for my team", "how do I let employees set their availability"]
+synonyms: ["how do I schedule employee shifts automatically", "how to manage staff availability and time off", "what is the best way to handle shift swaps", "how do I prevent overtime when scheduling", "how to build a weekly schedule for my team", "how do I let employees set their availability", "staff shift planner", "who works when"]
 lastUpdated: "2026-03-30"
 sourceUrl: "https://github.com/calcom/cal.com"
 difficulty: beginner

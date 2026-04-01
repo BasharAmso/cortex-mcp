@@ -13,7 +13,7 @@ useWhen:
 estimatedTokens: 650
 relatedFragments: [SKL-0190, SKL-0188, PAT-0098]
 dependencies: []
-synonyms: ["how do I track my business revenue", "how to create a dashboard for my store", "weekly business reports for small business", "how to see my sales data", "simple analytics for my business"]
+synonyms: ["how do I track my business revenue", "how to create a dashboard for my store", "weekly business reports for small business", "how to see my sales data", "simple analytics for my business", "business dashboard for owners", "daily sales report"]
 lastUpdated: "2026-03-30"
 sourceUrl: "https://github.com/metabase/metabase"
 difficulty: beginner

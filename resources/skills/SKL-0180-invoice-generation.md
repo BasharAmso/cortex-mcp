@@ -13,7 +13,7 @@ useWhen:
 estimatedTokens: 650
 relatedFragments: [SKL-0178, SKL-0179, SKL-0183]
 dependencies: []
-synonyms: ["how do I create and send invoices automatically", "how to track which invoices have been paid", "what is the best way to set up recurring billing", "how do I add online payment to my invoices", "how to build a simple invoicing system", "how do I send professional invoices to my clients"]
+synonyms: ["how do I create and send invoices automatically", "how to track which invoices have been paid", "what is the best way to set up recurring billing", "how do I add online payment to my invoices", "how to build a simple invoicing system", "how do I send professional invoices to my clients", "create invoices automatically", "billing system for freelancers"]
 lastUpdated: "2026-03-30"
 sourceUrl: "https://github.com/invoiceninja/invoiceninja"
 difficulty: beginner

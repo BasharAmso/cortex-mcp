@@ -13,7 +13,7 @@ useWhen:
 estimatedTokens: 650
 relatedFragments: [SKL-0186, SKL-0189, PAT-0098]
 dependencies: []
-synonyms: ["how do I send marketing emails to my customers", "how to set up a drip email campaign", "email newsletter for my business", "how to segment my email list", "what are good email open rates for small business"]
+synonyms: ["how do I send marketing emails to my customers", "how to set up a drip email campaign", "email newsletter for my business", "how to segment my email list", "what are good email open rates for small business", "automated email campaigns", "drip email setup"]
 lastUpdated: "2026-03-30"
 sourceUrl: "https://github.com/listmonk/listmonk"
 difficulty: beginner

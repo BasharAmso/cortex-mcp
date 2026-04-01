@@ -13,7 +13,7 @@ useWhen:
 estimatedTokens: 600
 relatedFragments: [SKL-0037, SKL-0040, PAT-0001, PAT-0008]
 dependencies: []
-synonyms: ["how to debug a production issue", "how to find out why something broke", "how to investigate a bug systematically", "root cause analysis process", "how to gather evidence before deciding"]
+synonyms: ["how to debug a production issue", "how to find out why something broke", "how to investigate a bug systematically", "root cause analysis process", "how to gather evidence before deciding", "how to validate my idea", "proof before building"]
 lastUpdated: "2026-03-29"
 sourceUrl: "https://github.com/dair-ai/Prompt-Engineering-Guide"
 difficulty: intermediate

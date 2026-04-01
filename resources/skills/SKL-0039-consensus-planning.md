@@ -13,7 +13,7 @@ useWhen:
 estimatedTokens: 600
 relatedFragments: [SKL-0037, SKL-0038, PAT-0006]
 dependencies: []
-synonyms: ["how to decide between two technical approaches", "how to get team agreement on architecture", "how to evaluate trade-offs", "should we build or buy", "how to pick the right framework"]
+synonyms: ["how to decide between two technical approaches", "how to get team agreement on architecture", "how to evaluate trade-offs", "should we build or buy", "how to pick the right framework", "how to get team alignment", "group decision making"]
 lastUpdated: "2026-03-29"
 sourceUrl: "https://github.com/dair-ai/Prompt-Engineering-Guide"
 difficulty: intermediate

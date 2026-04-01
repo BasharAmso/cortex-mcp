@@ -13,7 +13,7 @@ useWhen:
 estimatedTokens: 600
 relatedFragments: [SKL-0021, SKL-0032, SKL-0029]
 dependencies: []
-synonyms: ["am I ready to launch", "what do I need before going live", "pre-launch checklist", "did I forget anything before release", "go live readiness check"]
+synonyms: ["am I ready to launch", "what do I need before going live", "pre-launch checklist", "did I forget anything before release", "go live readiness check", "things to check before going live", "launch day preparation list"]
 lastUpdated: "2026-03-29"
 sourceUrl: "https://github.com/mezod/awesome-indie"
 difficulty: beginner

@@ -13,7 +13,7 @@ useWhen:
 estimatedTokens: 600
 relatedFragments: [SKL-0005, SKL-0012, SKL-0014]
 dependencies: []
-synonyms: ["build a landing page", "how do I get users", "set up a waitlist", "add referral system", "make my site show up on Google"]
+synonyms: ["build a landing page", "how do I get users", "set up a waitlist", "add referral system", "make my site show up on Google", "how to get more users", "marketing strategy for apps"]
 lastUpdated: "2026-03-29"
 sourceUrl: "https://github.com/btmills/awesome-growth-hacking"
 difficulty: intermediate

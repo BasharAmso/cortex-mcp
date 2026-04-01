@@ -13,7 +13,7 @@ useWhen:
 estimatedTokens: 650
 relatedFragments: [SKL-0177, SKL-0179, SKL-0183]
 dependencies: []
-synonyms: ["how do I send appointment reminders to customers", "how to set up SMS notifications for my business", "what is the best way to send email confirmations", "how do I let customers choose how they get notified", "how to automate customer messages", "how do I send promotional texts to my customers"]
+synonyms: ["how do I send appointment reminders to customers", "how to set up SMS notifications for my business", "what is the best way to send email confirmations", "how do I let customers choose how they get notified", "how to automate customer messages", "how do I send promotional texts to my customers", "send updates to customers", "order status alerts"]
 lastUpdated: "2026-03-30"
 sourceUrl: "https://github.com/novuhq/novu"
 difficulty: beginner

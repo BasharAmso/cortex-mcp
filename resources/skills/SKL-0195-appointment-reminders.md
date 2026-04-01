@@ -13,7 +13,7 @@ useWhen:
 estimatedTokens: 650
 relatedFragments: [SKL-0193, PAT-0102, SKL-0191]
 dependencies: []
-synonyms: ["how do I send automated appointment reminders", "what is the best way to reduce no-shows", "how to set up SMS reminders for my business", "how do I build a confirmation workflow for appointments", "when should I send reminder messages before an appointment"]
+synonyms: ["how do I send automated appointment reminders", "what is the best way to reduce no-shows", "how to set up SMS reminders for my business", "how do I build a confirmation workflow for appointments", "when should I send reminder messages before an appointment", "text reminders for appointments", "reduce no-shows"]
 lastUpdated: "2026-03-30"
 sourceUrl: "https://github.com/novuhq/novu"
 difficulty: beginner

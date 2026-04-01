@@ -13,7 +13,7 @@ useWhen:
 estimatedTokens: 650
 relatedFragments: [SKL-0184, SKL-0187, SKL-0185]
 dependencies: []
-synonyms: ["how do I manage multiple store locations", "centralized reporting for my franchise", "inventory sync across locations", "expanding to a second location", "how to run a multi-site business"]
+synonyms: ["how do I manage multiple store locations", "centralized reporting for my franchise", "inventory sync across locations", "expanding to a second location", "how to run a multi-site business", "manage multiple stores", "franchise software"]
 lastUpdated: "2026-03-30"
 sourceUrl: "https://github.com/frappe/erpnext"
 difficulty: intermediate

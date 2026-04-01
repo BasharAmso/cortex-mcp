@@ -13,7 +13,7 @@ useWhen:
 estimatedTokens: 650
 relatedFragments: [SKL-0185, SKL-0190, PAT-0099]
 dependencies: []
-synonyms: ["how do I set up online ordering for my restaurant", "I need a shopping cart for my website", "how to add checkout to my store", "building an order management system", "how do I track deliveries for customers"]
+synonyms: ["how do I set up online ordering for my restaurant", "I need a shopping cart for my website", "how to add checkout to my store", "building an order management system", "how do I track deliveries for customers", "food delivery app backend", "restaurant online ordering"]
 lastUpdated: "2026-03-30"
 sourceUrl: "https://github.com/medusajs/medusa"
 difficulty: beginner

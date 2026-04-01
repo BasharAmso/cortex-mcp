@@ -13,7 +13,7 @@ useWhen:
 estimatedTokens: 650
 relatedFragments: [PAT-0095, SKL-0180, PAT-0096]
 dependencies: []
-synonyms: ["how do I build a POS system for my restaurant", "how to manage table orders digitally", "what is the best way to send orders to the kitchen", "how do I split bills between customers", "how to track orders from table to kitchen", "how do I set up a digital ordering system for my cafe"]
+synonyms: ["how do I build a POS system for my restaurant", "how to manage table orders digitally", "what is the best way to send orders to the kitchen", "how do I split bills between customers", "how to track orders from table to kitchen", "how do I set up a digital ordering system for my cafe", "restaurant cash register system", "waiter ordering tablet"]
 lastUpdated: "2026-03-30"
 sourceUrl: "https://github.com/odoo/odoo"
 difficulty: intermediate

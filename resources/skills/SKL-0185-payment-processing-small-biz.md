@@ -13,7 +13,7 @@ useWhen:
 estimatedTokens: 650
 relatedFragments: [SKL-0184, SKL-0190, PAT-0098]
 dependencies: []
-synonyms: ["how do I accept payments on my website", "what is PCI compliance for small business", "how to handle refunds in my app", "Stripe vs Square for my business", "how do I set up payment processing"]
+synonyms: ["how do I accept payments on my website", "what is PCI compliance for small business", "how to handle refunds in my app", "Stripe vs Square for my business", "how do I set up payment processing", "how to accept credit cards", "payment setup for small business"]
 lastUpdated: "2026-03-30"
 sourceUrl: "https://github.com/juspay/hyperswitch"
 difficulty: beginner

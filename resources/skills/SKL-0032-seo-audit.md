@@ -13,7 +13,7 @@ useWhen:
 estimatedTokens: 600
 relatedFragments: [SKL-0033, SKL-0034, SKL-0002]
 dependencies: []
-synonyms: ["why doesnt my site show up on Google", "check my SEO", "are my meta tags right", "optimize my page for search", "audit my site for SEO issues"]
+synonyms: ["why doesnt my site show up on Google", "check my SEO", "are my meta tags right", "optimize my page for search", "audit my site for SEO issues", "why cant google find my site", "improve search ranking"]
 lastUpdated: "2026-03-29"
 sourceUrl: "https://github.com/nicklockwood/iVersion"
 difficulty: intermediate

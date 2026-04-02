@@ -71,6 +71,10 @@ Search for patterns that indicate hardcoded credentials:
 | Hardcoded database credentials | HIGH | `DB_PASSWORD = "postgres"` |
 | Commented-out credentials | MEDIUM | `// password: "test123"` |
 | Placeholder secrets in non-example files | HIGH | `TOKEN = "xxx"` in production configs |
+| Generic credential assignments | HIGH | `API_KEY=`, `ACCESS_TOKEN=`, `CLIENT_SECRET=` in source |
+| Hardcoded auth headers | CRITICAL | `Authorization: Basic/Bearer` with inline tokens |
+| Database connection strings | HIGH | `DATABASE_URL=` or `CONNECTION_STRING=` with embedded credentials |
+| Env var credential patterns | HIGH | Any env assignment where the value matches credential format (high entropy, key prefixes) |
 
 ### Step 3 — Check for Fail-Open Patterns
 

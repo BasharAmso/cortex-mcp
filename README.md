@@ -135,6 +135,8 @@ flowchart TB
 
 Your AI tool calls `search_knowledge` and `get_fragment` via MCP. Cortex returns the right knowledge for the task. Your project repos stay lightweight.
 
+**Fragments load on demand.** If you're building a game, Cortex only serves game-dev patterns when you ask for them. Salon booking examples never touch your context window unless you search for them. Use the `budget` parameter on `search_knowledge` to control how much context each search returns — the default keeps responses lean, increase it when you need deeper reference material.
+
 For the full architecture, see [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
 ### What's inside
@@ -158,6 +160,8 @@ Any skill -- in Claude Code, Cursor, Copilot, or custom agents -- can call Corte
 3. Apply the pattern alongside the skill's own procedure
 
 Your skills get smarter without getting longer. The knowledge stays in Cortex, versioned and searchable, instead of duplicated across every skill file.
+
+Bashi v3.2.0 includes three reference implementations: backend-dev, security-audit, and ai-feature each have a `## Knowledge Enhancement (MCP mode)` section showing this pattern in practice.
 
 ## What's in the Library
 

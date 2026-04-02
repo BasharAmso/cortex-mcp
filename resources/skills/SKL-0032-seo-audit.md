@@ -67,6 +67,7 @@ For each page, verify:
 | Twitter Card tags | `twitter:card`, `twitter:title`, `twitter:description` | LOW |
 | Viewport meta | `<meta name="viewport">` for mobile | HIGH |
 | Robots meta | Not accidentally blocking indexing | CRITICAL |
+| Sensitive page exclusion | Admin, internal, and staging pages have `noindex` meta tag or `X-Robots-Tag: noindex` header | HIGH |
 
 ### Step 3 — Content Quality Check
 

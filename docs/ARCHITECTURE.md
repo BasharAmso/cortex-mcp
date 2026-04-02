@@ -58,10 +58,10 @@ flowchart TB
     MCP -.->|No| NoMCP["Works without Cortex\n(no knowledge grounding)"]
     Library --- Pillars
 
-    style Bashi fill:#e8f4fd,stroke:#2196f3
-    style Cortex fill:#e8f5e9,stroke:#4caf50
-    style MCP fill:#fff3e0,stroke:#ff9800
-    style NoMCP fill:#f5f5f5,stroke:#999,stroke-dasharray: 5 5
+    style Bashi fill:#e8f4fd,stroke:#2196f3,color:#000
+    style Cortex fill:#e8f5e9,stroke:#4caf50,color:#000
+    style MCP fill:#fff3e0,stroke:#ff9800,color:#000
+    style NoMCP fill:#e0e0e0,stroke:#666,stroke-dasharray: 5 5,color:#000
 ```
 
 **How it works:** The user works in Bashi (full or lite). If Cortex MCP is connected as an MCP server, Bashi's agents and skills can call `search_knowledge` and `get_fragment` to ground their output in validated patterns. Without Cortex, Bashi still works — it just doesn't have the knowledge library backing it up.
@@ -112,11 +112,11 @@ flowchart TB
     IndexBuilder --> FS
     Memory --> AIMem
 
-    style Server fill:#e3f2fd,stroke:#1976d2
-    style Matching fill:#fce4ec,stroke:#c62828
-    style Budget fill:#fff8e1,stroke:#f9a825
-    style Data fill:#f3e5f5,stroke:#7b1fa2
-    style FS fill:#e8f5e9,stroke:#388e3c
+    style Server fill:#e3f2fd,stroke:#1976d2,color:#000
+    style Matching fill:#fce4ec,stroke:#c62828,color:#000
+    style Budget fill:#fff8e1,stroke:#f9a825,color:#000
+    style Data fill:#f3e5f5,stroke:#7b1fa2,color:#000
+    style FS fill:#e8f5e9,stroke:#388e3c,color:#000
 ```
 
 ---
@@ -298,7 +298,7 @@ flowchart LR
     Build --> UW
     Build --> QL
 
-    style Build fill:#fff3e0,stroke:#ff9800
+    style Build fill:#fff3e0,stroke:#ff9800,color:#000
 ```
 
 ### Skill Calling Cortex (integration pattern)

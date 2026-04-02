@@ -61,6 +61,36 @@ Or paste this into `~/.cursor/mcp.json` if you prefer:
 3. Add a new server with command: `cortex-mcp-server`
 </details>
 
+<details>
+<summary><strong>Cline / Continue / Zed</strong></summary>
+
+These tools support MCP via a JSON config file. Add Cortex to your MCP config:
+
+```json
+{
+  "mcpServers": {
+    "cortex": {
+      "command": "cortex-mcp-server"
+    }
+  }
+}
+```
+
+Check your tool's docs for the config file location.
+</details>
+
+<details>
+<summary><strong>Any other MCP-compatible tool</strong></summary>
+
+Cortex MCP uses stdio transport. Any tool that can launch an MCP server via command line works:
+
+- **Command:** `cortex-mcp-server`
+- **Transport:** stdio
+- **No API keys or config required**
+
+If your tool asks for a server URL instead of a command, it expects HTTP transport which Cortex doesn't support (by design — stdio is more secure).
+</details>
+
 **That's it.** Now just work normally. Your AI tool will pull knowledge from the library when it needs it. You can also ask directly:
 
 - "Search for error handling patterns"

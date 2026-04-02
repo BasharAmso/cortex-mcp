@@ -41,7 +41,7 @@ flowchart TB
 
     subgraph Bashi["Works in Bashi (any variant)"]
         direction TB
-        Full["Full: Orchestrator + 12 Agents + 37 Skills"]
+        Full["Full: 12 Agents + 37 Skills"]
         Lite["Lite: Orchestrator + Coach"]
     end
 

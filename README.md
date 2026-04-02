@@ -68,26 +68,52 @@ Or paste this into `~/.cursor/mcp.json` if you prefer:
 - "Show me how to set up Stripe payments"
 - "What agents are available?"
 
-## Architecture
-
-For the full architecture with visual diagrams, see [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
-
 ## How It Works
 
-```
-Cortex MCP (installed once, contains the library)
-  ├── resources/
-  │   ├── agents/      10 agent definitions
-  │   ├── skills/     443 skill procedures
-  │   ├── patterns/   225 reusable patterns
-  │   └── examples/    50 code examples
-  └── custom/         (your own directories, optional)
-         ↓ serves on-demand via MCP
-   ┌─────────┬──────────┬──────────┐
-Project A   Project B   Project C
+```mermaid
+flowchart TB
+    User["You (any AI tool)"]
+
+    subgraph Bashi["Works in Bashi or any MCP client"]
+        Full["Full: 12 Agents + 37 Skills"]
+        Lite["Lite: Orchestrator + Coach"]
+        Other["Cursor / Windsurf / Custom"]
+    end
+
+    MCP{"Cortex MCP\nconnected?"}
+
+    subgraph Cortex["Cortex MCP — Knowledge Library"]
+        Fragments["728 Fragments"]
+        Pillars["26 Domain Pillars"]
+    end
+
+    NoMCP["Works without Cortex\n(no knowledge grounding)"]
+
+    User --> Bashi
+    Bashi --> MCP
+    MCP -->|Yes| Cortex
+    MCP -.->|No| NoMCP
+    Fragments --- Pillars
+
+    style Bashi fill:#e8f4fd,stroke:#2196f3,color:#000
+    style Cortex fill:#e8f5e9,stroke:#4caf50,color:#000
+    style MCP fill:#fff3e0,stroke:#ff9800,color:#000
+    style NoMCP fill:#e0e0e0,stroke:#666,stroke-dasharray: 5 5,color:#000
 ```
 
-Your project repos stay lightweight. The knowledge lives in Cortex MCP and gets delivered based on what the current task needs.
+Your AI tool calls `search_knowledge` and `get_fragment` via MCP. Cortex returns the right knowledge for the task. Your project repos stay lightweight.
+
+For the full architecture, see [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+
+### What's inside
+
+```
+resources/
+├── agents/      10 agent definitions
+├── skills/     443 skill procedures
+├── patterns/   225 reusable patterns
+└── examples/    50 code examples
+```
 
 ## For Skill Authors
 

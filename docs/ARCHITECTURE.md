@@ -33,41 +33,38 @@ Cortex MCP is a local-only MCP server that ships with a built-in library of stru
 
 ## Two-Layer System Overview
 
-Cortex MCP is the **knowledge layer** ("what to know") in a two-layer architecture. It pairs with [Bashi](https://github.com/BasharAmso/bashi), the **orchestration layer** ("what to do"). Any MCP-compatible tool can use either or both layers.
+Cortex MCP is the **knowledge layer** ("what to know"). It pairs with [Bashi](https://github.com/BasharAmso/bashi), the **orchestration layer** ("what to do"). Any MCP-compatible tool can use Cortex directly.
 
 ```mermaid
 flowchart TB
     User["User / Developer"]
 
-    subgraph Bashi["Bashi — What To Do"]
-        Orchestrator["Orchestrator"]
-        Agents["12 Agents"]
-        Skills["37+ Skills"]
+    subgraph Bashi["Works in Bashi (any variant)"]
+        direction TB
+        Full["Full: Orchestrator + 12 Agents + 37 Skills"]
+        Lite["Lite: Orchestrator + Coach"]
     end
 
-    subgraph MCP["MCP Protocol (stdio JSON-RPC)"]
-        Bridge["search_knowledge · get_fragment"]
-    end
+    MCP{"MCP connected?"}
 
     subgraph Cortex["Cortex MCP — What To Know"]
-        Engine["Search Engine"]
-        Library["694 Fragments"]
+        Library["728 Fragments"]
         Pillars["26 Domain Pillars"]
     end
 
     User --> Bashi
-    User --> Cortex
     Bashi --> MCP
-    MCP --> Cortex
-    Engine --> Library
-    Engine --> Pillars
-    Orchestrator --> Agents
-    Agents --> Skills
+    MCP -->|Yes| Cortex
+    MCP -.->|No| NoMCP["Works without Cortex\n(no knowledge grounding)"]
+    Library --- Pillars
 
     style Bashi fill:#e8f4fd,stroke:#2196f3
     style Cortex fill:#e8f5e9,stroke:#4caf50
     style MCP fill:#fff3e0,stroke:#ff9800
+    style NoMCP fill:#f5f5f5,stroke:#999,stroke-dasharray: 5 5
 ```
+
+**How it works:** The user works in Bashi (full or lite). If Cortex MCP is connected as an MCP server, Bashi's agents and skills can call `search_knowledge` and `get_fragment` to ground their output in validated patterns. Without Cortex, Bashi still works — it just doesn't have the knowledge library backing it up.
 
 ## Component Diagram
 

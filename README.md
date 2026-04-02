@@ -105,7 +105,7 @@ flowchart TB
     User["You (any AI tool)"]
 
     subgraph Client["Your AI Tool (any MCP client)"]
-        Bashi["Bashi (Full or Lite)"]
+        Bashi["Bashi (Standalone or Lite)"]
         Claude["Claude Code"]
         Cursor["Cursor"]
         Windsurf["Windsurf"]

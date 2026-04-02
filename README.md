@@ -74,10 +74,12 @@ Or paste this into `~/.cursor/mcp.json` if you prefer:
 flowchart TB
     User["You (any AI tool)"]
 
-    subgraph Bashi["Works in Bashi or any MCP client"]
-        Full["Full: 12 Agents + 37 Skills"]
-        Lite["Lite: Orchestrator + Coach"]
-        Other["Cursor / Windsurf / Custom"]
+    subgraph Client["Your AI Tool (any MCP client)"]
+        Bashi["Bashi (Full or Lite)"]
+        Claude["Claude Code"]
+        Cursor["Cursor"]
+        Windsurf["Windsurf"]
+        Others["Cline · Continue · Zed\nCopilot · Codex · any MCP client"]
     end
 
     MCP{"Cortex MCP\nconnected?"}
@@ -89,13 +91,13 @@ flowchart TB
 
     NoMCP["Works without Cortex\n(no knowledge grounding)"]
 
-    User --> Bashi
-    Bashi --> MCP
+    User --> Client
+    Client --> MCP
     MCP -->|Yes| Cortex
     MCP -.->|No| NoMCP
     Fragments --- Pillars
 
-    style Bashi fill:#e8f4fd,stroke:#2196f3,color:#000
+    style Client fill:#e8f4fd,stroke:#2196f3,color:#000
     style Cortex fill:#e8f5e9,stroke:#4caf50,color:#000
     style MCP fill:#fff3e0,stroke:#ff9800,color:#000
     style NoMCP fill:#e0e0e0,stroke:#666,stroke-dasharray: 5 5,color:#000

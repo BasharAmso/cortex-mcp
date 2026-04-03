@@ -108,7 +108,7 @@ export function rankFragments(
  */
 function countMatches(values: string[], queryTokens: string[]): number {
   let count = 0;
-  const lowerValues = values.filter((v) => typeof v === "string").map((v) => v.toLowerCase());
+  const lowerValues = values.map((v) => v.toLowerCase());
 
   for (const token of queryTokens) {
     for (const value of lowerValues) {

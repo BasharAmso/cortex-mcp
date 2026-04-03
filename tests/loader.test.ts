@@ -50,6 +50,32 @@ name: Missing ID
 `,
   );
 
+  // Fragment with numeric YAML values in tags (e.g. 404, 500 parse as integers)
+  writeFileSync(
+    resolve(TEST_DIR, "skills", "numeric-tags.md"),
+    `---
+id: SKL-TEST-NUMERIC
+name: Numeric Tag Fragment
+category: skills
+tags: [error-page, 404, 500]
+capabilities: [error-handling]
+useWhen:
+  - designing error pages
+estimatedTokens: 200
+relatedFragments: []
+dependencies: []
+synonyms: []
+lastUpdated: "2026-03-29"
+sourceUrl: ""
+difficulty: beginner
+---
+
+# Numeric Tags
+
+Fragment with numeric values in YAML arrays.
+`,
+  );
+
   return () => {
     rmSync(TEST_DIR, { recursive: true, force: true });
   };
@@ -58,25 +84,38 @@ name: Missing ID
 describe("loadFragments", () => {
   it("loads fragments with valid frontmatter", () => {
     const fragments = loadFragments([TEST_DIR]);
-    expect(fragments).toHaveLength(1);
-    expect(fragments[0].id).toBe("SKL-TEST-001");
-    expect(fragments[0].name).toBe("Test Skill");
-    expect(fragments[0].category).toBe("skills");
-    expect(fragments[0].tags).toEqual(["testing", "example"]);
+    expect(fragments.length).toBeGreaterThanOrEqual(2);
+    const skill = fragments.find((f) => f.id === "SKL-TEST-001");
+    expect(skill).toBeDefined();
+    expect(skill!.name).toBe("Test Skill");
+    expect(skill!.category).toBe("skills");
+    expect(skill!.tags).toEqual(["testing", "example"]);
   });
 
   it("parses synonym fields from frontmatter", () => {
     const fragments = loadFragments([TEST_DIR]);
-    expect(fragments[0].synonyms).toEqual(["how to write tests", "add unit tests to my code"]);
-    expect(fragments[0].lastUpdated).toBe("2026-03-29");
-    expect(fragments[0].difficulty).toBe("beginner");
+    const skill = fragments.find((f) => f.id === "SKL-TEST-001")!;
+    expect(skill.synonyms).toEqual(["how to write tests", "add unit tests to my code"]);
+    expect(skill.lastUpdated).toBe("2026-03-29");
+    expect(skill.difficulty).toBe("beginner");
+  });
+
+  it("coerces numeric YAML values in arrays to strings", () => {
+    const fragments = loadFragments([TEST_DIR]);
+    const numeric = fragments.find((f) => f.id === "SKL-TEST-NUMERIC");
+    expect(numeric).toBeDefined();
+    expect(numeric!.tags).toEqual(["error-page", "404", "500"]);
+    // Every value must be a string — this is what crashed Fuse.js
+    for (const tag of numeric!.tags) {
+      expect(typeof tag).toBe("string");
+    }
   });
 
   it("skips files without frontmatter", () => {
     const fragments = loadFragments([TEST_DIR]);
     const ids = fragments.map((f) => f.id);
     expect(ids).not.toContain(undefined);
-    expect(fragments).toHaveLength(1);
+    expect(fragments.length).toBeGreaterThanOrEqual(2);
   });
 
   it("skips files with missing required fields", () => {
@@ -94,7 +133,8 @@ describe("buildFragmentMap", () => {
   it("creates a map from fragment ID to fragment", () => {
     const fragments = loadFragments([TEST_DIR]);
     const map = buildFragmentMap(fragments);
-    expect(map.size).toBe(1);
+    expect(map.size).toBe(2);
     expect(map.get("SKL-TEST-001")?.name).toBe("Test Skill");
+    expect(map.get("SKL-TEST-NUMERIC")?.name).toBe("Numeric Tag Fragment");
   });
 });

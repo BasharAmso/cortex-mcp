@@ -2,7 +2,7 @@
 id: SKL-0345
 name: Error Page Design
 category: skills
-tags: [error-page, 404, 500, offline, error-handling, ux, friendly-errors, recovery]
+tags: [error-page, "404", "500", offline, error-handling, ux, friendly-errors, recovery]
 capabilities: [error-page-design, error-messaging, recovery-actions, offline-handling]
 useWhen:
   - designing custom 404, 500, or offline pages

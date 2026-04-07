@@ -64,8 +64,7 @@ function parseFragment(filePath: string): Fragment | null {
     // Coerce all array fields to string[] — YAML parses unquoted numbers
     // (e.g. tags: [404, 500]) as integers, which crashes downstream consumers
     // like Fuse.js that call .toLowerCase() on array values.
-    const toStrings = (arr: unknown[] | undefined): string[] =>
-      (arr ?? []).map((v) => String(v));
+    const toStrings = (arr: unknown[] | undefined): string[] => (arr ?? []).map((v) => String(v));
 
     return {
       id: frontmatter.id,
